@@ -15,6 +15,12 @@ categories:
 
 [模板地址](https://gitee.com/mi_chong/spring-boot-model)
 
+![](https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1526542764168&di=307b509c8c315a84383917119b23eba5&imgtype=0&src=http%3A%2F%2Ftherealdanvega.com%2Fwp-content%2Fuploads%2F2015%2F11%2Fspring-boot-logo.png)
+
+#### 前言
+
+​	`Spring Boot是目前大火的Java后端框架，遵循着“约定大于配置”的规则，可以快速开发后台，摆脱SSM框架的各种xml配置，开箱即用，快速部署。依靠着spring的强大社区，框架中集成了各种优秀的第三方框架。`
+
 #### 一、逆向生成model、mapper
 ##### maven的配置
 ###### 1、首先引入依赖
