@@ -23,7 +23,7 @@ categories:
 
 #### 一、逆向生成model、mapper
 ##### maven的配置
-###### 1、首先引入依赖
+##### 1、首先引入依赖
 
 ```
 <!--整合mybatis-->
@@ -62,7 +62,7 @@ categories:
 			<artifactId>mysql-connector-java</artifactId>
 		</dependency>
 ```
-###### 2、build中添加插件
+##### 2、build中添加插件
 
 ```
             <!--mybatis逆向生成插件-->
@@ -91,7 +91,7 @@ categories:
 				</dependencies>
 			</plugin>
 ```
-###### 3、自定义一个MyMapper
+##### 3、自定义一个MyMapper
 
 ```
 import tk.mybatis.mapper.common.Mapper;
@@ -120,7 +120,7 @@ public interface MyMapper<T> extends
 ```
 
 
-###### 4、编写generator配置文件
+##### 4、编写generator配置文件
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
@@ -230,7 +230,7 @@ public class SbtestApplication {
 ```
 
 #### 三、整合缓存Redis
-###### 1、添加依赖
+##### 1、添加依赖
 
 ```
         <!--引入redis依赖-->
@@ -239,7 +239,7 @@ public class SbtestApplication {
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
 ```
-###### 2、配置文件中添加配置（application.properties）
+##### 2、配置文件中添加配置（application.properties）
 
 ```
 ###########################
@@ -266,7 +266,7 @@ spring.redis.pool.min-idle=2
 # 连接超时时间
 spring.redis.timeout=0
 ```
-###### 3、使用redis
+##### 3、使用redis
 
 ```
     /**
@@ -289,7 +289,7 @@ spring.redis.timeout=0
 ```
 
 #### 四、整合定时器
-###### 1、在启动项加上注解
+##### 1、在启动项加上注解
 
 ```
 /**
@@ -302,7 +302,7 @@ public class SbtestApplication {
 	}
 }
 ```
-###### 2、简单使用定时器
+##### 2、简单使用定时器
 
 > 注意加上@Component和@Scheduled注解
 
@@ -332,7 +332,7 @@ public class TimeTesk {
 }
 ```
 
-###### 3、使用cron表达式执行定时任务
+##### 3、使用cron表达式执行定时任务
 [表达式地址](http://cron.qqe2.com/)
 
 ```
@@ -355,7 +355,7 @@ public class TimeTesk {
 ```
 
 #### 五、整合异步任务
-###### 1、启动项添加注解
+##### 1、启动项添加注解
 
 
 ```
@@ -371,13 +371,13 @@ public class SbtestApplication {
 
 ```
 
-###### 2、使用
+##### 2、使用
 
 > 在使用类上面加上@Component，在类中的方法上面加上@Async
 
 
 #### 六、拦截器的使用
-###### 1、首先创建一个configer类
+##### 1、首先创建一个configer类
 
 ```
 @Configuration
@@ -400,7 +400,7 @@ public class WebMvcConfiger extends WebMvcConfigurerAdapter {
 }
 
 ```
-###### 2、新建拦截器
+##### 2、新建拦截器
 
 ```
 public class OneInterCeptor implements HandlerInterceptor {
