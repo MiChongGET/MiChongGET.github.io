@@ -57,7 +57,7 @@ https://blog.csdn.net/zistxym/article/details/42918339
 
 ##### 1、Ubuntu 14.04 16.04 (使用apt-get进行安装)
 
-```
+```shell
 # step 1: 安装必要的一些系统工具
 sudo apt-get update
 sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
@@ -80,7 +80,7 @@ sudo apt-get -y install docker-ce
 
 ##### 2、CentOS 7 (使用yum进行安装)
 
-```
+```shell
 # step 1: 安装必要的一些系统工具
 sudo yum install -y yum-utils device-mapper-persistent-data lvm2
 # Step 2: 添加软件源信息
