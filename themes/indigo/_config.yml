@@ -3,7 +3,7 @@
 
 # 添加新菜单项遵循以下规则
 # menu:
-#  link:               fontawesome图标，省略前缀，本主题前缀为 icon-，必须
+#  link:               fontawesome图标，省略前缀，本主题前缀为 icon-，http://www.bootcss.com/p/font-awesome/
 #    text: About       菜单显示的文字，如果省略即默认与图标一致，首字母会转大写
 #    url: /about       链接，绝对或相对路径，必须。
 #    target: _blank    是否跳出，省略则在当前页面打开
@@ -25,13 +25,19 @@ menu:
     text: CSDN
     url: https://blog.csdn.net/qq_31673689
     target: _blank
+  coffee:
+    text: Gitee
+    url: https://gitee.com/mi_chong
+    target: _blank
   facebook-official:
     text: FaceBook
     url: /custom
     target: _blank
+  
   info-circle: 
     text: About Me
     url: /about
+  
 # 你的头像url
 avatar: /img/header.jpg
 # avatar link
@@ -66,10 +72,10 @@ show_last_updated: true
 share: true
 
 # 是否开启打赏，关闭 reward: false
-reward:
-  title: 谢谢大爷~
-  wechat: /img/wechat.jpg     #微信，关闭设为 false
-  alipay: /img/alipay.jpg     #支付宝，关闭设为 false
+reward: false
+#  title: 谢谢支持~
+#  wechat: /img/wechat.jpg     #微信，关闭设为 false
+#  alipay: /img/alipay.jpg     #支付宝，关闭设为 false
 
 # 是否开启搜索
 search: true
@@ -93,7 +99,7 @@ cnzz: false
 baidu_tongji: false
 
 # 腾讯分析，如要开启，输入站点id
-tajs: false
+tajs: 500363267
 
 # google
 google_analytics: false
@@ -157,7 +163,7 @@ canonical: false
 since_year: 2017
 
 # 用户页面中作者相关的描述性文字，如不需要设为 false
-about: A Little Bit
+about: We stalk around thinking we’re hot stuff! 
 
 # “不蒜子”访问量统计，详见 http://ibruce.info/2015/04/04/busuanzi/
 visit_counter:
