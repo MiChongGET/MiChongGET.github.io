@@ -193,7 +193,9 @@ axios.post('/user', {
 
 ```javascript
 import PubSub from 'pubsub-js' //引入
-PubSub.subscribe('delete', (msg,data)=>{ }); //订阅
+componentDidMount() {
+  PubSub.subscribe('delete', (msg,data)=>{ }); //订阅  
+}
 PubSub.publish('delete', data) //发布消息
 ```
 
