@@ -99,11 +99,18 @@ theme: Butterfly
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: git
+# Coding仓库
+- type: git
   #repo: git@github.com:MiChongGET/MiChongGET.github.io.git
   #repo: git@gitee.com:mi_chong/mi_chong.git
   repo: git@e.coding.net:MiChongCoding/blog.git
   branch: master
+
+# github仓库
+- type: git
+  repo: git@github.com:MiChongGET/MiChongGET.github.io.git
+  branch: master
+
 
 # 音乐播放
 aplayer:

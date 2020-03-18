@@ -14,6 +14,7 @@ menu:
   影单: /movies/ || fa fa-film
   游戏: /games/ || fa fa-gamepad
   图集: /photos/ || fa fa-picture-o
+  工具: /tools/ || fa fa-rocket
   关于我: /about/ || fa fa-user
   留言板: /messageboard/ || fa fa-commenting
 
@@ -61,7 +62,7 @@ copy:
 social:
   fa fa-github: https://github.com/MiChongGET
   fa fa-envelope: qjzxzxd@gmail.com
-  fa fa-rss: /atom.xml
+  # fa fa-rss: /atom.xml
 
 ####    search    ####
 # Algolia search
