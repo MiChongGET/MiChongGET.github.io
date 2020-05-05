@@ -106,7 +106,7 @@ katex:
 
 # Post info settings
 # ---------------
-avatar: /img/avatar.png
+avatar: /img/header.PNG
 
 # the banner image of index
 index_img: https://ae01.alicdn.com/kf/H4fde4ee5cd594005aaad5b7527d1f871K.jpg
@@ -241,14 +241,15 @@ valine:
 since: 2018
 
 footer_custom_text: <p><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p>
+#footer_custom_text: 
 
 footer_copyright:
   enable: true
 
 ICP:
-  enable: false
-  url:
-  text:
+  enable: true
+  url: 
+  text: 皖ICP备20006548号-1
   icon: /img/icp.png
 
 ####   Analysis    ####

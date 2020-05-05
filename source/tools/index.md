@@ -8,6 +8,14 @@ top_img: https://file.buildworld.cn/img/79cdb988016dad5ef5df97a5e532f2db_5e71c64
 {% endnote %}
 http://tool.yovisun.com/scihub
 
+>俄罗斯大兄弟出品，必是精品👍（搜索论文的时候选择	Scientific articles）
+
+http://gen.lib.rus.ec
+
+>BookSC 是 Z-Library 的一部分，是世界上最大的在线图书馆之一。
+
+https://zh.booksc.org
+
 {% note success %}
 ###  电影网 
 {% endnote %}
