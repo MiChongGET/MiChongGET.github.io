@@ -126,8 +126,8 @@ douban:
   movie:
     title: '来自豆瓣电影'
     quote: '生活就像一盒巧克力，你永远不知道你会得到什么。——《阿甘正传》'
-  game:
-    title: '来自豆瓣游戏'
+  # game:
+  #   title: '来自豆瓣游戏'
     #quote: ''
   timeout: 100000
 

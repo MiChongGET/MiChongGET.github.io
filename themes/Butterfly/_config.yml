@@ -12,7 +12,7 @@ menu:
   歌单: /music/ || fa fa-music
   书单: /books/ || fa fa-book
   影单: /movies/ || fa fa-film
-  游戏: /games/ || fa fa-gamepad
+  #游戏: /games/ || fa fa-gamepad
   图集: /photos/ || fa fa-picture-o
   工具: /tools/ || fa fa-rocket
   关于我: /about/ || fa fa-user
