@@ -1,0 +1,14 @@
+- class_name: 友情链接
+  class_desc: 大佬集合
+  link_list:
+    - name: JerryC
+      link: https://demo.jerryc.me/
+      avatar: https://jerryc.me/image/avatar.png
+      descr: 今日事,今日毕
+    - name: cungudafa
+      descr: 一个学习记录者
+      link: https://cungudafa.top
+      avatar: https://cdn.jsdelivr.net/gh/cungudafa/cdn/img/custom/cungudafa.jpg
+
+
+

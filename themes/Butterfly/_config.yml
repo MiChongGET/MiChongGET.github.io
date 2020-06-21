@@ -9,16 +9,17 @@ menu:
   归档: /archives/ || fa fa-archive
   分类: /categories/ || fa fa-folder-open
   标签: /tags/ || fa fa-tags
-  歌单: /music/ || fa fa-music
-  书单: /books/ || fa fa-book
-  影单: /movies/ || fa fa-film
-  #游戏: /games/ || fa fa-gamepad
-  图集: /photos/ || fa fa-picture-o
+  说说: /talk/ || fa fa-comment 
+  娱乐||fa fa-list:
+    - 歌单 || /music/ || fa fa-music
+    - 书单 || /books/ || fa fa-book
+    - 影单 || /movies/ || fa fa-film
+    #游戏: /games/ || fa fa-gamepad
+    - 图集 || /photos/ || fa fa-picture-o
   工具: /tools/ || fa fa-rocket
   关于我: /about/ || fa fa-user
   留言板: /messageboard/ || fa fa-commenting
-
-  # Link: /link/ || fa fa-link
+  友链: /link/ || fa fa-link
   # List||fa fa-list:
   #   - Music || /music/ || fa fa-music
   #   - Movie || /movies/ || fa fa-film
@@ -290,13 +291,13 @@ qihu_site_verification:
 
 # 友情鏈接界面設置
 Flink:
-  headline: 友情鏈接
-  info_headline: 我的Blog資料
-  name: Blog 名字： JerryC
-  address: Blog 地址： https://jerryc.me/
-  avatar: Blog 頭像： https://jerryc.me/img/avatar.png
-  info: Blog 簡介： 今日事,今日畢
-  comment: 如果需要交換友鏈,請留言
+  headline: 友情链接
+  info_headline: 我的Blog资料
+  name: Blog 名字： MiChong
+  address: Blog 地址： https://www.buildworld.cn/
+  avatar: Blog 头像： https://www.buildworld.cn/img/header.PNG
+  info: Blog 简介： MiChong的🏡
+  comment: 如果需要交换友链，请留言。
 
 # 打賞按鈕
 reward:
