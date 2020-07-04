@@ -3,6 +3,8 @@ title: 日常随笔
 date: 2020-06-21 12:10:11
 comments: 'false'
 type: artitalk
+top_img: "https://ae01.alicdn.com/kf/Hccf499903ca04bb0a1f4707ea83628f9j.jpg"
+password: 9919
 ---
 <head>
   <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
@@ -19,8 +21,7 @@ type: artitalk
         var lazy = 1; //是否开启懒加载动画
         var bgimg="https://cdn.jsdelivr.net/gh/drew233/cdn/20200409110727.webp";
       </script>
-      <div id="lazy"></div>
-      <div id="artitalk"></div>
+      <div id="artitalk_main"></div>
       <script type="text/javascript" src="https://unpkg.com/artitalk"></script>
   </body>
 </html>

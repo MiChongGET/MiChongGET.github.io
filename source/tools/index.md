@@ -4,16 +4,23 @@ date: 2020-03-18 18:14:54
 top_img: https://file.buildworld.cn/img/79cdb988016dad5ef5df97a5e532f2db_5e71c64cf3a1b.png
 ---
 {% note success %}
+### 常用文档收藏
+{% endnote %}
+> 大数据开发指南
+https://github.com/heibaiying/BigData-Notes
+
+>刷Leetcode
+https://github.com/azl397985856/leetcode
+
+{% note success %}
 ### 论文下载
 {% endnote %}
 http://tool.yovisun.com/scihub
 
 >俄罗斯大兄弟出品，必是精品👍（搜索论文的时候选择	Scientific articles）
-
 http://gen.lib.rus.ec
 
 >BookSC 是 Z-Library 的一部分，是世界上最大的在线图书馆之一。
-
 https://zh.booksc.org
 
 {% note success %}
@@ -50,8 +57,6 @@ https://www.sq688.com
 http://www.51ape.com
 3、音乐狂
 http://music.junyuewl.com
-4、blooo（无损）
-http://www.blooo.top/music/
 
 {% note success %}
 ###  二次元/中国风音乐

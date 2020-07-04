@@ -107,7 +107,7 @@ katex:
 
 # Post info settings
 # ---------------
-avatar: /img/header.PNG
+avatar: /img/header.jpg
 
 # the banner image of index
 index_img: https://ae01.alicdn.com/kf/H4fde4ee5cd594005aaad5b7527d1f871K.jpg
@@ -225,8 +225,8 @@ gitalk:
 # valine comment system. https://valine.js.org
 valine:
   enable: true # if you want use valine,please set this value is true
-  appId: mef0W501zi4VSjltsnmN5D9J-gzGzoHsz # leancloud application app id
-  appKey: ktKil4OakXUNcSs0Ofkph1rm # leancloud application app key
+  appId: uP2eHTa46LgqECzDMDE6P7zl-MdYXbMMI # leancloud application app id
+  appKey: GkCLsvUt4VnOXMJz69EeCqEY # leancloud application app key
   notify: false # valine mail notify (true/false) https://github.com/xCss/Valine/wiki
   verify: false # valine verify code (true/false)
   pageSize: 10 # comment list page size
@@ -241,7 +241,7 @@ valine:
 # ------------------------------------
 since: 2018
 
-footer_custom_text: <p><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p>
+footer_custom_text: <script src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><script src="https://player.lmih.cn/player/js/player.js" id="myhk" key="159272785049" m="1"></script><p><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p>
 #footer_custom_text: 
 
 footer_copyright:
@@ -295,7 +295,7 @@ Flink:
   info_headline: 我的Blog资料
   name: Blog 名字： MiChong
   address: Blog 地址： https://www.buildworld.cn/
-  avatar: Blog 头像： https://www.buildworld.cn/img/header.PNG
+  avatar: Blog 头像： https://www.buildworld.cn/img/header.jpg
   info: Blog 简介： MiChong的🏡
   comment: 如果需要交换友链，请留言。
 
