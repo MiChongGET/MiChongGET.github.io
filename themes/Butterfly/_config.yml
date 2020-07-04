@@ -239,7 +239,7 @@ valine:
 
 #####     Footer Settings    ####
 # ------------------------------------
-since: 2018
+since: 2017
 
 footer_custom_text: <script src="//lib.baomitu.com/jquery/3.3.1/jquery.min.js"></script><script src="https://player.lmih.cn/player/js/player.js" id="myhk" key="159272785049" m="1"></script><p><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p>
 #footer_custom_text: 
@@ -502,7 +502,7 @@ busuanzi:
 # 也可以寫成 年/月/日 時間
 runtimeshow:
   enable: true
-  start_date: 1/31/2018 15:03:00
+  start_date: 11/23/2017 16:00:48
 
 ####   右下角按鈕  ####
 #----------------------------------------------
