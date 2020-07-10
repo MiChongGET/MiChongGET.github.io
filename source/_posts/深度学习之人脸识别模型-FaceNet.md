@@ -1,7 +1,6 @@
 ---
 title: 深度学习之人脸识别模型--FaceNet
 date: 2020-04-17 13:02:52
-top: True
 tags:
 - Python
 - TensorFlow

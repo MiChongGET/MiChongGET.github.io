@@ -35,7 +35,7 @@ cover: https://file.buildworld.cn/img/20200702193913.png
 #### 0）启动kafka
 
 ```shell
-[root@hadoop102 kafka]$ bin/kafka-server-start.sh -daemon config/server.properties
+[root@hadoop102 kafka]$ /opt/module/kafka/bin/kafka-server-start.sh -daemon /opt/module/kafka/config/server.properties
 ```
 
 

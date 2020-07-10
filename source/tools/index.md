@@ -6,11 +6,26 @@ top_img: https://file.buildworld.cn/img/79cdb988016dad5ef5df97a5e532f2db_5e71c64
 {% note success %}
 ### 常用文档收藏
 {% endnote %}
+>CS-Note
+https://cyc2018.github.io/CS-Notes/#/README
+
 > 大数据开发指南
 https://github.com/heibaiying/BigData-Notes
 
 >刷Leetcode
 https://github.com/azl397985856/leetcode
+
+>刷算法
+https://github.com/labuladong/fucking-algorithm
+
+>Java面经
+https://github.com/DreamCats/JavaBooks
+
+{% note success %}
+### 科研资料
+{% endnote %}
+>脑电EEG基础与处理汇总
+https://mp.weixin.qq.com/s/fPz3fIACWVPwr1peKpCQ-g
 
 {% note success %}
 ### 论文下载
