@@ -21,6 +21,10 @@ https://github.com/labuladong/fucking-algorithm
 >Java面经
 https://github.com/DreamCats/JavaBooks
 
+>阿里巴巴官方电子书网站，技术手册藏经阁
+https://developer.aliyun.com/topic/ebook
+
+
 {% note success %}
 ### 科研资料
 {% endnote %}

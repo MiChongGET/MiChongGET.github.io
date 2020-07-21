@@ -9,8 +9,8 @@ tags:
 categories:
 - 脑机交互
 description: 脑电波（Electroencephalogram,EEG）是一种使用电生理指标记录大脑活动的方法，大脑在活动时，大量神经元同步发生的突触后电位经总和后形成的。它记录大脑活动时的电波变化，是脑神经细胞的电生理活动在大脑皮层或头皮表面的总体反映。脑机接口（BCI），是一种通过检测中枢神经系统活动并将其转化为人工输出，来替代、修复、增强、补充或者改善中枢神经系统的正常输出，从而改变中枢神经系统与内外环境之间的交互作用的技术。
-top_img: https://ae01.alicdn.com/kf/H4b08c64bb68946049984436c74d58205Z.jpg
-cover: https://ae01.alicdn.com/kf/H8c31c92bb6b04046b45d797780cff3787.jpg
+top_img: https://yanxuan.nosdn.127.net/de018a7a4c00b68406c31fee5029ac6b.png
+cover: https://yanxuan.nosdn.127.net/de018a7a4c00b68406c31fee5029ac6b.png
 ---
 
 ##  EEG脑电数据处理
