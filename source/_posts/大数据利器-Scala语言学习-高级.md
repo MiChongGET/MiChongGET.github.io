@@ -9,7 +9,6 @@ description: Scala combines object-oriented and functional programming in one co
 top_img: https://yanxuan.nosdn.127.net/18050f4caec3423ca456d74729f8a9ea.png
 cover: https://file.buildworld.cn/img/2e9eb5fbd273a7db40541819e49bf576_scala-icon.png
 ---
-
 ## Scala高级
 
 ## 一、集合
@@ -537,3 +536,335 @@ object demo {
 //结果
 Vector(5, 4, 2, -1, -5, -10)
 ```
+
+## 二、模式匹配
+
+> - 1) 如果所有 case 都不匹配，那么会执行 `case _` 分支，类似于 Java 中 default 语句
+> - 2) 如果所有 case 都不匹配，又没有写 case _ 分支，那么会抛出 `MatchError`
+> - 3) 每个 case 中，**不用 break 语句**，自动中断 case
+> - 4) 可以在 match 中使用其它类型，而不仅仅是字符,可以是表达式
+> - 5) `=>` 等价于 java swtich 的 `:`
+> - 6) => 后面的代码块到下一个 case， 是作为一个整体执行，可以使用{} 扩起来，也可以不扩。
+
+### 1、守卫
+
+```scala
+for (ch <- "+-3!"){
+  ch match {
+    case '+' => println(ch)
+    case '-' => println(ch)
+    //case _ if ... 这里不是默认匹配, 表示忽略 ch ， 而是进行后面的 if 匹配.
+    case _ if ch.toString.equals('3') =>println(ch)
+    case _ => println("end")
+  }
+}
+```
+
+### 2、匹配数组
+
+> - 1) `Array(0)` 匹配只有一个元素且为 0 的数组。
+> - 2) `Array(x,y)` 匹配数组有两个元素，并将两个元素赋值为 x 和 y。当然可以依次类推 Array(x,y,z) 匹配数组有 3 个元素的等等....
+> - 3) `Array(0,_*)` 匹配数组以 0 开始
+
+### 3、匹配列表
+
+```scala
+for (list <- Array(List(0), List(1, 0), List(88), List(0, 0, 0), List(1, 0, 0))) {
+  val result = list match {
+    case 0 :: Nil => "0" // 匹配的 List(0)
+    case x :: y :: Nil => x + " " + y // 匹配的是有两个元素的 List(x,y)
+    case 0 :: tail => "0 ..." // 匹配 以 0 开头的后面有任意元素的 List
+    case x :: Nil => List(x)
+    case _ => "something else"
+  }
+}
+```
+
+### 4、匹配元组
+
+```scala
+//请返回 (34, 89) => (89,34)
+for (pair <- Array((0, 1), (34, 89), (1, 0), (1, 1), (1, 0, 2))) {
+  val result = pair match { //
+    case (0, _) => "0 ..." // 表示匹配 0 开头的二元组
+    case (y, 0) => y //表示匹配 0 结尾的二元组
+    case (x, y) => (y, x)
+    case _ => "other" //.默认
+  }
+  println(result)
+}
+```
+
+### 5、对象匹配
+
+> - 1) 构建对象时 apply 会被调用 ，比如 val n1 = Square(5)
+> - 2) 当将 Square(n) 写在 case 后时[case Square(n) => xxx]，会默认调用 unapply 方法(对象提取器)
+> - 3) number 会被 传递给 def unapply(z: Double) 的 z 形参
+> - 4) 如果返回的是 Some 集合，则 unapply 提取器返回的结果会返回给 n 这个形参
+> - 5) case 中对象的 unapply 方法(提取器)返回 some 集合则为匹配成功
+> - 6) 返回 None 集合则为匹配失败
+
+```scala
+def main(args: Array[String]): Unit = {
+
+  def main(args: Array[String]): Unit = {
+    // 模式匹配使用：
+    val number: Double = 36.0 //Square(6.0)
+    //说明
+    //1. 当 number 去和 case Square(n) 时，会进行如下操作
+    //2. 把 number 传递给 Square unapply(z: Double) 的 z
+    //3. unapply 被调用，返回一个结果, 返回的结果和程序员的逻辑代码,比如 Some(math.sqrt(z))
+    //4. 如果返回的结果是 Some 集合，则表示匹配成功 ,如果返回的是 None 则表示匹配失败
+    //5. 如果匹配成功，就是将 Some(?) 的 值,赋给 case Square(n) 的 n
+    //6. 这样就等价于将原来对象的构建参数，提取出来，我们将这个过程称为对象匹配, 这个使用很多.
+    number match {
+      case Square(n) => println(n) // 6.0
+      case _ => println("nothing matched")
+    }
+  }
+}
+
+//说明
+//1. unapply 为对象提取器
+//2. apply 对象构建器
+object Square { //静态性质
+  def unapply(z: Double): Option[Double] = {
+    println("unapply 被调用 z =" + z) // 36.0
+    Some(math.sqrt(z)) // Some(6.0)
+  }
+
+  def apply(z: Double): Double = z * z
+}
+```
+
+### 6、样例类
+
+> - 1) 样例类仍然是类。
+> - 2) 样例类用 case 关键字进行声明。
+> - 3) 样例类是为模式匹配(对象)而优化的类。
+> - 4) 构造器中的每一个参数都成为 val——除非它被显式地声明为 var（不建议这样做）。
+> - 5) 在样例类对应的伴生对象中提供 apply 方法让你不用 new 关键字就能构造出相应的对象。
+> - 6) 提供 unapply 方法让模式匹配可以工作。
+> - 7) 将自动生成 toString、equals、hashCode 和 copy 方法(有点类似模板类，直接给生成，供程序员使用)。
+> - 8) 除上述外，样例类和其他类完全一样。你可以添加方法和字段，扩展它们。
+
+```scala
+//抽象类
+abstract class Amount
+
+case class Dollar(value: Double) extends Amount
+
+//Currency 样例类
+case class Currency(value: Double, unit: String) extends Amount
+
+//NoAmount 样例类
+case object NoAmount extends Amount
+
+//样例类依然可以有自己的方法和属性
+case class Dog(name: String) {
+  var age = 10
+
+  def cry(): Unit = {
+    println("小狗汪汪叫~~")
+  }
+}
+```
+
+### 7、密封类
+
+> - 1) 如果想让 case 类的所有子类都必须在申明该类的相同的源文件中定义，可以将样例类的通用超类声明为`sealed`，这个超类称之为密封类。
+> - 2) 密封就是不能在其他文件中定义/使用类。
+
+## 三、函数式编程
+
+### 1、偏函数
+
+> 在对符合某个条件，而不是所有情况 进行逻辑操作时，使用偏函数是一个不错的选择将包在大括号内的一组 case 语句封装为函数，我们称之为偏函数，它只对会作用于指定类型的参数或指定范围值的参数实施计算，超出范围的值会忽略.
+>
+> 偏函数在 Scala 中是一个特质 `PartialFunction`
+
+> - 1) 使用构建特质的实现类(使用的方式是 PartialFunction 的匿名子类)
+> - 2) PartialFunction 是个特质(看源码)
+> - 3) 构建偏函数时，参数形式 [Any, Int]是泛型，第一个表示传入参数类型，第二个表示返回参数
+> - 4) 当使用偏函数时，会遍历集合的所有元素，编译器执行流程时先执行 isDefinedAt()如果为 true ,就会执行 apply,构建一个新的 Int 对象返回
+> - 5) 执行 isDefinedAt() 为 false 就过滤掉这个元素，即不构建新的 Int 对象.
+> - 6) map 函数不支持偏函数，因为 map 底层的机制就是所有循环遍历，无法过滤处理原来集合的元素
+> - 7) collect 函数支持偏函数
+
+```scala
+object demo2 {
+  def main(args: Array[String]): Unit = {
+
+    val list = List(1,2,3,4,"abc")
+
+    val function1 = new PartialFunction[Any,Int] {
+      override def isDefinedAt(x: Any): Boolean = {
+        //判断x是否是int类型
+        x.isInstanceOf[Int]
+      }
+
+      override def apply(v1: Any): Int = {
+        //将是int类型的元素值+1,然后返回相加之后的值
+        v1.asInstanceOf[Int] + 1
+      }
+    }
+
+    // 调用偏函数不能使用 map, 而是 collect
+    val list2 = list.collect(function1)
+    println(list2)
+
+  }
+}
+```
+
+**偏函数简化**
+
+```scala
+// 方式1
+def f2: PartialFunction[Any, Int] = {
+  case i: Int => i + 1
+}
+println(list.collect(f2))
+
+//方式2
+val list = List(1, 2, 3, 4, "abc")
+val list3 = list.collect {
+    case i: Int => i + 1
+}
+println(list3)
+```
+
+### 2、匿名函数
+
+> 没有名字的函数就是匿名函数，可以通过 函数表达式，来设置匿名函数
+
+```scala
+val add = (a: Int, b: Int) => a + b
+println(add(1,2))
+```
+
+### 3、高阶函数
+
+> 能够接受函数作为参数的函数，叫做高阶函数 `(higher-order function)`。可使应用程序更加健壮。 高阶函数可以返回一个匿名函数。
+
+```scala
+object demo3 {
+  def main(args: Array[String]): Unit = {
+    println(minusxy(3)(4))
+  }
+
+  def minusxy(x: Int) = {
+    (y: Int) => x - y
+  }
+}
+```
+
+### 4、闭包
+
+> 基本介绍：闭包就是一个函数和与其相关的引用环境（变量/值）组合的一个整体(实体)。
+
+**f就是一个闭包**
+
+```scala
+object demo3 {
+  def main(args: Array[String]): Unit = {
+    val f = minusxy(10)
+    println(f(2))
+  }
+
+  def minusxy(x: Int) = {
+    (y: Int) => x - y
+  }
+}
+```
+
+### 5、函数柯里化(curry)
+
+> - 1) 函数编程中，接受多个参数的函数都可以转化为接受单个参数的函数，这个转化过程就叫柯里化。
+> - 2) 柯里化就是证明了函数只需要一个参数而已。其实我们刚才的学习过程中，已经涉及到了柯里化操作。
+> - 3) 不用设立柯里化存在的意义这样的命题。柯里化就是以函数为主体这种思想发展的必然产生的结果。(即：柯里化是面向函数思想的必然产生结果)
+>   传统方式, 函数/方法(变量)， 对象.方法(变量)
+>   集合.函数(函数).函数(函数).函数(函数) //函数链
+
+```scala
+def eq(s1: String)(s2: String):Boolean={
+  s1.eq(s2)
+}
+```
+
+###  6、控制抽象
+
+> - 1) 参数是函数
+> - 2) 函数参数没有输入值也没有返回值
+
+```scala
+def main(args: Array[String]): Unit = {
+
+  def myRunThread(f1: =>Unit)={
+    new Thread{
+      override def run(): Unit = {
+        f1
+      }
+    }
+  }.start()
+  
+  myRunThread{
+    println("start")
+    Thread.sleep(2000)
+    println("end")
+  }
+}
+```
+
+## 四、泛型
+
+```scala
+object demo2 {
+  def main(args: Array[String]): Unit = {
+
+    val value = new IntMessage[Int](20)
+    println(value.get)
+
+  }
+
+  // 在 Scala 定义泛型用[T]， s 为泛型的引用
+  abstract class Message[T](s:T){
+    def get:T = s
+  }
+
+  //可以构建 Int 类型的 Message
+  class IntMessage[Int](msg:Int) extends Message(msg)
+
+  //String 类型的 Message
+  class StringMessage[String](msg:String) extends Message(msg)
+
+}
+```
+
+### 1、上界、下界
+
+**scala 中上界**
+在 scala 里表示某个类型是 A 类型的子类型，也称上界或上限，使用 <: 关键字，语法如下：
+
+```scala
+[T <:A] //A 是 T 的上界
+//或用通配符:
+[_ <:A]
+```
+
+**scala 中下界**
+在 scala 的下界或下限，使用 >: 关键字，语法如下：
+
+```scala
+[T >: A] //A 是 T 的下界,下限
+//或用通配符:
+[_ >:A]
+```
+
+### 2、协变、逆变和不变
+
+> Scala 的协变(+)，逆变(-)，协变 covariant、逆变 contravariant、不可变 invariant
+
+- 1) C[+T]：如果 A 是 B 的子类，那么 C[A]是 C[B]的子类，称为协变。
+- 2) C[-T]：如果 A 是 B 的子类，那么 C[B]是 C[A]的子类，称为逆变。
+- 3) C[T]：无论 A 和 B 是什么关系，C[A]和 C[B]没有从属关系。称为不变。

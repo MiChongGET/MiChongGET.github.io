@@ -11,6 +11,25 @@ cover: https://file.buildworld.cn/img/u=3576311305,4246803808&fm=26&gp=0.jpg
 ---
 ## Zookeeper
 
+### 常用命令
+
+#### 开启Zookeeper
+```shell
+[root@hadoop102 zookeeper-3.4.10]# bin/zkServer.sh start
+[root@hadoop103 zookeeper-3.4.10]# bin/zkServer.sh start
+[root@hadoop104 zookeeper-3.4.10]# bin/zkServer.sh start
+```
+
+#### 查看状态
+```shell
+ bin/zkServer.sh status
+```
+
+#### 停止Zookeeper
+```shell
+ bin/zkServer.sh stop
+```
+
 ### 1、Zookeeper工作机制
 
 ![](https://file.buildworld.cn/img/20200606173824.png)

@@ -132,8 +132,7 @@ cover: https://yanxuan.nosdn.127.net/de018a7a4c00b68406c31fee5029ac6b.png
 
 #### DFBCSP框架
 
-![DFBCSP框架](https://ae01.alicdn.com/kf/H58e7c284aefa4a848a01cb4fbdd941b4x.jpg)
-
+![DFBCSP框架](https://file.buildworld.cn/img/e2fc1833625a49db3fba73dec5c9f5e0_640_wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1.png)
 
 
 
@@ -146,9 +145,7 @@ cover: https://yanxuan.nosdn.127.net/de018a7a4c00b68406c31fee5029ac6b.png
 
 **改进DFBCSP算法的详细流程框图**
 
-![改进DFBCSP算法的详细流程框图](https://ae01.alicdn.com/kf/H92ab031f28d84b58be411ac06481b026d.jpg)
-
-
+![改进DFBCSP算法的详细流程框图](https://file.buildworld.cn/img/604a420080a816a842b035414e8e6e6e_640_wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1.png)
 
 
 
