@@ -8,7 +8,7 @@ categories:
 - 校园
 description: 前言：最近一直想做数据采集这块，想到年底了，来个年终总结什么的。所以就想到了爬取学校2017年的校内新闻。
 top_img: https://ae01.alicdn.com/kf/He5c0d011cf8d49fe8056a63e72b32afeC.jpg
-cover: https://ae01.alicdn.com/kf/H5ee1d6be6ddc4631a6077c275ba2f93bV.jpg
+cover: https://file.buildworld.cn/img/w882gr.jpg
 ---
 >前言：最近一直想做数据采集这块，想到年底了，来个年终总结什么的。所以就想到了爬取学校2017年的校内新闻。基于采集的五百多篇新闻结合Python的WordCloud做出来个词云，可视化新闻图片，根据关键词出现次数自动设置大小。效果图如下:
 

@@ -6,12 +6,9 @@ tags:
 - SpringCloud
 - SpringDataJpa
 - Docker
+- 微服务架构
 categories:
 - 后端
-- 微服务架构
-- 服务器
-- 系统
-- 运维
 
 cover: https://file.buildworld.cn/img/6dc7724665fb0fa34d8d2872f6b40d22_224859_0cf8011f_759177.png
 ---

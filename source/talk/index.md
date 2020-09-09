@@ -22,7 +22,7 @@ password: 9919
         var bgimg="https://cdn.jsdelivr.net/gh/drew233/cdn/20200409110727.webp";
       </script>
       <div id="artitalk_main"></div>
-      <script type="text/javascript" src="https://unpkg.com/artitalk"></script>
+      <script type="text/javascript" src="https://unpkg.com/artitalk@2.4.2/artitalk.js"></script>
   </body>
 </html>
  

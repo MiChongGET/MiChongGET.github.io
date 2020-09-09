@@ -6,10 +6,9 @@ tags:
 - SpringBoot
 - SpringCloud
 - Java
+- 微服务架构
 categories:
 - 后端
-- 系统
-- 微服务架构
 ---
 
 #### 一、Spring Cloud Eureka

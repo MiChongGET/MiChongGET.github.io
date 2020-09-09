@@ -3,8 +3,41 @@ title: 工具集合
 date: 2020-03-18 18:14:54
 top_img: https://file.buildworld.cn/img/79cdb988016dad5ef5df97a5e532f2db_5e71c64cf3a1b.png
 ---
+
 {% note success %}
-### 常用文档收藏
+### 大数据博客🍗
+{% endnote %}
+>1、厦门大学--子雨大数据之Spark入门教程（Scala版）
+http://dblab.xmu.edu.cn/blog/spark
+
+>2、董的博客
+http://dongxicheng.org
+
+>3、美团技术博客
+https://tech.meituan.com
+
+>4、Spark官方文档
+http://spark.apache.org/docs/latest
+
+>5、“哥不是小萝莉”的博客
+https://www.cnblogs.com/smartloli
+
+>6、Databricks，是属于 Spark 的商业化公司，由美国伯克利大学 AMP 实验室的 Spark 大数据处理系统多位创始人联合创立。Databricks 致力于提供基于 Spark 的云服务，可用于数据集成，数据管道等任务。
+https://databricks.com/blog
+
+
+{% note success %}
+### 优秀开源项目🚀
+{% endnote %}
+>1、streaming-offset-to-zk
+- （1）提供了快速使用 spark streaming + kafka 开发流式程序的骨架，示例中的代码大部分都加上了详细的注释
+- （2）提供了手动管理kafka的offset存储到zookeeper的方法，并解决了一些bug，如kafka扩容分区，重启实时流不识别新增分区的问题。
+- （3）提供了比较简单和优雅的关闭spark streaming流式程序功能
+https://github.com/qindongliang/streaming-offset-to-zk
+
+
+{% note success %}
+### 常用文档收藏📖
 {% endnote %}
 >CS-Note
 https://cyc2018.github.io/CS-Notes/#/README
@@ -20,9 +53,13 @@ https://github.com/labuladong/fucking-algorithm
 
 >Java面经
 https://github.com/DreamCats/JavaBooks
+https://github.com/h2pl/Java-Tutorial
 
 >阿里巴巴官方电子书网站，技术手册藏经阁
 https://developer.aliyun.com/topic/ebook
+
+>Java大数据学习之路
+https://github.com/TALKDATA/JavaBigData
 
 
 {% note success %}
@@ -43,7 +80,25 @@ http://gen.lib.rus.ec
 https://zh.booksc.org
 
 {% note success %}
-###  电影网 
+### 黑科技网站
+{% endnote %}
+1、TOOLFK
+>TOOLFK 是一个面对程序员的在线工具箱网站
+https://www.toolfk.com
+
+2、果汁排行榜
+>果汁排行榜是一个集合了各类排行版的网站
+分类有：热搜榜、热议榜、影视榜、音乐榜、摄影榜、设计榜、财富榜、产品热销排名、游戏榜、大数据等
+http://guozhivip.com/rank
+
+3、大数据导航
+>大数据导航这个网站，几乎覆盖了所有类型的数据及工具，相当实用
+网站包含：数据搜索、互联网趋势分析、全球互联网数据、BI 商业智能、实时数据工具、短视频数据平台、教育数据、城市开放数据等
+http://hao.199it.com
+
+
+{% note success %}
+### 电影网 
 {% endnote %}
 1、美剧鸟
 http://www.meijuniao.com
@@ -62,10 +117,6 @@ https://www.waijutv.com
 {% endnote %}
 1、AGE动漫
 https://www.agefans.tv/
-2、动漫岛
-http://www.dmd8.com/
-3、樱花动漫
-http://www.dmd8.com/
 
 {% note success %}
 ###  无损音乐下载 
@@ -82,8 +133,6 @@ http://music.junyuewl.com
 {% endnote %}
 1、幻音
 http://www.huanmusic.com
-2、源音塘
-https://www.yuanyintang.com
 
  
 {% note success %}
@@ -244,28 +293,6 @@ https://cowtransfer.com
 https://send.firefox.com
 3、文叔叔
 https://www.wenshushu.cn
-
-{% note success %}
-### 游戏加速
-{% endnote %}   
-1、腾讯手游加速器
-https://tmga.qq.com/index.html
-2、薄荷加速器
-https://cn.bohe.com
-3、GoLink加速器
-https://www.golink.com
-4、BiuBiu加速器
-https://www.biubiu001.com
-5、QAQ 加速器
-www.qaqgame.com
-6、塞雷加速器
-https://www.cpspeed.com
-7、流星加速器
-https://www.liuxing.com
-8、猫灵网游加速器
-https://www.mljsq.cn
-9、蓝泡网游加速器
-http://www.lpjsq.cn
 
 {% note success %}
 ### 在线壁纸

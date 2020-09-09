@@ -16,7 +16,7 @@ cover: https://file.buildworld.cn/img/20200702193913.png
 
 ### 1、**Kafka** 基础架构
 
-![](https://ae01.alicdn.com/kf/Hbbbd7556065c46a79a68ebd9302ab08eR.jpg)
+![](https://file.buildworld.cn/img/20200907111151.png)
 
 > 1）**Producer** ：消息生产者，就是向kafka broker发消息的客户端；
 > 2）**Consumer** ：消息消费者，向kafka broker取消息的客户端；
