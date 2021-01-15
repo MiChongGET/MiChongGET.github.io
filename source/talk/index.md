@@ -4,13 +4,23 @@ date: 2020-06-21 12:10:11
 comments: 'false'
 type: artitalk
 top_img: "https://ae01.alicdn.com/kf/Hccf499903ca04bb0a1f4707ea83628f9j.jpg"
-password: 9919
+# password: 9919
 ---
+<html>
 <head>
-  <script src="https://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+ 
 </head>
-  <body>
-      <script>
+<body>
+<div id="artitalk_main"></div>
+  <script type="text/javascript" src="https://unpkg.com/artitalk"></script>
+  <script>
+    new Artitalk({
+    appId: 'mef0W501zi4VSjltsnmN5D9J-gzGzoHsz',
+    appKey: 'ktKil4OakXUNcSs0Ofkph1rm',
+    serverURL: 'http://leancloudapi.buildworld.cn',
+})
+</script>
+      <!-- <script>
         var img = "https://www.buildworld.cn/img/header.PNG";
         var appID = "uP2eHTa46LgqECzDMDE6P7zl-MdYXbMMI";
         var appKEY = "GkCLsvUt4VnOXMJz69EeCqEY";
@@ -22,7 +32,7 @@ password: 9919
         var bgimg="https://cdn.jsdelivr.net/gh/drew233/cdn/20200409110727.webp";
       </script>
       <div id="artitalk_main"></div>
-      <script type="text/javascript" src="https://unpkg.com/artitalk@2.4.2/artitalk.js"></script>
+      <script type="text/javascript" src="https://unpkg.com/artitalk@2.4.2/artitalk.js"></script> -->
   </body>
 </html>
  

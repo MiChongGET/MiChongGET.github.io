@@ -68,9 +68,15 @@ https://github.com/TALKDATA/JavaBigData
 >脑电EEG基础与处理汇总
 https://mp.weixin.qq.com/s/fPz3fIACWVPwr1peKpCQ-g
 
+
+
 {% note success %}
 ### 论文下载
 {% endnote %}
+>谷歌学术
+https://xueshu.lanfanshu.cn/
+
+>SCI下载器
 http://tool.yovisun.com/scihub
 
 >俄罗斯大兄弟出品，必是精品👍（搜索论文的时候选择	Scientific articles）
