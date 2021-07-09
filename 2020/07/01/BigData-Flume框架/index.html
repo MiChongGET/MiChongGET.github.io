@@ -1,0 +1,320 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BigData--Apache Flume框架 | MiChong的🏡</title><meta name="keywords" content="Hadoop,Flume,Apache"><meta name="author" content="MiChong,qjzxzxd@gmail.com"><meta name="copyright" content="MiChong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Flume是Cloudera提供的一个高可用的，高可靠的，分布式的海量日志采集、聚合和传输的系统。Flume基于流式架构，灵活简单。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BigData--Apache Flume框架">
+<meta property="og:url" content="https://www.buildworld.cn/2020/07/01/BigData-Flume%E6%A1%86%E6%9E%B6/index.html">
+<meta property="og:site_name" content="MiChong的🏡">
+<meta property="og:description" content="Flume是Cloudera提供的一个高可用的，高可靠的，分布式的海量日志采集、聚合和传输的系统。Flume基于流式架构，灵活简单。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/H3cae0a1814934caa9a43090c0c041653e.jpg">
+<meta property="article:published_time" content="2020-07-01T09:22:48.000Z">
+<meta property="article:modified_time" content="2020-07-03T08:40:08.920Z">
+<meta property="article:author" content="MiChong">
+<meta property="article:tag" content="Hadoop">
+<meta property="article:tag" content="Flume">
+<meta property="article:tag" content="Apache">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ae01.alicdn.com/kf/H3cae0a1814934caa9a43090c0c041653e.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.buildworld.cn/2020/07/01/BigData-Flume%E6%A1%86%E6%9E%B6/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BigData--Apache Flume框架',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-07-03 16:40:08'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="MiChong的🏡" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('http://p5.qhimg.com/bdr/__85/t011fe8fb82651dfd2c.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">MiChong的🏡</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">BigData--Apache Flume框架</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-07-01T09:22:48.000Z" title="发表于 2020-07-01 17:22:48">2020-07-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-07-03T08:40:08.920Z" title="更新于 2020-07-03 16:40:08">2020-07-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/BigData/">BigData</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="BigData--Apache Flume框架"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="Flume进阶"><a href="#Flume进阶" class="headerlink" title="Flume进阶"></a>Flume进阶</h2><h3 id="1、Flume基本框架"><a href="#1、Flume基本框架" class="headerlink" title="1、Flume基本框架"></a>1、Flume基本框架</h3><p><img src="https://file.buildworld.cn/img/20200701104704.png"></p>
+<p><strong>1. Event</strong></p>
+<p><code>Event</code> 是 Flume NG 数据传输的基本单元。类似于 JMS 和消息系统中的消息。一个 Event 由标题和正文组成：前者是键/值映射，后者是任意字节数组。</p>
+<p><strong>2. Source</strong></p>
+<p>数据收集组件，从外部数据源收集数据，并存储到 Channel 中。</p>
+<p><strong>Source类型</strong></p>
+<ul>
+<li>（1）监控后台日志：exec</li>
+<li>（2）监控后台产生日志的端口：netcat</li>
+</ul>
+<p><strong>3. Channel</strong></p>
+<p><code>Channel</code> 是源和接收器之间的管道，用于临时存储数据。可以是内存或持久化的文件系统：</p>
+<ul>
+<li><code>Memory Channel</code> : 使用内存，优点是速度快，但数据可能会丢失 (如突然宕机)；</li>
+<li><code>File Channel</code> : 使用持久化的文件系统，优点是能保证数据不丢失，但是速度慢。</li>
+</ul>
+<p><strong>4. Sink</strong></p>
+<p><code>Sink</code> 的主要功能从 <code>Channel</code> 中读取 <code>Event</code> ，并将其存入外部存储系统或将其转发到下一个<code>Source</code> ，成功后再从 <code>Channel</code> 中移除 <code>Event</code> 。</p>
+<p><strong>5. Agent</strong></p>
+<p>是一个独立的 (JVM) 进程，包含 <code>Source</code> 、 <code>Channel</code> 、 <code>Sink</code> 等组件。</p>
+<h3 id="2、Flume事务"><a href="#2、Flume事务" class="headerlink" title="2、Flume事务"></a>2、Flume事务</h3><p><img src="https://file.buildworld.cn/img/20200701104347.png"></p>
+<blockquote>
+<p><strong>Flume 的事务机制（类似数据库的事务机制）</strong>：Flume 使用两个独立的事务分别负责从<code>Soucrce</code> 到 <code>Channel</code>，以及从 <code>Channel</code> 到 <code>Sink</code> 的事件传递。比如 <code>spooling directory source</code> 为文件的每一行创建一个事件，一旦事务中所有的事件全部传递到 <code>Channel</code> 且提交成功，那么 <code>Soucrce</code> 就将该文件标记为完成。同理，事务以类似的方式处理从 <code>Channel</code> 到 <code>Sink</code> 的传递过程，如果因为某种原因使得事件无法记录，那么事务将会回滚。且所有的事件都会保持到 <code>Channel</code> 中，等待重新传递。</p>
+</blockquote>
+<h3 id="3、Flume-Agent-内部原理"><a href="#3、Flume-Agent-内部原理" class="headerlink" title="3、Flume Agent 内部原理"></a>3、<strong>Flume Agent</strong> 内部原理</h3><p><img src="https://file.buildworld.cn/img/20200701113850.png"></p>
+<p><strong>重要组件：</strong> </p>
+<p><strong>1）ChannelSelector</strong> </p>
+<p><code>ChannelSelector</code> 的作用就是选出 <code>Event</code> 将要被发往哪个 <code>Channel</code>。其共有两种类型，分别是 <code>Replicating</code>（复制）和 <code>Multiplexing</code>（多路复用）。</p>
+<p><code>ReplicatingSelector</code> 会将同一个 <code>Event</code> 发往所有的 <code>Channel</code>，<code>Multiplexing</code> 会根据相应的原则，将不同的 <code>Event</code> 发往不同的 <code>Channel</code>。 </p>
+<p><strong>2）SinkProcessor</strong> </p>
+<p><code>SinkProcessor</code> 共 有 三 种 类 型 ， 分 别 是 <code>DefaultSinkProcessor</code> 、<code>LoadBalancingSinkProcessor</code> 和 <code>FailoverSinkProcessor</code></p>
+<p><code>DefaultSinkProcessor</code> 对 应 的 是 单 个 的 <code>Sink</code> ， <code>LoadBalancingSinkProcessor</code> 和 <code>FailoverSinkProcessor</code> 对应的是 <code>Sink Group</code>，<code>LoadBalancingSinkProcessor</code> 可以实现负载均衡的功能，<code>FailoverSinkProcessor</code> 可以实现故障转移的功能。</p>
+<h3 id="4、Flume-拓扑结构"><a href="#4、Flume-拓扑结构" class="headerlink" title="4、Flume 拓扑结构"></a>4、<strong>Flume</strong> 拓扑结构</h3><h4 id="（1）、简单串联"><a href="#（1）、简单串联" class="headerlink" title="（1）、简单串联"></a>（1）、简单串联</h4><p><img src="https://file.buildworld.cn/img/20200701145041.png"></p>
+<blockquote>
+<p>这种模式是将多个 <code>flume</code> 顺序连接起来了，从最初的 <code>source</code> 开始到最终 <code>sink</code> 传送的目的存储系统。此模式不建议桥接过多的 <code>flume</code> 数量，<code>flume</code> 数量过多不仅会影响传输速率，而且一旦传输过程中某个节点 flume 宕机，会影响整个传输系统。</p>
+</blockquote>
+<h4 id="（2）、复制和多路复用"><a href="#（2）、复制和多路复用" class="headerlink" title="（2）、复制和多路复用"></a>（2）、复制和多路复用</h4><p><img src="https://file.buildworld.cn/img/20200701145300.png"></p>
+<blockquote>
+<p><code>Flume</code> 支持将事件流向一个或者多个目的地。这种模式可以将相同数据复制到多个<code>channel</code> 中，或者将不同数据分发到不同的 <code>channel</code> 中，<code>sink</code> 可以选择传送到不同的目的地。</p>
+</blockquote>
+<h4 id="（3）、负载均衡和故障转移"><a href="#（3）、负载均衡和故障转移" class="headerlink" title="（3）、负载均衡和故障转移"></a>（3）、负载均衡和故障转移</h4><p><img src="https://file.buildworld.cn/img/20200701145526.png"></p>
+<blockquote>
+<p><code>Flume</code>支持使用将多个<code>sink</code>逻辑上分到一个<code>sink</code>组，<code>sink</code>组配合不同的<code>SinkProcessor</code>可以实现负载均衡和错误恢复的功能。</p>
+</blockquote>
+<h4 id="4-、聚合"><a href="#4-、聚合" class="headerlink" title="(4)、聚合"></a>(4)、聚合</h4><p><img src="https://file.buildworld.cn/img/20200701145800.png"></p>
+<blockquote>
+<p>这种模式是我们最常见的，也非常实用，日常 web 应用通常分布在上百个服务器，大者甚至上千个、上万个服务器。产生的日志，处理起来也非常麻烦。用 <code>flume</code> 的这种组合方式能很好的解决这一问题，每台服务器部署一个 <code>flume</code> 采集日志，传送到一个集中收集日志的<code>flume</code>，再由此 <code>flume</code> 上传到 <code>hdfs</code>、<code>hive</code>、<code>hbase</code> 等，进行日志分析。 </p>
+</blockquote>
+<h3 id="5、-Flume-参数调优"><a href="#5、-Flume-参数调优" class="headerlink" title="5、 Flume 参数调优"></a>5、 <strong>Flume</strong> 参数调优</h3><h4 id="（1）-Source"><a href="#（1）-Source" class="headerlink" title="（1）. Source"></a>（1）. Source</h4><blockquote>
+<p>增加 <code>Source</code> 个（使用 <code>Tair Dir Source</code> 时可增加 <code>FileGroups</code> 个数）可以增大 Source 的读取数据的能力。例如：当某一个目录产生的文件过多时需要将这个文件目录拆分成多个文件目录，同时配置好多个 Source 以保证 Source 有足够的能力获取到新产生的数据。</p>
+</blockquote>
+<blockquote>
+<p><code>batchSize</code> 参数决定 Source 一次批量运输到 Channel 的 event 条数，适当调大这个参数可以提高 Source 搬运 Event 到 Channel 时的性能。</p>
+</blockquote>
+<h4 id="（2）-Channel"><a href="#（2）-Channel" class="headerlink" title="（2）. Channel"></a>（2）. Channel</h4><blockquote>
+<p><code>type</code> 选择 memory 时 Channel 的性能最好，但是如果 Flume 进程意外挂掉可能会丢失数据。type 选择 file 时 Channel 的容错性更好，但是性能上会比 memory channel 差。</p>
+</blockquote>
+<blockquote>
+<p>使用 <code>file Channel</code> 时 <code>dataDirs</code> 配置多个不同盘下的目录可以提高性能。</p>
+</blockquote>
+<blockquote>
+<p><code>Capacity</code> 参数决定 <code>Channel</code> 可容纳最大的 <code>event</code> 条数。<code>transactionCapacity</code> 参数决定每次 Source 往 channel 里面写的最大 event 条数和每次 Sink 从 channel 里面读的最大 event条数。<strong>transactionCapacity 需要大于 Source 和 Sink 的 batchSize 参数。</strong></p>
+</blockquote>
+<h4 id="（3）-Sink"><a href="#（3）-Sink" class="headerlink" title="（3）. Sink"></a>（3）. Sink</h4><blockquote>
+<p>增加 <code>Sink</code> 的个数可以增加 Sink 消费 event 的能力。Sink 也不是越多越好够用就行，过多的 Sink 会占用系统资源，造成系统资源不必要的浪费。</p>
+</blockquote>
+<blockquote>
+<p><code>batchSize</code> 参数决定 Sink 一次批量从 Channel 读取的 event 条数，适当调大这个参数可以提高 Sink 从 Channel 搬出 event 的性能。</p>
+</blockquote>
+<h3 id="6、Flume-的-Channel-Selectors"><a href="#6、Flume-的-Channel-Selectors" class="headerlink" title="6、Flume 的 Channel Selectors"></a>6、<strong>Flume</strong> <strong>的</strong> Channel Selectors</h3><p><img src="https://file.buildworld.cn/img/20200701190722.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:qjzxzxd@gmail.com">MiChong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.buildworld.cn/2020/07/01/BigData-Flume%E6%A1%86%E6%9E%B6/">https://www.buildworld.cn/2020/07/01/BigData-Flume%E6%A1%86%E6%9E%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.buildworld.cn" target="_blank">MiChong的🏡</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hadoop/">Hadoop</a><a class="post-meta__tags" href="/tags/Flume/">Flume</a><a class="post-meta__tags" href="/tags/Apache/">Apache</a></div><div class="post_share"><div class="social-share" data-image="https://ae01.alicdn.com/kf/H3cae0a1814934caa9a43090c0c041653e.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/07/02/BigData-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%A1%86%E6%9E%B6Apache-Kafka/"><img class="prev-cover" src="https://file.buildworld.cn/img/20200702193913.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">BigData-消息队列框架Apache Kafka入门、原理解析</div></div></a></div><div class="next-post pull-right"><a href="/2020/06/12/BCI-Python-EEG%E5%B7%A5%E5%85%B7%E5%BA%93MNE/"><img class="next-cover" src="https://ae01.alicdn.com/kf/H32f1a2189cf54b20a201315213d6c44fa.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">BCI--Python-EEG工具库MNE</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/07/02/BigData-消息队列框架Apache-Kafka/" title="BigData-消息队列框架Apache Kafka入门、原理解析"><img class="cover" src="https://file.buildworld.cn/img/20200702193913.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-02</div><div class="title">BigData-消息队列框架Apache Kafka入门、原理解析</div></div></a></div><div><a href="/2020/05/23/BigData-Hadoop2-x新特性之HA/" title="BigData--Hadoop2.x新特性之HA"><img class="cover" src="https://ae01.alicdn.com/kf/H326912a669954a64891d011f0bee71368.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-23</div><div class="title">BigData--Hadoop2.x新特性之HA</div></div></a></div><div><a href="/2020/06/03/BigData-Hadoop数据压缩/" title="BigData--Hadoop数据压缩"><img class="cover" src="https://file.buildworld.cn/img/b2b1da7192e883d1e9b068e562692596_u=3289803254,2227787275&fm=26&gp=0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-03</div><div class="title">BigData--Hadoop数据压缩</div></div></a></div><div><a href="/2020/05/24/BigData-MapReduce入门/" title="BigData--MapReduce入门"><img class="cover" src="https://ae01.alicdn.com/kf/H675a31a08d4b4015ab2bd5886ce81979C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-24</div><div class="title">BigData--MapReduce入门</div></div></a></div><div><a href="/2020/05/26/BigData-MapReduce进阶-一-之框架原理/" title="BigData--MapReduce进阶(一)之框架原理"><img class="cover" src="https://ae01.alicdn.com/kf/H675a31a08d4b4015ab2bd5886ce81979C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-26</div><div class="title">BigData--MapReduce进阶(一)之框架原理</div></div></a></div><div><a href="/2020/06/01/BigData-MapReduce进阶-二-之工作机制/" title="BigData--MapReduce进阶(二)之工作机制"><img class="cover" src="https://ae01.alicdn.com/kf/H675a31a08d4b4015ab2bd5886ce81979C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-01</div><div class="title">BigData--MapReduce进阶(二)之工作机制</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MiChong</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MiChongGET"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/qjzxzxd@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到米虫的小站，一起加油🤝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Flume%E8%BF%9B%E9%98%B6"><span class="toc-number">1.</span> <span class="toc-text">Flume进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81Flume%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6"><span class="toc-number">1.1.</span> <span class="toc-text">1、Flume基本框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81Flume%E4%BA%8B%E5%8A%A1"><span class="toc-number">1.2.</span> <span class="toc-text">2、Flume事务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81Flume-Agent-%E5%86%85%E9%83%A8%E5%8E%9F%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">3、Flume Agent 内部原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81Flume-%E6%8B%93%E6%89%91%E7%BB%93%E6%9E%84"><span class="toc-number">1.4.</span> <span class="toc-text">4、Flume 拓扑结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E3%80%81%E7%AE%80%E5%8D%95%E4%B8%B2%E8%81%94"><span class="toc-number">1.4.1.</span> <span class="toc-text">（1）、简单串联</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E3%80%81%E5%A4%8D%E5%88%B6%E5%92%8C%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8"><span class="toc-number">1.4.2.</span> <span class="toc-text">（2）、复制和多路复用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E3%80%81%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%92%8C%E6%95%85%E9%9A%9C%E8%BD%AC%E7%A7%BB"><span class="toc-number">1.4.3.</span> <span class="toc-text">（3）、负载均衡和故障转移</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E3%80%81%E8%81%9A%E5%90%88"><span class="toc-number">1.4.4.</span> <span class="toc-text">(4)、聚合</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81-Flume-%E5%8F%82%E6%95%B0%E8%B0%83%E4%BC%98"><span class="toc-number">1.5.</span> <span class="toc-text">5、 Flume 参数调优</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%881%EF%BC%89-Source"><span class="toc-number">1.5.1.</span> <span class="toc-text">（1）. Source</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%882%EF%BC%89-Channel"><span class="toc-number">1.5.2.</span> <span class="toc-text">（2）. Channel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%EF%BC%883%EF%BC%89-Sink"><span class="toc-number">1.5.3.</span> <span class="toc-text">（3）. Sink</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81Flume-%E7%9A%84-Channel-Selectors"><span class="toc-number">1.6.</span> <span class="toc-text">6、Flume 的 Channel Selectors</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/06/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/07/06/hello-world/" title="Hello World">Hello World</a><time datetime="2021-07-06T05:12:56.084Z" title="发表于 2021-07-06 13:12:56">2021-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合"><img src="https://file.buildworld.cn/img/20210209161641.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode数据库题目集合"/></a><div class="content"><a class="title" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合">LeetCode数据库题目集合</a><time datetime="2021-02-09T08:13:56.000Z" title="发表于 2021-02-09 16:13:56">2021-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习"><img src="https://file.buildworld.cn/img/20210107194133.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData-数据仓库学习"/></a><div class="content"><a class="title" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习">BigData-数据仓库学习</a><time datetime="2021-01-07T11:35:36.000Z" title="发表于 2021-01-07 19:35:36">2021-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录"><img src="https://file.buildworld.cn/img/20201104092750.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法学习记录"/></a><div class="content"><a class="title" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录">算法学习记录</a><time datetime="2020-11-04T01:20:49.000Z" title="发表于 2020-11-04 09:20:49">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink"><img src="https://file.buildworld.cn/img/20200911110402.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData--分布式流数据流引擎Apache Flink"/></a><div class="content"><a class="title" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink">BigData--分布式流数据流引擎Apache Flink</a><time datetime="2020-09-11T02:59:30.000Z" title="发表于 2020-09-11 10:59:30">2020-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By MiChong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'mef0W501zi4VSjltsnmN5D9J-gzGzoHsz',
+      appKey: 'ktKil4OakXUNcSs0Ofkph1rm',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "7d002c40-fe0a-44eb-977b-a992eaed1e7c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

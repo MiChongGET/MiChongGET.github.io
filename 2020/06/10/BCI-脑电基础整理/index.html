@@ -1,0 +1,324 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BCI--脑电基础整理 | MiChong的🏡</title><meta name="keywords" content="BCI"><meta name="author" content="MiChong,qjzxzxd@gmail.com"><meta name="copyright" content="MiChong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="脑机接口（BCI），是一种通过检测中枢神经系统活动并将其转化为人工输出，来替代、修复、增强、补充或者改善中枢神经系统的正常输出，从而改变中枢神经系统与内外环境之间的交互作用的技术。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BCI--脑电基础整理">
+<meta property="og:url" content="https://www.buildworld.cn/2020/06/10/BCI-%E8%84%91%E7%94%B5%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86/index.html">
+<meta property="og:site_name" content="MiChong的🏡">
+<meta property="og:description" content="脑机接口（BCI），是一种通过检测中枢神经系统活动并将其转化为人工输出，来替代、修复、增强、补充或者改善中枢神经系统的正常输出，从而改变中枢神经系统与内外环境之间的交互作用的技术。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://file.buildworld.cn/img/ec5a290b7250a197b6c0df8fadf474dd_f203db60b3fe49358114eecab1bc755e.jpeg">
+<meta property="article:published_time" content="2020-06-10T12:59:22.000Z">
+<meta property="article:modified_time" content="2021-07-09T01:38:21.721Z">
+<meta property="article:author" content="MiChong">
+<meta property="article:tag" content="BCI">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.buildworld.cn/img/ec5a290b7250a197b6c0df8fadf474dd_f203db60b3fe49358114eecab1bc755e.jpeg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.buildworld.cn/2020/06/10/BCI-%E8%84%91%E7%94%B5%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BCI--脑电基础整理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-09 09:38:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="MiChong的🏡" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://ae01.alicdn.com/kf/H93aaa47128f94ffe9f05b4eb547bcdafu.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">MiChong的🏡</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">BCI--脑电基础整理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-06-10T12:59:22.000Z" title="发表于 2020-06-10 20:59:22">2020-06-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-09T01:38:21.721Z" title="更新于 2021-07-09 09:38:21">2021-07-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%84%91%E6%9C%BA%E4%BA%A4%E4%BA%92/">脑机交互</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="BCI--脑电基础整理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="脑电基础整理"><a href="#脑电基础整理" class="headerlink" title="脑电基础整理"></a>脑电基础整理</h2><p><strong>脑机接口（BCI）</strong>，是一种通过检测中枢神经系统活动并将其转化为人工输出，来替代、修复、增强、补充或者改善中枢神经系统的正常输出，从而改变中枢神经系统与内外环境之间的交互作用的技术。脑机接口技术通过置于头皮或颅内的电极等传感器采集脑神经活动信号，经过信号处理、特征提取、模式识别等过程，可获知人的控制意图、认知或心理状态、神经系统疾病状态等信息，为运动、语言等功能残缺的患者提供新的控制、交流通道或康复手段，也可为健康人群提供更多信息输出通道。随着脑电信号采集技术与信号处理技术的发展成熟，脑机接口技术已逐渐走入临床应用，在诸如中风、注意力缺陷等脑损伤或其他神经系统疾病患者的临床康复中表现出色，为高位截瘫、肌萎缩性侧索硬化症等运动功能障碍患者提供新的运动功能替代方案，为情绪、疲劳、意识状态等的检测和识别提供客观指标。</p>
+<h3 id="一、采集脑电信号的四种技术"><a href="#一、采集脑电信号的四种技术" class="headerlink" title="一、采集脑电信号的四种技术"></a>一、采集脑电信号的四种技术</h3><h4 id="1、脑电图-Electroencephalography-EEG"><a href="#1、脑电图-Electroencephalography-EEG" class="headerlink" title="1、脑电图(Electroencephalography,EEG)"></a>1、脑电图(Electroencephalography,EEG)</h4><p><strong>脑电图</strong>通过电极记录大脑的电活动，电极通常嵌入电极帽中。这种电极帽通常需要 5 分钟才能安装在用户身上并调节电极以获得良好的信号。脑电图系统相对便宜且便携，是 BCI 研究中最常见的神经影像学方法。</p>
+<img src="https://ae01.alicdn.com/kf/H9d2bf4ace5bc4372932e4b2647ebfbecI.jpg" style="zoom:120%;" />
+
+<h4 id="2、皮层脑电图（Electrocorticography-ECoG）"><a href="#2、皮层脑电图（Electrocorticography-ECoG）" class="headerlink" title="2、皮层脑电图（Electrocorticography, ECoG）"></a>2、皮层脑电图（Electrocorticography, ECoG）</h4><p><strong>皮层脑电图</strong>涉及到通过外科手术将电极植入大脑表面来记录电活动。相对于 EEG 传感器，ECoG 传感器具有更好的空间分辨率，能够准确检测脑电图电极不可见的高频脑活动。电极一旦植入，就可以准备用于 BCI 或其他任务，而无需在每次使用前进行准备。</p>
+<h4 id="3、深度电极-Depth-electrode"><a href="#3、深度电极-Depth-electrode" class="headerlink" title="3、深度电极(Depth electrode)"></a>3、深度电极(Depth electrode)</h4><p>**深度电极(Depth electrode)**记录使用通过外科手术植入大脑的电极。这种方法具有类似于 ECoG 的吸引人的特性，但记录的是来自一小群神经元的活动。因此，这两种方法提供了大脑活动的不同图景。</p>
+<h4 id="4、功能磁共振成像-FunctionalMagnetic-Resonance-Imaging-fMRI"><a href="#4、功能磁共振成像-FunctionalMagnetic-Resonance-Imaging-fMRI" class="headerlink" title="4、功能磁共振成像(FunctionalMagnetic Resonance Imaging, fMRI)"></a>4、功能磁共振成像(FunctionalMagnetic Resonance Imaging, fMRI)</h4><p><strong>功能磁共振成像</strong>不能测量电活动，而是用来测量与不同精神活动相关的大脑血流变化。而这些变化不能像上面三种方法那样用时间精度来检测。fMRI 系统需要非常强大的磁场，因此要花费昂贵且不便于携带。</p>
+<p><img src="https://ae01.alicdn.com/kf/H16206fdcfb4548059e51de516e2b7492W.jpg"></p>
+<h3 id="二、大脑布罗德曼分区系统"><a href="#二、大脑布罗德曼分区系统" class="headerlink" title="二、大脑布罗德曼分区系统"></a>二、大脑布罗德曼分区系统</h3><blockquote>
+<p>布罗德曼分区是一个根据细胞结构将大脑皮层划分为一系列解剖区域的系统。神经解剖学中所谓细胞结构（Cytoarchitecture），是指在染色的脑组织中观察到的神经元的组织方式。</p>
+</blockquote>
+<p><strong>大脑半球外侧面的布罗德曼分区</strong></p>
+<p><img src="https://ae01.alicdn.com/kf/H80d11821245b474d81ad4e4342ae9fc0v.jpg" alt="大脑半球外侧面的布罗德曼分区"></p>
+<p><strong>大脑半球内侧面的布罗德曼分区</strong></p>
+<p><img src="https://ae01.alicdn.com/kf/H759a4eb6677e40a1aae01258ab7642e89.jpg"></p>
+<ul>
+<li><p>黄色部位是 <strong>额叶</strong>，主要功能：思维，计划和中央执行职能；运动执行；</p>
+</li>
+<li><p>绿色部位是 <strong>顶叶</strong>，主要功能：体感知觉，视觉和体空间信息的整合；</p>
+</li>
+<li><p>红色部位是 <strong>颞叶</strong>，主要功能：语言功能和听觉感知，参与长期记忆和情感；</p>
+</li>
+<li><p>青色部位是 <strong>枕叶</strong>，主要功能：视觉感知和处理。</p>
+</li>
+</ul>
+<h3 id="三、稳态视觉诱发电位-SSVEP"><a href="#三、稳态视觉诱发电位-SSVEP" class="headerlink" title="三、稳态视觉诱发电位 SSVEP"></a>三、稳态视觉诱发电位 SSVEP</h3><p>诱发电位主要有<strong>视觉诱发电位</strong>、<strong>听觉诱发电位</strong>以及<strong>触觉诱发电位</strong>三种。视觉诱发电位由于简单、方便被广泛应用于脑电信号的研究中。当视觉收到光或者图形闪烁等刺激时，脑电信号的电位会发生变化，这些电位的变化就是<code>视觉诱发电位(Visual Evoked Potential, VEP)</code>。</p>
+<h4 id="1、视觉诱发电位可以大致分为三类："><a href="#1、视觉诱发电位可以大致分为三类：" class="headerlink" title="1、视觉诱发电位可以大致分为三类："></a>1、视觉诱发电位可以大致分为三类：</h4><ul>
+<li>瞬时视觉诱发电位（Transient Visual EvokedPotential， TVEP）;</li>
+<li>稳态视觉诱发电位（Steady-State Visual EvokedPotential, SSVEP）;</li>
+<li>伪随机码视觉诱发电位。</li>
+</ul>
+<h4 id="2、SSVEP-信号原理与基础"><a href="#2、SSVEP-信号原理与基础" class="headerlink" title="2、SSVEP 信号原理与基础"></a>2、SSVEP 信号原理与基础</h4><p>关于 SSVEP 信号的原理，主流观点认为大脑里分布的各种神经网络都有其固有的谐振频率，在正常状态下，这些神经网络都是互不同步的，也是杂乱无章，没有规律的，此时的脑电信号是自发脑电。当施加一个恒定频率的外界视觉刺激时，与刺激频率或谐波频率相一致的神经网络就会产生谐振，导致大脑的电位活动在刺激频率或谐波频率处出现明显变化，由此产生 SSVEP 信号。</p>
+<p><strong>基于 SSVEP 信号的 BCI 系统就是通过检测枕叶视觉区的 EEG 信号来判断大脑的思维活动。</strong></p>
+<p>当人体受到一个固定频率的闪烁或者变换模式的视觉刺激时，大脑皮层的电位活动将被调制，从而产生一个连续的且与刺激频率有关（刺激频率的基频或倍频处）的响应，这个响应具有和视觉刺激类似的周期性节律，即为**稳态视觉诱发电位(SSVEP)**。SSVEP 信号表现在 EEG 脑电信号中则是在功率谱中能在刺激频率或谐波上出现谱峰。通过分析检测谱峰处对应的频率，即能检测到受试者视觉注视的刺激源，从而能识别受试者的意图。</p>
+<p>在使用视觉刺激装置来获取 SSVEP 信号时，在大脑皮层中与枕叶视觉区有关的脑电通道主要有六个（P03,P0Z,P04,01,0Z,02）</p>
+<p><img src="https://ae01.alicdn.com/kf/H44e9c152fad149eb839ca9e2171abf70R.jpg"></p>
+<h4 id="3、获取-SSVEP-信号要注意的点"><a href="#3、获取-SSVEP-信号要注意的点" class="headerlink" title="3、获取 SSVEP 信号要注意的点"></a>3、获取 SSVEP 信号要注意的点</h4><ul>
+<li>（1）能诱发 SSVEP 幅度随频率变化的响应曲线大致可以分为三个区域:<code>低频区(4~15Hz), 中频区(15~30Hz), 高频区(30~60Hz)</code>。不稳定的频率无法诱发稳定的 SSVEP 信号，将严重影响对信号识别的准确率，因此稳定的刺激频率是必须的。</li>
+<li>（2）不同人的 SSVEP 信号幅值不尽相同，对相同频率的响应敏感程度也存在差异，同时，由于谐波成分的存在，要尽量避免一个刺激频率是另一个刺激频率的整数倍，否则将容易引起识别错误的情况。</li>
+<li>（3）诱发 SSVEP 信号的刺激源要具有友好性，满足受试者对于舒适性的要求，刺激频率过高或是刺激强度过大容易导致视觉疲劳而影响视力健康，甚至会诱发癫痫样脑电活动。</li>
+</ul>
+<img src="https://ae01.alicdn.com/kf/Ha4554517d6f34265b26a7bcf39756e22R.jpg" style="zoom:120%;" />
+
+<h3 id="四、10-20-国际标准导联系统"><a href="#四、10-20-国际标准导联系统" class="headerlink" title="四、10-20 国际标准导联系统"></a>四、10-20 国际标准导联系统</h3><h4 id="1、系统介绍"><a href="#1、系统介绍" class="headerlink" title="1、系统介绍"></a>1、系统介绍</h4><p><strong>10-20 系统电极放置法</strong>是国际脑电图学会规定的标准电极放置法。额极中点至鼻根的距离和枕点至枕外粗隆的距离各占此连线全长的 10％，其余各点均以此连线全长的 20％相隔，如下图所示。因此命名为 10-20 系统。</p>
+<blockquote>
+<p>奇数表示大脑左侧，偶数表示大脑右侧。左右侧各取 8 个电极，加上前后位上的额中点（Fz）、中央点（Cz）、顶点（Pz）以及两个耳电极共 21 个电极。</p>
+</blockquote>
+<p><img src="https://ae01.alicdn.com/kf/Ha523e4f5264c4f71af3e51d6c022830ch.jpg"></p>
+<p>10-20 系统的电极位置主要以颅骨为参照，并不因个人头围或头型的差异而有所不同。10-20 系统电极位置描述如下：</p>
+<ul>
+<li><p><strong>前后矢状线</strong>：从鼻根至枕外粗隆取一连线，在此线上，由前至后标出 5 个点，依次命名为：额极中点（Fpz）、额中点（Fz）、中央点（Cz）、顶点（Pz）、枕点（Oz）。额极中点至鼻根的距离和枕点至枕外粗隆的距离各占此连线全长的 10％，其余各点均以此连线全长的 20％相隔。</p>
+</li>
+<li><p><strong>横位</strong>：从左耳前点（耳屏前颧弓根凹陷处）通过中央点至右耳前点取一连线，在此连线的左右两侧对称标出左颞中（T3）、右颞中（T4）、左中央（C3）、右中央（C4）。T3、T4 点与耳前点的距离各占此线全长的 10％，其余各点（包括 Cz 点）均以此连线全长的 20％相隔。</p>
+</li>
+<li><p><strong>侧位</strong>：从 Fpz 点向后通过 T3、T4 点至枕点分别取左右侧连线，在左右侧连线上由前至后对称地标出左额极（Fp1 ）、右额极（Fp2 ）、左前颞（F7）、右前颞（F8）、左后颞（T5）、右后颞（T6）、左枕（O1）、右枕（O2）各点。Fp1 、Fp2 点至额极中点（Fpz ）的距离与 O1、O2 点至 Oz 点的距离各占此连线全长的 10％，其余各点（包括 T3、T4）均以此连线全长的 20％相隔。</p>
+</li>
+<li><p>其余的左额（F3）、右额（F4）点分别位于 Fp1、Fp2 与 C3、C4 点的中间；左顶（P3）、右顶（P4）点分别位于 C3、C4 与 O1、O2 点的中间。</p>
+</li>
+</ul>
+<h4 id="2、10-20-系统中数字与字母"><a href="#2、10-20-系统中数字与字母" class="headerlink" title="2、10-20 系统中数字与字母"></a>2、10-20 系统中数字与字母</h4><h5 id="（1）数字代表的含义："><a href="#（1）数字代表的含义：" class="headerlink" title="（1）数字代表的含义："></a>（1）数字代表的含义：</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">左脑单数，右脑双数；</span><br><span class="line"></span><br><span class="line">/代表中间，例：C3/T3就是指两点之间的中间地点；</span><br><span class="line"></span><br><span class="line">-代表涵盖两点或相连的所有点，例：C3-T3代表涵盖这两点；</span><br></pre></td></tr></table></figure>
+
+<h5 id="（2）字母代表的含义："><a href="#（2）字母代表的含义：" class="headerlink" title="（2）字母代表的含义："></a>（2）字母代表的含义：</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">F: 额叶(Frontal lobe)</span><br><span class="line"></span><br><span class="line">Fp:前额叶（Frontal poles）</span><br><span class="line"></span><br><span class="line">T: 颞叶（Temporal lobes）</span><br><span class="line"></span><br><span class="line">O: 枕叶（Occipital lobes）</span><br><span class="line"></span><br><span class="line">P: 顶叶（Parietal lobes）</span><br><span class="line"></span><br><span class="line">C: 中心部（Central） 或感觉运动皮层（sensorimotorcortex）</span><br><span class="line"></span><br><span class="line">Z: 零点（zero）即左右脑中心</span><br></pre></td></tr></table></figure>
+
+<h3 id="五、运动想象系统"><a href="#五、运动想象系统" class="headerlink" title="五、运动想象系统"></a>五、运动想象系统</h3><h4 id="1、系统介绍-1"><a href="#1、系统介绍-1" class="headerlink" title="1、系统介绍"></a>1、系统介绍</h4><p><strong>运动想象系统的生理基础</strong>是：当人在想象躯体不同部位的运动时，会相应的激活大脑的不同功能区域，从而产生具有不同特性的脑电信号。而所谓的不同特性指的是<strong>事件相关去同步化（Event-related desynchronization，ERD）</strong>和<strong>事件相关同步化（Event-relatedsynchronization，ERS）</strong>现象。</p>
+<p><strong>当人在想象运动时，大脑皮层相关的区域会出现特定频率振幅减小，能量下降的情况，这就是 ERD；而当人在想象运动结束或者进入大脑静息状态时，大脑皮层相关区域则会出现振幅增加，能量增加的情况，这就是 ERS。</strong></p>
+<p>而 ERD 和 ERS 只会在 EEG 的特定频率范围内出现，比如 8-12Hz 的<strong>Mu 波</strong>以及 18-26Hz 的<strong>Beta 波</strong>。</p>
+<img src="https://file.buildworld.cn/img/14ec0be1f43b90b03b842e99427ba0c1_640_wx_fmt=png&amp;tp=webp&amp;wxfrom=5&amp;wx_lazy=1&amp;wx_co=1.webp" style="zoom:150%;" />
+
+<p>上图详解：想象左手右手运动的<strong>ERD 现象</strong>。当想象左手运动时，大脑皮层右侧(<strong>C4 电极</strong>附近) 出现 ERD 现象，相关区域能量减小；当想象右手运动时，大脑皮层左侧（<strong>C3 电极</strong>附近）出现 ERD 现象，相关区域能量减小。</p>
+<p><strong>运动想象系统是指对想象运动产生的 EEG 信号进行解码，从而获知被试的运动意图，将相应的控制命令传给外接设备，达到人机交互的目的。</strong></p>
+<h4 id="2、脑电信号的节律波"><a href="#2、脑电信号的节律波" class="headerlink" title="2、脑电信号的节律波"></a>2、脑电信号的节律波</h4><p>两种分类方法：</p>
+<p><strong>分类方法一</strong>：以 Schwab 频率来划分的话，一般分为三类：<code>慢波、中间快波和快波</code>。</p>
+<ul>
+<li>1）慢波包括 0.5-3Hz 范围的 delta 波、4-7Hz 的 theta 波和 8-13Hz 的 alpha 波；</li>
+<li>2）中间快波为频率在 14-17Hz 范围的波；</li>
+<li>3）快波包括 18-30Hz 的 beta 波、31Hz 以上的为 gama 波。</li>
+</ul>
+<p><strong>分类方法二</strong>：Walter 分类，共有以下五种分类：</p>
+<ul>
+<li>a.频率在 0.5-3.5Hz 范围内为 delta 波，</li>
+<li>b.频率在 4-7Hz 范围内为 theta 波，</li>
+<li>c.频率在 8-13Hz 范围内为 alpha，</li>
+<li>d.频率在 14-25Hz 范围内为 beta 波，</li>
+<li>e.频率在 26Hz 以上的为 gama 波，</li>
+</ul>
+<p><strong>特别要注意的是这里对频率在 10Hz 左右的波称为节律。</strong></p>
+<h4 id="3、特征提取算法"><a href="#3、特征提取算法" class="headerlink" title="3、特征提取算法"></a>3、特征提取算法</h4><p><strong>（1）时域方法</strong>：这是比较早期的 EEG 信号处理方法，主要通过提取 EEG 的波形特征，比如振幅、方差、波峰等，对 EEG 信号进行分析；</p>
+<p><strong>（2）频域方法</strong>：运动想象 EEG 信号的 ERD 和 ERS 现象只出现在特定频率范围，比如 8-12Hz 的 Mu 波和 18-26Hz 的 Beta 波。因此，通过功率谱等谱分析方法，也可以有效地从 EEG 提取中特征。其中比较出名的方法有自回归功率谱分析、双谱分析法等；</p>
+<p><strong>（3）空域方法</strong>：这是近年运动想象领域比较通用的特征提取方法，主要通过设计空域滤波器对 EEG 的多通道空间分布进行处理，提取可分的特征。包括：<code>共空域模式法（Common spatialpattern，CSP）</code>，以及基于 CSP 改进的方法。</p>
+<p><strong>基于 CSP 改进的方法包括：</strong></p>
+<ul>
+<li><p><code>时空滤波的共空谱模式（Common spatio-spectralpattern, CSSP）</code>；</p>
+</li>
+<li><p><code>共稀疏谱空模式（Common sparse spectral spatial pattern，CSSSP）</code>；</p>
+</li>
+<li><p><code>正则化公用空间模式（Regularized Common Spatial Pattern, RCSP)</code>等。</p>
+</li>
+</ul>
+<p><strong>（4）小波模糊熵的特征提取方法</strong>鉴于脑电信号的非线性特性和运动想象时的节律特性，提出了<strong>小波模糊熵的特征提取方法</strong>，利用小波变换将 EEG 信号进行小波分解，得到对应运动想象 EEG 信号的 alpha 和 beta 节律，然后采用模糊熵方法提取特征。</p>
+<h4 id="4、分类识别算法"><a href="#4、分类识别算法" class="headerlink" title="4、分类识别算法"></a>4、分类识别算法</h4><p><strong>(1)LDA 分类器</strong></p>
+<p>LDA 分类器(LinearDiscriminant Analysis，LDA)是一种简单高效的线性分类器，将数据往低维度方向投影，使得投影后的数据具有类内方差最小，类间方差最大的特性。也即是投影后同一类别的数据尽可能接近，不同类别的数据尽可能分开。最后在最可分的数据上通过简单的阈值设置进行分类。LDA 是运动想象系统中最常用的分类器，在历届的脑机接口竞赛中都被许多参赛者使用。近年来，结合运动想象的特点，许多基于 LDA 的改进方法也被提出来，比如自适应 LDA、贝叶斯 LDA 等，并且都取得了很好的分类性能。</p>
+<p><strong>(2)SVM 分类器</strong></p>
+<p>支持向量机分类器(SVM)是机器学习里典型的分类器，通过构建一个最优的分割超平面，从而将两类数据尽可能的区分开。SVM 在运动想象系统中也被广泛的使用，除此之外，SVM 在 P300、稳态视觉诱发电位（Steady state visuallyevoked potentials，SSVEP）脑机接口系统中也广泛使用。</p>
+<p><strong>(3)贝叶斯分类器</strong></p>
+<p>贝叶斯分类器是利用贝叶斯公式计算出样本属于各个类别的后验概率，然后最大后验概率所对应的类别则为该样本的类别。贝叶斯分类器也广泛的使用于运动想象系统，对特征进行分类。</p>
+<p><strong>(4)人工神经网络</strong></p>
+<p>人工神经网络是利用大脑神经元结构和信息传递机理，在此基础上建立大规模的具有自适应能力的网络系统，并且通过拓扑结构连接，按照大型规模的并行方式排列而成。人工神经网络适合非线性分析问题，并且具有较强的学习和归纳能力，自适应性强。人工神经网络的模式有很多种，目前常用的人工神经网络有：感知器、多层感知器、BP 神经网络、RBF 神经网络等。</p>
+<p><strong>(5)聚类分类器</strong></p>
+<p>聚类分析是一种具有探索性质的模式分类方法，在分类时不依赖于任何关于分类的先验知识，而是采用相似度量的方法，对具有相同或相似特征的样本进行分类。聚类分析在分类时需要确定一种聚类准则来评价聚类方法的好坏，常用的聚类准则有<code>误差平方和</code>、<code>类间距离和</code>、<code>离散度</code>等。聚类方法有很多种，常见的方法有：<code>层次聚类</code>、<code>动态聚类法</code>和<code>决策树聚类法</code>等。由于聚类为线性分类器，<strong>它在脑电信号分类中的缺点是对脑电信号的特征要求很高，难以处理复杂的分类问题，容易造成分辨率低。</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:qjzxzxd@gmail.com">MiChong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.buildworld.cn/2020/06/10/BCI-%E8%84%91%E7%94%B5%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86/">https://www.buildworld.cn/2020/06/10/BCI-%E8%84%91%E7%94%B5%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.buildworld.cn" target="_blank">MiChong的🏡</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/BCI/">BCI</a></div><div class="post_share"><div class="social-share" data-image="https://file.buildworld.cn/img/ec5a290b7250a197b6c0df8fadf474dd_f203db60b3fe49358114eecab1bc755e.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/06/12/BCI-Python-EEG%E5%B7%A5%E5%85%B7%E5%BA%93MNE/"><img class="prev-cover" src="https://ae01.alicdn.com/kf/H32f1a2189cf54b20a201315213d6c44fa.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">BCI--Python-EEG工具库MNE</div></div></a></div><div class="next-post pull-right"><a href="/2020/06/08/BigData-Hive%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%B7%A5%E5%85%B7/"><img class="next-cover" src="https://file.buildworld.cn/img/20200608124301.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">BigData--Hive数据仓库工具</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/06/12/BCI-Python-EEG工具库MNE/" title="BCI--Python-EEG工具库MNE"><img class="cover" src="https://ae01.alicdn.com/kf/H32f1a2189cf54b20a201315213d6c44fa.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-12</div><div class="title">BCI--Python-EEG工具库MNE</div></div></a></div><div><a href="/2020/07/07/BCI-EEG脑电数据处理/" title="BCI-EEG脑电数据处理"><img class="cover" src="https://yanxuan.nosdn.127.net/de018a7a4c00b68406c31fee5029ac6b.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-07</div><div class="title">BCI-EEG脑电数据处理</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MiChong</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MiChongGET"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/qjzxzxd@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到米虫的小站，一起加油🤝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%84%91%E7%94%B5%E5%9F%BA%E7%A1%80%E6%95%B4%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">脑电基础整理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%87%87%E9%9B%86%E8%84%91%E7%94%B5%E4%BF%A1%E5%8F%B7%E7%9A%84%E5%9B%9B%E7%A7%8D%E6%8A%80%E6%9C%AF"><span class="toc-number">1.1.</span> <span class="toc-text">一、采集脑电信号的四种技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E8%84%91%E7%94%B5%E5%9B%BE-Electroencephalography-EEG"><span class="toc-number">1.1.1.</span> <span class="toc-text">1、脑电图(Electroencephalography,EEG)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E7%9A%AE%E5%B1%82%E8%84%91%E7%94%B5%E5%9B%BE%EF%BC%88Electrocorticography-ECoG%EF%BC%89"><span class="toc-number">1.1.2.</span> <span class="toc-text">2、皮层脑电图（Electrocorticography, ECoG）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E6%B7%B1%E5%BA%A6%E7%94%B5%E6%9E%81-Depth-electrode"><span class="toc-number">1.1.3.</span> <span class="toc-text">3、深度电极(Depth electrode)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%8A%9F%E8%83%BD%E7%A3%81%E5%85%B1%E6%8C%AF%E6%88%90%E5%83%8F-FunctionalMagnetic-Resonance-Imaging-fMRI"><span class="toc-number">1.1.4.</span> <span class="toc-text">4、功能磁共振成像(FunctionalMagnetic Resonance Imaging, fMRI)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%A4%A7%E8%84%91%E5%B8%83%E7%BD%97%E5%BE%B7%E6%9B%BC%E5%88%86%E5%8C%BA%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.2.</span> <span class="toc-text">二、大脑布罗德曼分区系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%A8%B3%E6%80%81%E8%A7%86%E8%A7%89%E8%AF%B1%E5%8F%91%E7%94%B5%E4%BD%8D-SSVEP"><span class="toc-number">1.3.</span> <span class="toc-text">三、稳态视觉诱发电位 SSVEP</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E8%A7%86%E8%A7%89%E8%AF%B1%E5%8F%91%E7%94%B5%E4%BD%8D%E5%8F%AF%E4%BB%A5%E5%A4%A7%E8%87%B4%E5%88%86%E4%B8%BA%E4%B8%89%E7%B1%BB%EF%BC%9A"><span class="toc-number">1.3.1.</span> <span class="toc-text">1、视觉诱发电位可以大致分为三类：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81SSVEP-%E4%BF%A1%E5%8F%B7%E5%8E%9F%E7%90%86%E4%B8%8E%E5%9F%BA%E7%A1%80"><span class="toc-number">1.3.2.</span> <span class="toc-text">2、SSVEP 信号原理与基础</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E8%8E%B7%E5%8F%96-SSVEP-%E4%BF%A1%E5%8F%B7%E8%A6%81%E6%B3%A8%E6%84%8F%E7%9A%84%E7%82%B9"><span class="toc-number">1.3.3.</span> <span class="toc-text">3、获取 SSVEP 信号要注意的点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%8110-20-%E5%9B%BD%E9%99%85%E6%A0%87%E5%87%86%E5%AF%BC%E8%81%94%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.4.</span> <span class="toc-text">四、10-20 国际标准导联系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.4.1.</span> <span class="toc-text">1、系统介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%8110-20-%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%95%B0%E5%AD%97%E4%B8%8E%E5%AD%97%E6%AF%8D"><span class="toc-number">1.4.2.</span> <span class="toc-text">2、10-20 系统中数字与字母</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E6%95%B0%E5%AD%97%E4%BB%A3%E8%A1%A8%E7%9A%84%E5%90%AB%E4%B9%89%EF%BC%9A"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">（1）数字代表的含义：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%AD%97%E6%AF%8D%E4%BB%A3%E8%A1%A8%E7%9A%84%E5%90%AB%E4%B9%89%EF%BC%9A"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">（2）字母代表的含义：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E8%BF%90%E5%8A%A8%E6%83%B3%E8%B1%A1%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.5.</span> <span class="toc-text">五、运动想象系统</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E7%B3%BB%E7%BB%9F%E4%BB%8B%E7%BB%8D-1"><span class="toc-number">1.5.1.</span> <span class="toc-text">1、系统介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E8%84%91%E7%94%B5%E4%BF%A1%E5%8F%B7%E7%9A%84%E8%8A%82%E5%BE%8B%E6%B3%A2"><span class="toc-number">1.5.2.</span> <span class="toc-text">2、脑电信号的节律波</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.3.</span> <span class="toc-text">3、特征提取算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%88%86%E7%B1%BB%E8%AF%86%E5%88%AB%E7%AE%97%E6%B3%95"><span class="toc-number">1.5.4.</span> <span class="toc-text">4、分类识别算法</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/06/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/07/06/hello-world/" title="Hello World">Hello World</a><time datetime="2021-07-06T05:12:56.084Z" title="发表于 2021-07-06 13:12:56">2021-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合"><img src="https://file.buildworld.cn/img/20210209161641.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode数据库题目集合"/></a><div class="content"><a class="title" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合">LeetCode数据库题目集合</a><time datetime="2021-02-09T08:13:56.000Z" title="发表于 2021-02-09 16:13:56">2021-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习"><img src="https://file.buildworld.cn/img/20210107194133.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData-数据仓库学习"/></a><div class="content"><a class="title" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习">BigData-数据仓库学习</a><time datetime="2021-01-07T11:35:36.000Z" title="发表于 2021-01-07 19:35:36">2021-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录"><img src="https://file.buildworld.cn/img/20201104092750.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法学习记录"/></a><div class="content"><a class="title" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录">算法学习记录</a><time datetime="2020-11-04T01:20:49.000Z" title="发表于 2020-11-04 09:20:49">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink"><img src="https://file.buildworld.cn/img/20200911110402.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData--分布式流数据流引擎Apache Flink"/></a><div class="content"><a class="title" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink">BigData--分布式流数据流引擎Apache Flink</a><time datetime="2020-09-11T02:59:30.000Z" title="发表于 2020-09-11 10:59:30">2020-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By MiChong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "7d002c40-fe0a-44eb-977b-a992eaed1e7c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

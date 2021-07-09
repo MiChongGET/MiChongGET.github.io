@@ -1,0 +1,367 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BigData-数据仓库学习 | MiChong的🏡</title><meta name="keywords" content="Data WareHouse"><meta name="author" content="MiChong,qjzxzxd@gmail.com"><meta name="copyright" content="MiChong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="数据仓库，英文名称为Data Warehouse，可简写为DW或DWH。数据仓库，是为企业所有级别的决策制定过程，提供所有类型数据支持的战略集合。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BigData-数据仓库学习">
+<meta property="og:url" content="https://www.buildworld.cn/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="MiChong的🏡">
+<meta property="og:description" content="数据仓库，英文名称为Data Warehouse，可简写为DW或DWH。数据仓库，是为企业所有级别的决策制定过程，提供所有类型数据支持的战略集合。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://file.buildworld.cn/img/20210107194133.png">
+<meta property="article:published_time" content="2021-01-07T11:35:36.000Z">
+<meta property="article:modified_time" content="2021-04-09T02:14:48.855Z">
+<meta property="article:author" content="MiChong">
+<meta property="article:tag" content="Data WareHouse">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.buildworld.cn/img/20210107194133.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.buildworld.cn/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BigData-数据仓库学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-04-09 10:14:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="MiChong的🏡" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://file.buildworld.cn/img/20210107210514.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">MiChong的🏡</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">BigData-数据仓库学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-01-07T11:35:36.000Z" title="发表于 2021-01-07 19:35:36">2021-01-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-09T02:14:48.855Z" title="更新于 2021-04-09 10:14:48">2021-04-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/BigData/">BigData</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="BigData-数据仓库学习"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="一、相关技术"><a href="#一、相关技术" class="headerlink" title="一、相关技术"></a>一、相关技术</h3><h4 id="1、技术选型"><a href="#1、技术选型" class="headerlink" title="1、技术选型"></a>1、技术选型</h4><p><img src="https://file.buildworld.cn/img/20201224104550.png"></p>
+<h4 id="2、系统数据流程设计"><a href="#2、系统数据流程设计" class="headerlink" title="2、系统数据流程设计"></a>2、系统数据流程设计</h4><p><img src="https://file.buildworld.cn/img/20201224142101.png"></p>
+<h3 id="二、数仓分层"><a href="#二、数仓分层" class="headerlink" title="二、数仓分层"></a>二、数仓分层</h3><h4 id="1、数据仓库分层"><a href="#1、数据仓库分层" class="headerlink" title="1、数据仓库分层"></a>1、数据仓库分层</h4><p><img src="https://file.buildworld.cn/img/20210107104843.png"></p>
+<h4 id="2、范式理论"><a href="#2、范式理论" class="headerlink" title="2、范式理论"></a>2、范式理论</h4><blockquote>
+<ul>
+<li>第一范式：属性不可分割性。</li>
+<li>第二范式：不能存在“部分函数依赖”</li>
+<li>第三范式：不能存在传递函数依赖。</li>
+</ul>
+</blockquote>
+<h4 id="3、关系建模和维度建模"><a href="#3、关系建模和维度建模" class="headerlink" title="3、关系建模和维度建模"></a>3、关系建模和维度建模</h4><blockquote>
+<ul>
+<li><p><strong>联机事务处理OLTP（on-line transaction processing）</strong></p>
+<p>OLTP是传统的关系型数据库的主要应用，主要是基本的、日常的事务处理，例如银行交易。</p>
+</li>
+<li><p><strong>联机分析处理OLAP（On-Line Analytical Processing）</strong></p>
+<p>OLAP是数据仓库系统的主要应用，支持复杂的分析操作，侧重决策支持，并且提供直观易懂的查询结果。</p>
+<p>二者对比</p>
+<table>
+<thead>
+<tr>
+<th align="center">对比属性</th>
+<th>OLTP</th>
+<th>OLAP</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">读特性</td>
+<td>每次查询只返回少量记录</td>
+<td>对大量记录进行汇总</td>
+</tr>
+<tr>
+<td align="center">写特性</td>
+<td>随机、低延时写入用户的输入</td>
+<td>批量导入</td>
+</tr>
+<tr>
+<td align="center">使用场景</td>
+<td>用户，Java EE项目</td>
+<td>内部分析师，为决策提供支持</td>
+</tr>
+<tr>
+<td align="center">数据表征</td>
+<td>最新数据状态</td>
+<td>随时间变化的历史状态</td>
+</tr>
+<tr>
+<td align="center">数据规模</td>
+<td>GB</td>
+<td>TB到PB</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+</blockquote>
+<h5 id="3-1-关系建模"><a href="#3-1-关系建模" class="headerlink" title="3.1 关系建模"></a>3.1 关系建模</h5><blockquote>
+<p><strong>关系模型</strong>如图所示，严格遵循第三范式（3NF），从图中可以看出，较为松散、零碎，物理表数量多，而数据冗余程度低。由于数据分布于众多的表中，这些数据可以更为灵活地被应用，功能性较强。关系模型主要应用与OLTP系统中，为了保证数据的一致性以及避免冗余，所以大部分业务系统的表都是遵循第三范式的。</p>
+<p><img src="https://file.buildworld.cn/img/20210107161933.png"></p>
+</blockquote>
+<h5 id="3-2维度建模"><a href="#3-2维度建模" class="headerlink" title="3.2维度建模"></a>3.2维度建模</h5><blockquote>
+<p><strong>维度模型</strong>如图所示，主要应用于OLAP系统中，通常以某一个事实表为中心进行表的组织，主要面向业务，特征是可能存在数据的冗余，但是能方便的得到数据。</p>
+<p><img src="https://file.buildworld.cn/img/20210107162057.png"></p>
+</blockquote>
+<p><strong>关系模型虽然冗余少，但是在大规模数据，跨表分析统计查询过程中，会造成多表关联，这会大大降低执行效率。所以通常我们采用维度模型建模，把相关各种表整理成两种：事实表和维度表两种。</strong></p>
+<h4 id="4、维度表和事实表"><a href="#4、维度表和事实表" class="headerlink" title="4、维度表和事实表"></a>4、维度表和事实表</h4><h5 id="4-1维度表"><a href="#4-1维度表" class="headerlink" title="4.1维度表"></a>4.1维度表</h5><blockquote>
+<p><strong>维度表</strong>：一般是对事实的描述信息。每一张维表对应现实世界中的一个对象或者概念。   例如：用户、商品、日期、地区等。</p>
+<ul>
+<li> 维表的范围很宽（具有多个属性、列比较多）</li>
+<li> 跟事实表相比，行数相对较小：通常&lt; 10万条</li>
+<li> 内容相对固定：编码表</li>
+</ul>
+</blockquote>
+<h5 id="4-2事实表"><a href="#4-2事实表" class="headerlink" title="4.2事实表"></a>4.2事实表</h5><blockquote>
+<p><strong>事实表中</strong>每行数据代表一个业务事件（下单、支付、退款、评价等）。“事实”这个术语表示的是业务事件的<strong>度量值（可统计次数、个数、金额等）</strong>，</p>
+<ul>
+<li> 非常的大</li>
+<li> 内容相对的窄：列数较少（主要是外键id和度量值）</li>
+<li> 经常发生变化，每天会新增加很多。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>1）事务型事实表</strong></p>
+<p>以<strong>每个事务或事件为单位</strong>，例如一个销售订单记录，一笔支付记录等，作为事实表里的一行数据。一旦事务被提交，事实表数据被插入，数据就不再进行更改，其更新方式为增量更新。</p>
+<p><strong>2）周期型快照事实表</strong></p>
+<p>周期型快照事实表中<strong>不会保留所有数据，只保留固定时间间隔的数据</strong>，例如每天或者每月的销售额，或每月的账户余额等。</p>
+<p>例如购物车，有加减商品，随时都有可能变化，但是我们更关心每天结束时这里面有多少商品，方便我们后期统计分析。</p>
+<p><strong>3）累积型快照事实表</strong></p>
+<p><strong>累计快照事实表用于跟踪业务事实的变化。</strong>例如，数据仓库中可能需要累积或者存储订单从下订单开始，到订单商品被打包、运输、和签收的各个业务阶段的时间点数据来跟踪订单声明周期的进展情况。当这个业务过程进行时，事实表的记录也要不断更新。</p>
+</blockquote>
+<h4 id="5、维度模型分类"><a href="#5、维度模型分类" class="headerlink" title="5、维度模型分类"></a>5、维度模型分类</h4><h5 id="5-1、星型模型"><a href="#5-1、星型模型" class="headerlink" title="5.1、星型模型"></a>5.1、星型模型</h5><blockquote>
+<p>雪花模型与星型模型的区别主要在于维度的层级，标准的星型模型维度只有一层，而雪花模型可能会涉及多级<img src="https://file.buildworld.cn/img/20210107202646.png"></p>
+</blockquote>
+<h5 id="5-2、雪花模型"><a href="#5-2、雪花模型" class="headerlink" title="5.2、雪花模型"></a>5.2、雪花模型</h5><p><img src="https://file.buildworld.cn/img/20210107204147.png"></p>
+<h5 id="5-3、星座模型"><a href="#5-3、星座模型" class="headerlink" title="5.3、星座模型"></a>5.3、星座模型</h5><blockquote>
+<p>星座模型与前两种情况的区别是事实表的数量，星座模型是基于多个事实表的。</p>
+</blockquote>
+<p><img src="https://file.buildworld.cn/img/20210107210328.png"></p>
+<h4 id="6、数据仓库建模"><a href="#6、数据仓库建模" class="headerlink" title="6、数据仓库建模"></a>6、数据仓库建模</h4><h5 id="6-1、ODS层"><a href="#6-1、ODS层" class="headerlink" title="6.1、ODS层"></a>6.1、ODS层</h5><blockquote>
+<ul>
+<li>用户行为数据</li>
+<li>业务数据</li>
+</ul>
+</blockquote>
+<h5 id="6-2、DWD层"><a href="#6-2、DWD层" class="headerlink" title="6.2、DWD层"></a>6.2、DWD层</h5><blockquote>
+<p>DWD层需要构建维度模型，一般采用星型模型。见上面图</p>
+<p><strong>维度建模一般按照以下四个步骤：</strong></p>
+<p><code>选择业务过程→声明粒度→确认维度→确认事实</code></p>
+<p><strong>（1）选择业务过程</strong></p>
+<p>在业务系统中，挑选我们感兴趣的业务线，比如下单业务，支付业务，退款业务，物流业务，一条业务线对应一张事实表。</p>
+<p>如果是中小公司，尽量把所有业务过程都选择。</p>
+<p>如果是大公司（1000多张表），选择和需求相关的业务线。</p>
+<p><strong>（2）声明粒度</strong></p>
+<p>数据粒度指数据仓库的数据中保存数据的细化程度或综合程度的级别。</p>
+<p>声明粒度意味着精确定义事实表中的一行数据表示什么，应该尽可能选择<strong>最小粒度</strong>，以此来应各种各样的需求。</p>
+<p><strong>典型的粒度声明如下：</strong></p>
+<p>订单事实表中一行数据表示的是一个订单中的一个商品项。</p>
+<p>支付事实表中一行数据表示的是一个支付记录。</p>
+<p><strong>（3）确定维度</strong></p>
+<p>维度的主要作用是描述业务是事实，主要表示的是“谁，何处，何时”等信息。</p>
+<p>确定维度的原则是：后续需求中是否要分析相关维度的指标。例如，需要统计，什么时间下的订单多，哪个地区下的订单多，哪个用户下的订单多。需要确定的维度就包括：时间维度、地区维度、用户维度。</p>
+<p><strong>（4）确定事实</strong></p>
+<p>此处的“事实”一词，指的是业务中的度量值（次数、个数、件数、金额，可以进行累加），例如订单金额、下单次数等。</p>
+<p>在DWD层，以<strong>业务过程</strong>为建模驱动，基于每个具体业务过程的特点，构建<strong>最细粒度</strong>的明细层事实表。事实表可做适当的宽表化处理。</p>
+</blockquote>
+<h5 id="6-3-DWS和DWT层"><a href="#6-3-DWS和DWT层" class="headerlink" title="6.3 DWS和DWT层"></a>6.3 DWS和DWT层</h5><blockquote>
+<p><code>DWS和DWT层的区别</code>：DWS层存放的所有主题对象当天的汇总行为，例如每个地区当天的下单次数，下单金额等，DWT层存放的是所有主题对象的累积行为，例如每个地区最近７天（15天、30天、60天）的下单次数、下单金额等。</p>
+</blockquote>
+<h5 id="6-4-ADS层"><a href="#6-4-ADS层" class="headerlink" title="6.4 ADS层"></a>6.4 ADS层</h5><h3 id="三、流批一体架构"><a href="#三、流批一体架构" class="headerlink" title="三、流批一体架构"></a>三、流批一体架构</h3><h4 id="1、传统数仓架构（Lambda）"><a href="#1、传统数仓架构（Lambda）" class="headerlink" title="1、传统数仓架构（Lambda）"></a>1、传统数仓架构（Lambda）</h4><p><img src="https://file.buildworld.cn/img/20210115195432.png"></p>
+<blockquote>
+<p>传统的Lambda架构分为：</p>
+<ul>
+<li>业务层</li>
+<li>存储层</li>
+<li>计算层</li>
+<li>服务层</li>
+<li>应用层</li>
+</ul>
+</blockquote>
+<p>传统的架构很灵活，流和批之间没有相互耦合，但是也会<strong>带来的问题</strong>：</p>
+<ul>
+<li><strong>效率层面</strong>：流批底层数据模型不一致，导致应用层需要做大量的拼接逻辑（同比、环比、二次加工等），搭建效率低，且容易出错。</li>
+<li><strong>成本层面</strong>：流批存储系统隔离（面向不同写入场景），提供的数据服务不一致，维护成本高。同时，手工创建数据同步任务，增加了开发成本和存储成本。</li>
+<li><strong>质量与资源层面</strong>：首先，一个业务逻辑，两个引擎两套代码，SQL 逻辑不能复用，数据一致性和质量难以保障。其次，不同平台和引擎间切换，开发体验割裂，容易出现变更遗漏。并且，批处理&amp;流处理集群无法做到错峰，资源利用率较低。</li>
+</ul>
+<h4 id="2、流批一体架构（Kappa-Lambda）"><a href="#2、流批一体架构（Kappa-Lambda）" class="headerlink" title="2、流批一体架构（Kappa+Lambda）"></a>2、流批一体架构（Kappa+Lambda）</h4><p><strong>本质上是在流的场景中寻找批场景</strong></p>
+<p><img src="https://file.buildworld.cn/img/20210115200803.png"></p>
+<ul>
+<li><strong>流批逻辑层</strong>：这是最重要的部分之一。业务层和存储层仍然不变，在此之上构建一个流批逻辑层来进行流存储和批存储的映射。有了这个逻辑层，就可以基于 Flink 引擎面向统一的逻辑层做业务逻辑表达，并且输出是统一的。</li>
+<li><strong>计算层</strong>：做流批统一处理。首先，一套代码，两种计算模式，逻辑统一，灵活切换，可以实现研发效率大幅提升。其次，流批计算资源混部，资源利用率提升。</li>
+<li><strong>服务层</strong>：做流批统一存储，无需手工同步，无重复存储。</li>
+<li><strong>应用层</strong>：进行产品组装，流批存储透明化，查询逻辑完全一致，应用端接入成本大幅降低，点查 / OLAP 分析统一支持。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:qjzxzxd@gmail.com">MiChong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.buildworld.cn/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/">https://www.buildworld.cn/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.buildworld.cn" target="_blank">MiChong的🏡</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Data-WareHouse/">Data WareHouse</a></div><div class="post_share"><div class="social-share" data-image="https://file.buildworld.cn/img/20210107194133.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/"><img class="prev-cover" src="https://file.buildworld.cn/img/20210209161641.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">LeetCode数据库题目集合</div></div></a></div><div class="next-post pull-right"><a href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/"><img class="next-cover" src="https://file.buildworld.cn/img/20201104092750.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">算法学习记录</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MiChong</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MiChongGET"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/qjzxzxd@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到米虫的小站，一起加油🤝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%9B%B8%E5%85%B3%E6%8A%80%E6%9C%AF"><span class="toc-number">1.</span> <span class="toc-text">一、相关技术</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B"><span class="toc-number">1.1.</span> <span class="toc-text">1、技术选型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E7%B3%BB%E7%BB%9F%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.2.</span> <span class="toc-text">2、系统数据流程设计</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%95%B0%E4%BB%93%E5%88%86%E5%B1%82"><span class="toc-number">2.</span> <span class="toc-text">二、数仓分层</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%88%86%E5%B1%82"><span class="toc-number">2.1.</span> <span class="toc-text">1、数据仓库分层</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E8%8C%83%E5%BC%8F%E7%90%86%E8%AE%BA"><span class="toc-number">2.2.</span> <span class="toc-text">2、范式理论</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%85%B3%E7%B3%BB%E5%BB%BA%E6%A8%A1%E5%92%8C%E7%BB%B4%E5%BA%A6%E5%BB%BA%E6%A8%A1"><span class="toc-number">2.3.</span> <span class="toc-text">3、关系建模和维度建模</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-%E5%85%B3%E7%B3%BB%E5%BB%BA%E6%A8%A1"><span class="toc-number">2.3.1.</span> <span class="toc-text">3.1 关系建模</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2%E7%BB%B4%E5%BA%A6%E5%BB%BA%E6%A8%A1"><span class="toc-number">2.3.2.</span> <span class="toc-text">3.2维度建模</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E7%BB%B4%E5%BA%A6%E8%A1%A8%E5%92%8C%E4%BA%8B%E5%AE%9E%E8%A1%A8"><span class="toc-number">2.4.</span> <span class="toc-text">4、维度表和事实表</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#4-1%E7%BB%B4%E5%BA%A6%E8%A1%A8"><span class="toc-number">2.4.1.</span> <span class="toc-text">4.1维度表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-2%E4%BA%8B%E5%AE%9E%E8%A1%A8"><span class="toc-number">2.4.2.</span> <span class="toc-text">4.2事实表</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E7%BB%B4%E5%BA%A6%E6%A8%A1%E5%9E%8B%E5%88%86%E7%B1%BB"><span class="toc-number">2.5.</span> <span class="toc-text">5、维度模型分类</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#5-1%E3%80%81%E6%98%9F%E5%9E%8B%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.5.1.</span> <span class="toc-text">5.1、星型模型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-2%E3%80%81%E9%9B%AA%E8%8A%B1%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.5.2.</span> <span class="toc-text">5.2、雪花模型</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-3%E3%80%81%E6%98%9F%E5%BA%A7%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.5.3.</span> <span class="toc-text">5.3、星座模型</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%BB%BA%E6%A8%A1"><span class="toc-number">2.6.</span> <span class="toc-text">6、数据仓库建模</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#6-1%E3%80%81ODS%E5%B1%82"><span class="toc-number">2.6.1.</span> <span class="toc-text">6.1、ODS层</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-2%E3%80%81DWD%E5%B1%82"><span class="toc-number">2.6.2.</span> <span class="toc-text">6.2、DWD层</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-3-DWS%E5%92%8CDWT%E5%B1%82"><span class="toc-number">2.6.3.</span> <span class="toc-text">6.3 DWS和DWT层</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-4-ADS%E5%B1%82"><span class="toc-number">2.6.4.</span> <span class="toc-text">6.4 ADS层</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%B5%81%E6%89%B9%E4%B8%80%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">三、流批一体架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E4%BC%A0%E7%BB%9F%E6%95%B0%E4%BB%93%E6%9E%B6%E6%9E%84%EF%BC%88Lambda%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">1、传统数仓架构（Lambda）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%B5%81%E6%89%B9%E4%B8%80%E4%BD%93%E6%9E%B6%E6%9E%84%EF%BC%88Kappa-Lambda%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">2、流批一体架构（Kappa+Lambda）</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/06/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/07/06/hello-world/" title="Hello World">Hello World</a><time datetime="2021-07-06T05:12:56.084Z" title="发表于 2021-07-06 13:12:56">2021-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合"><img src="https://file.buildworld.cn/img/20210209161641.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode数据库题目集合"/></a><div class="content"><a class="title" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合">LeetCode数据库题目集合</a><time datetime="2021-02-09T08:13:56.000Z" title="发表于 2021-02-09 16:13:56">2021-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习"><img src="https://file.buildworld.cn/img/20210107194133.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData-数据仓库学习"/></a><div class="content"><a class="title" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习">BigData-数据仓库学习</a><time datetime="2021-01-07T11:35:36.000Z" title="发表于 2021-01-07 19:35:36">2021-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录"><img src="https://file.buildworld.cn/img/20201104092750.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法学习记录"/></a><div class="content"><a class="title" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录">算法学习记录</a><time datetime="2020-11-04T01:20:49.000Z" title="发表于 2020-11-04 09:20:49">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink"><img src="https://file.buildworld.cn/img/20200911110402.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData--分布式流数据流引擎Apache Flink"/></a><div class="content"><a class="title" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink">BigData--分布式流数据流引擎Apache Flink</a><time datetime="2020-09-11T02:59:30.000Z" title="发表于 2020-09-11 10:59:30">2020-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By MiChong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "7d002c40-fe0a-44eb-977b-a992eaed1e7c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

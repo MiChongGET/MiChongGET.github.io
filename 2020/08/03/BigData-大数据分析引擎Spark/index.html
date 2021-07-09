@@ -1,0 +1,513 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BigData--大数据分析引擎Spark | MiChong的🏡</title><meta name="keywords" content="Spark"><meta name="author" content="MiChong,qjzxzxd@gmail.com"><meta name="copyright" content="MiChong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Apache Spark™ is a unified analytics engine for large-scale data processing.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BigData--大数据分析引擎Spark">
+<meta property="og:url" content="https://www.buildworld.cn/2020/08/03/BigData-%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%BC%95%E6%93%8ESpark/index.html">
+<meta property="og:site_name" content="MiChong的🏡">
+<meta property="og:description" content="Apache Spark™ is a unified analytics engine for large-scale data processing.">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://file.buildworld.cn/img/20200803194840.png">
+<meta property="article:published_time" content="2020-08-03T02:23:37.000Z">
+<meta property="article:modified_time" content="2021-04-09T02:17:15.900Z">
+<meta property="article:author" content="MiChong">
+<meta property="article:tag" content="Spark">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.buildworld.cn/img/20200803194840.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.buildworld.cn/2020/08/03/BigData-%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%BC%95%E6%93%8ESpark/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BigData--大数据分析引擎Spark',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-04-09 10:17:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="MiChong的🏡" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://file.buildworld.cn/img/573b864c042fecfea1a71d9845896376_t011159af9f862fc82e.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">MiChong的🏡</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">BigData--大数据分析引擎Spark</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-08-03T02:23:37.000Z" title="发表于 2020-08-03 10:23:37">2020-08-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-09T02:17:15.900Z" title="更新于 2021-04-09 10:17:15">2021-04-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/BigData/">BigData</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="BigData--大数据分析引擎Spark"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一、Spark运行"><a href="#一、Spark运行" class="headerlink" title="一、Spark运行"></a>一、Spark运行</h2><h3 id="1、Spark内置模块"><a href="#1、Spark内置模块" class="headerlink" title="1、Spark内置模块"></a>1、Spark内置模块</h3><p><img src="https://file.buildworld.cn/img/20200803102434.png"></p>
+<blockquote>
+<ul>
+<li><code>Spark Core</code>：实现了Spark的基本功能，包含任务调度、内存管理、错误恢复、与存储系统交互等模块。Spark Core中还包含了对弹性分布式数据集(Resilient Distributed DataSet，简称RDD)的API定义。 </li>
+<li><code>Spark SQL</code>：是Spark用来操作结构化数据的程序包。通过Spark SQL，我们可以使用 SQL或者Apache Hive版本的SQL方言(HQL)来查询数据。Spark SQL支持多种数据源，比如Hive表、Parquet以及JSON等。 </li>
+<li><code>Spark Streaming</code>：是Spark提供的对实时数据进行流式计算的组件。提供了用来操作数据流的API，并且与Spark Core中的 RDD API高度对应。 </li>
+<li><code>Spark MLlib</code>：提供常见的机器学习(ML)功能的程序库。包括分类、回归、聚类、协同过滤等，还提供了模型评估、数据 导入等额外的支持功能。 </li>
+<li><code>集群管理器</code>：Spark 设计为可以高效地在一个计算节点到数千个计算节点之间伸缩计 算。为了实现这样的要求，同时获得最大灵活性，Spark支持在各种集群管理器(Cluster Manager)上运行，包括Hadoop YARN、Apache Mesos，以及Spark自带的一个简易调度 器，叫作<strong>独立调度器</strong>。</li>
+</ul>
+</blockquote>
+<h3 id="2、spark通用运行建议流程"><a href="#2、spark通用运行建议流程" class="headerlink" title="2、spark通用运行建议流程"></a>2、spark通用运行建议流程</h3><p><img src="https://file.buildworld.cn/img/20200726140437.png"></p>
+<blockquote>
+<ul>
+<li>textFile(“input”)：读取本地文件input文件夹数据；</li>
+<li>flatMap(_.split(“ “))：压平操作，按照空格分割符将一行数据映射成一个个单词；</li>
+<li>map((_,1))：对每一个元素操作，将单词映射为元组；</li>
+<li>reduceByKey(<em>+</em>)：按照key将值进行聚合，相加；</li>
+<li>collect：将数据收集到Driver端展示。</li>
+</ul>
+</blockquote>
+<h3 id="3、Spark和yarn联动"><a href="#3、Spark和yarn联动" class="headerlink" title="3、Spark和yarn联动"></a>3、Spark和yarn联动</h3><p><img src="https://file.buildworld.cn/img/20200726174442.png"></p>
+<h2 id="二、RDD转换"><a href="#二、RDD转换" class="headerlink" title="二、RDD转换"></a>二、RDD转换</h2><h3 id="1、-Value类型"><a href="#1、-Value类型" class="headerlink" title="1、 Value类型"></a>1、 Value类型</h3><h4 id="1）map-func"><a href="#1）map-func" class="headerlink" title="1）map(func)"></a>1）map(func)</h4><blockquote>
+<p>返回一个新的RDD，该RDD由每一个输入元素经过func函数转换后组成</p>
+</blockquote>
+<h4 id="2）mapPartitions-func"><a href="#2）mapPartitions-func" class="headerlink" title="2）mapPartitions(func)"></a>2）mapPartitions(func)</h4><blockquote>
+<p>类似于map，但独立地在RDD的每一个分片上运行，因此在类型为T的RDD上运行时，func的函数类型必须是Iterator[T] =&gt; Iterator[U]。假设有N个元素，有M个分区，那么map的函数的将被调用N次,而mapPartitions被调用M次,一个函数一次处理所有分区。</p>
+</blockquote>
+<h4 id="3）mapPartitionsWithIndex-func"><a href="#3）mapPartitionsWithIndex-func" class="headerlink" title="3）mapPartitionsWithIndex(func)"></a>3）mapPartitionsWithIndex(func)</h4><blockquote>
+<p>类似于mapPartitions，但func带有一个整数参数表示分片的索引值，因此在类型为T的RDD上运行时，func的函数类型必须是(Int, Interator[T]) =&gt; Iterator[U]；</p>
+</blockquote>
+<p><strong>map()和mapPartition()的区别</strong></p>
+<blockquote>
+<ul>
+<li>map()：每次处理一条数据。</li>
+<li>mapPartition()：每次处理一个分区的数据，这个分区的数据处理完后，原RDD中分区的数据才能释放，可能导致OOM。</li>
+</ul>
+</blockquote>
+<h4 id="4）flatMap-func"><a href="#4）flatMap-func" class="headerlink" title="4）flatMap(func)"></a>4）flatMap(func)</h4><blockquote>
+<p>类似于map，但是每一个输入元素可以被映射为0或多个输出元素（所以func应该返回一个序列，而不是单一元素）</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> listRDD: <span class="type">RDD</span>[<span class="type">List</span>[<span class="type">Int</span>]] = sc.makeRDD(<span class="type">Array</span>(<span class="type">List</span>(<span class="number">1</span>, <span class="number">2</span>), <span class="type">List</span>(<span class="number">3</span>, <span class="number">4</span>)))</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> flatMapRDD = listRDD.flatMap(datas =&gt; datas)</span><br><span class="line"></span><br><span class="line">flatMapRDD.collect().foreach(println)</span><br></pre></td></tr></table></figure>
+
+<h4 id="5）glom"><a href="#5）glom" class="headerlink" title="5）glom"></a>5）glom</h4><blockquote>
+<p>将每一个分区形成一个数组，形成新的RDD类型时RDD[Array[T]]</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> listRDD = sc.makeRDD(<span class="number">1</span> to <span class="number">16</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> flatMapRDD = listRDD.glom()</span><br><span class="line"></span><br><span class="line">flatMapRDD.collect().foreach(array=&gt;&#123;</span><br><span class="line">  println(array.mkString(<span class="string">&quot;,&quot;</span>))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6）groupBy-func"><a href="#6）groupBy-func" class="headerlink" title="6）groupBy(func)"></a>6）groupBy(func)</h4><blockquote>
+<p>分组，按照传入函数的返回值进行分组。将相同的key对应的值放入一个迭代器。</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> listRDD = sc.makeRDD(<span class="number">1</span> to <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> groupByRDD = listRDD.groupBy(i =&gt; i % <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">groupByRDD.collect().foreach(println)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//打印结果</span></span><br><span class="line">(<span class="number">0</span>,<span class="type">CompactBuffer</span>(<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">10</span>, <span class="number">12</span>, <span class="number">14</span>, <span class="number">16</span>))</span><br><span class="line">(<span class="number">1</span>,<span class="type">CompactBuffer</span>(<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">11</span>, <span class="number">13</span>, <span class="number">15</span>))</span><br></pre></td></tr></table></figure>
+
+<h4 id="7）filter-func"><a href="#7）filter-func" class="headerlink" title="7）filter(func)"></a>7）filter(func)</h4><blockquote>
+<p>过滤。返回一个新的RDD，该RDD由经过func函数计算后返回值为true的输入元素组成。</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> listRDD = sc.makeRDD(<span class="number">1</span> to <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> filterRDD = listRDD.filter(i =&gt; (i % <span class="number">2</span>) == <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">filterRDD.collect().foreach(println)</span><br></pre></td></tr></table></figure>
+
+<h4 id="8）sample-withReplacement-fraction-seed"><a href="#8）sample-withReplacement-fraction-seed" class="headerlink" title="8）sample(withReplacement, fraction, seed)"></a>8）sample(withReplacement, fraction, seed)</h4><blockquote>
+<p>以指定的随机种子随机抽样出数量为fraction的数据，withReplacement表示是抽出的数据是否放回，true为有放回的抽样，false为无放回的抽样，seed用于指定随机数生成器种子。</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> listRDD = sc.makeRDD(<span class="number">1</span> to <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sampleRDD = listRDD.sample(<span class="literal">false</span>, <span class="number">0.4</span>, <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">sampleRDD.collect().foreach(println)</span><br></pre></td></tr></table></figure>
+
+<h4 id="9）distinct-numTasks"><a href="#9）distinct-numTasks" class="headerlink" title="9）distinct([numTasks]))"></a>9）distinct([numTasks]))</h4><blockquote>
+<p>对源RDD进行去重后返回一个新的RDD。默认情况下，只有8个并行任务来操作，但是可以传入一个可选的numTasks参数改变它。</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> listRDD = sc.makeRDD(<span class="number">1</span> to <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> distinctRDD = listRDD.distinct()</span><br><span class="line"></span><br><span class="line">distinctRDD.collect().foreach(println)</span><br></pre></td></tr></table></figure>
+
+<h4 id="10）coalesce-numPartitions"><a href="#10）coalesce-numPartitions" class="headerlink" title="10）coalesce(numPartitions)"></a>10）coalesce(numPartitions)</h4><blockquote>
+<p>缩减分区数，用于大数据集过滤后，提高小数据集的执行效率。</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> listRDD = sc.makeRDD(<span class="number">1</span> to <span class="number">16</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">println(<span class="string">&quot;缩减分区前=&quot;</span> + listRDD.partitions.size)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> coalesceRDD = listRDD.coalesce(<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">println(<span class="string">&quot;缩减分区后=&quot;</span> + coalesceRDD.partitions.size)</span><br></pre></td></tr></table></figure>
+
+<h4 id="11）-repartition-numPartitions"><a href="#11）-repartition-numPartitions" class="headerlink" title="11） repartition(numPartitions)"></a>11） repartition(numPartitions)</h4><blockquote>
+<p>根据分区数，重新通过网络随机洗牌所有数据。</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> listRDD = sc.makeRDD(<span class="number">1</span> to <span class="number">16</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> repartitionRDD = listRDD.repartition(<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">repartitionRDD.collect().foreach(println)</span><br></pre></td></tr></table></figure>
+
+<p><strong>coalesce和repartition的区别</strong></p>
+<ul>
+<li><ol>
+<li>coalesce重新分区，可以选择是否进行shuffle过程。由参数<code>shuffle: Boolean = false/true</code>决定。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>repartition实际上是调用的coalesce，默认是进行shuffle的。源码如下：</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">repartition</span></span>(numPartitions: <span class="type">Int</span>)(<span class="keyword">implicit</span> ord: <span class="type">Ordering</span>[<span class="type">T</span>] = <span class="literal">null</span>): <span class="type">RDD</span>[<span class="type">T</span>] = withScope &#123;</span><br><span class="line"> coalesce(numPartitions, shuffle = <span class="literal">true</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="12）sortBy-func-ascending-numTasks"><a href="#12）sortBy-func-ascending-numTasks" class="headerlink" title="12）sortBy(func,[ascending], [numTasks])"></a>12）sortBy(func,[ascending], [numTasks])</h4><blockquote>
+<p>使用func先对数据进行处理，按照处理后的数据比较结果排序，默认为正序(从小到大)。</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> listRDD = sc.makeRDD(<span class="number">1</span> to <span class="number">16</span>, <span class="number">4</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//安装除以2余数来排序</span></span><br><span class="line"><span class="keyword">val</span> sortByRDD = listRDD.sortBy(x=&gt;x%<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">sortByRDD.collect().foreach(println)</span><br></pre></td></tr></table></figure>
+
+<h4 id="13）pipe-command-envVars"><a href="#13）pipe-command-envVars" class="headerlink" title="13）pipe(command, [envVars])"></a>13）pipe(command, [envVars])</h4><blockquote>
+<p>管道，针对每个分区，都执行一个shell脚本，返回输出的RDD。</p>
+</blockquote>
+<h3 id="2、双Value类型"><a href="#2、双Value类型" class="headerlink" title="2、双Value类型"></a>2、双Value类型</h3><h4 id="1）union-otherDataset"><a href="#1）union-otherDataset" class="headerlink" title="1）union(otherDataset)"></a>1）union(otherDataset)</h4><blockquote>
+<p>对源RDD和参数RDD求并集后返回一个新的RDD。</p>
+</blockquote>
+<h4 id="2）subtract-otherDataset"><a href="#2）subtract-otherDataset" class="headerlink" title="2）subtract (otherDataset)"></a>2）subtract (otherDataset)</h4><blockquote>
+<p>计算差的一种函数，去除两个RDD中相同的元素，不同的RDD将保留下来。</p>
+</blockquote>
+<h4 id="3）intersection-otherDataset"><a href="#3）intersection-otherDataset" class="headerlink" title="3）intersection(otherDataset)"></a>3）intersection(otherDataset)</h4><blockquote>
+<p>对源RDD和参数RDD求交集后返回一个新的RDD。</p>
+</blockquote>
+<h4 id="4）cartesian-otherDataset"><a href="#4）cartesian-otherDataset" class="headerlink" title="4）cartesian(otherDataset)"></a>4）cartesian(otherDataset)</h4><blockquote>
+<p>笛卡尔积<strong>（尽量避免使用）</strong></p>
+</blockquote>
+<h4 id="5）zip-otherDataset"><a href="#5）zip-otherDataset" class="headerlink" title="5）zip(otherDataset)"></a>5）zip(otherDataset)</h4><blockquote>
+<p>将两个RDD组合成Key/Value形式的RDD,这里默认两个RDD的partition数量以及元素数量都相同，否则会抛出异常。</p>
+</blockquote>
+<h3 id="3、Key-Value类型"><a href="#3、Key-Value类型" class="headerlink" title="3、Key-Value类型"></a>3、Key-Value类型</h3><h4 id="1）partitionBy"><a href="#1）partitionBy" class="headerlink" title="1）partitionBy"></a>1）partitionBy</h4><blockquote>
+<p>对pairRDD进行分区操作，如果原有的partionRDD和现有的partionRDD是一致的话就不进行分区， 否则会生成ShuffleRDD，即会产生shuffle过程。</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]): <span class="type">Unit</span> = &#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> listRDD = sc.makeRDD(<span class="type">List</span>((<span class="string">&quot;a&quot;</span>,<span class="number">1</span>),(<span class="string">&quot;b&quot;</span>,<span class="number">2</span>),(<span class="string">&quot;c&quot;</span>,<span class="number">3</span>)))</span><br><span class="line"></span><br><span class="line">  <span class="keyword">val</span> partRDD = listRDD.partitionBy(<span class="keyword">new</span> <span class="type">MyPartitioner</span>(<span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">  partRDD.saveAsTextFile(<span class="string">&quot;output&quot;</span>)</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//自定义</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyPartitioner</span>(<span class="params">partitions:<span class="type">Int</span></span>) <span class="keyword">extends</span> <span class="title">Partitioner</span></span>&#123;</span><br><span class="line">  <span class="comment">//设置分区数目</span></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">numPartitions</span></span>: <span class="type">Int</span> = &#123;</span><br><span class="line">    partitions</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">//设置数据存放位置</span></span><br><span class="line">  <span class="keyword">override</span> <span class="function"><span class="keyword">def</span> <span class="title">getPartition</span></span>(key: <span class="type">Any</span>): <span class="type">Int</span> = &#123;</span><br><span class="line">    <span class="number">1</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2）groupByKey"><a href="#2）groupByKey" class="headerlink" title="2）groupByKey"></a>2）groupByKey</h4><blockquote>
+<p>groupByKey也是对每个key进行操作，但只生成一个<code>sequence</code>。</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> words = <span class="type">Array</span>(<span class="string">&quot;one&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;two&quot;</span>, <span class="string">&quot;three&quot;</span>, <span class="string">&quot;three&quot;</span>, <span class="string">&quot;three&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> wordPairsRDD = sc.parallelize(words).map(word =&gt; (word, <span class="number">1</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> group = wordPairsRDD.groupByKey()</span><br><span class="line"></span><br><span class="line"><span class="comment">//将相同key对应值聚合到一个sequence中</span></span><br><span class="line">group.collect().foreach(println)</span><br><span class="line"><span class="comment">//计算相同key对应值的相加结果</span></span><br><span class="line">group.map(t=&gt;(t._1,t._2.sum)).foreach(println)</span><br></pre></td></tr></table></figure>
+
+<h4 id="3）reduceByKey-func-numTasks"><a href="#3）reduceByKey-func-numTasks" class="headerlink" title="3）reduceByKey(func, [numTasks])"></a>3）reduceByKey(func, [numTasks])</h4><blockquote>
+<p>在一个(K,V)的RDD上调用，返回一个(K,V)的RDD，使用指定的reduce函数，将相同key的值聚合到一起，reduce任务的个数可以通过第二个可选的参数来设置。</p>
+</blockquote>
+<p><strong>reduceByKey和groupByKey的区别</strong></p>
+<blockquote>
+<ul>
+<li><ol>
+<li>reduceByKey：按照key进行聚合，在shuffle之前有combine（预聚合）操作，返回结果是RDD[k,v].</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>groupByKey：按照key进行分组，直接进行shuffle。</li>
+</ol>
+</li>
+<li><ol start="3">
+<li>开发指导：reduceByKey比groupByKey快，建议使用。但是需要注意是否会影响业务逻辑。</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<p><img src="https://file.buildworld.cn/img/20200803194634.png"></p>
+<h4 id="4）aggregateByKey"><a href="#4）aggregateByKey" class="headerlink" title="4）aggregateByKey"></a>4）aggregateByKey</h4><blockquote>
+<p>参数：<code>(zeroValue:U,[partitioner: Partitioner]) (seqOp: (U, V) =&gt; U,combOp: (U, U) =&gt; U)</code></p>
+<ul>
+<li><ol>
+<li>作用：在kv对的RDD中，，按key将value进行分组合并，合并时，将每个value和初始值作为seq函数的参数，进行计算，返回的结果作为一个新的kv对，然后再将结果按照key进行合并，最后将每个分组的value传递给combine函数进行计算（先将前两个value进行计算，将返回结果和下一个value传给combine函数，以此类推），将key与计算结果作为一个新的kv对输出。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>参数描述：</li>
+</ol>
+</li>
+</ul>
+<p>（1）<code>zeroValue</code>：给每一个分区中的每一个key一个初始值；</p>
+<p>（2）<code>seqOp</code>：函数用于在每一个分区中用初始值逐步迭代value；</p>
+<p>（3）<code>combOp</code>：函数用于合并每个分区中的结果。</p>
+</blockquote>
+<p><img src="https://file.buildworld.cn/img/20200804105505.png"></p>
+<p><strong>创建一个pairRDD，取出每个分区相同key对应值的最大值，然后相加</strong></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> rdd = sc.parallelize(<span class="type">List</span>((<span class="string">&quot;a&quot;</span>, <span class="number">3</span>), (<span class="string">&quot;a&quot;</span>, <span class="number">2</span>), (<span class="string">&quot;c&quot;</span>, <span class="number">4</span>), (<span class="string">&quot;b&quot;</span>, <span class="number">3</span>), (<span class="string">&quot;c&quot;</span>, <span class="number">6</span>), (<span class="string">&quot;c&quot;</span>, <span class="number">8</span>)), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">rdd.glom().collect().foreach(println)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> value = rdd.aggregateByKey(<span class="number">0</span>)(math.max(_, _), _ + _)</span><br><span class="line"></span><br><span class="line">value.collect().foreach(println)</span><br></pre></td></tr></table></figure>
+
+<h4 id="5）foldByKey"><a href="#5）foldByKey" class="headerlink" title="5）foldByKey"></a>5）foldByKey</h4><blockquote>
+<p>参数：<code>(zeroValue: V)(func: (V, V) =&gt; V): RDD[(K, V)]</code></p>
+</blockquote>
+<ul>
+<li><ol>
+<li>作用：aggregateByKey的简化操作，seqop和combop相同</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>需求：创建一个pairRDD，计算相同key对应值的相加结果</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> agg = rdd.foldByKey(<span class="number">0</span>)(_+_)</span><br></pre></td></tr></table></figure>
+
+<h4 id="6）combineByKey-C"><a href="#6）combineByKey-C" class="headerlink" title="6）combineByKey[C]"></a>6）combineByKey[C]</h4><blockquote>
+<p>参数：<code>(createCombiner: V =&gt; C, mergeValue: (C, V) =&gt; C, mergeCombiners: (C, C) =&gt; C)</code> </p>
+</blockquote>
+<blockquote>
+<ul>
+<li><ol>
+<li>作用：对相同K，把V合并成一个集合。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>参数描述：</li>
+</ol>
+<p>（1）createCombiner: combineByKey() 会遍历分区中的所有元素，因此每个元素的键要么还没有遇到过，要么就和之前的某个元素的键相同。如果这是一个新的元素,combineByKey()会使用一个叫作createCombiner()的函数来创建那个键对应的累加器的初始值</p>
+<p>（2）mergeValue: 如果这是一个在处理当前分区之前已经遇到的键，它会使用mergeValue()方法将该键的累加器对应的当前值与这个新的值进行合并</p>
+<p>（3）mergeCombiners: 由于每个分区都是独立处理的， 因此对于同一个键可以有多个累加器。如果有两个或者更多的分区都有对应同一个键的累加器， 就需要使用用户提供的 mergeCombiners() 方法将各个分区的结果进行合并。</p>
+</li>
+</ul>
+</blockquote>
+<p><img src="https://file.buildworld.cn/img/20200804152509.png"></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> input = sc.parallelize(<span class="type">Array</span>((<span class="string">&quot;a&quot;</span>, <span class="number">88</span>), (<span class="string">&quot;b&quot;</span>, <span class="number">95</span>), (<span class="string">&quot;a&quot;</span>, <span class="number">91</span>), (<span class="string">&quot;b&quot;</span>, <span class="number">93</span>), (<span class="string">&quot;a&quot;</span>, <span class="number">95</span>), (<span class="string">&quot;b&quot;</span>, <span class="number">98</span>)),<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> value = input.combineByKey(x =&gt; x, (x: <span class="type">Int</span>, y: <span class="type">Int</span>) =&gt; x + y, (x: <span class="type">Int</span>, y: <span class="type">Int</span>) =&gt; x + y)</span><br><span class="line"></span><br><span class="line">value.collect().foreach(println)</span><br></pre></td></tr></table></figure>
+
+<h4 id="7）sortByKey-ascending-numTasks"><a href="#7）sortByKey-ascending-numTasks" class="headerlink" title="7）sortByKey([ascending], [numTasks])"></a>7）sortByKey([ascending], [numTasks])</h4><blockquote>
+<p>作用：在一个(K,V)的RDD上调用，K必须实现Ordered接口，返回一个按照key进行排序的(K,V)的RDD</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> input = sc.parallelize(<span class="type">Array</span>((<span class="string">&quot;a&quot;</span>, <span class="number">88</span>), (<span class="string">&quot;b&quot;</span>, <span class="number">95</span>), (<span class="string">&quot;a&quot;</span>, <span class="number">91</span>), (<span class="string">&quot;b&quot;</span>, <span class="number">93</span>), (<span class="string">&quot;a&quot;</span>, <span class="number">95</span>), (<span class="string">&quot;b&quot;</span>, <span class="number">98</span>)),<span class="number">2</span>)</span><br><span class="line"><span class="keyword">val</span> value1 = input.sortByKey(<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="8）mapValues"><a href="#8）mapValues" class="headerlink" title="8）mapValues"></a>8）mapValues</h4><blockquote>
+<p>针对于(K,V)形式的类型只对V进行操作</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"><span class="keyword">val</span> input = sc.parallelize(<span class="type">Array</span>((<span class="string">&quot;a&quot;</span>, <span class="number">88</span>), (<span class="string">&quot;b&quot;</span>, <span class="number">95</span>), (<span class="string">&quot;a&quot;</span>, <span class="number">91</span>), (<span class="string">&quot;b&quot;</span>, <span class="number">93</span>), (<span class="string">&quot;a&quot;</span>, <span class="number">95</span>), (<span class="string">&quot;b&quot;</span>, <span class="number">98</span>)), <span class="number">2</span>)</span><br><span class="line"><span class="keyword">val</span> value1 = input.mapValues(_ + <span class="number">100</span>)</span><br><span class="line">value1.collect().foreach(println)</span><br></pre></td></tr></table></figure>
+
+<h4 id="9）join-otherDataset-numTasks"><a href="#9）join-otherDataset-numTasks" class="headerlink" title="9）join(otherDataset, [numTasks])"></a>9）join(otherDataset, [numTasks])</h4><blockquote>
+<p>在类型为(K,V)和(K,W)的RDD上调用，返回一个相同key对应的所有元素对在一起的(K,(V,W))的RDD</p>
+</blockquote>
+<h4 id="10）cogroup-otherDataset-numTasks"><a href="#10）cogroup-otherDataset-numTasks" class="headerlink" title="10）cogroup(otherDataset, [numTasks])"></a>10）cogroup(otherDataset, [numTasks])</h4><blockquote>
+<p>在类型为(K,V)和(K,W)的RDD上调用，返回一个(K,(Iterable<V>,Iterable<W>))类型的RDD</p>
+</blockquote>
+<h3 id="三、Action（行动算子）"><a href="#三、Action（行动算子）" class="headerlink" title="三、Action（行动算子）"></a>三、Action（行动算子）</h3><h4 id="1）reduce-func"><a href="#1）reduce-func" class="headerlink" title="1）reduce(func)"></a>1）reduce(func)</h4><blockquote>
+<p>通过func函数聚集RDD中的所有元素，先聚合分区内数据，再聚合分区间数据。</p>
+</blockquote>
+<h4 id="2）collect"><a href="#2）collect" class="headerlink" title="2）collect()"></a>2）collect()</h4><blockquote>
+<p>在驱动程序中，以数组的形式返回数据集的所有元素。</p>
+</blockquote>
+<h4 id="3）-count"><a href="#3）-count" class="headerlink" title="3） count()"></a>3） count()</h4><blockquote>
+<p>返回RDD中元素的个数</p>
+</blockquote>
+<h4 id="4）first"><a href="#4）first" class="headerlink" title="4）first()"></a>4）first()</h4><blockquote>
+<p>返回RDD中的第一个元素</p>
+</blockquote>
+<h4 id="5）take-n"><a href="#5）take-n" class="headerlink" title="5）take(n)"></a>5）take(n)</h4><blockquote>
+<p>返回一个由RDD的前n个元素组成的数组</p>
+</blockquote>
+<h4 id="6）takeOrdered-n"><a href="#6）takeOrdered-n" class="headerlink" title="6）takeOrdered(n)"></a>6）takeOrdered(n)</h4><blockquote>
+<p>返回该RDD排序后的前n个元素组成的数组</p>
+</blockquote>
+<h4 id="7）aggregate-num-func1-func2"><a href="#7）aggregate-num-func1-func2" class="headerlink" title="7）aggregate(num)(func1)(func2)"></a>7）aggregate(num)(func1)(func2)</h4><blockquote>
+<ul>
+<li><ol>
+<li>参数：(zeroValue: U)(seqOp: (U, T) ⇒ U, combOp: (U, U) ⇒ U)</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>作用：aggregate函数将每个分区里面的元素通过seqOp和初始值进行聚合，然后用combine函数将每个分区的结果和初始值(zeroValue)进行combine操作。这个函数最终返回的类型不需要和RDD中元素类型一致。</li>
+</ol>
+</li>
+</ul>
+</blockquote>
+<h4 id="8）fold-num-func"><a href="#8）fold-num-func" class="headerlink" title="8）fold(num)(func)"></a>8）fold(num)(func)</h4><blockquote>
+<p>作用：折叠操作，aggregate的简化操作，seqop和combop一样。</p>
+</blockquote>
+<h4 id="9）saveAsTextFile-path"><a href="#9）saveAsTextFile-path" class="headerlink" title="9）saveAsTextFile(path)"></a>9）saveAsTextFile(path)</h4><blockquote>
+<p>将数据集的元素以textfile的形式保存到HDFS文件系统或者其他支持的文件系统，对于每个元素，Spark将会调用toString方法，将它装换为文件中的文本</p>
+</blockquote>
+<h4 id="10）saveAsSequenceFile-path"><a href="#10）saveAsSequenceFile-path" class="headerlink" title="10）saveAsSequenceFile(path)"></a>10）saveAsSequenceFile(path)</h4><blockquote>
+<p>将数据集中的元素以Hadoop sequencefile的格式保存到指定的目录下，可以使HDFS或者其他Hadoop支持的文件系统。</p>
+</blockquote>
+<h4 id="11）saveAsObjectFile-path"><a href="#11）saveAsObjectFile-path" class="headerlink" title="11）saveAsObjectFile(path)"></a>11）saveAsObjectFile(path)</h4><blockquote>
+<p>用于将RDD中的元素序列化成对象，存储到文件中。</p>
+</blockquote>
+<h4 id="12）-countByKey"><a href="#12）-countByKey" class="headerlink" title="12） countByKey()"></a>12） countByKey()</h4><blockquote>
+<p>针对(K,V)类型的RDD，返回一个(K,Int)的map，表示每一个key对应的元素个数。</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> rdd = sc.parallelize(<span class="type">List</span>((<span class="number">1</span>,<span class="number">3</span>),(<span class="number">1</span>,<span class="number">2</span>),(<span class="number">1</span>,<span class="number">4</span>),(<span class="number">2</span>,<span class="number">3</span>),(<span class="number">3</span>,<span class="number">6</span>),(<span class="number">3</span>,<span class="number">8</span>)),<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> total = rdd.countByKey()</span><br><span class="line"></span><br><span class="line">println(total)</span><br><span class="line"></span><br><span class="line"><span class="comment">//打印结果</span></span><br><span class="line"><span class="type">Map</span>(<span class="number">3</span> -&gt; <span class="number">2</span>, <span class="number">1</span> -&gt; <span class="number">3</span>, <span class="number">2</span> -&gt; <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="13）-foreach-func"><a href="#13）-foreach-func" class="headerlink" title="13） foreach(func)"></a>13） foreach(func)</h4><blockquote>
+<p>在数据集的每一个元素上，运行函数func进行更新。</p>
+</blockquote>
+<h3 id="四、RDD依赖关系"><a href="#四、RDD依赖关系" class="headerlink" title="四、RDD依赖关系"></a>四、RDD依赖关系</h3><h4 id="1）Lineage"><a href="#1）Lineage" class="headerlink" title="1）Lineage"></a>1）Lineage</h4><blockquote>
+<p>RDD只支持粗粒度转换，即在大量记录上执行的单个操作。将创建RDD的一系列<code>Lineage</code>（血统）记录下来，以便恢复丢失的分区。RDD的<code>Lineage</code>会记录RDD的元数据信息和转换行为，当该RDD的部分分区数据丢失时，它可以根据这些信息来重新运算和恢复丢失的数据分区。</p>
+</blockquote>
+<h4 id="2）窄依赖"><a href="#2）窄依赖" class="headerlink" title="2）窄依赖"></a>2）窄依赖</h4><blockquote>
+<p>窄依赖指的是每一个父RDD的Partition最多被子RDD的一个Partition使用.</p>
+</blockquote>
+<h4 id="3）宽依赖"><a href="#3）宽依赖" class="headerlink" title="3）宽依赖"></a>3）宽依赖</h4><blockquote>
+<p>宽依赖指的是多个子RDD的Partition会依赖同一个父RDD的Partition，会引起shuffle.</p>
+</blockquote>
+<h4 id="4）DAG-Directed-Acyclic-Graph"><a href="#4）DAG-Directed-Acyclic-Graph" class="headerlink" title="4）DAG(Directed Acyclic Graph)"></a>4）DAG(Directed Acyclic Graph)</h4><blockquote>
+<p>DAG(Directed Acyclic Graph)叫做有向无环图，原始的RDD通过一系列的转换就就形成了DAG，根据RDD之间的依赖关系的不同将DAG划分成不同的Stage，对于窄依赖，partition的转换处理在Stage中完成计算。对于宽依赖，由于有Shuffle的存在，只能在parent RDD处理完成后，才能开始接下来的计算，因此<strong>宽依赖是划分Stage的依据</strong>。</p>
+</blockquote>
+<p><img src="https://file.buildworld.cn/img/20200807164413.png"></p>
+<h3 id="五、累加器"><a href="#五、累加器" class="headerlink" title="五、累加器"></a>五、累加器</h3><blockquote>
+<p>累加器用来对信息进行聚合，通常在向 Spark传递函数时，比如使用 map() 函数或者用 filter() 传条件时，可以使用驱动器程序中定义的变量，但是集群中运行的每个任务都会得到这些变量的一份新的副本，更新这些副本的值也不会影响驱动器中的对应变量。如果我们想实现所有分片处理时更新共享变量的功能，那么累加器可以实现我们想要的效果。</p>
+</blockquote>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> config = <span class="keyword">new</span> <span class="type">SparkConf</span>().setMaster(<span class="string">&quot;local[*]&quot;</span>).setAppName(<span class="string">&quot;WordCount&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(config)</span><br><span class="line"></span><br><span class="line"><span class="keyword">val</span> rdd: <span class="type">RDD</span>[<span class="type">Int</span>] = sc.makeRDD(<span class="type">List</span>(<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建累加器对象</span></span><br><span class="line"><span class="keyword">val</span> accumulator: <span class="type">LongAccumulator</span> = sc.longAccumulator</span><br><span class="line"></span><br><span class="line">rdd.foreach &#123;</span><br><span class="line">  <span class="keyword">case</span> i =&gt; &#123;</span><br><span class="line">    <span class="comment">//执行累加器的累加功能</span></span><br><span class="line">    accumulator.add(i)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//获取累加器保存的值</span></span><br><span class="line">println(accumulator.value)</span><br></pre></td></tr></table></figure>
+
+<h4 id="自定义累加器"><a href="#自定义累加器" class="headerlink" title="自定义累加器"></a>自定义累加器</h4><blockquote>
+<p>自定义累加器类型的功能在1.X版本中就已经提供了，但是使用起来比较麻烦，在2.0版本后，累加器的易用性有了较大的改进，而且官方还提供了一个新的抽象类：<code>AccumulatorV2</code>来提供更加友好的自定义类型累加器的实现方式。实现自定义类型累加器需要继承<code>AccumulatorV2</code>并至少覆写下例中出现的方法。</p>
+</blockquote>
+<h3 id="六、广播变量（调优策略）"><a href="#六、广播变量（调优策略）" class="headerlink" title="六、广播变量（调优策略）"></a>六、广播变量（调优策略）</h3><blockquote>
+<p>广播变量用来高效分发较大的对象。向所有工作节点发送一个较大的<strong>只读</strong>值，以供一个或多个Spark操作使用。比如，如果你的应用需要向所有节点发送一个较大的只读查询表，甚至是机器学习算法中的一个很大的特征向量，广播变量用起来都很顺手。 在多个并行操作中使用同一个变量，但是 Spark会为每个任务分别发送。</p>
+</blockquote>
+<blockquote>
+<p>使用广播变量的过程如下：</p>
+<ul>
+<li>(1) 通过对一个类型 T 的对象调用 SparkContext.broadcast 创建出一个 Broadcast[T] 对象。 任何可序列化的类型都可以这么实现。 </li>
+<li>(2) 通过 value 属性访问该对象的值(在 Java 中为 value() 方法)。 </li>
+<li>(3) 变量只会被发到各个节点一次，应作为只读值处理(修改这个值不会影响到别的节点)。</li>
+</ul>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:qjzxzxd@gmail.com">MiChong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.buildworld.cn/2020/08/03/BigData-%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%BC%95%E6%93%8ESpark/">https://www.buildworld.cn/2020/08/03/BigData-%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%BC%95%E6%93%8ESpark/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.buildworld.cn" target="_blank">MiChong的🏡</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Spark/">Spark</a></div><div class="post_share"><div class="social-share" data-image="https://file.buildworld.cn/img/20200803194840.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/09/03/BigData-%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E4%B9%8BSparkSQL/"><img class="prev-cover" src="https://file.buildworld.cn/img/20200903155458.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">BigData--大数据技术之SparkSQL</div></div></a></div><div class="next-post pull-right"><a href="/2020/07/20/%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%88%A9%E5%99%A8-Scala%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0-%E9%AB%98%E7%BA%A7/"><img class="next-cover" src="https://file.buildworld.cn/img/2e9eb5fbd273a7db40541819e49bf576_scala-icon.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">大数据利器--Scala语言学习(高级)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/09/03/BigData-大数据技术之SparkSQL/" title="BigData--大数据技术之SparkSQL"><img class="cover" src="https://file.buildworld.cn/img/20200903155458.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-03</div><div class="title">BigData--大数据技术之SparkSQL</div></div></a></div><div><a href="/2020/09/09/BigData-大数据技术之Spark机器学习库MLLib/" title="BigData--大数据技术之Spark机器学习库MLLib"><img class="cover" src="https://file.buildworld.cn/img/20200909195630.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-09</div><div class="title">BigData--大数据技术之Spark机器学习库MLLib</div></div></a></div><div><a href="/2020/09/07/BigData-大数据技术之SparkStreaming/" title="BigData--大数据技术之SparkStreaming"><img class="cover" src="https://file.buildworld.cn/img/20200907103306.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-09-07</div><div class="title">BigData--大数据技术之SparkStreaming</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MiChong</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MiChongGET"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/qjzxzxd@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到米虫的小站，一起加油🤝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Spark%E8%BF%90%E8%A1%8C"><span class="toc-number">1.</span> <span class="toc-text">一、Spark运行</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81Spark%E5%86%85%E7%BD%AE%E6%A8%A1%E5%9D%97"><span class="toc-number">1.1.</span> <span class="toc-text">1、Spark内置模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81spark%E9%80%9A%E7%94%A8%E8%BF%90%E8%A1%8C%E5%BB%BA%E8%AE%AE%E6%B5%81%E7%A8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">2、spark通用运行建议流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81Spark%E5%92%8Cyarn%E8%81%94%E5%8A%A8"><span class="toc-number">1.3.</span> <span class="toc-text">3、Spark和yarn联动</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81RDD%E8%BD%AC%E6%8D%A2"><span class="toc-number">2.</span> <span class="toc-text">二、RDD转换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81-Value%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">1、 Value类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%89map-func"><span class="toc-number">2.1.1.</span> <span class="toc-text">1）map(func)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%89mapPartitions-func"><span class="toc-number">2.1.2.</span> <span class="toc-text">2）mapPartitions(func)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%89mapPartitionsWithIndex-func"><span class="toc-number">2.1.3.</span> <span class="toc-text">3）mapPartitionsWithIndex(func)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%EF%BC%89flatMap-func"><span class="toc-number">2.1.4.</span> <span class="toc-text">4）flatMap(func)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%EF%BC%89glom"><span class="toc-number">2.1.5.</span> <span class="toc-text">5）glom</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%EF%BC%89groupBy-func"><span class="toc-number">2.1.6.</span> <span class="toc-text">6）groupBy(func)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%EF%BC%89filter-func"><span class="toc-number">2.1.7.</span> <span class="toc-text">7）filter(func)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%EF%BC%89sample-withReplacement-fraction-seed"><span class="toc-number">2.1.8.</span> <span class="toc-text">8）sample(withReplacement, fraction, seed)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9%EF%BC%89distinct-numTasks"><span class="toc-number">2.1.9.</span> <span class="toc-text">9）distinct([numTasks]))</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10%EF%BC%89coalesce-numPartitions"><span class="toc-number">2.1.10.</span> <span class="toc-text">10）coalesce(numPartitions)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11%EF%BC%89-repartition-numPartitions"><span class="toc-number">2.1.11.</span> <span class="toc-text">11） repartition(numPartitions)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12%EF%BC%89sortBy-func-ascending-numTasks"><span class="toc-number">2.1.12.</span> <span class="toc-text">12）sortBy(func,[ascending], [numTasks])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13%EF%BC%89pipe-command-envVars"><span class="toc-number">2.1.13.</span> <span class="toc-text">13）pipe(command, [envVars])</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%8F%8CValue%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.2.</span> <span class="toc-text">2、双Value类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%89union-otherDataset"><span class="toc-number">2.2.1.</span> <span class="toc-text">1）union(otherDataset)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%89subtract-otherDataset"><span class="toc-number">2.2.2.</span> <span class="toc-text">2）subtract (otherDataset)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%89intersection-otherDataset"><span class="toc-number">2.2.3.</span> <span class="toc-text">3）intersection(otherDataset)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%EF%BC%89cartesian-otherDataset"><span class="toc-number">2.2.4.</span> <span class="toc-text">4）cartesian(otherDataset)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%EF%BC%89zip-otherDataset"><span class="toc-number">2.2.5.</span> <span class="toc-text">5）zip(otherDataset)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81Key-Value%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.3.</span> <span class="toc-text">3、Key-Value类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%89partitionBy"><span class="toc-number">2.3.1.</span> <span class="toc-text">1）partitionBy</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%89groupByKey"><span class="toc-number">2.3.2.</span> <span class="toc-text">2）groupByKey</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%89reduceByKey-func-numTasks"><span class="toc-number">2.3.3.</span> <span class="toc-text">3）reduceByKey(func, [numTasks])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%EF%BC%89aggregateByKey"><span class="toc-number">2.3.4.</span> <span class="toc-text">4）aggregateByKey</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%EF%BC%89foldByKey"><span class="toc-number">2.3.5.</span> <span class="toc-text">5）foldByKey</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%EF%BC%89combineByKey-C"><span class="toc-number">2.3.6.</span> <span class="toc-text">6）combineByKey[C]</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%EF%BC%89sortByKey-ascending-numTasks"><span class="toc-number">2.3.7.</span> <span class="toc-text">7）sortByKey([ascending], [numTasks])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%EF%BC%89mapValues"><span class="toc-number">2.3.8.</span> <span class="toc-text">8）mapValues</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9%EF%BC%89join-otherDataset-numTasks"><span class="toc-number">2.3.9.</span> <span class="toc-text">9）join(otherDataset, [numTasks])</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10%EF%BC%89cogroup-otherDataset-numTasks"><span class="toc-number">2.3.10.</span> <span class="toc-text">10）cogroup(otherDataset, [numTasks])</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81Action%EF%BC%88%E8%A1%8C%E5%8A%A8%E7%AE%97%E5%AD%90%EF%BC%89"><span class="toc-number">2.4.</span> <span class="toc-text">三、Action（行动算子）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%89reduce-func"><span class="toc-number">2.4.1.</span> <span class="toc-text">1）reduce(func)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%89collect"><span class="toc-number">2.4.2.</span> <span class="toc-text">2）collect()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%89-count"><span class="toc-number">2.4.3.</span> <span class="toc-text">3） count()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%EF%BC%89first"><span class="toc-number">2.4.4.</span> <span class="toc-text">4）first()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%EF%BC%89take-n"><span class="toc-number">2.4.5.</span> <span class="toc-text">5）take(n)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%EF%BC%89takeOrdered-n"><span class="toc-number">2.4.6.</span> <span class="toc-text">6）takeOrdered(n)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%EF%BC%89aggregate-num-func1-func2"><span class="toc-number">2.4.7.</span> <span class="toc-text">7）aggregate(num)(func1)(func2)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%EF%BC%89fold-num-func"><span class="toc-number">2.4.8.</span> <span class="toc-text">8）fold(num)(func)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9%EF%BC%89saveAsTextFile-path"><span class="toc-number">2.4.9.</span> <span class="toc-text">9）saveAsTextFile(path)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10%EF%BC%89saveAsSequenceFile-path"><span class="toc-number">2.4.10.</span> <span class="toc-text">10）saveAsSequenceFile(path)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#11%EF%BC%89saveAsObjectFile-path"><span class="toc-number">2.4.11.</span> <span class="toc-text">11）saveAsObjectFile(path)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#12%EF%BC%89-countByKey"><span class="toc-number">2.4.12.</span> <span class="toc-text">12） countByKey()</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#13%EF%BC%89-foreach-func"><span class="toc-number">2.4.13.</span> <span class="toc-text">13） foreach(func)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81RDD%E4%BE%9D%E8%B5%96%E5%85%B3%E7%B3%BB"><span class="toc-number">2.5.</span> <span class="toc-text">四、RDD依赖关系</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%EF%BC%89Lineage"><span class="toc-number">2.5.1.</span> <span class="toc-text">1）Lineage</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%EF%BC%89%E7%AA%84%E4%BE%9D%E8%B5%96"><span class="toc-number">2.5.2.</span> <span class="toc-text">2）窄依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%EF%BC%89%E5%AE%BD%E4%BE%9D%E8%B5%96"><span class="toc-number">2.5.3.</span> <span class="toc-text">3）宽依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%EF%BC%89DAG-Directed-Acyclic-Graph"><span class="toc-number">2.5.4.</span> <span class="toc-text">4）DAG(Directed Acyclic Graph)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E7%B4%AF%E5%8A%A0%E5%99%A8"><span class="toc-number">2.6.</span> <span class="toc-text">五、累加器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B4%AF%E5%8A%A0%E5%99%A8"><span class="toc-number">2.6.1.</span> <span class="toc-text">自定义累加器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%B9%BF%E6%92%AD%E5%8F%98%E9%87%8F%EF%BC%88%E8%B0%83%E4%BC%98%E7%AD%96%E7%95%A5%EF%BC%89"><span class="toc-number">2.7.</span> <span class="toc-text">六、广播变量（调优策略）</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/06/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/07/06/hello-world/" title="Hello World">Hello World</a><time datetime="2021-07-06T05:12:56.084Z" title="发表于 2021-07-06 13:12:56">2021-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合"><img src="https://file.buildworld.cn/img/20210209161641.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode数据库题目集合"/></a><div class="content"><a class="title" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合">LeetCode数据库题目集合</a><time datetime="2021-02-09T08:13:56.000Z" title="发表于 2021-02-09 16:13:56">2021-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习"><img src="https://file.buildworld.cn/img/20210107194133.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData-数据仓库学习"/></a><div class="content"><a class="title" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习">BigData-数据仓库学习</a><time datetime="2021-01-07T11:35:36.000Z" title="发表于 2021-01-07 19:35:36">2021-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录"><img src="https://file.buildworld.cn/img/20201104092750.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法学习记录"/></a><div class="content"><a class="title" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录">算法学习记录</a><time datetime="2020-11-04T01:20:49.000Z" title="发表于 2020-11-04 09:20:49">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink"><img src="https://file.buildworld.cn/img/20200911110402.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData--分布式流数据流引擎Apache Flink"/></a><div class="content"><a class="title" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink">BigData--分布式流数据流引擎Apache Flink</a><time datetime="2020-09-11T02:59:30.000Z" title="发表于 2020-09-11 10:59:30">2020-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By MiChong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "7d002c40-fe0a-44eb-977b-a992eaed1e7c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

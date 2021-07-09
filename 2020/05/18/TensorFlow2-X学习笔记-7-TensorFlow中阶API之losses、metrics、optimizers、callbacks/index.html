@@ -1,0 +1,344 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TensorFlow2.X学习笔记(7)--TensorFlow中阶API之losses、metrics、optimizers、callbacks | MiChong的🏡</title><meta name="keywords" content="Python,TensorFlow"><meta name="author" content="MiChong,qjzxzxd@gmail.com"><meta name="copyright" content="MiChong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="一般来说，监督学习的目标函数由损失函数和正则化项组成。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow2.X学习笔记(7)--TensorFlow中阶API之losses、metrics、optimizers、callbacks">
+<meta property="og:url" content="https://www.buildworld.cn/2020/05/18/TensorFlow2-X%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-7-TensorFlow%E4%B8%AD%E9%98%B6API%E4%B9%8Blosses%E3%80%81metrics%E3%80%81optimizers%E3%80%81callbacks/index.html">
+<meta property="og:site_name" content="MiChong的🏡">
+<meta property="og:description" content="一般来说，监督学习的目标函数由损失函数和正则化项组成。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg">
+<meta property="article:published_time" content="2020-05-18T07:59:29.000Z">
+<meta property="article:modified_time" content="2020-05-24T14:11:37.832Z">
+<meta property="article:author" content="MiChong">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="TensorFlow">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.buildworld.cn/2020/05/18/TensorFlow2-X%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-7-TensorFlow%E4%B8%AD%E9%98%B6API%E4%B9%8Blosses%E3%80%81metrics%E3%80%81optimizers%E3%80%81callbacks/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'TensorFlow2.X学习笔记(7)--TensorFlow中阶API之losses、metrics、optimizers、callbacks',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-05-24 22:11:37'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="MiChong的🏡" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://ae01.alicdn.com/kf/H97dae6f0ba1246cbaf21c697b8bd3e73y.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">MiChong的🏡</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">TensorFlow2.X学习笔记(7)--TensorFlow中阶API之losses、metrics、optimizers、callbacks</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-18T07:59:29.000Z" title="发表于 2020-05-18 15:59:29">2020-05-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-05-24T14:11:37.832Z" title="更新于 2020-05-24 22:11:37">2020-05-24</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="TensorFlow2.X学习笔记(7)--TensorFlow中阶API之losses、metrics、optimizers、callbacks"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一、损失函数"><a href="#一、损失函数" class="headerlink" title="一、损失函数"></a>一、损失函数</h2><p><strong>一般来说，监督学习的目标函数由损失函数和正则化项组成。（Objective = Loss + Regularization）</strong></p>
+<ul>
+<li>对于二分类模型，通常使用的是二元交叉熵损失函数 binary_crossentropy。</li>
+<li>对于多分类模型，如果label是类别序号编码的，则使用类别交叉熵损失函数 categorical_crossentropy。如果label进行了one-hot编码，则需要使用稀疏类别交叉熵损失函数 sparse_categorical_crossentropy。</li>
+</ul>
+<h3 id="1、内置损失函数"><a href="#1、内置损失函数" class="headerlink" title="1、内置损失函数"></a>1、内置损失函数</h3><p><strong>内置的损失函数一般有类的实现和函数的实现两种形式。</strong></p>
+<blockquote>
+<p>常用的内置损失函数</p>
+</blockquote>
+<ul>
+<li><code>mean_squared_error</code>（平方差误差损失，用于回归，简写为 mse, 类实现形式为 MeanSquaredError 和 MSE）</li>
+<li><code>mean_absolute_error</code> (绝对值误差损失，用于回归，简写为 mae, 类实现形式为 MeanAbsoluteError 和 MAE)</li>
+<li><code>mean_absolute_percentage_error</code> (平均百分比误差损失，用于回归，简写为 mape, 类实现形式为 MeanAbsolutePercentageError 和 MAPE)</li>
+<li><code>Huber</code>(Huber损失，只有类实现形式，用于回归，介于mse和mae之间，对异常值比较鲁棒，相对mse有一定的优势)</li>
+<li><code>binary_crossentropy</code>(二元交叉熵，用于二分类，类实现形式为 BinaryCrossentropy)</li>
+<li><code>categorical_crossentropy</code>(类别交叉熵，用于多分类，要求label为onehot编码，类实现形式为 CategoricalCrossentropy)</li>
+<li><code>sparse_categorical_crossentropy</code>(稀疏类别交叉熵，用于多分类，要求label为序号编码形式，类实现形式为 SparseCategoricalCrossentropy)</li>
+<li><code>hinge</code>(合页损失函数，用于二分类，最著名的应用是作为支持向量机SVM的损失函数，类实现形式为 Hinge)</li>
+<li>kld(相对熵损失，也叫KL散度，常用于最大期望算法EM的损失函数，两个概率分布差异的一种信息度量。<code>类实现形式为</code> KLDivergence 或 KLD)</li>
+<li><code>cosine_similarity</code>(余弦相似度，可用于多分类，类实现形式为 CosineSimilarity)</li>
+</ul>
+<h3 id="2、-自定义损失函数"><a href="#2、-自定义损失函数" class="headerlink" title="2、 自定义损失函数"></a>2、 自定义损失函数</h3><blockquote>
+<p>自定义损失函数接收两个张量<code>y_true</code>,<code>y_pred</code>作为输入参数，并输出一个标量作为损失函数值。</p>
+</blockquote>
+<h4 id="函数形式"><a href="#函数形式" class="headerlink" title="函数形式"></a>函数形式</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">focal_loss</span>(<span class="params">gamma=<span class="number">2.</span>, alpha=<span class="number">.25</span></span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">focal_loss_fixed</span>(<span class="params">y_true, y_pred</span>):</span></span><br><span class="line">        pt_1 = tf.where(tf.equal(y_true, <span class="number">1</span>), y_pred, tf.ones_like(y_pred))</span><br><span class="line">        pt_0 = tf.where(tf.equal(y_true, <span class="number">0</span>), y_pred, tf.zeros_like(y_pred))</span><br><span class="line">        loss = -tf.<span class="built_in">sum</span>(alpha * tf.<span class="built_in">pow</span>(<span class="number">1.</span> - pt_1, gamma) * tf.log(<span class="number">1e-07</span>+pt_1)) \</span><br><span class="line">           -tf.<span class="built_in">sum</span>((<span class="number">1</span>-alpha) * tf.<span class="built_in">pow</span>( pt_0, gamma) * tf.log(<span class="number">1.</span> - pt_0 + <span class="number">1e-07</span>))</span><br><span class="line">        <span class="keyword">return</span> loss</span><br><span class="line">    <span class="keyword">return</span> focal_loss_fixed</span><br></pre></td></tr></table></figure>
+
+<h4 id="类形式"><a href="#类形式" class="headerlink" title="类形式"></a>类形式</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">FocalLoss</span>(<span class="params">losses.Loss</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self,gamma=<span class="number">2.0</span>,alpha=<span class="number">0.25</span></span>):</span></span><br><span class="line">        self.gamma = gamma</span><br><span class="line">        self.alpha = alpha</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call</span>(<span class="params">self,y_true,y_pred</span>):</span></span><br><span class="line"></span><br><span class="line">        pt_1 = tf.where(tf.equal(y_true, <span class="number">1</span>), y_pred, tf.ones_like(y_pred))</span><br><span class="line">        pt_0 = tf.where(tf.equal(y_true, <span class="number">0</span>), y_pred, tf.zeros_like(y_pred))</span><br><span class="line">        loss = -tf.<span class="built_in">sum</span>(self.alpha * tf.<span class="built_in">pow</span>(<span class="number">1.</span> - pt_1, self.gamma) * tf.log(<span class="number">1e-07</span>+pt_1)) \</span><br><span class="line">           -tf.<span class="built_in">sum</span>((<span class="number">1</span>-self.alpha) * tf.<span class="built_in">pow</span>( pt_0, self.gamma) * tf.log(<span class="number">1.</span> - pt_0 + <span class="number">1e-07</span>))</span><br><span class="line">        <span class="keyword">return</span> loss</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="二、评估指标metrics"><a href="#二、评估指标metrics" class="headerlink" title="二、评估指标metrics"></a>二、评估指标metrics</h2><p><strong>损失函数除了作为模型训练时候的优化目标，也能够作为模型好坏的一种评价指标。</strong></p>
+<h3 id="1、常用的内置评估指标"><a href="#1、常用的内置评估指标" class="headerlink" title="1、常用的内置评估指标"></a>1、常用的内置评估指标</h3><ul>
+<li><code>MeanSquaredError</code>（平方差误差，用于回归，可以简写为MSE，函数形式为mse）</li>
+<li><code>MeanAbsoluteError</code> (绝对值误差，用于回归，可以简写为MAE，函数形式为mae)</li>
+<li><code>MeanAbsolutePercentageError</code> (平均百分比误差，用于回归，可以简写为MAPE，函数形式为mape)</li>
+<li><code>RootMeanSquaredError</code> (均方根误差，用于回归)</li>
+<li><code>Accuracy</code> (准确率，用于分类，可以用字符串”Accuracy”表示，Accuracy=(TP+TN)/(TP+TN+FP+FN)，要求y_true和y_pred都为类别序号编码)</li>
+<li><code>Precision</code> (精确率，用于二分类，Precision = TP/(TP+FP))</li>
+<li><code>Recall</code> (召回率，用于二分类，Recall = TP/(TP+FN))</li>
+<li><code>TruePositives</code> (真正例，用于二分类)</li>
+<li><code>TrueNegatives</code> (真负例，用于二分类)</li>
+<li><code>FalsePositives</code> (假正例，用于二分类)</li>
+<li><code>FalseNegatives</code> (假负例，用于二分类)</li>
+<li><code>AUC</code>(ROC曲线(TPR vs FPR)下的面积，用于二分类，直观解释为随机抽取一个正样本和一个负样本，正样本的预测值大于负样本的概率)</li>
+<li><code>CategoricalAccuracy</code>（分类准确率，与Accuracy含义相同，要求y_true(label)为onehot编码形式）</li>
+<li><code>SparseCategoricalAccuracy</code> (稀疏分类准确率，与Accuracy含义相同，要求y_true(label)为序号编码形式)</li>
+<li><code>MeanIoU</code> (Intersection-Over-Union，常用于图像分割)</li>
+<li><code>TopKCategoricalAccuracy</code> (多分类TopK准确率，要求y_true(label)为onehot编码形式)</li>
+<li><code>SparseTopKCategoricalAccuracy</code> (稀疏多分类TopK准确率，要求y_true(label)为序号编码形式)</li>
+<li><code>Mean</code> (平均值)</li>
+<li><code>Sum</code> (求和)</li>
+</ul>
+<h3 id="2、自定义评估指标"><a href="#2、自定义评估指标" class="headerlink" title="2、自定义评估指标"></a>2、自定义评估指标</h3><p><strong>KS指标适合二分类问题，其计算方式为 <code>KS=max(TPR-FPR).</code></strong></p>
+<blockquote>
+<p>TPR=TP/(TP+FN) , FPR = FP/(FP+TN)</p>
+<p>TPR曲线实际上就是正样本的累积分布曲线(CDF)，FPR曲线实际上就是负样本的累积分布曲线(CDF)。</p>
+</blockquote>
+<p><strong>KS指标就是正样本和负样本累积分布曲线差值的最大值。</strong></p>
+<h4 id="函数形式的自定义评估指标"><a href="#函数形式的自定义评估指标" class="headerlink" title="函数形式的自定义评估指标"></a>函数形式的自定义评估指标</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#函数形式的自定义评估指标</span></span><br><span class="line"><span class="meta">@tf.function</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">ks</span>(<span class="params">y_true,y_pred</span>):</span></span><br><span class="line">    y_true = tf.reshape(y_true,(-<span class="number">1</span>,))</span><br><span class="line">    y_pred = tf.reshape(y_pred,(-<span class="number">1</span>,))</span><br><span class="line">    length = tf.shape(y_true)[<span class="number">0</span>]</span><br><span class="line">    t = tf.math.top_k(y_pred,k = length,<span class="built_in">sorted</span> = <span class="literal">False</span>)</span><br><span class="line">    y_pred_sorted = tf.gather(y_pred,t.indices)</span><br><span class="line">    y_true_sorted = tf.gather(y_true,t.indices)</span><br><span class="line">    cum_positive_ratio = tf.truediv(</span><br><span class="line">        tf.cumsum(y_true_sorted),tf.reduce_sum(y_true_sorted))</span><br><span class="line">    cum_negative_ratio = tf.truediv(</span><br><span class="line">        tf.cumsum(<span class="number">1</span> - y_true_sorted),tf.reduce_sum(<span class="number">1</span> - y_true_sorted))</span><br><span class="line">    ks_value = tf.reduce_max(tf.<span class="built_in">abs</span>(cum_positive_ratio - cum_negative_ratio)) </span><br><span class="line">    <span class="keyword">return</span> ks_value</span><br><span class="line"></span><br><span class="line">y_true = tf.constant([[<span class="number">1</span>],[<span class="number">1</span>],[<span class="number">1</span>],[<span class="number">0</span>],[<span class="number">1</span>],[<span class="number">1</span>],[<span class="number">1</span>],[<span class="number">0</span>],[<span class="number">0</span>],[<span class="number">0</span>],[<span class="number">1</span>],[<span class="number">0</span>],[<span class="number">1</span>],[<span class="number">0</span>]])</span><br><span class="line">y_pred = tf.constant([[<span class="number">0.6</span>],[<span class="number">0.1</span>],[<span class="number">0.4</span>],[<span class="number">0.5</span>],[<span class="number">0.7</span>],[<span class="number">0.7</span>],[<span class="number">0.7</span>],</span><br><span class="line">                      [<span class="number">0.4</span>],[<span class="number">0.4</span>],[<span class="number">0.5</span>],[<span class="number">0.8</span>],[<span class="number">0.3</span>],[<span class="number">0.5</span>],[<span class="number">0.3</span>]])</span><br><span class="line">tf.<span class="built_in">print</span>(ks(y_true,y_pred))</span><br></pre></td></tr></table></figure>
+
+<h4 id="类形式的自定义评估指标"><a href="#类形式的自定义评估指标" class="headerlink" title="类形式的自定义评估指标"></a>类形式的自定义评估指标</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#类形式的自定义评估指标</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">KS</span>(<span class="params">metrics.Metric</span>):</span></span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, name = <span class="string">&quot;ks&quot;</span>, **kwargs</span>):</span></span><br><span class="line">        <span class="built_in">super</span>(KS,self).__init__(name=name,**kwargs)</span><br><span class="line">        self.true_positives = self.add_weight(</span><br><span class="line">            name = <span class="string">&quot;tp&quot;</span>,shape = (<span class="number">101</span>,), initializer = <span class="string">&quot;zeros&quot;</span>)</span><br><span class="line">        self.false_positives = self.add_weight(</span><br><span class="line">            name = <span class="string">&quot;fp&quot;</span>,shape = (<span class="number">101</span>,), initializer = <span class="string">&quot;zeros&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @tf.function</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">update_state</span>(<span class="params">self,y_true,y_pred</span>):</span></span><br><span class="line">        y_true = tf.cast(tf.reshape(y_true,(-<span class="number">1</span>,)),tf.<span class="built_in">bool</span>)</span><br><span class="line">        y_pred = tf.cast(<span class="number">100</span>*tf.reshape(y_pred,(-<span class="number">1</span>,)),tf.int32)</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> tf.<span class="built_in">range</span>(<span class="number">0</span>,tf.shape(y_true)[<span class="number">0</span>]):</span><br><span class="line">            <span class="keyword">if</span> y_true[i]:</span><br><span class="line">                self.true_positives[y_pred[i]].assign(</span><br><span class="line">                    self.true_positives[y_pred[i]]+<span class="number">1.0</span>)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                self.false_positives[y_pred[i]].assign(</span><br><span class="line">                    self.false_positives[y_pred[i]]+<span class="number">1.0</span>)</span><br><span class="line">        <span class="keyword">return</span> (self.true_positives,self.false_positives)</span><br><span class="line"></span><br><span class="line"><span class="meta">    @tf.function</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">result</span>(<span class="params">self</span>):</span></span><br><span class="line">        cum_positive_ratio = tf.truediv(</span><br><span class="line">            tf.cumsum(self.true_positives),tf.reduce_sum(self.true_positives))</span><br><span class="line">        cum_negative_ratio = tf.truediv(</span><br><span class="line">            tf.cumsum(self.false_positives),tf.reduce_sum(self.false_positives))</span><br><span class="line">        ks_value = tf.reduce_max(tf.<span class="built_in">abs</span>(cum_positive_ratio - cum_negative_ratio)) </span><br><span class="line">        <span class="keyword">return</span> ks_value</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">y_true = tf.constant([[<span class="number">1</span>],[<span class="number">1</span>],[<span class="number">1</span>],[<span class="number">0</span>],[<span class="number">1</span>],[<span class="number">1</span>],[<span class="number">1</span>],[<span class="number">0</span>],[<span class="number">0</span>],[<span class="number">0</span>],[<span class="number">1</span>],[<span class="number">0</span>],[<span class="number">1</span>],[<span class="number">0</span>]])</span><br><span class="line">y_pred = tf.constant([[<span class="number">0.6</span>],[<span class="number">0.1</span>],[<span class="number">0.4</span>],[<span class="number">0.5</span>],[<span class="number">0.7</span>],[<span class="number">0.7</span>],</span><br><span class="line">                      [<span class="number">0.7</span>],[<span class="number">0.4</span>],[<span class="number">0.4</span>],[<span class="number">0.5</span>],[<span class="number">0.8</span>],[<span class="number">0.3</span>],[<span class="number">0.5</span>],[<span class="number">0.3</span>]])</span><br><span class="line"></span><br><span class="line">myks = KS()</span><br><span class="line">myks.update_state(y_true,y_pred)</span><br><span class="line">tf.<span class="built_in">print</span>(myks.result())</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="三、优化器optimizers"><a href="#三、优化器optimizers" class="headerlink" title="三、优化器optimizers"></a>三、优化器optimizers</h2><h3 id="1、优化器"><a href="#1、优化器" class="headerlink" title="1、优化器"></a>1、优化器</h3><p><strong>优化器主要使用<code>apply_gradients</code>方法传入变量和对应梯度从而来对给定变量进行迭代，或者直接使用minimize方法对目标函数进行迭代优化。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用optimizer.apply_gradients</span></span><br><span class="line">optimizer = tf.keras.optimizers.SGD(learning_rate=<span class="number">0.01</span>)  </span><br><span class="line"><span class="keyword">while</span> tf.constant(<span class="literal">True</span>): </span><br><span class="line">        <span class="keyword">with</span> tf.GradientTape() <span class="keyword">as</span> tape:</span><br><span class="line">            y = a*tf.<span class="built_in">pow</span>(x,<span class="number">2</span>) + b*x + c</span><br><span class="line">        dy_dx = tape.gradient(y,x)</span><br><span class="line">        optimizer.apply_gradients(grads_and_vars=[(dy_dx,x)])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用model.fit</span></span><br><span class="line">model.<span class="built_in">compile</span>(optimizer = </span><br><span class="line">              tf.keras.optimizers.SGD(learning_rate=<span class="number">0.01</span>),loss = myloss)</span><br><span class="line">history = model.fit(tf.zeros((<span class="number">100</span>,<span class="number">2</span>)),</span><br><span class="line">                    tf.ones(<span class="number">100</span>),batch_size = <span class="number">1</span>,epochs = <span class="number">10</span>)  <span class="comment">#迭代1000次</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用optimizer.minimize</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">train</span>(<span class="params">epoch = <span class="number">1000</span></span>):</span>  </span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> tf.<span class="built_in">range</span>(epoch):  </span><br><span class="line">        optimizer.minimize(f,[x])</span><br><span class="line">    tf.<span class="built_in">print</span>(<span class="string">&quot;epoch = &quot;</span>,optimizer.iterations)</span><br><span class="line">    <span class="keyword">return</span>(f())</span><br></pre></td></tr></table></figure>
+
+<h3 id="2、内置优化器"><a href="#2、内置优化器" class="headerlink" title="2、内置优化器"></a>2、内置优化器</h3><p>深度学习优化算法大概经历了 SGD -&gt; SGDM -&gt; NAG -&gt;Adagrad -&gt; Adadelta(RMSprop) -&gt; Adam -&gt; Nadam 这样的发展历程。</p>
+<p>在keras.optimizers子模块中，它们基本上都有对应的类的实现。</p>
+<ul>
+<li><code>SGD</code>, 默认参数为纯SGD, 设置momentum参数不为0实际上变成SGDM, 考虑了一阶动量, 设置 nesterov为True后变成NAG，即 Nesterov Acceleration Gradient，在计算梯度时计算的是向前走一步所在位置的梯度。</li>
+<li><code>Adagrad</code>, 考虑了二阶动量，对于不同的参数有不同的学习率，即自适应学习率。缺点是学习率单调下降，可能后期学习速率过慢乃至提前停止学习。</li>
+<li><code>RMSprop</code>, 考虑了二阶动量，对于不同的参数有不同的学习率，即自适应学习率，对Adagrad进行了优化，通过指数平滑只考虑一定窗口内的二阶动量。</li>
+<li><code>Adadelta</code>, 考虑了二阶动量，与RMSprop类似，但是更加复杂一些，自适应性更强。</li>
+<li><code>Adam</code>, 同时考虑了一阶动量和二阶动量，可以看成RMSprop上进一步考虑了Momentum。</li>
+<li><code>Nadam</code>, 在Adam基础上进一步考虑了 Nesterov Acceleration。</li>
+</ul>
+<h2 id="四、回调函数callbacks"><a href="#四、回调函数callbacks" class="headerlink" title="四、回调函数callbacks"></a>四、回调函数callbacks</h2><p>tf.keras的回调函数实际上是一个类，一般是在model.fit时作为参数指定，用于控制在训练过程开始或者在训练过程结束，在每个epoch训练开始或者训练结束，在每个batch训练开始或者训练结束时执行一些操作，例如收集一些日志信息，改变学习率等超参数，提前终止训练过程等等。</p>
+<h3 id="1、内置回调函数"><a href="#1、内置回调函数" class="headerlink" title="1、内置回调函数"></a>1、内置回调函数</h3><ul>
+<li><code>BaseLogger</code>： 收集每个epoch上metrics在各个batch上的平均值，对stateful_metrics参数中的带中间状态的指标直接拿最终值无需对各个batch平均，指标均值结果将添加到logs变量中。该回调函数被所有模型默认添加，且是第一个被添加的。</li>
+<li><code>History</code>： 将BaseLogger计算的各个epoch的metrics结果记录到history这个dict变量中，并作为model.fit的返回值。该回调函数被所有模型默认添加，在BaseLogger之后被添加。</li>
+<li><code>EarlyStopping</code>： 当被监控指标在设定的若干个epoch后没有提升，则提前终止训练。</li>
+<li><code>TensorBoard</code>： 为Tensorboard可视化保存日志信息。支持评估指标，计算图，模型参数等的可视化。</li>
+<li><code>ModelCheckpoint</code>： 在每个epoch后保存模型。</li>
+<li><code>ReduceLROnPlateau</code>：如果监控指标在设定的若干个epoch后没有提升，则以一定的因子减少学习率。</li>
+<li><code>TerminateOnNaN</code>：如果遇到loss为NaN，提前终止训练。</li>
+<li><code>LearningRateScheduler</code>：学习率控制器。给定学习率lr和epoch的函数关系，根据该函数关系在每个epoch前调整学习率。</li>
+<li><code>CSVLogger</code>：将每个epoch后的logs结果记录到CSV文件中。</li>
+<li><code>ProgbarLogger</code>：将每个epoch后的logs结果打印到标准输出流中。</li>
+</ul>
+<h3 id="2、自定义回调函数"><a href="#2、自定义回调函数" class="headerlink" title="2、自定义回调函数"></a>2、自定义回调函数</h3><p><strong>可以使用<code>callbacks.LambdaCallback</code>编写较为简单的回调函数，也可以通过对<code>callbacks.Callback</code>子类化编写更加复杂的回调函数逻辑。</strong></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:qjzxzxd@gmail.com">MiChong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.buildworld.cn/2020/05/18/TensorFlow2-X%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-7-TensorFlow%E4%B8%AD%E9%98%B6API%E4%B9%8Blosses%E3%80%81metrics%E3%80%81optimizers%E3%80%81callbacks/">https://www.buildworld.cn/2020/05/18/TensorFlow2-X%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-7-TensorFlow%E4%B8%AD%E9%98%B6API%E4%B9%8Blosses%E3%80%81metrics%E3%80%81optimizers%E3%80%81callbacks/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.buildworld.cn" target="_blank">MiChong的🏡</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/TensorFlow/">TensorFlow</a></div><div class="post_share"><div class="social-share" data-image="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/05/19/TensorFlow2-X%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-8-TensorFlow%E9%AB%98%E9%98%B6API%E4%B9%8B%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%9E%8B%E3%80%81%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/"><img class="prev-cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">TensorFlow2.X学习笔记(8)--TensorFlow高阶API之构建模型、训练模型</div></div></a></div><div class="next-post pull-right"><a href="/2020/05/06/TensorFlow2-X%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-6-TensorFlow%E4%B8%AD%E9%98%B6API%E4%B9%8B%E7%89%B9%E5%BE%81%E5%88%97%E3%80%81%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E3%80%81%E6%A8%A1%E5%9E%8B%E5%B1%82/"><img class="next-cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">TensorFlow2.X学习笔记(6)--TensorFlow中阶API之特征列、激活函数、模型层</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/04/29/TensorFlow2-X学习笔记-1-TensorFlow核心概念/" title="TensorFlow2.X学习笔记(1)--TensorFlow核心概念"><img class="cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-29</div><div class="title">TensorFlow2.X学习笔记(1)--TensorFlow核心概念</div></div></a></div><div><a href="/2020/04/30/TensorFlow2-X学习笔记-2-TensorFlow的层次结构介绍/" title=" TensorFlow2.X学习笔记(2)--TensorFlow的层次结构介绍"><img class="cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-30</div><div class="title"> TensorFlow2.X学习笔记(2)--TensorFlow的层次结构介绍</div></div></a></div><div><a href="/2020/05/02/TensorFlow2-X学习笔记-3-TensorFlow低阶API之张量/" title="TensorFlow2.X学习笔记(3)--TensorFlow低阶API之张量"><img class="cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-02</div><div class="title">TensorFlow2.X学习笔记(3)--TensorFlow低阶API之张量</div></div></a></div><div><a href="/2020/05/02/TensorFlow2-X学习笔记-4-TensorFlow低阶API之AutoGraph相关研究/" title="TensorFlow2.X学习笔记(4)--TensorFlow低阶API之AutoGraph相关研究"><img class="cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-02</div><div class="title">TensorFlow2.X学习笔记(4)--TensorFlow低阶API之AutoGraph相关研究</div></div></a></div><div><a href="/2020/05/03/TensorFlow2-X学习笔记-5-TensorFlow中阶API之数据管道/" title="TensorFlow2.X学习笔记(5)--TensorFlow中阶API之数据管道"><img class="cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-03</div><div class="title">TensorFlow2.X学习笔记(5)--TensorFlow中阶API之数据管道</div></div></a></div><div><a href="/2020/05/06/TensorFlow2-X学习笔记-6-TensorFlow中阶API之特征列、激活函数、模型层/" title="TensorFlow2.X学习笔记(6)--TensorFlow中阶API之特征列、激活函数、模型层"><img class="cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-06</div><div class="title">TensorFlow2.X学习笔记(6)--TensorFlow中阶API之特征列、激活函数、模型层</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MiChong</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MiChongGET"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/qjzxzxd@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到米虫的小站，一起加油🤝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">一、损失函数</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%86%85%E7%BD%AE%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">1、内置损失函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81-%E8%87%AA%E5%AE%9A%E4%B9%89%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">1.2.</span> <span class="toc-text">2、 自定义损失函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.2.1.</span> <span class="toc-text">函数形式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%BD%A2%E5%BC%8F"><span class="toc-number">1.2.2.</span> <span class="toc-text">类形式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87metrics"><span class="toc-number">2.</span> <span class="toc-text">二、评估指标metrics</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%B8%B8%E7%94%A8%E7%9A%84%E5%86%85%E7%BD%AE%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="toc-number">2.1.</span> <span class="toc-text">1、常用的内置评估指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="toc-number">2.2.</span> <span class="toc-text">2、自定义评估指标</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E5%BD%A2%E5%BC%8F%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="toc-number">2.2.1.</span> <span class="toc-text">函数形式的自定义评估指标</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E5%BD%A2%E5%BC%8F%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="toc-number">2.2.2.</span> <span class="toc-text">类形式的自定义评估指标</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BC%98%E5%8C%96%E5%99%A8optimizers"><span class="toc-number">3.</span> <span class="toc-text">三、优化器optimizers</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-number">3.1.</span> <span class="toc-text">1、优化器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%86%85%E7%BD%AE%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-number">3.2.</span> <span class="toc-text">2、内置优化器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0callbacks"><span class="toc-number">4.</span> <span class="toc-text">四、回调函数callbacks</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%86%85%E7%BD%AE%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">1、内置回调函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9B%9E%E8%B0%83%E5%87%BD%E6%95%B0"><span class="toc-number">4.2.</span> <span class="toc-text">2、自定义回调函数</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/06/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/07/06/hello-world/" title="Hello World">Hello World</a><time datetime="2021-07-06T05:12:56.084Z" title="发表于 2021-07-06 13:12:56">2021-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合"><img src="https://file.buildworld.cn/img/20210209161641.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode数据库题目集合"/></a><div class="content"><a class="title" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合">LeetCode数据库题目集合</a><time datetime="2021-02-09T08:13:56.000Z" title="发表于 2021-02-09 16:13:56">2021-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习"><img src="https://file.buildworld.cn/img/20210107194133.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData-数据仓库学习"/></a><div class="content"><a class="title" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习">BigData-数据仓库学习</a><time datetime="2021-01-07T11:35:36.000Z" title="发表于 2021-01-07 19:35:36">2021-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录"><img src="https://file.buildworld.cn/img/20201104092750.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法学习记录"/></a><div class="content"><a class="title" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录">算法学习记录</a><time datetime="2020-11-04T01:20:49.000Z" title="发表于 2020-11-04 09:20:49">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink"><img src="https://file.buildworld.cn/img/20200911110402.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData--分布式流数据流引擎Apache Flink"/></a><div class="content"><a class="title" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink">BigData--分布式流数据流引擎Apache Flink</a><time datetime="2020-09-11T02:59:30.000Z" title="发表于 2020-09-11 10:59:30">2020-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By MiChong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'mef0W501zi4VSjltsnmN5D9J-gzGzoHsz',
+      appKey: 'ktKil4OakXUNcSs0Ofkph1rm',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "7d002c40-fe0a-44eb-977b-a992eaed1e7c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

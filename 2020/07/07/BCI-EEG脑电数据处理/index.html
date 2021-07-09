@@ -1,0 +1,374 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BCI-EEG脑电数据处理 | MiChong的🏡</title><meta name="keywords" content="BCI,EEG,ICA"><meta name="author" content="MiChong,qjzxzxd@gmail.com"><meta name="copyright" content="MiChong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="脑电波（Electroencephalogram,EEG）是一种使用电生理指标记录大脑活动的方法，大脑在活动时，大量神经元同步发生的突触后电位经总和后形成的。它记录大脑活动时的电波变化，是脑神经细胞的电生理活动在大脑皮层或头皮表面的总体反映。脑机接口（BCI），是一种通过检测中枢神经系统活动并将其转化为人工输出，来替代、修复、增强、补充或者改善中枢神经系统的正常输出，从而改变中枢神经系统与内外环境">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BCI-EEG脑电数据处理">
+<meta property="og:url" content="https://www.buildworld.cn/2020/07/07/BCI-EEG%E8%84%91%E7%94%B5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="MiChong的🏡">
+<meta property="og:description" content="脑电波（Electroencephalogram,EEG）是一种使用电生理指标记录大脑活动的方法，大脑在活动时，大量神经元同步发生的突触后电位经总和后形成的。它记录大脑活动时的电波变化，是脑神经细胞的电生理活动在大脑皮层或头皮表面的总体反映。脑机接口（BCI），是一种通过检测中枢神经系统活动并将其转化为人工输出，来替代、修复、增强、补充或者改善中枢神经系统的正常输出，从而改变中枢神经系统与内外环境">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://yanxuan.nosdn.127.net/de018a7a4c00b68406c31fee5029ac6b.png">
+<meta property="article:published_time" content="2020-07-07T11:42:56.000Z">
+<meta property="article:modified_time" content="2021-04-09T02:13:38.361Z">
+<meta property="article:author" content="MiChong">
+<meta property="article:tag" content="BCI">
+<meta property="article:tag" content="EEG">
+<meta property="article:tag" content="ICA">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://yanxuan.nosdn.127.net/de018a7a4c00b68406c31fee5029ac6b.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.buildworld.cn/2020/07/07/BCI-EEG%E8%84%91%E7%94%B5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BCI-EEG脑电数据处理',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-04-09 10:13:38'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="MiChong的🏡" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://yanxuan.nosdn.127.net/de018a7a4c00b68406c31fee5029ac6b.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">MiChong的🏡</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">BCI-EEG脑电数据处理</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-07-07T11:42:56.000Z" title="发表于 2020-07-07 19:42:56">2020-07-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-04-09T02:13:38.361Z" title="更新于 2021-04-09 10:13:38">2021-04-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E8%84%91%E6%9C%BA%E4%BA%A4%E4%BA%92/">脑机交互</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="BCI-EEG脑电数据处理"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="EEG脑电数据处理"><a href="#EEG脑电数据处理" class="headerlink" title="EEG脑电数据处理"></a>EEG脑电数据处理</h2><blockquote>
+<p>脑电波（Electroencephalogram,EEG）是一种使用电生理指标记录大脑活动的方法，大脑在活动时，大量神经元同步发生的突触后电位经总和后形成的。它记录大脑活动时的电波变化，是脑神经细胞的电生理活动在大脑皮层或头皮表面的总体反映。脑机接<br>口（BCI），是一种通过检测中枢神经系统活动并将其转化为人工输出，来替代、修复、增强、补充或者改善中枢神经系统的正常输出，从而改变中枢神经系统与内外环境之间的交互作用的技术。</p>
+</blockquote>
+<h3 id="一、十大基本步骤"><a href="#一、十大基本步骤" class="headerlink" title="一、十大基本步骤"></a>一、十大基本步骤</h3><h4 id="1、-定位通道位置"><a href="#1、-定位通道位置" class="headerlink" title="1、 定位通道位置"></a>1、 定位通道位置</h4><blockquote>
+<p>将EEG数据加载进eeglab之后，<code>eeglab</code>能够读取到的仅仅是每一个通道的名称和数值，但是它并不知道这个通道是位于头皮上的什么地方，因此我们需要加载进一个跟记录数据时相匹配的通道位置信息</p>
+</blockquote>
+<blockquote>
+<p>eeglab中默认的文件是 <strong>standard-10-5-cap385(<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU5NjU4OTc4MA==&mid=2247484433&idx=1&sn=1d4bba3c10192920d8255d899a6d8f28&chksm=fe6129aac916a0bc648142cb3a53c0679cd1c03a21c20553bba0b4858c613cd6dd0e73e8b727&scene=21#wechat_redirect">国际10-5系统</a>)</strong></p>
+</blockquote>
+<h4 id="2、删除无用通道"><a href="#2、删除无用通道" class="headerlink" title="2、删除无用通道"></a>2、删除无用通道</h4><blockquote>
+<p>在<strong>EEGLAB</strong>中预处理数据的时候，使用<code>ICA</code>方式去除眼电成分，这种方式可以不用眼电通道数据的参与就可以进行。</p>
+</blockquote>
+<h4 id="3、滤波"><a href="#3、滤波" class="headerlink" title="3、滤波"></a>3、滤波</h4><blockquote>
+<p>滤波分为<code>高通滤波</code>，<code>低通滤波</code>，<code>带通滤波</code>和<code>凹陷滤波</code>。</p>
+</blockquote>
+<ul>
+<li><strong>高通滤波</strong>是指，高于某个频率的信号可以通过，而低于这个频率的信号会被衰减过滤掉。而<strong>低通滤波</strong>则相反，指的是低于某个频率的信号可以通过，而高于这个频率的信号则相反。所以，在输入数值的时候，高通滤波要输入的是一个较小的数字，而低通滤波则是输入一个较大的数字。这可能跟我们的第一反应有点相悖。因此，也可以用它们的英文叫法来辨别，高通<code>high-pass</code>，低通<code>low-pass</code>，英文看起来就更为直观了。</li>
+<li><strong>带通滤波</strong>，指的是在某个频率段范围内的信号可以通过，而这个频率段范围以外的信号会被衰减过滤掉，就相当于同时做了高通滤波和低通滤波。</li>
+<li><strong>凹陷滤波</strong>，指的是在某个频率范围内的信号会被衰减过滤掉，而这个频率范围以外的信号会被保留下来。这个操作通常是用来去除50Hz市电的干扰。我国的50Hz，因此在收集到的信号中，会有一个非常强烈的50Hz频段的信号存在，这就可以用凹陷滤波来去掉。</li>
+</ul>
+<h4 id="4、分段"><a href="#4、分段" class="headerlink" title="4、分段"></a>4、分段</h4><blockquote>
+<p>数据打上<strong>mark</strong>，将数据切分为一段一段，在这些范围以外的的数据，直接去除。</p>
+<p>一般的ERP分段在事件前200毫秒到事件后1000毫秒这个时间段就足够了，因为几乎所有的ERP成分，都是在1秒以内产生的。但是如果后期还要做时频分析的话，则需要将分段时间拉长，扩大到事件前1秒到事件后2秒这个时间段内，因为时频分析的算法，要求数据要有一定的长度。</p>
+</blockquote>
+<h4 id="5、基线校正"><a href="#5、基线校正" class="headerlink" title="5、基线校正"></a>5、基线校正</h4><blockquote>
+<p>被试被认为是处于一个相对平静的状态，此时的脑电活动代表了一个平静状态下的脑电活动，将这段时间内的脑电活动当做成一个基线。</p>
+<p>一般来说，都是以分段中，事件之前这段时间来作为基线的，比如分段为-200毫秒到1000毫秒，那就将所有的数据，减去前200毫米以内数据的均值。</p>
+<p>基线校正的第二个作用是<strong>防止数据漂移带来的影响</strong>。有时候因为某些原因，我们采集到的数据，会呈现一个逐渐缓慢向上漂移的趋势，而在分完段之后，由于向上飘的影响，每一段数据的起点将不在同一个地方，也会使得这段数据的绝对波幅变高。而基线校正就可以校正这种漂移带来的影响，让每一段数据都拥有一个差不多的起点。</p>
+</blockquote>
+<h4 id="6、重参考"><a href="#6、重参考" class="headerlink" title="6、重参考"></a>6、重参考</h4><blockquote>
+<ul>
+<li>首先要解释的是参考的定义。我们看到采集之后的数据是一个个的数值，但这个数值是什么意思呢，就是电极所在位置跟参考电极之间的电位差。</li>
+<li>一般在脑电记录的时候会采用的参考电极有鼻尖参考，cz或头顶中央参考，还有单侧乳突参考，乳突就是耳朵后面一小块突起的区域。我们所看到的每个通道的数值，其实就是指这个通道跟参考通道之间的电位差。</li>
+<li>在分析数据的时候，有时候我们会想要转换参考点的位置。因为不同位置的参考，会对数据造成一定的影响。比如记录时采用的是cz或头顶中央参考，那么自然地，距离cz点较近的电极点，记录到的电位差会非常小，而离得远的电极记录到的电位差就自然会大一点，这种大与小的差异，并不是由认知活动产生的，而是由记录方式产生的。又比如，单侧乳突参考，那脑袋左边的电极点跟右边的电极点，也会存在着记录方式不同产生的电位差不同。</li>
+<li>常用的一些参考位置有双侧乳突平均参考，指将两个乳突数据的平均值作为参考数据，或者是全脑平均参考，指的是将全脑所有数据的均值作为参考数据的方法，不过使用全脑平均参考的时候要注意，眼电数据不要纳入其中，因为眼电数据的波动起伏非常大，很容易对数据造成比较大的干扰。</li>
+</ul>
+</blockquote>
+<h4 id="7、降低采样率"><a href="#7、降低采样率" class="headerlink" title="7、降低采样率"></a>7、降低采样率</h4><blockquote>
+<ul>
+<li>采样率的单位是Hz，指的是一秒内要记录多少个数据点的意思，比如原始数据的采样率是1000Hz的话，就是代表一秒内有1000个数据点。</li>
+<li>在后期分析的时候，我们有时候会想要降低采样率，比如降到500Hz或者250Hz。这样做最大的好处其实就是减小数据量，以提高计算速度，没有其他的作用了。所以这一步并不是必须的。</li>
+<li>但降低采样率需要注意两点，<strong>一是降低采样率要在滤波之后</strong>。因为降低采样率会使我们丢失高频信息，使高频信息变得扭曲，所以最好在保留了我们感兴趣波段之后再去降低采样率，这样可以保证信号最大程度不会失真。<strong>二是有一个采样定理，</strong>理论上来说，我们的采样率必须是我们想要分析的波段的两倍，比如我们想要分析60Hz的波，那数据采样率为120Hz就足够了。实际上，建议采样率最好在分析波段的三到四倍。</li>
+</ul>
+</blockquote>
+<h4 id="8、插值坏导"><a href="#8、插值坏导" class="headerlink" title="8、插值坏导"></a>8、插值坏导</h4><blockquote>
+<ul>
+<li>在做完上述这些处理之后，可以保存一下数据。因为在这之前的操作，是每个被试都需要做的基础操作，后期我们可以通过代码来实现批处理。而在这之后的操作，是需要根据每个被试的具体情况具体分析去处理的，因此只能一个个做，不能进行批处理。</li>
+<li>从这一步开始可以说是真正的去除伪迹的过程了。去伪迹大体分为两种，<code>横向操作</code>和<code>纵向操作</code>，<strong>横向即对通道进行校正操作，对数据不好的导联进行插值处理，纵向是指挑出数据不好的trials，删除掉。</strong>建议是先横向处理后再纵向剔除，尽量保留下更多的trials数。</li>
+<li>EEGLAB中插值坏导有两种方式，<strong>一种是以某通道周围几个通道的数据的平均值，来替代这个通道的数据，这种直接通过代码实现即可。</strong> <strong>另外一种是EEGLAB里内置的一种算法实现</strong>，具体换算是什么过程我也不太清楚，但是我问过贾会宾老师，他是推荐使用第二种方法。原因在于，我们记录的是头皮脑电，头是一个球体，因此直接用周围数据的均值来代替这种方法有点粗糙，而EEGLAB内置的方法则会考虑到容积传导效应，以及近的点和远的点贡献的权重不同来进行插值，因此会更加有效。</li>
+</ul>
+</blockquote>
+<h4 id="9、独立主成分分析"><a href="#9、独立主成分分析" class="headerlink" title="9、独立主成分分析"></a>9、独立主成分分析</h4><p><strong><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU5NjU4OTc4MA==&mid=2247486858&idx=1&sn=abb9ba31da1264ca1f2d5a690ee04b4d&chksm=fe612031c916a927a710161d50ac9e5c8969b02141c5952c739e4689d61f59bbdf8e391f7186&scene=21#wechat_redirect">如何识别ICA成分</a></strong></p>
+<blockquote>
+<p>这是一个很有用但也很难的方法，我并不是十分清楚它的原理，只能大概理解，也只能大概描述一下。前面说过，我们记录到的是头皮脑电，脑电帽上划出了一个个的点来表示位置，但是我们在<code>FPz</code>点记录到的数据，就真的是<code>FPz</code>点这个位置头皮下方的区域所产生的电活动？不一定。做过实验的都知道，眨眼会产生影响，左右看会产生影响，帽子戴得太紧导致肌肉紧张也会产生影响，还有左右的<code>FP1，FP2</code>处产生的电活动也会影响到<code>FPz</code>，甚至在离它最远的Oz点下方产生的电活动，也有可能对前方<code>FPz</code>点产生微弱的影响。因为真正的电活动产生于头皮下方颅骨内部，它经过了这么一层又一层的传播之后，不同源的电活动肯定会相互影响，从而导致某个记录点记录到的数据，混合了很多不同成分的电活动。而独立主成分分析，就是要对记录点的数据做一个逆运算，把每个记录点的数据， 分解成一个又一个的成分组成。然后我们再从中剔除掉伪迹成分，比如眨眼的成分，肌肉紧张的成分等，从而得到一个相对干净的数据。</p>
+</blockquote>
+<h4 id="10、剔除坏段"><a href="#10、剔除坏段" class="headerlink" title="10、剔除坏段"></a>10、剔除坏段</h4><blockquote>
+<ul>
+<li>预处理到了这一步，已经接近于完成了。最后一个步骤就是要剔除掉波幅超过100微幅的trial(要求严格一点也可以定位80)，因为波幅起伏这么大的活动，已经不是由认知活动引起的了，肯定是由于其他的动作引起的，所以可以直接剔除掉。</li>
+<li>这一步操作一定要在插值坏导和ICA去除眼电成分之后再做，因为有可能被试眨眼比较频繁，那这么操作下来，有可能就需要删掉接近一半的trials数了，删掉的trials数太多，这个数据也就废了。所以要将它留到最后一步才做，同时，这个操作也能用来检查我们前两步操作是否足够有效。</li>
+</ul>
+</blockquote>
+<h3 id="二、ICA-独立成分分析"><a href="#二、ICA-独立成分分析" class="headerlink" title="二、ICA(独立成分分析)"></a>二、ICA(独立成分分析)</h3><p><strong>ICA是一种分离线性混合源的技术。例如，我们可以尝试混合然后分开两个源。</strong></p>
+<p><a target="_blank" rel="noopener" href="https://labeling.ucsd.edu/tutorial/labels">ICA判断网站</a></p>
+<p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU5NjU4OTc4MA==&mid=2247485932&idx=1&sn=8749bfe4967f60de387fe7f9ba38be62&chksm=fe612457c916ad41df8ec9f2890458d86ca4ac7df44c360a4e77234e6a26115e40c957cf979a&scene=21#wechat_redirect">结合matlab代码案例解释ICA独立成分分析原理</a></p>
+<h4 id="1、ICA假设"><a href="#1、ICA假设" class="headerlink" title="1、ICA假设"></a>1、ICA假设</h4><blockquote>
+<p>基于ICA的伪影校正可以通过线性分解从EEG数据中分离并去除多种伪影。ICA方法基于以下假设：</p>
+<ul>
+<li>1）在头皮上记录的时间序列是时间上独立的大脑和伪迹活动的空间稳定混合物，</li>
+<li>2）并且大脑，头皮和身体不同部位产生的电势之和为在电极上呈线性关系，</li>
+<li>3）从源到电极的传播延迟可以忽略不计</li>
+</ul>
+</blockquote>
+<h4 id="2、ICA特性"><a href="#2、ICA特性" class="headerlink" title="2、ICA特性"></a>2、ICA特性</h4><blockquote>
+<ul>
+<li>ICA只能分离线性混合的源。</li>
+<li>由于ICA处理的是点云，因此改变点的绘制顺序(EEG中的时间点顺序)对算法的结果几乎没有影响。</li>
+<li>改变通道顺序(例如在EEG中交换电极位置)也不会影响算法的结果。对于脑电信号来说，该算法对电极位置没有先验知识，ICA分量在大多数情况下可以被解析为一个等效偶极子，这证明了ICA能够分离出皮层同步化的致密区域。</li>
+<li> 由于独立分量分析通过最大化源的非高斯性来分离源，所以完美的高斯源是不能被分离的。</li>
+<li> 即使信息源不是独立的，独立分量分析也能找到一个最大独立空间。</li>
+</ul>
+</blockquote>
+<h3 id="三、共空间模式-Common-Spatial-Pattern-CSP"><a href="#三、共空间模式-Common-Spatial-Pattern-CSP" class="headerlink" title="三、共空间模式(Common Spatial Pattern, CSP)"></a>三、共空间模式(Common Spatial Pattern, CSP)</h3><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzU5NjU4OTc4MA==&mid=2247486495&idx=1&sn=3bb4aa2415bf9c48947f700db3a1a69e&chksm=fe6121a4c916a8b2a585a5e3d10aa38d6e578726e77403efabfb05c14d5855a6916ad7b9e93e&scene=21#wechat_redirect">详细介绍地址</a></p>
+<blockquote>
+<p><code>共空间模式（Common Spatial Pattern, CSP）</code>是一种对两分类任务下的空域滤波特征提取算法，能够从多通道的脑机接口数据里面提取出每一类的空间分布成分。公共空间模式算法的基本原理是利用矩阵的对角化，找到一组最优空间滤波器进行投影，使得两类信号的方差值差异最大化，从而得到具有较高区分度的特征向量。</p>
+</blockquote>
+<h4 id="1、CSP发展史"><a href="#1、CSP发展史" class="headerlink" title="1、CSP发展史"></a>1、CSP发展史</h4><p><img src="https://file.buildworld.cn/img/37d37a272098ac16bee4514f24235efe_640_wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1.png" alt="共空间模式（CSP）的研究概况"></p>
+<blockquote>
+<p>由于不同特征的信息包含在信号的不同频段中，因此考虑EEG信号，可以将其分离到不同的特定频段进行分析。在当前研究的特征提取和特征分类算法中，<code>CSP</code>是性能最好和应用最广泛的特征提取方法。<code>CSP</code>将当前数据转换到另一个新的空间，使得类间数据的方差最大化，类内的方差最小化。</p>
+</blockquote>
+<blockquote>
+<p>通常，在运动想象EEG信号分类中，<code>CSP</code>算法往往选择宽频段（4-40HZ）来进行信号处理。研究表明，这个宽频段包含了大多数的运动想象相关的信息，同时，也包含着其他冗余信息，所以不少研究工作重点考虑这个宽频段的选择最佳问题，以此来改善CSP的分类性能。在提出的<code>共空间频谱模式（CSSP）</code>中，<code>有限脉冲响应（FIR）滤波器</code>在<code>CSP滤波器</code>的基础上进行了优化，通过插入时间延迟τ来实现，该时间延迟τ允许单独调谐频率滤波器，评估若干样本点的时间延迟τ值，并且使用10倍交叉验证来选择最佳值。使用带通滤波器对信号进行滤波，然后进行空间滤波和特征提取。实验结果显示CSSP改进了性能。提出的<code>共稀疏频谱空间模式（CSSSP）</code>进一步改进了CSSP方法，其找到所有信道共用的频谱模式，而非CSSP为每个信道找到不同的频谱模式。</p>
+</blockquote>
+<blockquote>
+<p>已经提出的<code>子带公空间模式（SBCSP）</code>，其中在多个子带处对运动图像EEG信号进行滤波，并且从每个子带提取CSP特征。为了减小子带的维数，<code>线性判别分析（LDA）</code>分别应用于每个子带的特征，并融合在一起以进行分类。 SBCSP实现了比CSP，CSSP和CSSSP更高的分类精度。然而，SBCSP忽略了从不同子带获得的CSP特征的可能关联，因此提出了<code>滤波器组CSP（FBCSP）</code>来解决该问题。 FBCSP计算来自多个子带的CSP特征的互信息，以便选择最具辨识性的特征，所选特征使用支持向量机（SVM）分类器进行分类。 FBCSP的表现优于SBCSP，然而，它仍然使用了若干子带，这些子带依然会带来不少的计算成本的增加。所以提出<code>DFBCSP</code>来解决这个问题，DFBCSP利用单信道（C3，C4或Cz）频带功率的Fisher比（FR）来从多个重叠子频带中选择最具判别性的子频带。然后为每个子带提取CSP特征，并使用SVM分类器进行分类。与SBCSP和FBCSP相比，<strong>DFBCSP实现了更高的分类准确度和更低的计算成本。</strong></p>
+</blockquote>
+<h4 id="DFBCSP框架"><a href="#DFBCSP框架" class="headerlink" title="DFBCSP框架"></a>DFBCSP框架</h4><p><img src="https://file.buildworld.cn/img/e2fc1833625a49db3fba73dec5c9f5e0_640_wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1.png" alt="DFBCSP框架"></p>
+<blockquote>
+<p>考虑<code>DFBCSP</code>的优劣，因此提出了一种改进的<code>DFBCSP</code>方法来解决这些问题。首先，使用从使用所有通道数据生成的特征计算的互信息，而不是像在<code>DFBCSP-FR</code>中那样使用单通道频带功率的FR，来选择能够产生最佳结果的频带。而不使用仅使用单个信道频带功率和FR作为选择子频带（<code>DFBCSP-FR</code>）的方法。这是因为EEG信号主要受噪声污染。因此，如果用于计算FR的单个信道被噪声破坏，则选择出来的频段将会影响分类器的分类精度。这导致选择的子带往往不是最有效的子带，因为可能选择了具有冗余信息的子带。因此，文章建议利用所有可用信道数据通过利用互信息来选择最具判别性的子带，以便获得最佳结果。与使用用于频带选择的单信道信息相比，使用所有信道数据进行频带选择减少了选择具有冗余信息的子频带的机会。</p>
+<p>其次，文章不再像在DFBCSP-FR中那样仅使用来自重叠子带的CSP特征，而是结合利用宽带CSP和CSSP的特征信息，文章引入了7-30Hz的单个宽带以及在4-30Hz范围内的12个重叠子带，带宽为4Hz并且重叠2Hz。</p>
+</blockquote>
+<p><strong>改进DFBCSP算法的详细流程框图</strong></p>
+<p><img src="https://file.buildworld.cn/img/604a420080a816a842b035414e8e6e6e_640_wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1.png" alt="改进DFBCSP算法的详细流程框图"></p>
+<h3 id="四、EEG信号特征提取算法-MI方向"><a href="#四、EEG信号特征提取算法-MI方向" class="headerlink" title="四、EEG信号特征提取算法(MI方向)"></a>四、EEG信号特征提取算法(MI方向)</h3><p><strong>EEG信号特征提取就是以脑电信号作为源信号，确定各种参数并以此为向量组成表征信号特征的特征向量。</strong></p>
+<blockquote>
+<p>特征參数主要包括<code>时域信号(如幅值)</code>和<code>频域信号(如频率)</code>两大类，相应的特征提取方法也分为<code>时域法</code>、<code>频域法</code> 和<code>时-频域</code>方法。</p>
+</blockquote>
+<h4 id="1、频域分析"><a href="#1、频域分析" class="headerlink" title="1、频域分析"></a>1、频域分析</h4><blockquote>
+<p>频域分析方法主要是<strong>基于EEG信号各频段功率、相干</strong>等。</p>
+</blockquote>
+<blockquote>
+<p>这类方法是建立在假设EEG信号具有平稳特性的基础上，同时只是考虑信号的频域信息，忽略信号在时间上的分辨率。在EEG信号研究中，常用的频域分析方法包括<code>功率谱估计</code>(<code>直接法和间接法</code>)。</p>
+<p><strong>运动想象EEG信号</strong>的<code>ERD</code>和<code>ERS</code>现象只出现在特定频率范围，比如<code>8-12Hz 的Mu波</code>和<code>18-26Hz 的Beta 波</code>。因此，通过功率谱等谱分析方法，也可以有效地从EEG提取中特征。其中比较出名的方法有自回归功率谱分析、双谱分析法等。</p>
+</blockquote>
+<h4 id="2、时域分析"><a href="#2、时域分析" class="headerlink" title="2、时域分析"></a>2、时域分析</h4><blockquote>
+<p>时域分析方法则主要分析EEG，如<code>幅度</code>、<code>均值</code>、<code>方差</code>、<code>偏歪度</code>、<code>峭度</code>等。</p>
+</blockquote>
+<blockquote>
+<p>这类方法主要是利用EEG波形的性质，如波幅、均值、方差、偏歪度和峭度等对临床EEG记录进行观察分析。在EEG信号研究中，常用的时域分析方法有：<code>过零点分析</code>、<code>直方图分析</code>、<code>方差分析</code>、<code>相关分析</code>、<code>峰值检测</code>、<code>波形参数分析</code>和<code>波形识别</code>等。</p>
+</blockquote>
+<h4 id="3、空域方法："><a href="#3、空域方法：" class="headerlink" title="3、空域方法："></a>3、空域方法：</h4><blockquote>
+<p>这是近年运动想象领域比较通用的特征提取方法，主要通过设计空域滤波器对EEG 的多通道空间分布进行处理，提取可分的特征。包括：<code>共空域模式法（Common spatialpattern，CSP）</code>，以及基于CSP改进的方法。</p>
+</blockquote>
+<p><strong>基于CSP改进的方法包括：</strong></p>
+<ul>
+<li><p>1.时空滤波的共空谱模式（Common spatio-spectralpattern, CSSP）；</p>
+</li>
+<li><p>2.共稀疏谱空模式（Common sparse spectral spatial pattern，CSSSP）；</p>
+</li>
+<li><p>3.正则化公用空间模式（Regularized Common Spatial Pattern, RCSP)等。</p>
+</li>
+</ul>
+<h4 id="4、小波模糊熵的特征提取方法"><a href="#4、小波模糊熵的特征提取方法" class="headerlink" title="4、小波模糊熵的特征提取方法"></a>4、小波模糊熵的特征提取方法</h4><blockquote>
+<p>鉴于脑电信号的非线性特性和运动想象时的节律特性，提出了小波模糊熵的特征提取方法，利用小波变换将EEG信号进行小波分解，得到对应运动想象EEG信号的alpha和beta节律，然后采用模糊熵方法提取特征。</p>
+</blockquote>
+<h4 id="5、常使用的特征提取方法："><a href="#5、常使用的特征提取方法：" class="headerlink" title="5、常使用的特征提取方法："></a>5、常使用的特征提取方法：</h4><ul>
+<li>自回归(auto regressive, AR)</li>
+<li>傅里叶变换(Fourier transform,FT)</li>
+<li>表面拉普拉斯(surface-Laplacian)变换</li>
+<li>小波变换(Wavelet transform,WT)</li>
+</ul>
+<p><strong>快速傅里叶变换(Fast Fourier transform, FFT)</strong></p>
+<blockquote>
+<p>经典的FFT在分析确定信号和平稳信号时很有效，但在分析突变信号的频谱时具有一定的局限性。对于alpha波、beta波等脑电基本节律，功率谱分析或FFT等方法可以从频域中直接提取出特征。</p>
+</blockquote>
+<p><strong>稀疏傅里叶变换(Sparse Fourier transform, SFT)</strong></p>
+<blockquote>
+<p>SFT是时间窗内信号特征的平均，时间窗里信号越短，获得的时间分辨率就越高。该方法在一定程度上克服了FFT不具有的局部分析能力的缺陷，在某些信号处理中有一定的作用。</p>
+</blockquote>
+<p><strong>自适应自回归(Adaptive Auto Regressive ,AAR)</strong></p>
+<blockquote>
+<p>AAR模型参数方法随每一样本点的输入而改变，能够很好地反映大脑的状态。不过，该方法更适合分析平稳的脑电信号，对包含高度非平稳信号的运动想象EEG，该模型是有局限性的。</p>
+</blockquote>
+<p><strong>小波变换(Wavelettransform, WT)</strong></p>
+<blockquote>
+<p>小波变换在低频时的时间分辨率较低，而频率分辨率较高；在高频时的时间分辨率较高，而频率分辨率较低，正符合低频信号变化緩慢而高频信号变化较快的特点。因此小波分析比傅里叶变换和短时傅里叶变换更适合分析非平稳的脑电信号。</p>
+</blockquote>
+<p>我的博客即将同步至腾讯云+社区，邀请大家一同入驻：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/support-plan?invite_code=2zy5g5eac5kwc">https://cloud.tencent.com/developer/support-plan?invite_code=2zy5g5eac5kwc</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:qjzxzxd@gmail.com">MiChong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.buildworld.cn/2020/07/07/BCI-EEG%E8%84%91%E7%94%B5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/">https://www.buildworld.cn/2020/07/07/BCI-EEG%E8%84%91%E7%94%B5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.buildworld.cn" target="_blank">MiChong的🏡</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/BCI/">BCI</a><a class="post-meta__tags" href="/tags/EEG/">EEG</a><a class="post-meta__tags" href="/tags/ICA/">ICA</a></div><div class="post_share"><div class="social-share" data-image="https://yanxuan.nosdn.127.net/de018a7a4c00b68406c31fee5029ac6b.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/07/09/BigData-Apache-HBase%E6%95%B0%E6%8D%AE%E5%BA%93/"><img class="prev-cover" src="https://ae01.alicdn.com/kf/H439047697514463983c2a6699326c2c68.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">BigData-Apache HBase数据库</div></div></a></div><div class="next-post pull-right"><a href="/2020/07/02/BigData-%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97%E6%A1%86%E6%9E%B6Apache-Kafka/"><img class="next-cover" src="https://file.buildworld.cn/img/20200702193913.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">BigData-消息队列框架Apache Kafka入门、原理解析</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/06/12/BCI-Python-EEG工具库MNE/" title="BCI--Python-EEG工具库MNE"><img class="cover" src="https://ae01.alicdn.com/kf/H32f1a2189cf54b20a201315213d6c44fa.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-12</div><div class="title">BCI--Python-EEG工具库MNE</div></div></a></div><div><a href="/2020/06/10/BCI-脑电基础整理/" title="BCI--脑电基础整理"><img class="cover" src="https://file.buildworld.cn/img/ec5a290b7250a197b6c0df8fadf474dd_f203db60b3fe49358114eecab1bc755e.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-10</div><div class="title">BCI--脑电基础整理</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MiChong</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MiChongGET"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/qjzxzxd@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到米虫的小站，一起加油🤝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#EEG%E8%84%91%E7%94%B5%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">1.</span> <span class="toc-text">EEG脑电数据处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%8D%81%E5%A4%A7%E5%9F%BA%E6%9C%AC%E6%AD%A5%E9%AA%A4"><span class="toc-number">1.1.</span> <span class="toc-text">一、十大基本步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81-%E5%AE%9A%E4%BD%8D%E9%80%9A%E9%81%93%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.1.1.</span> <span class="toc-text">1、 定位通道位置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%88%A0%E9%99%A4%E6%97%A0%E7%94%A8%E9%80%9A%E9%81%93"><span class="toc-number">1.1.2.</span> <span class="toc-text">2、删除无用通道</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E6%BB%A4%E6%B3%A2"><span class="toc-number">1.1.3.</span> <span class="toc-text">3、滤波</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%88%86%E6%AE%B5"><span class="toc-number">1.1.4.</span> <span class="toc-text">4、分段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%9F%BA%E7%BA%BF%E6%A0%A1%E6%AD%A3"><span class="toc-number">1.1.5.</span> <span class="toc-text">5、基线校正</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E9%87%8D%E5%8F%82%E8%80%83"><span class="toc-number">1.1.6.</span> <span class="toc-text">6、重参考</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81%E9%99%8D%E4%BD%8E%E9%87%87%E6%A0%B7%E7%8E%87"><span class="toc-number">1.1.7.</span> <span class="toc-text">7、降低采样率</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%E3%80%81%E6%8F%92%E5%80%BC%E5%9D%8F%E5%AF%BC"><span class="toc-number">1.1.8.</span> <span class="toc-text">8、插值坏导</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9%E3%80%81%E7%8B%AC%E7%AB%8B%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90"><span class="toc-number">1.1.9.</span> <span class="toc-text">9、独立主成分分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#10%E3%80%81%E5%89%94%E9%99%A4%E5%9D%8F%E6%AE%B5"><span class="toc-number">1.1.10.</span> <span class="toc-text">10、剔除坏段</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81ICA-%E7%8B%AC%E7%AB%8B%E6%88%90%E5%88%86%E5%88%86%E6%9E%90"><span class="toc-number">1.2.</span> <span class="toc-text">二、ICA(独立成分分析)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81ICA%E5%81%87%E8%AE%BE"><span class="toc-number">1.2.1.</span> <span class="toc-text">1、ICA假设</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81ICA%E7%89%B9%E6%80%A7"><span class="toc-number">1.2.2.</span> <span class="toc-text">2、ICA特性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%85%B1%E7%A9%BA%E9%97%B4%E6%A8%A1%E5%BC%8F-Common-Spatial-Pattern-CSP"><span class="toc-number">1.3.</span> <span class="toc-text">三、共空间模式(Common Spatial Pattern, CSP)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81CSP%E5%8F%91%E5%B1%95%E5%8F%B2"><span class="toc-number">1.3.1.</span> <span class="toc-text">1、CSP发展史</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#DFBCSP%E6%A1%86%E6%9E%B6"><span class="toc-number">1.3.2.</span> <span class="toc-text">DFBCSP框架</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81EEG%E4%BF%A1%E5%8F%B7%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E7%AE%97%E6%B3%95-MI%E6%96%B9%E5%90%91"><span class="toc-number">1.4.</span> <span class="toc-text">四、EEG信号特征提取算法(MI方向)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E9%A2%91%E5%9F%9F%E5%88%86%E6%9E%90"><span class="toc-number">1.4.1.</span> <span class="toc-text">1、频域分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%97%B6%E5%9F%9F%E5%88%86%E6%9E%90"><span class="toc-number">1.4.2.</span> <span class="toc-text">2、时域分析</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E7%A9%BA%E5%9F%9F%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">1.4.3.</span> <span class="toc-text">3、空域方法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%B0%8F%E6%B3%A2%E6%A8%A1%E7%B3%8A%E7%86%B5%E7%9A%84%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95"><span class="toc-number">1.4.4.</span> <span class="toc-text">4、小波模糊熵的特征提取方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%B8%B8%E4%BD%BF%E7%94%A8%E7%9A%84%E7%89%B9%E5%BE%81%E6%8F%90%E5%8F%96%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-number">1.4.5.</span> <span class="toc-text">5、常使用的特征提取方法：</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/06/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/07/06/hello-world/" title="Hello World">Hello World</a><time datetime="2021-07-06T05:12:56.084Z" title="发表于 2021-07-06 13:12:56">2021-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合"><img src="https://file.buildworld.cn/img/20210209161641.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode数据库题目集合"/></a><div class="content"><a class="title" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合">LeetCode数据库题目集合</a><time datetime="2021-02-09T08:13:56.000Z" title="发表于 2021-02-09 16:13:56">2021-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习"><img src="https://file.buildworld.cn/img/20210107194133.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData-数据仓库学习"/></a><div class="content"><a class="title" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习">BigData-数据仓库学习</a><time datetime="2021-01-07T11:35:36.000Z" title="发表于 2021-01-07 19:35:36">2021-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录"><img src="https://file.buildworld.cn/img/20201104092750.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法学习记录"/></a><div class="content"><a class="title" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录">算法学习记录</a><time datetime="2020-11-04T01:20:49.000Z" title="发表于 2020-11-04 09:20:49">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink"><img src="https://file.buildworld.cn/img/20200911110402.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData--分布式流数据流引擎Apache Flink"/></a><div class="content"><a class="title" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink">BigData--分布式流数据流引擎Apache Flink</a><time datetime="2020-09-11T02:59:30.000Z" title="发表于 2020-09-11 10:59:30">2020-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By MiChong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "7d002c40-fe0a-44eb-977b-a992eaed1e7c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

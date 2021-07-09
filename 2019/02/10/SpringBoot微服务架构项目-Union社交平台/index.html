@@ -1,0 +1,422 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SpringBoot微服务架构项目--Union社交平台 | MiChong的🏡</title><meta name="keywords" content="Docker,SpringBoot,SpringCloud,微服务架构,SpringDataJpa"><meta name="author" content="MiChong,qjzxzxd@gmail.com"><meta name="copyright" content="MiChong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Gitee项目地址 前言 本项目是采用Spring全家桶的java后端框架，采用目前WEB端比较流行的前后端分离的开发方式，后端采用微服务架构思想，将业务各个拆分出来，通过SpringCloud微服务框架将各个微服务业务连接起来，使得项目业务之间独立运行，在服务部署和运行时不会相互影响。  一、系统概况1、系统技术栈示意图 2、后端系统架构图 3、后台微服务系统   微服务系统 名称 端口">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringBoot微服务架构项目--Union社交平台">
+<meta property="og:url" content="https://www.buildworld.cn/2019/02/10/SpringBoot%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E9%A1%B9%E7%9B%AE-Union%E7%A4%BE%E4%BA%A4%E5%B9%B3%E5%8F%B0/index.html">
+<meta property="og:site_name" content="MiChong的🏡">
+<meta property="og:description" content="Gitee项目地址 前言 本项目是采用Spring全家桶的java后端框架，采用目前WEB端比较流行的前后端分离的开发方式，后端采用微服务架构思想，将业务各个拆分出来，通过SpringCloud微服务框架将各个微服务业务连接起来，使得项目业务之间独立运行，在服务部署和运行时不会相互影响。  一、系统概况1、系统技术栈示意图 2、后端系统架构图 3、后台微服务系统   微服务系统 名称 端口">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://file.buildworld.cn/img/6dc7724665fb0fa34d8d2872f6b40d22_224859_0cf8011f_759177.png">
+<meta property="article:published_time" content="2019-02-10T10:08:53.000Z">
+<meta property="article:modified_time" content="2020-09-09T04:20:48.745Z">
+<meta property="article:author" content="MiChong">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="SpringCloud">
+<meta property="article:tag" content="微服务架构">
+<meta property="article:tag" content="SpringDataJpa">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.buildworld.cn/img/6dc7724665fb0fa34d8d2872f6b40d22_224859_0cf8011f_759177.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.buildworld.cn/2019/02/10/SpringBoot%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E9%A1%B9%E7%9B%AE-Union%E7%A4%BE%E4%BA%A4%E5%B9%B3%E5%8F%B0/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SpringBoot微服务架构项目--Union社交平台',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-09-09 12:20:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="MiChong的🏡" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://file.buildworld.cn/img/6dc7724665fb0fa34d8d2872f6b40d22_224859_0cf8011f_759177.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">MiChong的🏡</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">SpringBoot微服务架构项目--Union社交平台</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-02-10T10:08:53.000Z" title="发表于 2019-02-10 18:08:53">2019-02-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-09-09T04:20:48.745Z" title="更新于 2020-09-09 12:20:48">2020-09-09</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="SpringBoot微服务架构项目--Union社交平台"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src="https://file.buildworld.cn/img/6dc7724665fb0fa34d8d2872f6b40d22_224859_0cf8011f_759177.png"><br><a target="_blank" rel="noopener" href="https://gitee.com/union_project/union_parent">Gitee项目地址</a></p>
+<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h4><blockquote>
+<p>本项目是采用Spring全家桶的java后端框架，采用目前WEB端比较流行的前后端分离的开发方式，后端采用微服务架构思想，将业务各个拆分出来，通过SpringCloud微服务框架将各个微服务业务连接起来，使得项目业务之间独立运行，在服务部署和运行时不会相互影响。</p>
+</blockquote>
+<h4 id="一、系统概况"><a href="#一、系统概况" class="headerlink" title="一、系统概况"></a>一、系统概况</h4><h5 id="1、系统技术栈示意图"><a href="#1、系统技术栈示意图" class="headerlink" title="1、系统技术栈示意图"></a>1、系统技术栈示意图</h5><p><img src="http://myfile.buildworld.cn/224859_801038ac_759177.jpeg" alt="系统技术栈示意图"></p>
+<h5 id="2、后端系统架构图"><a href="#2、后端系统架构图" class="headerlink" title="2、后端系统架构图"></a>2、后端系统架构图</h5><p><img src="http://myfile.buildworld.cn/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E5%9B%BE%E6%96%B0.png" alt="后端系统架构图"></p>
+<h5 id="3、后台微服务系统"><a href="#3、后台微服务系统" class="headerlink" title="3、后台微服务系统"></a>3、后台微服务系统</h5><table>
+<thead>
+<tr>
+<th>微服务系统</th>
+<th>名称</th>
+<th>端口</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>union_config</td>
+<td>配置服务器</td>
+<td>12000</td>
+</tr>
+<tr>
+<td>union_eureka</td>
+<td>Eureka服务器</td>
+<td>8110</td>
+</tr>
+<tr>
+<td>union-base</td>
+<td>基础服务器</td>
+<td>9001</td>
+</tr>
+<tr>
+<td>union-recruit</td>
+<td>招聘服务器</td>
+<td>9002</td>
+</tr>
+<tr>
+<td>union-qa</td>
+<td>用户问题服务器</td>
+<td>9003</td>
+</tr>
+<tr>
+<td>union-article</td>
+<td>文章服务器</td>
+<td>9004</td>
+</tr>
+<tr>
+<td>union-gathering</td>
+<td>用户活动服务器</td>
+<td>9005</td>
+</tr>
+<tr>
+<td>union-spit</td>
+<td>用户吐槽服务器</td>
+<td>9006</td>
+</tr>
+<tr>
+<td>union-search</td>
+<td>ES搜索服务器</td>
+<td>9007</td>
+</tr>
+<tr>
+<td>union-user</td>
+<td>用户服务器</td>
+<td>9008</td>
+</tr>
+<tr>
+<td>union-friend</td>
+<td>交友服务器</td>
+<td>9009</td>
+</tr>
+<tr>
+<td>union-manager</td>
+<td>管理员管理服务器</td>
+<td>9010</td>
+</tr>
+<tr>
+<td>union-web</td>
+<td>用户管理服务器</td>
+<td>9011</td>
+</tr>
+<tr>
+<td>union_rabbitmqtest</td>
+<td>RM测试服务器</td>
+<td>8002</td>
+</tr>
+<tr>
+<td>union_ai</td>
+<td>Ai人工智能服务器</td>
+<td>未开发</td>
+</tr>
+</tbody></table>
+<h4 id="二、SpringCloud使用说明"><a href="#二、SpringCloud使用说明" class="headerlink" title="二、SpringCloud使用说明"></a>二、SpringCloud使用说明</h4><h5 id="1、主要框架"><a href="#1、主要框架" class="headerlink" title="1、主要框架"></a>1、主要框架</h5><ul>
+<li>服务发现——Netflix Eureka</li>
+<li>服务调用——Netflix Feign</li>
+<li>熔断器——Netflix Hystrix</li>
+<li>服务网关——Netflix Zuul</li>
+<li>分布式配置——Spring Cloud Config</li>
+<li>消息总线 —— Spring Cloud Bus</li>
+</ul>
+<h5 id="注意一下Cloud版本"><a href="#注意一下Cloud版本" class="headerlink" title="注意一下Cloud版本"></a>注意一下Cloud版本</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Release Train	Boot Version</span><br><span class="line">Greenwich       2.1.x</span><br><span class="line">Finchley        2.0.x</span><br><span class="line">Edgware         1.5.x</span><br><span class="line">Dalston         1.5.x</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、服务发现组件–Eureka"><a href="#2、服务发现组件–Eureka" class="headerlink" title="2、服务发现组件–Eureka"></a>2、服务发现组件–Eureka</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">  Eureka是Netflix开发的服务发现框架，SpringCloud将它集成在自己的子项目</span><br><span class="line">spring-cloud-netflix中，实现SpringCloud的服务发现功能。Eureka包含两个组件：</span><br><span class="line">  Eureka Server和Eureka Client。</span><br><span class="line">    </span><br><span class="line">  Eureka Server提供服务注册服务，各个节点启动后，会在Eureka Server中进行注</span><br><span class="line">册，这样EurekaServer中的服务注册表中将会存储所有可用服务节点的信息，服务节点</span><br><span class="line">的信息可以在界面中直观的看到。</span><br><span class="line"></span><br><span class="line">  Eureka Client是一个java客户端，用于简化与Eureka Server的交互，客户端同时也</span><br><span class="line">就别一个内置的、使用轮询(round-robin)负载算法的负载均衡器。在应用启动后，将会</span><br><span class="line">向Eureka Server发送心跳,默认周期为30秒，如果Eureka Server在多个心跳周期内没有</span><br><span class="line">接收到某个节点的心跳，Eureka Server将会从服务注册表中把这个服务节点移除(默认90</span><br><span class="line">秒)。</span><br><span class="line"></span><br><span class="line">  Eureka Server之间通过复制的方式完成数据的同步，Eureka还提供了客户端缓存机</span><br><span class="line">制，即使所有的Eureka Server都挂掉，客户端依然可以利用缓存中的信息消费其他服务</span><br><span class="line">的API。综上，Eureka通过心跳检查、客户端缓存等机制，确保了系统的高可用性、灵活</span><br><span class="line">性和可伸缩性。</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>下面是项目全部跑起来的结果</p>
+</blockquote>
+<p><img src="https://images.gitee.com/uploads/images/2019/0202/224900_36c8b6c3_759177.jpeg" alt="Eureka服务器"></p>
+<h5 id="3、服务间调用组件–Feign"><a href="#3、服务间调用组件–Feign" class="headerlink" title="3、服务间调用组件–Feign"></a>3、服务间调用组件–Feign</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  Feign是简化Java HTTP客户端开发的工具（java-to-httpclient-binder），它的灵感</span><br><span class="line">来自于Retrofit、JAXRS-2.0和WebSocket。Feign的初衷是降低统一绑定Denominator到</span><br><span class="line">HTTP API的复杂度，不区分是否为restful。</span><br></pre></td></tr></table></figure>
+<h5 id="4、熔断器Hystrix"><a href="#4、熔断器Hystrix" class="headerlink" title="4、熔断器Hystrix"></a>4、熔断器Hystrix</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">  在微服务架构中通常会有多个服务层调用，基础服务的故障可能会导致级联故障，进而</span><br><span class="line">造成整个系统不可用的情况，这种现象被称为服务雪崩效应。服务雪崩效应是一种</span><br><span class="line">因“服务提供者”的不可用导致“服务消费者”的不可用,并将不可用逐渐放大的过程。</span><br><span class="line"></span><br><span class="line">  Hystrix 能使你的系统在出现依赖服务失效的时候，通过隔离系统所依赖的服务，防</span><br><span class="line">止服务级联失败，同时提供失败回退机制，更优雅地应对失效，并使你的系统能更快地</span><br><span class="line">从异常中恢复。</span><br></pre></td></tr></table></figure>
+<h5 id="5、微服务网关Zuul"><a href="#5、微服务网关Zuul" class="headerlink" title="5、微服务网关Zuul"></a>5、微服务网关Zuul</h5><blockquote>
+<p>Zuul是Netflix开源的微服务网关，他可以和Eureka,Ribbon,Hystrix等组件配合使<br>用。<br>Zuul组件的核心是一系列的过滤器，这些过滤器可以完成以下功能：</p>
+</blockquote>
+<ul>
+<li> 身份认证和安全: 识别每一个资源的验证要求，并拒绝那些不符的请求</li>
+<li> 审查与监控：</li>
+<li> 动态路由：动态将请求路由到不同后端集群</li>
+<li> 压力测试：逐渐增加指向集群的流量，以了解性能</li>
+<li> 负载分配：为每一种负载类型分配对应容量，并弃用超出限定值的请求</li>
+<li> 静态响应处理：边缘位置进行响应，避免转发到内部集群</li>
+<li> 多区域弹性：跨域AWS Region进行请求路由，旨在实现ELB(ElasticLoad Balancing)使用多样化</li>
+</ul>
+<h5 id="6、微服务配置文件集中管理Spring-Cloud-Config"><a href="#6、微服务配置文件集中管理Spring-Cloud-Config" class="headerlink" title="6、微服务配置文件集中管理Spring Cloud Config"></a>6、微服务配置文件集中管理Spring Cloud Config</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  在分布式系统中，由于服务数量巨多，为了方便服务配置文件统一管理，实时更新，所</span><br><span class="line">以需要分布式配置中心组件。在Spring Cloud中，有分布式配置中心组件spring cloud</span><br><span class="line">config ，它支持配置服务放在配置服务的内存中（即本地），也支持放在远程Git仓库</span><br><span class="line">中。在spring cloud config 组件中，分两个角色，一是config server，二是config</span><br><span class="line">client。</span><br><span class="line">  Config Server是一个可横向扩展、集中式的配置服务器，它用于集中管理应用程序各个</span><br><span class="line">环境下的配置，默认使用Git存储配置文件内容，也可以使用SVN存储，或者是本地文件</span><br><span class="line">存储。</span><br><span class="line">  Config Client是Config Server的客户端，用于操作存储在Config Server中的配置内容。</span><br><span class="line">  微服务在启动时会请求Config Server获取配置文件的内容，请求到后再启动容器。</span><br><span class="line">详细内容看在线文档： https://springcloud.cc/spring-cloud-config.html</span><br></pre></td></tr></table></figure>
+<h5 id="7、消息总线组件SpringCloudBus"><a href="#7、消息总线组件SpringCloudBus" class="headerlink" title="7、消息总线组件SpringCloudBus"></a>7、消息总线组件SpringCloudBus</h5><blockquote>
+<p>可以用于动态修改各个微服务系统的配置文件，而不要重新启动微服务</p>
+</blockquote>
+<h4 id="三、系统运维"><a href="#三、系统运维" class="headerlink" title="三、系统运维"></a>三、系统运维</h4><h5 id="1、新建一个Mysql服务器容器"><a href="#1、新建一个Mysql服务器容器" class="headerlink" title="1、新建一个Mysql服务器容器"></a>1、新建一个Mysql服务器容器</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -di --name=union_mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root centos/mysql-57-centos7</span><br></pre></td></tr></table></figure>
+<h5 id="2、新建一个redis服务器"><a href="#2、新建一个redis服务器" class="headerlink" title="2、新建一个redis服务器"></a>2、新建一个redis服务器</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -di --name=union_redis -p 6379:6379 redis</span><br></pre></td></tr></table></figure>
+<h5 id="3、elasticsearch容器"><a href="#3、elasticsearch容器" class="headerlink" title="3、elasticsearch容器"></a>3、elasticsearch容器</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docker run -di --name=es -p 5601:5601 -p 9200:9200 nshou/elasticsearch-kibana</span><br><span class="line">带挂载文件的创建方式</span><br><span class="line">docker run -di --name=union_es -p 9200:9200 -p 9300:9300 -v /usr/local/es/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml elasticsearch:5.6.8</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>head安装</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -di --name=union_eshead -p 9100:9100 mobz/elasticsearch-head:5</span><br></pre></td></tr></table></figure>
+<h5 id="4、导出某个容器"><a href="#4、导出某个容器" class="headerlink" title="4、导出某个容器"></a>4、导出某个容器</h5><blockquote>
+<p>导出某个容器，非常简单，使用docker export命令，语法：docker export $container_id &gt; 容器快照名</p>
+</blockquote>
+<h5 id="5、导入某个容器–docker-import命令"><a href="#5、导入某个容器–docker-import命令" class="headerlink" title="5、导入某个容器–docker import命令"></a>5、导入某个容器–docker import命令</h5><blockquote>
+<p>有了容器快照之后，我们可以在想要的时候随时导入。导入快照使用docker import命令。<br>例如我们可以使用cat centos.tar | docker import - my/centos:v888 导入容器快照作为镜像</p>
+</blockquote>
+<blockquote>
+<p>镜像保存/载入：docker load/docker save；将一个镜像导出为文件，再使用docker load命令将文件导入为一个镜像，会保存该镜像的的所有历史记录。比docker export命令导出的文件大，很好理解，因为会保存镜像的所有历史记录。<br>容器导入/导出：docker import/docker export；将一个容器导出为文件，再使用docker import命令将容器导入成为一个新的镜像，但是相比docker save命令，容器文件会丢失所有元数据和历史记录，仅保存容器当时的状态，相当于虚拟机快照。</p>
+</blockquote>
+<h5 id="6、rabbitMq创建"><a href="#6、rabbitMq创建" class="headerlink" title="6、rabbitMq创建"></a>6、rabbitMq创建</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -di --name=union_rm -p 5671:5617 -p 5672:5672 -p 4369:4369 -p 15671:15671 -p 15672:15672 -p 25672:25672 rabbitmq:management</span><br></pre></td></tr></table></figure>
+<h5 id="7、创建私有仓库容器"><a href="#7、创建私有仓库容器" class="headerlink" title="7、创建私有仓库容器"></a>7、创建私有仓库容器</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -di --name=registry -p 5000:5000 registry</span><br><span class="line">&#123;&quot;registry-mirrors&quot;:[&quot;https://docker.mirrors.ustc.edu.cn&quot;],&quot;insecure-registries&quot;:[&quot;192.168.255.128:5000&quot;]&#125;</span><br><span class="line">刷新配置systemctl daemon-reload</span><br><span class="line">通过Maven插件自动部署。</span><br><span class="line">对于数量众多的微服务，手动部署无疑是非常麻烦的做法，并且容易出错。所以我们这</span><br><span class="line">里学习如何自动部署，这也是企业实际开发中经常使用的方法。</span><br></pre></td></tr></table></figure>
+<h5 id="8、Maven插件自动部署步骤："><a href="#8、Maven插件自动部署步骤：" class="headerlink" title="8、Maven插件自动部署步骤："></a>8、Maven插件自动部署步骤：</h5><h6 id="（1）修改宿主机的docker配置，让其可以远程访问"><a href="#（1）修改宿主机的docker配置，让其可以远程访问" class="headerlink" title="（1）修改宿主机的docker配置，让其可以远程访问"></a>（1）修改宿主机的docker配置，让其可以远程访问</h6><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /lib/systemd/system/docker.service</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>其中ExecStart=后添加配置 -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock</p>
+</blockquote>
+<h6 id="（2）修改pom-xml文件，添加插件"><a href="#（2）修改pom-xml文件，添加插件" class="headerlink" title="（2）修改pom.xml文件，添加插件"></a>（2）修改pom.xml文件，添加插件</h6> <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">build</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">finalName</span>&gt;</span>config<span class="tag">&lt;/<span class="name">finalName</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;<span class="name">plugins</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">           <span class="comment">&lt;!-- docker的maven插件，官网 https://github.com/spotify/docker-maven-plugin --&gt;</span></span><br><span class="line">           <span class="tag">&lt;<span class="name">plugin</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.spotify<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>docker-maven-plugin<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.4.13<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;<span class="name">configuration</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">imageName</span>&gt;</span>192.168.255.128:5000/$&#123;project.artifactId&#125;:$&#123;project.version&#125;<span class="tag">&lt;/<span class="name">imageName</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">baseImage</span>&gt;</span>jdk1.8<span class="tag">&lt;/<span class="name">baseImage</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">entryPoint</span>&gt;</span>[&quot;java&quot;, &quot;-jar&quot;,&quot;/$&#123;project.build.finalName&#125;.jar&quot;]<span class="tag">&lt;/<span class="name">entryPoint</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">resources</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;<span class="name">resource</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">targetPath</span>&gt;</span>/<span class="tag">&lt;/<span class="name">targetPath</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">directory</span>&gt;</span>$&#123;project.build.directory&#125;<span class="tag">&lt;/<span class="name">directory</span>&gt;</span></span><br><span class="line">                           <span class="tag">&lt;<span class="name">include</span>&gt;</span>$&#123;project.build.finalName&#125;.jar<span class="tag">&lt;/<span class="name">include</span>&gt;</span></span><br><span class="line">                       <span class="tag">&lt;/<span class="name">resource</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;/<span class="name">resources</span>&gt;</span></span><br><span class="line">                   <span class="tag">&lt;<span class="name">dockerHost</span>&gt;</span>http://192.168.255.128:2375<span class="tag">&lt;/<span class="name">dockerHost</span>&gt;</span></span><br><span class="line">               <span class="tag">&lt;/<span class="name">configuration</span>&gt;</span></span><br><span class="line">           <span class="tag">&lt;/<span class="name">plugin</span>&gt;</span></span><br><span class="line">       <span class="tag">&lt;/<span class="name">plugins</span>&gt;</span></span><br><span class="line">   <span class="tag">&lt;/<span class="name">build</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="9、Gogs安装与配置"><a href="#9、Gogs安装与配置" class="headerlink" title="9、Gogs安装与配置"></a>9、Gogs安装与配置</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> docker pull gogs/gogs</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> mkdir -p /var/gogs</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> docker run -di --name=gogs -p 10022:22 -p 3000:3000 -v /var/gogsdata:/data gogs/gogs</span></span><br></pre></td></tr></table></figure>
+<h5 id="10、容器管理工具Rancher"><a href="#10、容器管理工具Rancher" class="headerlink" title="10、容器管理工具Rancher"></a>10、容器管理工具Rancher</h5><blockquote>
+<p>Rancher是一个开源的企业级全栈化容器部署及管理平台。Rancher为容器提供一揽<br>子基础架构服务：CNI兼容的网络服务、存储服务、主机管理、负载均衡、防护墙……<br>Rancher让上述服务跨越公有云、私有云、虚拟机、物理机环境运行，真正实现一键式应<br>用部署和管理。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d --name=rancher --restart=always -p 9090:8080 rancher/server</span><br></pre></td></tr></table></figure>
+<h5 id="11、influxDB监控"><a href="#11、influxDB监控" class="headerlink" title="11、influxDB监控"></a>11、influxDB监控</h5><blockquote>
+<p>influxDB是一个分布式时间序列数据库。cAdvisor仅仅显示实时信息，但是不存储<br>监视数据。因此，我们需要提供时序数据库用于存储cAdvisor组件所提供的监控信息，<br>以便显示除实时信息之外的时序数据。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -di -p 8083:8083 -p 8086:8086 --expose 8090 --expose 8099 --name influxsrv tutum/influxdb</span><br></pre></td></tr></table></figure>
+<p>端口概述： 8083端口:web访问端口 8086:数据写入端口</p>
+<h6 id="常用操作"><a href="#常用操作" class="headerlink" title="常用操作"></a>常用操作</h6><ul>
+<li>创建数据库<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE DATABASE &quot;cadvisor&quot;</span><br></pre></td></tr></table></figure>
+<h5 id="12、cAdvisor"><a href="#12、cAdvisor" class="headerlink" title="12、cAdvisor"></a>12、cAdvisor</h5><blockquote>
+<p>Google开源的用于监控基础设施应用的工具，它是一个强大的监控工具，不需要任<br>何配置就可以通过运行在Docker主机上的容器来监控Docker容器，而且可以监控Docker<br>主机。更多详细操作和配置选项可以查看Github上的cAdvisor项目文档。</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --volume=/:/rootfs:ro --volume=/var/run:/var/run:rw --volume=/sys:/sys:ro --volume=/var/lib/docker/:/var/lib/docker:ro --publish=8080:8080 --detach=true --link influxsrv:influxsrv --name=cadvisor google/cadvisor -storage_driver=influxdb -storage_driver_db=union-db -storage_driver_host=influxsrv:8086</span><br></pre></td></tr></table></figure>
+<h5 id="13、Grafana"><a href="#13、Grafana" class="headerlink" title="13、Grafana"></a>13、Grafana</h5><blockquote>
+<p>Grafana是一个可视化面板（Dashboard），有着非常漂亮的图表和布局展示，功<br>能齐全的度量仪表盘和图形编辑器。支持Graphite、zabbix、InfluxDB、Prometheus和<br>OpenTSDB作为数据源。<br>Grafana主要特性：灵活丰富的图形化选项；可以混合多种风格；支持白天和夜间模式；<br>多个数据源。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 3001:3000 -e INFLUXDB_HOST=influxsrv -e INFLUXDB_PORT=8086 -e INFLUXDB_NAME=cadvisor -e INFLUXDB_USER=root -e INFLUXDB_PASS=root --link influxsrv:influxsrv --name grafana grafana/grafana</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:qjzxzxd@gmail.com">MiChong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.buildworld.cn/2019/02/10/SpringBoot%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E9%A1%B9%E7%9B%AE-Union%E7%A4%BE%E4%BA%A4%E5%B9%B3%E5%8F%B0/">https://www.buildworld.cn/2019/02/10/SpringBoot%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84%E9%A1%B9%E7%9B%AE-Union%E7%A4%BE%E4%BA%A4%E5%B9%B3%E5%8F%B0/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.buildworld.cn" target="_blank">MiChong的🏡</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Docker/">Docker</a><a class="post-meta__tags" href="/tags/SpringBoot/">SpringBoot</a><a class="post-meta__tags" href="/tags/SpringCloud/">SpringCloud</a><a class="post-meta__tags" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/">微服务架构</a><a class="post-meta__tags" href="/tags/SpringDataJpa/">SpringDataJpa</a></div><div class="post_share"><div class="social-share" data-image="https://file.buildworld.cn/img/6dc7724665fb0fa34d8d2872f6b40d22_224859_0cf8011f_759177.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/04/16/CNN%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C-%E6%89%8B%E5%86%99%E6%95%B0%E5%AD%97%E8%AF%86%E5%88%AB/"><img class="prev-cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CNN神经网络--手写数字识别</div></div></a></div><div class="next-post pull-right"><a href="/2019/01/27/%E8%BD%BB%E9%87%8F%E7%BA%A7%E6%96%87%E4%BB%B6%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F/"><img class="next-cover" src="https://file.buildworld.cn/img/ea92cb20ac076f7ad36592c9609f773a_esfu_logo.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">轻量级文件存储系统</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2018/04/21/Spring Cloud构建微服务架构：服务注册与发现（Eureka、Consul) /" title="Spring Cloud构建微服务架构：服务注册与发现（Eureka、Consul)"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-04-21</div><div class="title">Spring Cloud构建微服务架构：服务注册与发现（Eureka、Consul)</div></div></a></div><div><a href="/2019/01/27/轻量级文件存储系统/" title="轻量级文件存储系统"><img class="cover" src="https://file.buildworld.cn/img/ea92cb20ac076f7ad36592c9609f773a_esfu_logo.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-01-27</div><div class="title">轻量级文件存储系统</div></div></a></div><div><a href="/2018/05/19/Docker（一）安装和配置/" title="Docker（一）安装和配置"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-05-19</div><div class="title">Docker（一）安装和配置</div></div></a></div><div><a href="/2018/05/22/Docker（二）基础使用/" title="Docker（二）基础使用"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-05-22</div><div class="title">Docker（二）基础使用</div></div></a></div><div><a href="/2018/03/29/SpringBoot之API--Swagger2接口文档管理/" title="SpringBoot之API--Swagger2接口文档管理"><img class="cover" src="https://file.buildworld.cn/img/u=2551084964,3275034231&fm=26&gp=0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-03-29</div><div class="title">SpringBoot之API--Swagger2接口文档管理</div></div></a></div><div><a href="/2018/03/29/SpringBoot整合Dubbo/" title="SpringBoot整合Dubbo"><img class="cover" src="https://file.buildworld.cn/img/u=2551084964,3275034231&fm=26&gp=0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-03-29</div><div class="title">SpringBoot整合Dubbo</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MiChong</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MiChongGET"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/qjzxzxd@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到米虫的小站，一起加油🤝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%86%B5"><span class="toc-number">2.</span> <span class="toc-text">一、系统概况</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E7%B3%BB%E7%BB%9F%E6%8A%80%E6%9C%AF%E6%A0%88%E7%A4%BA%E6%84%8F%E5%9B%BE"><span class="toc-number">2.1.</span> <span class="toc-text">1、系统技术栈示意图</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E5%90%8E%E7%AB%AF%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E5%9B%BE"><span class="toc-number">2.2.</span> <span class="toc-text">2、后端系统架构图</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E5%90%8E%E5%8F%B0%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%B3%BB%E7%BB%9F"><span class="toc-number">2.3.</span> <span class="toc-text">3、后台微服务系统</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81SpringCloud%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="toc-number">3.</span> <span class="toc-text">二、SpringCloud使用说明</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E4%B8%BB%E8%A6%81%E6%A1%86%E6%9E%B6"><span class="toc-number">3.1.</span> <span class="toc-text">1、主要框架</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%B8%80%E4%B8%8BCloud%E7%89%88%E6%9C%AC"><span class="toc-number">3.2.</span> <span class="toc-text">注意一下Cloud版本</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E6%9C%8D%E5%8A%A1%E5%8F%91%E7%8E%B0%E7%BB%84%E4%BB%B6%E2%80%93Eureka"><span class="toc-number">3.3.</span> <span class="toc-text">2、服务发现组件–Eureka</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E6%9C%8D%E5%8A%A1%E9%97%B4%E8%B0%83%E7%94%A8%E7%BB%84%E4%BB%B6%E2%80%93Feign"><span class="toc-number">3.4.</span> <span class="toc-text">3、服务间调用组件–Feign</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E7%86%94%E6%96%AD%E5%99%A8Hystrix"><span class="toc-number">3.5.</span> <span class="toc-text">4、熔断器Hystrix</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%BD%91%E5%85%B3Zuul"><span class="toc-number">3.6.</span> <span class="toc-text">5、微服务网关Zuul</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E9%9B%86%E4%B8%AD%E7%AE%A1%E7%90%86Spring-Cloud-Config"><span class="toc-number">3.7.</span> <span class="toc-text">6、微服务配置文件集中管理Spring Cloud Config</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7%E3%80%81%E6%B6%88%E6%81%AF%E6%80%BB%E7%BA%BF%E7%BB%84%E4%BB%B6SpringCloudBus"><span class="toc-number">3.8.</span> <span class="toc-text">7、消息总线组件SpringCloudBus</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E7%B3%BB%E7%BB%9F%E8%BF%90%E7%BB%B4"><span class="toc-number">4.</span> <span class="toc-text">三、系统运维</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AAMysql%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%AE%B9%E5%99%A8"><span class="toc-number">4.1.</span> <span class="toc-text">1、新建一个Mysql服务器容器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E6%96%B0%E5%BB%BA%E4%B8%80%E4%B8%AAredis%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-number">4.2.</span> <span class="toc-text">2、新建一个redis服务器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81elasticsearch%E5%AE%B9%E5%99%A8"><span class="toc-number">4.3.</span> <span class="toc-text">3、elasticsearch容器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E5%AF%BC%E5%87%BA%E6%9F%90%E4%B8%AA%E5%AE%B9%E5%99%A8"><span class="toc-number">4.4.</span> <span class="toc-text">4、导出某个容器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81%E5%AF%BC%E5%85%A5%E6%9F%90%E4%B8%AA%E5%AE%B9%E5%99%A8%E2%80%93docker-import%E5%91%BD%E4%BB%A4"><span class="toc-number">4.5.</span> <span class="toc-text">5、导入某个容器–docker import命令</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81rabbitMq%E5%88%9B%E5%BB%BA"><span class="toc-number">4.6.</span> <span class="toc-text">6、rabbitMq创建</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7%E3%80%81%E5%88%9B%E5%BB%BA%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E5%AE%B9%E5%99%A8"><span class="toc-number">4.7.</span> <span class="toc-text">7、创建私有仓库容器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8%E3%80%81Maven%E6%8F%92%E4%BB%B6%E8%87%AA%E5%8A%A8%E9%83%A8%E7%BD%B2%E6%AD%A5%E9%AA%A4%EF%BC%9A"><span class="toc-number">4.8.</span> <span class="toc-text">8、Maven插件自动部署步骤：</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E4%BF%AE%E6%94%B9%E5%AE%BF%E4%B8%BB%E6%9C%BA%E7%9A%84docker%E9%85%8D%E7%BD%AE%EF%BC%8C%E8%AE%A9%E5%85%B6%E5%8F%AF%E4%BB%A5%E8%BF%9C%E7%A8%8B%E8%AE%BF%E9%97%AE"><span class="toc-number">4.8.1.</span> <span class="toc-text">（1）修改宿主机的docker配置，让其可以远程访问</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E4%BF%AE%E6%94%B9pom-xml%E6%96%87%E4%BB%B6%EF%BC%8C%E6%B7%BB%E5%8A%A0%E6%8F%92%E4%BB%B6"><span class="toc-number">4.8.2.</span> <span class="toc-text">（2）修改pom.xml文件，添加插件</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9%E3%80%81Gogs%E5%AE%89%E8%A3%85%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="toc-number">4.9.</span> <span class="toc-text">9、Gogs安装与配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10%E3%80%81%E5%AE%B9%E5%99%A8%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7Rancher"><span class="toc-number">4.10.</span> <span class="toc-text">10、容器管理工具Rancher</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11%E3%80%81influxDB%E7%9B%91%E6%8E%A7"><span class="toc-number">4.11.</span> <span class="toc-text">11、influxDB监控</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%93%8D%E4%BD%9C"><span class="toc-number">4.11.1.</span> <span class="toc-text">常用操作</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#12%E3%80%81cAdvisor"><span class="toc-number">4.12.</span> <span class="toc-text">12、cAdvisor</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#13%E3%80%81Grafana"><span class="toc-number">4.13.</span> <span class="toc-text">13、Grafana</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/06/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/07/06/hello-world/" title="Hello World">Hello World</a><time datetime="2021-07-06T05:12:56.084Z" title="发表于 2021-07-06 13:12:56">2021-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合"><img src="https://file.buildworld.cn/img/20210209161641.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode数据库题目集合"/></a><div class="content"><a class="title" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合">LeetCode数据库题目集合</a><time datetime="2021-02-09T08:13:56.000Z" title="发表于 2021-02-09 16:13:56">2021-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习"><img src="https://file.buildworld.cn/img/20210107194133.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData-数据仓库学习"/></a><div class="content"><a class="title" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习">BigData-数据仓库学习</a><time datetime="2021-01-07T11:35:36.000Z" title="发表于 2021-01-07 19:35:36">2021-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录"><img src="https://file.buildworld.cn/img/20201104092750.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法学习记录"/></a><div class="content"><a class="title" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录">算法学习记录</a><time datetime="2020-11-04T01:20:49.000Z" title="发表于 2020-11-04 09:20:49">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink"><img src="https://file.buildworld.cn/img/20200911110402.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData--分布式流数据流引擎Apache Flink"/></a><div class="content"><a class="title" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink">BigData--分布式流数据流引擎Apache Flink</a><time datetime="2020-09-11T02:59:30.000Z" title="发表于 2020-09-11 10:59:30">2020-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By MiChong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'mef0W501zi4VSjltsnmN5D9J-gzGzoHsz',
+      appKey: 'ktKil4OakXUNcSs0Ofkph1rm',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "7d002c40-fe0a-44eb-977b-a992eaed1e7c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

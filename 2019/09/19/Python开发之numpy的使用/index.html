@@ -1,0 +1,322 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Python开发之numpy的使用 | MiChong的🏡</title><meta name="keywords" content="Python,Numpy"><meta name="author" content="MiChong,qjzxzxd@gmail.com"><meta name="copyright" content="MiChong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="NumPy(Numerical Python) 是 Python 语言的一个扩展程序库，支持大量的维度数组与矩阵运算，此外也针对数组运算提供大量的数学函数库。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python开发之numpy的使用">
+<meta property="og:url" content="https://www.buildworld.cn/2019/09/19/Python%E5%BC%80%E5%8F%91%E4%B9%8Bnumpy%E7%9A%84%E4%BD%BF%E7%94%A8/index.html">
+<meta property="og:site_name" content="MiChong的🏡">
+<meta property="og:description" content="NumPy(Numerical Python) 是 Python 语言的一个扩展程序库，支持大量的维度数组与矩阵运算，此外也针对数组运算提供大量的数学函数库。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://file.buildworld.cn/img/36e3eb10ca35c9673229fd526e7e7697_5ac6e9d90002903efacacdcb8182b8ed.png">
+<meta property="article:published_time" content="2019-09-19T07:40:15.000Z">
+<meta property="article:modified_time" content="2020-05-05T07:14:48.000Z">
+<meta property="article:author" content="MiChong">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="Numpy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.buildworld.cn/img/36e3eb10ca35c9673229fd526e7e7697_5ac6e9d90002903efacacdcb8182b8ed.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.buildworld.cn/2019/09/19/Python%E5%BC%80%E5%8F%91%E4%B9%8Bnumpy%E7%9A%84%E4%BD%BF%E7%94%A8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Python开发之numpy的使用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-05-05 15:14:48'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="MiChong的🏡" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://file.buildworld.cn/img/36e3eb10ca35c9673229fd526e7e7697_5ac6e9d90002903efacacdcb8182b8ed.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">MiChong的🏡</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Python开发之numpy的使用</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-09-19T07:40:15.000Z" title="发表于 2019-09-19 15:40:15">2019-09-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-05-05T07:14:48.000Z" title="更新于 2020-05-05 15:14:48">2020-05-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/">编程语言</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Python开发之numpy的使用"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="一、注意几点"><a href="#一、注意几点" class="headerlink" title="一、注意几点"></a>一、注意几点</h4><ul>
+<li><p>NumPy 数组在创建时有固定的大小，不同于Python列表（可以动态增长）。更改ndarray的大小将创建一个新的数组并删除原始数据。</p>
+</li>
+<li><p>NumPy 数组中的元素都需要具有相同的数据类型，因此在存储器中将具有相同的大小。数组的元素如果也是数组（可以是 Python 的原生 array，也可以是 ndarray）的情况下，则构成了多维数组。</p>
+</li>
+<li><p>NumPy 数组便于对大量数据进行高级数学和其他类型的操作。通常，这样的操作比使用Python的内置序列可能更有效和更少的代码执行。</p>
+</li>
+</ul>
+<h5 id="二、numpy的使用"><a href="#二、numpy的使用" class="headerlink" title="二、numpy的使用"></a>二、numpy的使用</h5><h5 id="1、创建ndarray"><a href="#1、创建ndarray" class="headerlink" title="1、创建ndarray"></a>1、创建ndarray</h5><ul>
+<li>由python list创建<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1维数组</span></span><br><span class="line">a = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])  </span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(a), a.shape, a[<span class="number">0</span>], a[<span class="number">1</span>], a[<span class="number">2</span>])</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">&lt;<span class="class"><span class="keyword">class</span> &#x27;<span class="title">numpy</span>.<span class="title">ndarray</span>&#x27;&gt; (<span class="params"><span class="number">3</span>,</span>) 1 2 3</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"># 重新赋值</span></span><br><span class="line"><span class="class"><span class="title">a</span>[0] = 5                 </span></span><br><span class="line"><span class="class"><span class="title">print</span>(<span class="params">a</span>)</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">out</span>:</span></span><br><span class="line">[<span class="number">5</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2维数组</span></span><br><span class="line">b = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]])   </span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">[[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]]</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(b[<span class="number">0</span>, <span class="number">0</span>], b[<span class="number">0</span>, <span class="number">1</span>], b[<span class="number">1</span>, <span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">4</span></span><br></pre></td></tr></table></figure></li>
+<li>由numpy内置函数创建</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建2x2的全0数组</span></span><br><span class="line">a = np.zeros((<span class="number">2</span>,<span class="number">2</span>))  </span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">[[ <span class="number">0.</span>  <span class="number">0.</span>]</span><br><span class="line"> [ <span class="number">0.</span>  <span class="number">0.</span>]]</span><br><span class="line"></span><br><span class="line"> <span class="comment"># 创建1x2的全1数组</span></span><br><span class="line">b = np.ones((<span class="number">1</span>,<span class="number">2</span>))  </span><br><span class="line"><span class="built_in">print</span>(b)</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">[[ <span class="number">1.</span>  <span class="number">1.</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建2x2定值为7的数组</span></span><br><span class="line">c = np.full((<span class="number">2</span>,<span class="number">2</span>), <span class="number">7</span>) </span><br><span class="line"><span class="built_in">print</span>(c)</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">[[<span class="number">7</span> <span class="number">7</span>]</span><br><span class="line"> [<span class="number">7</span> <span class="number">7</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建2x2的单位矩阵（对角元素为1）</span></span><br><span class="line">d = np.eye(<span class="number">2</span>)        </span><br><span class="line"><span class="built_in">print</span>(d)</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">[[ <span class="number">1.</span>  <span class="number">0.</span>]</span><br><span class="line"> [ <span class="number">0.</span>  <span class="number">1.</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建一个对角线为10,20,30,50的对角矩阵</span></span><br><span class="line">d_1 = np.diag([<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">50</span>]) </span><br><span class="line"><span class="built_in">print</span>(d_1)</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">[[<span class="number">10</span> <span class="number">0</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [ <span class="number">0</span> <span class="number">20</span> <span class="number">0</span> <span class="number">0</span>]</span><br><span class="line"> [ <span class="number">0</span> <span class="number">0</span> <span class="number">30</span> <span class="number">0</span>]</span><br><span class="line"> [ <span class="number">0</span> <span class="number">0</span> <span class="number">0</span> <span class="number">50</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建一个一维的0-14的数组</span></span><br><span class="line">e = np.arange(<span class="number">15</span>)   </span><br><span class="line"><span class="built_in">print</span>(e)</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span> <span class="number">12</span> <span class="number">13</span> <span class="number">14</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建一个一维的4-9的数组</span></span><br><span class="line">e_1 = np.arange(<span class="number">4</span>,<span class="number">10</span>)  </span><br><span class="line"><span class="built_in">print</span>(e_1)</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">[<span class="number">4</span> <span class="number">5</span> <span class="number">6</span> <span class="number">7</span> <span class="number">8</span> <span class="number">9</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建一个一维的1-13且以间隔为3的数组</span></span><br><span class="line">e_2 = np.arange(<span class="number">1</span>,<span class="number">14</span>,<span class="number">3</span>)  </span><br><span class="line"><span class="built_in">print</span>(e_2)</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">[ <span class="number">1</span> <span class="number">4</span> <span class="number">7</span> <span class="number">10</span> <span class="number">13</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建一个一维的范围在0-10，长度为6的数组</span></span><br><span class="line">f = np.linspace(<span class="number">0</span>,<span class="number">10</span>,<span class="number">6</span>)  </span><br><span class="line"><span class="built_in">print</span>(f)</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line"><span class="comment">#各个元素的间隔相等，为(10-0)/(6-1) = 2，若不想包含末尾的10，可以添加参数endpoint = False</span></span><br><span class="line">[ <span class="number">0.</span>,  <span class="number">2.</span>,  <span class="number">4.</span>,  <span class="number">6.</span>,  <span class="number">8.</span>, <span class="number">10.</span>]  </span><br><span class="line"></span><br><span class="line"><span class="comment">#把arange创建的一维数组转换为3行4列的二维数组</span></span><br><span class="line">g = np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>,<span class="number">4</span>)  </span><br><span class="line"><span class="built_in">print</span>(g)                        </span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line"><span class="comment">#注意：使用reshape转换前后的数据量应该相同，12 = 3x4</span></span><br><span class="line">[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],              </span><br><span class="line"> [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>],</span><br><span class="line"> [ <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]]              </span><br><span class="line"></span><br><span class="line"><span class="comment"># 2x2的随机数组(矩阵),取值范围在[0.0,1.0)（包含0，不包含1）</span></span><br><span class="line">h = np.random.random((<span class="number">2</span>,<span class="number">2</span>)) </span><br><span class="line"><span class="built_in">print</span>(e)</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">[[ <span class="number">0.72776966</span>  <span class="number">0.94164821</span>]</span><br><span class="line"> [ <span class="number">0.04652655</span>  <span class="number">0.2316599</span> ]]</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建一个取值范围在[4,15)，2行2列的随机整数矩阵</span></span><br><span class="line">i = np.random.randint(<span class="number">4</span>,<span class="number">15</span>,size = (<span class="number">2</span>,<span class="number">2</span>))  </span><br><span class="line"><span class="built_in">print</span>(i)</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">[[<span class="number">6</span>, <span class="number">5</span>],</span><br><span class="line"> [<span class="number">5</span>, <span class="number">9</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment">#创建一个从均值为0，标准差为0.1的正态分布中随机抽样的3x3矩阵</span></span><br><span class="line">j = np.random.normal(<span class="number">0</span>,<span class="number">0.1</span>,size = (<span class="number">3</span>,<span class="number">3</span>))  </span><br><span class="line"><span class="built_in">print</span>(j)</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">[[-<span class="number">0.20783767</span>, -<span class="number">0.12406401</span>, -<span class="number">0.11775284</span>],</span><br><span class="line"> [ <span class="number">0.02037018</span>,  <span class="number">0.02898423</span>, -<span class="number">0.02548213</span>],</span><br><span class="line"> [-<span class="number">0.0149878</span> ,  <span class="number">0.05277648</span>,  <span class="number">0.08332239</span>]]</span><br></pre></td></tr></table></figure>
+
+<h5 id="2、访问-amp-更改"><a href="#2、访问-amp-更改" class="headerlink" title="2、访问&amp;更改"></a>2、访问&amp;更改</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#访问某一元素，这里可以自己多尝试</span></span><br><span class="line"><span class="comment">#访问一维数组的某一元素，中括号内填写index</span></span><br><span class="line"><span class="built_in">print</span>(np.arange(<span class="number">6</span>)[<span class="number">3</span>]) </span><br><span class="line">out:<span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#访问二维数组的某一元素，中括号内填写[行,列]</span></span><br><span class="line"><span class="built_in">print</span>(np.arange(<span class="number">6</span>).reshape(<span class="number">3</span>,<span class="number">2</span>)[<span class="number">1</span>,<span class="number">1</span>]) </span><br><span class="line">out:<span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#访问三位数组中的某一元素，中括号内[组，行，列]</span></span><br><span class="line"><span class="built_in">print</span>(np.arange(<span class="number">12</span>).reshape(<span class="number">2</span>,<span class="number">3</span>,<span class="number">2</span>)[<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>]) </span><br><span class="line">out:<span class="number">3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#更改某一元素，用 = 进行赋值和替换即可</span></span><br><span class="line">a = np.arange(<span class="number">6</span>)</span><br><span class="line">a[<span class="number">3</span>] = <span class="number">7</span>      <span class="comment">#先访问，再重新赋值</span></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span> <span class="number">7</span> <span class="number">4</span> <span class="number">5</span>]</span><br></pre></td></tr></table></figure>
+<h5 id="3、删除"><a href="#3、删除" class="headerlink" title="3、删除"></a>3、删除</h5><blockquote>
+<p>这里需要注意的是axis这个参数，在2维数据中，axis = 0表示选择行，axis = 1表示选择列，但不能机械的认为0就表示行，1就表示列，注意前提2维数据中。</p>
+</blockquote>
+<blockquote>
+<p>在三维数据中，axis = 0表示组，1表示行，2表示列。这是为什么呢？提示一下，三位数组的shape中组、行和列是怎样排序的？</p>
+</blockquote>
+<p>==如果要修改a的值，需要重新赋值==</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">a = np.arange(<span class="number">6</span>).reshape(<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">np.delete(a,[<span class="number">0</span>],axis = <span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]])  <span class="comment">#原数据并未更改</span></span><br><span class="line"></span><br><span class="line">a = np.delete(a,[<span class="number">0</span>],axis = <span class="number">0</span>)  <span class="comment">#重新赋值</span></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"></span><br><span class="line">array([[<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]])   <span class="comment">#原数据已更改</span></span><br></pre></td></tr></table></figure>
+<h5 id="4、添加"><a href="#4、添加" class="headerlink" title="4、添加"></a>4、添加</h5><blockquote>
+<p>往ndarray中增加元素的办法跟python list也很类似，常用的有两种：</p>
+</blockquote>
+<ul>
+<li>一种是添加（append），就是将新增的元素添加到ndarray的尾部</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">语法为：np.append(ndarray, elements, axis)</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>一种是插入（insert），可以让新增元素插入到指定位置</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">语法为：np.insert(ndarray, index, elements, axis)</span><br><span class="line"></span><br><span class="line">参数中就多了一个index，指示的是插入新元素的位置。</span><br></pre></td></tr></table></figure>
+
+<h5 id="5、ndarray切片"><a href="#5、ndarray切片" class="headerlink" title="5、ndarray切片"></a>5、ndarray切片</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a[:,:-<span class="number">1</span>]   去除最后一列</span><br><span class="line">a[:,-<span class="number">1</span>]    只保留最后一列</span><br></pre></td></tr></table></figure>
+<ul>
+<li>一个常用的切片</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">以列的形式获取最后一列数据：</span><br><span class="line"></span><br><span class="line">a[:,<span class="number">3</span>:]</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">array([[ <span class="number">3</span>],</span><br><span class="line">       [ <span class="number">7</span>],</span><br><span class="line">       [<span class="number">11</span>],</span><br><span class="line">       [<span class="number">15</span>]])</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">以一维数组的形式获取最后一列数据：</span><br><span class="line"></span><br><span class="line">a[:,-<span class="number">1</span>]</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line">array([ <span class="number">3</span>,  <span class="number">7</span>, <span class="number">11</span>, <span class="number">15</span>])</span><br></pre></td></tr></table></figure>
+<h5 id="6、ndarray筛选"><a href="#6、ndarray筛选" class="headerlink" title="6、ndarray筛选"></a>6、ndarray筛选</h5><ul>
+<li>选择ndarray的对角线</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">所用函数为np.diag(ndarray, k=N)，其中参数k的取值决定了按照哪一条对角线选择数据。</span><br><span class="line"></span><br><span class="line">默认k = 0，取主对角线；</span><br><span class="line"></span><br><span class="line">k = 1时，取主对角线上面1行的元素；</span><br><span class="line"></span><br><span class="line">k = -1时，取主对角线下面1行的元素。</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>提取ndarray中的唯一值</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看二维数组a中的唯一值</span></span><br><span class="line">a = [[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>],</span><br><span class="line">     [<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],</span><br><span class="line">     [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>]]</span><br><span class="line"><span class="built_in">print</span>(np.unique(a))    </span><br><span class="line">array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看a中的唯一行（也就是没有重复的行）</span></span><br><span class="line"><span class="built_in">print</span>(np.unique(a,axis = <span class="number">0</span>))  </span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看a中的唯一列</span></span><br><span class="line"><span class="built_in">print</span>(np.unique(a,axis = <span class="number">1</span>))  </span><br><span class="line">array([[<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>],</span><br><span class="line">       [<span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment">#查看a中第一行的唯一值</span></span><br><span class="line"><span class="built_in">print</span>(np.unique(a[<span class="number">0</span>]))  </span><br><span class="line">array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>通过布尔运算筛选</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">X[X &gt; 10] #筛选数组X中大于10的数据</span><br></pre></td></tr></table></figure>
+
+<h5 id="7、ndarray运算"><a href="#7、ndarray运算" class="headerlink" title="7、ndarray运算"></a>7、ndarray运算</h5><ul>
+<li>集合运算</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">np.intersect1d(x,y) <span class="comment">#取x与y的交集</span></span><br><span class="line">np.setdiff1d(x,y)   <span class="comment">#取x与y的差集，返回的是在x中且没在y中的元素</span></span><br><span class="line">np.union1d(x,y)     <span class="comment">#取x与y的并集</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>算术运算</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">我们可以通过+、-、*、/或np.add、np.substract、np.multiply 、np.divide来对两个矩阵进行元素级的加减乘除运算，因为是元素级的运算，所以两个矩阵的shape必须要一致或者是可广播(Broadcast)。</span><br><span class="line"></span><br><span class="line">这里所谓的可广播，就是指虽然A和B两个矩阵的shape不一致，但是A可以拆分为整数个与B具有相同shape的矩阵，这样在进行元素级别的运算时，就会先将A进行拆分，然后与B进行运算，结果再组合一起就可以。这里的A就是“可广播”矩阵。</span><br></pre></td></tr></table></figure>
+
+<h5 id="8、ndarray排序"><a href="#8、ndarray排序" class="headerlink" title="8、ndarray排序"></a>8、ndarray排序</h5><blockquote>
+<p>np.sort()和ndarray.sort()来对ndarray进行排序。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">相同的是：</span><br><span class="line"></span><br><span class="line">二者都可以使用参数axis来决定依照哪个轴进行排序，axis = 0时按照列排序，axis = 1时按照行排序；</span><br><span class="line"></span><br><span class="line">不同的是：</span><br><span class="line"></span><br><span class="line">np.sort()不会更改原数组；ndarray.sort()会更改原数组</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:qjzxzxd@gmail.com">MiChong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.buildworld.cn/2019/09/19/Python%E5%BC%80%E5%8F%91%E4%B9%8Bnumpy%E7%9A%84%E4%BD%BF%E7%94%A8/">https://www.buildworld.cn/2019/09/19/Python%E5%BC%80%E5%8F%91%E4%B9%8Bnumpy%E7%9A%84%E4%BD%BF%E7%94%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.buildworld.cn" target="_blank">MiChong的🏡</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/Numpy/">Numpy</a></div><div class="post_share"><div class="social-share" data-image="https://file.buildworld.cn/img/36e3eb10ca35c9673229fd526e7e7697_5ac6e9d90002903efacacdcb8182b8ed.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/09/20/Python%E5%BC%80%E5%8F%91%E4%B9%8BPandas%E7%9A%84%E4%BD%BF%E7%94%A8/"><img class="prev-cover" src="https://file.buildworld.cn//img/pandas.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Python开发之Pandas的使用</div></div></a></div><div class="next-post pull-right"><a href="/2019/07/22/OpenCV%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%89%EF%BC%89%EF%BC%9A%E9%9C%8D%E5%A4%AB%E5%8F%98%E6%8D%A2%E3%80%81%E7%9B%B4%E6%96%B9%E5%9B%BE%E3%80%81%E8%BD%AE%E5%BB%93%E7%AD%89%E7%BB%BC%E5%90%88%E5%BA%94%E7%94%A8/"><img class="next-cover" src="https://file.buildworld.cn/img/opencv.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">OpenCV图像处理笔记（三）：霍夫变换、直方图、轮廓等综合应用</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/06/12/BCI-Python-EEG工具库MNE/" title="BCI--Python-EEG工具库MNE"><img class="cover" src="https://ae01.alicdn.com/kf/H32f1a2189cf54b20a201315213d6c44fa.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-12</div><div class="title">BCI--Python-EEG工具库MNE</div></div></a></div><div><a href="/2019/09/20/Python开发之Pandas的使用/" title="Python开发之Pandas的使用"><img class="cover" src="https://file.buildworld.cn//img/pandas.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-09-20</div><div class="title">Python开发之Pandas的使用</div></div></a></div><div><a href="/2020/03/05/Python版本的OpenCV安装/" title="Python版本的OpenCV安装"><img class="cover" src="https://file.buildworld.cn/img/opencv.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-05</div><div class="title">Python版本的OpenCV安装</div></div></a></div><div><a href="/2020/03/14/Python进阶-一/" title="Python进阶(一)"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-03-14</div><div class="title">Python进阶(一)</div></div></a></div><div><a href="/2020/04/29/TensorFlow2-X学习笔记-1-TensorFlow核心概念/" title="TensorFlow2.X学习笔记(1)--TensorFlow核心概念"><img class="cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-29</div><div class="title">TensorFlow2.X学习笔记(1)--TensorFlow核心概念</div></div></a></div><div><a href="/2020/04/30/TensorFlow2-X学习笔记-2-TensorFlow的层次结构介绍/" title=" TensorFlow2.X学习笔记(2)--TensorFlow的层次结构介绍"><img class="cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-30</div><div class="title"> TensorFlow2.X学习笔记(2)--TensorFlow的层次结构介绍</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MiChong</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MiChongGET"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/qjzxzxd@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到米虫的小站，一起加油🤝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%B3%A8%E6%84%8F%E5%87%A0%E7%82%B9"><span class="toc-number">1.</span> <span class="toc-text">一、注意几点</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%8C%E3%80%81numpy%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">二、numpy的使用</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E5%88%9B%E5%BB%BAndarray"><span class="toc-number">1.2.</span> <span class="toc-text">1、创建ndarray</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E8%AE%BF%E9%97%AE-amp-%E6%9B%B4%E6%94%B9"><span class="toc-number">1.3.</span> <span class="toc-text">2、访问&amp;更改</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%E3%80%81%E5%88%A0%E9%99%A4"><span class="toc-number">1.4.</span> <span class="toc-text">3、删除</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4%E3%80%81%E6%B7%BB%E5%8A%A0"><span class="toc-number">1.5.</span> <span class="toc-text">4、添加</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5%E3%80%81ndarray%E5%88%87%E7%89%87"><span class="toc-number">1.6.</span> <span class="toc-text">5、ndarray切片</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6%E3%80%81ndarray%E7%AD%9B%E9%80%89"><span class="toc-number">1.7.</span> <span class="toc-text">6、ndarray筛选</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7%E3%80%81ndarray%E8%BF%90%E7%AE%97"><span class="toc-number">1.8.</span> <span class="toc-text">7、ndarray运算</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8%E3%80%81ndarray%E6%8E%92%E5%BA%8F"><span class="toc-number">1.9.</span> <span class="toc-text">8、ndarray排序</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/06/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/07/06/hello-world/" title="Hello World">Hello World</a><time datetime="2021-07-06T05:12:56.084Z" title="发表于 2021-07-06 13:12:56">2021-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合"><img src="https://file.buildworld.cn/img/20210209161641.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode数据库题目集合"/></a><div class="content"><a class="title" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合">LeetCode数据库题目集合</a><time datetime="2021-02-09T08:13:56.000Z" title="发表于 2021-02-09 16:13:56">2021-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习"><img src="https://file.buildworld.cn/img/20210107194133.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData-数据仓库学习"/></a><div class="content"><a class="title" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习">BigData-数据仓库学习</a><time datetime="2021-01-07T11:35:36.000Z" title="发表于 2021-01-07 19:35:36">2021-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录"><img src="https://file.buildworld.cn/img/20201104092750.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法学习记录"/></a><div class="content"><a class="title" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录">算法学习记录</a><time datetime="2020-11-04T01:20:49.000Z" title="发表于 2020-11-04 09:20:49">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink"><img src="https://file.buildworld.cn/img/20200911110402.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData--分布式流数据流引擎Apache Flink"/></a><div class="content"><a class="title" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink">BigData--分布式流数据流引擎Apache Flink</a><time datetime="2020-09-11T02:59:30.000Z" title="发表于 2020-09-11 10:59:30">2020-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By MiChong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'mef0W501zi4VSjltsnmN5D9J-gzGzoHsz',
+      appKey: 'ktKil4OakXUNcSs0Ofkph1rm',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "7d002c40-fe0a-44eb-977b-a992eaed1e7c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

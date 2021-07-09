@@ -1,0 +1,359 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>BigData--Hadoop技术 | MiChong的🏡</title><meta name="keywords" content="Hadoop,HDFS,YARN,MapReduce"><meta name="author" content="MiChong,qjzxzxd@gmail.com"><meta name="copyright" content="MiChong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Hadoop是一个由Apache基金会所开发的分布式系统基础架构。用户可以在不了解分布式底层细节的情况下，开发分布式程序。充分利用集群的威力进行高速运算和存储。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BigData--Hadoop技术">
+<meta property="og:url" content="https://www.buildworld.cn/2020/05/22/BigData%E4%B9%8BHadoop%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="MiChong的🏡">
+<meta property="og:description" content="Hadoop是一个由Apache基金会所开发的分布式系统基础架构。用户可以在不了解分布式底层细节的情况下，开发分布式程序。充分利用集群的威力进行高速运算和存储。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://file.buildworld.cn/img/b7e15dd6cb0a651fd54bd82bf625939d_Cg-4WVPSElWIGdy1AABtPWOy4kQAAP6HAKPjYgAAG1V585.jpg">
+<meta property="article:published_time" content="2020-05-22T01:37:03.000Z">
+<meta property="article:modified_time" content="2020-05-22T08:48:37.617Z">
+<meta property="article:author" content="MiChong">
+<meta property="article:tag" content="Hadoop">
+<meta property="article:tag" content="HDFS">
+<meta property="article:tag" content="YARN">
+<meta property="article:tag" content="MapReduce">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.buildworld.cn/img/b7e15dd6cb0a651fd54bd82bf625939d_Cg-4WVPSElWIGdy1AABtPWOy4kQAAP6HAKPjYgAAG1V585.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.buildworld.cn/2020/05/22/BigData%E4%B9%8BHadoop%E6%8A%80%E6%9C%AF/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'BigData--Hadoop技术',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-05-22 16:48:37'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="MiChong的🏡" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://ae01.alicdn.com/kf/Hec817c4f0dc645feb89c62cf831f6ecem.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">MiChong的🏡</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">BigData--Hadoop技术</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-05-22T01:37:03.000Z" title="发表于 2020-05-22 09:37:03">2020-05-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-05-22T08:48:37.617Z" title="更新于 2020-05-22 16:48:37">2020-05-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/BigData/">BigData</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="BigData--Hadoop技术"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一、Hadoop组成"><a href="#一、Hadoop组成" class="headerlink" title="一、Hadoop组成"></a>一、Hadoop组成</h2><p><img src="http://myfile.buildworld.cn/Hadoop%E7%BB%84%E6%88%90.png" alt="image"></p>
+<h3 id="1、HDFS架构"><a href="#1、HDFS架构" class="headerlink" title="1、HDFS架构"></a>1、HDFS架构</h3><ul>
+<li>1）NameNode（nn）：存储文件的元数据，如文件名，文件目录结构，文件属性（生成时间、副本数、文件权限），以及每个文件的块列表和块所在的DataNode等</li>
+<li>2）DataNode(dn)：在本地文件系统存储文件块数据，以及块数据的校验和。</li>
+<li>3）Secondary NameNode(2nn)：用来监控HDFS状态的辅助后台程序，每隔一段时间获取HDFS元数据的快照</li>
+</ul>
+<h3 id="2、YARN架构"><a href="#2、YARN架构" class="headerlink" title="2、YARN架构"></a>2、YARN架构</h3><p><img src="http://myfile.buildworld.cn/YARN%E6%9E%B6%E6%9E%84.png" alt="image"></p>
+<h3 id="3、MapReduce架构"><a href="#3、MapReduce架构" class="headerlink" title="3、MapReduce架构"></a>3、MapReduce架构</h3><ul>
+<li>1）Map阶段并行处理输入数据</li>
+<li>2）Reduce阶段对Map结果进行汇总<br><img src="http://myfile.buildworld.cn/mapreduce.png" alt="image"></li>
+</ul>
+<h3 id="4、大数据技术生态体系"><a href="#4、大数据技术生态体系" class="headerlink" title="4、大数据技术生态体系"></a>4、大数据技术生态体系</h3><p><img src="https://file.buildworld.cn/img/20200522094812.png"></p>
+<h2 id="二、HDFS-Hadoop-Distribution-File-System"><a href="#二、HDFS-Hadoop-Distribution-File-System" class="headerlink" title="二、HDFS(Hadoop Distribution File System)"></a>二、HDFS(Hadoop Distribution File System)</h2><h3 id="1、优点"><a href="#1、优点" class="headerlink" title="1、优点"></a>1、优点</h3><p><img src="http://myfile.buildworld.cn/hdfs%E4%BC%98%E7%82%B9.png" alt="image"></p>
+<h3 id="2、缺点"><a href="#2、缺点" class="headerlink" title="2、缺点"></a>2、缺点</h3><p><img src="http://myfile.buildworld.cn/hdfs%E7%BC%BA%E7%82%B9.png" alt="image"></p>
+<h3 id="3、组织架构"><a href="#3、组织架构" class="headerlink" title="3、组织架构"></a>3、组织架构</h3><p><img src="http://myfile.buildworld.cn/hdfs%E7%BB%84%E7%BB%87%E6%9E%B6%E6%9E%84.png" alt="image"><br><img src="http://myfile.buildworld.cn/hdfs%E7%BB%84%E7%BB%87%E6%9E%B6%E6%9E%842.png" alt="image"></p>
+<h2 id="三、HDFS的数据流"><a href="#三、HDFS的数据流" class="headerlink" title="三、HDFS的数据流"></a>三、HDFS的数据流</h2><h3 id="1、HDFS写数据流程"><a href="#1、HDFS写数据流程" class="headerlink" title="1、HDFS写数据流程"></a>1、HDFS写数据流程</h3><p><img src="https://file.buildworld.cn/img/20200521213715.png"></p>
+<ul>
+<li>1）客户端通过Distributed FileSystem模块向NameNode请求上传文件，NameNode检查目标文件是否已存在，父目录是否存在。</li>
+<li>2）NameNode返回是否可以上传。</li>
+<li>3）客户端请求第一个 Block上传到哪几个DataNode服务器上。</li>
+<li>4）NameNode返回3个DataNode节点，分别为dn1、dn2、dn3。</li>
+<li>5）客户端通过FSDataOutputStream模块请求dn1上传数据，dn1收到请求会继续调用dn2，然后dn2调用dn3，将这个通信管道建立完成。</li>
+<li>6）dn1、dn2、dn3逐级应答客户端。</li>
+<li>7）客户端开始往dn1上传第一个Block（先从磁盘读取数据放到一个本地内存缓存），以Packet为单位，dn1收到一个Packet就会传给dn2，dn2传给dn3；dn1每传一个packet会放入一个应答队列等待应答。</li>
+<li>8）当一个Block传输完成之后，客户端再次请求NameNode上传第二个Block的服务器。（重复执行3-7步）。</li>
+</ul>
+<h3 id="2、HDFS读数据流程"><a href="#2、HDFS读数据流程" class="headerlink" title="2、HDFS读数据流程"></a>2、HDFS读数据流程</h3><p><img src="https://file.buildworld.cn/img/20200521213817.png"></p>
+<h3 id="3、网络拓扑-节点距离计算"><a href="#3、网络拓扑-节点距离计算" class="headerlink" title="3、网络拓扑-节点距离计算"></a>3、网络拓扑-节点距离计算</h3><blockquote>
+<p>节点距离：两个节点到达最近的共同祖先的距离总和。</p>
+</blockquote>
+<h3 id="常用命令实操"><a href="#常用命令实操" class="headerlink" title="常用命令实操"></a>常用命令实操</h3><p>（0）启动Hadoop集群（方便后续的测试）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ sbin/start-dfs.sh</span><br><span class="line">[atguigu@hadoop103 hadoop-2.7.2]$ sbin/start-yarn.sh</span><br></pre></td></tr></table></figure>
+
+<p>（1）-help：输出这个命令参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -help rm</span><br></pre></td></tr></table></figure>
+
+<p>（2）-ls: 显示目录信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -ls /</span><br></pre></td></tr></table></figure>
+
+<p>（3）-mkdir：在HDFS上创建目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -mkdir -p /sanguo/shuguo</span><br></pre></td></tr></table></figure>
+
+<p>（4）-moveFromLocal：从本地剪切粘贴到HDFS</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ touch kongming.txt</span><br><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs  -moveFromLocal  ./kongming.txt  /sanguo/shuguo</span><br></pre></td></tr></table></figure>
+
+<p>（5）-appendToFile：追加一个文件到已经存在的文件末尾</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ touch liubei.txt</span><br><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ vi liubei.txt</span><br></pre></td></tr></table></figure>
+
+<p>输入</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">san gu mao lu</span><br><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -appendToFile liubei.txt /sanguo/shuguo/kongming.txt</span><br></pre></td></tr></table></figure>
+
+<p>（6）-cat：显示文件内容</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -cat /sanguo/shuguo/kongming.txt</span><br></pre></td></tr></table></figure>
+
+<p>（7）-chgrp 、-chmod、-chown：Linux文件系统中的用法一样，修改文件所属权限</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs  -chmod  666  /sanguo/shuguo/kongming.txt</span><br><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs  -chown  atguigu:atguigu   /sanguo/shuguo/kongming.txt</span><br></pre></td></tr></table></figure>
+
+<p>（8）-copyFromLocal：从本地文件系统中拷贝文件到HDFS路径去</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -copyFromLocal README.txt /</span><br></pre></td></tr></table></figure>
+
+<p>（9）-copyToLocal：从HDFS拷贝到本地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -copyToLocal /sanguo/shuguo/kongming.txt ./</span><br></pre></td></tr></table></figure>
+
+<p>（10）-cp ：从HDFS的一个路径拷贝到HDFS的另一个路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -cp /sanguo/shuguo/kongming.txt /zhuge.txt</span><br></pre></td></tr></table></figure>
+
+<p>（11）-mv：在HDFS目录中移动文件</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -mv /zhuge.txt /sanguo/shuguo/</span><br></pre></td></tr></table></figure>
+
+<p>（12）-get：等同于copyToLocal，就是从HDFS下载文件到本地</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -get /sanguo/shuguo/kongming.txt ./</span><br></pre></td></tr></table></figure>
+
+<p>（13）-getmerge：合并下载多个文件，比如HDFS的<br>目录 /user/atguigu/test下有多个文件:log.1, log.2,log.3,…</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -getmerge /user/atguigu/test/* ./zaiyiqi.txt</span><br></pre></td></tr></table></figure>
+
+<p>（14）-put：等同于copyFromLocal</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -put ./zaiyiqi.txt /user/atguigu/test/</span><br></pre></td></tr></table></figure>
+
+<p>（15）-tail：显示一个文件的末尾</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -tail /sanguo/shuguo/kongming.txt</span><br></pre></td></tr></table></figure>
+
+<p>（16）-rm：删除文件或文件夹</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -rm /user/atguigu/test/jinlian2.txt</span><br></pre></td></tr></table></figure>
+
+<p>（17）-rmdir：删除空目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -mkdir /test</span><br><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -rmdir /test</span><br></pre></td></tr></table></figure>
+
+<p>（18）-du统计文件夹的大小信息</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -du -s -h /user/atguigu/test</span><br><span class="line">2.7 K  /user/atguigu/test</span><br><span class="line"></span><br><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -du  -h /user/atguigu/test</span><br><span class="line">1.3 K  /user/atguigu/test/README.txt</span><br><span class="line">15     /user/atguigu/test/jinlian.txt</span><br><span class="line">1.4 K  /user/atguigu/test/zaiyiqi.txt</span><br></pre></td></tr></table></figure>
+
+<p>（19）-setrep：设置HDFS中文件的副本数量</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[atguigu@hadoop102 hadoop-2.7.2]$ hadoop fs -setrep 10 /sanguo/shuguo/kongming.txt</span><br></pre></td></tr></table></figure>
+
+
+<p><strong>假设有数据中心d1机架r1中的节点n1。该节点可以表示为/d1/r1/n1。</strong></p>
+<p><img src="https://file.buildworld.cn/img/20200521221124.png"></p>
+<h2 id="四、NN-amp-amp-2NN"><a href="#四、NN-amp-amp-2NN" class="headerlink" title="四、NN &amp;&amp; 2NN"></a>四、NN &amp;&amp; 2NN</h2><h3 id="1、NameNode工作机制"><a href="#1、NameNode工作机制" class="headerlink" title="1、NameNode工作机制"></a>1、NameNode工作机制</h3><p><strong>NameNode中的元数据是存储在哪里的？</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">    首先，我们做个假设，如果存储在NameNode节点的磁盘中，因为经常需要进行随机访问，还有响应客户请求，必然是效率过低。</span><br><span class="line">因此，元数据需要存放在内存中。但如果只存在内存中，一旦断电，元数据丢失，整个集群就无法工作了。因此产生在磁盘中备份元数据的FsImage。</span><br><span class="line"></span><br><span class="line">    这样又会带来新的问题，当在内存中的元数据更新时，如果同时更新FsImage，就会导致效率过低，但如果不更新，就会发生一致性问题，</span><br><span class="line">一旦NameNode节点断电，就会产生数据丢失。因此，引入Edits文件(只进行追加操作，效率很高)。每当元数据有更新或者添加元数据时，</span><br><span class="line">修改内存中的元数据并追加到Edits中。这样，一旦NameNode节点断电，可以通过FsImage和Edits的合并，合成元数据。</span><br><span class="line"></span><br><span class="line">    但是，如果长时间添加数据到Edits中，会导致该文件数据过大，效率降低，而且一旦断电，恢复元数据需要的时间过长。</span><br><span class="line">因此，需要定期进行FsImage和Edits的合并，如果这个操作由NameNode节点完成，又会效率过低。因此，引入一个新的节点SecondaryNamenode，</span><br><span class="line">专门用于FsImage和Edits的合并。</span><br></pre></td></tr></table></figure>
+<p><strong>Fsimage：NameNode内存中元数据序列化后形成的文件。</strong><br><strong>Edits：记录客户端更新元数据信息的每一步操作（可通过Edits运算出元数据）。</strong></p>
+<h5 id="下图为NN和2NN工作机制"><a href="#下图为NN和2NN工作机制" class="headerlink" title="下图为NN和2NN工作机制"></a>下图为NN和2NN工作机制</h5><p><img src="http://myfile.buildworld.cn/NameNode%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6.png" alt="NN和2NN工作机制">  </p>
+<h2 id="五、DataNode"><a href="#五、DataNode" class="headerlink" title="五、DataNode"></a>五、DataNode</h2><h3 id="1、DataNode工作机制"><a href="#1、DataNode工作机制" class="headerlink" title="1、DataNode工作机制"></a>1、DataNode工作机制</h3><p><img src="https://file.buildworld.cn/img/20200522143452.png"></p>
+<h3 id="2、数据完整性"><a href="#2、数据完整性" class="headerlink" title="2、数据完整性"></a>2、数据完整性</h3><ul>
+<li>1）当DataNode读取Block的时候，它会计算CheckSum。</li>
+<li>2）如果计算后的CheckSum，与Block创建时值不一样，说明Block已经损坏。</li>
+<li>3）Client读取其他DataNode上的Block。</li>
+<li>4）DataNode在其文件创建后周期验证CheckSum。</li>
+</ul>
+<p><img src="https://file.buildworld.cn/img/20200522152850.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:qjzxzxd@gmail.com">MiChong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.buildworld.cn/2020/05/22/BigData%E4%B9%8BHadoop%E6%8A%80%E6%9C%AF/">https://www.buildworld.cn/2020/05/22/BigData%E4%B9%8BHadoop%E6%8A%80%E6%9C%AF/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.buildworld.cn" target="_blank">MiChong的🏡</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Hadoop/">Hadoop</a><a class="post-meta__tags" href="/tags/HDFS/">HDFS</a><a class="post-meta__tags" href="/tags/YARN/">YARN</a><a class="post-meta__tags" href="/tags/MapReduce/">MapReduce</a></div><div class="post_share"><div class="social-share" data-image="https://file.buildworld.cn/img/b7e15dd6cb0a651fd54bd82bf625939d_Cg-4WVPSElWIGdy1AABtPWOy4kQAAP6HAKPjYgAAG1V585.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/05/23/BigData-Hadoop2-x%E6%96%B0%E7%89%B9%E6%80%A7%E4%B9%8BHA/"><img class="prev-cover" src="https://ae01.alicdn.com/kf/H326912a669954a64891d011f0bee71368.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">BigData--Hadoop2.x新特性之HA</div></div></a></div><div class="next-post pull-right"><a href="/2020/05/19/TensorFlow2-X%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-8-TensorFlow%E9%AB%98%E9%98%B6API%E4%B9%8B%E6%9E%84%E5%BB%BA%E6%A8%A1%E5%9E%8B%E3%80%81%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B/"><img class="next-cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">TensorFlow2.X学习笔记(8)--TensorFlow高阶API之构建模型、训练模型</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/05/23/BigData-Hadoop2-x新特性之HA/" title="BigData--Hadoop2.x新特性之HA"><img class="cover" src="https://ae01.alicdn.com/kf/H326912a669954a64891d011f0bee71368.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-23</div><div class="title">BigData--Hadoop2.x新特性之HA</div></div></a></div><div><a href="/2020/05/24/BigData-MapReduce入门/" title="BigData--MapReduce入门"><img class="cover" src="https://ae01.alicdn.com/kf/H675a31a08d4b4015ab2bd5886ce81979C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-24</div><div class="title">BigData--MapReduce入门</div></div></a></div><div><a href="/2020/05/26/BigData-MapReduce进阶-一-之框架原理/" title="BigData--MapReduce进阶(一)之框架原理"><img class="cover" src="https://ae01.alicdn.com/kf/H675a31a08d4b4015ab2bd5886ce81979C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-26</div><div class="title">BigData--MapReduce进阶(一)之框架原理</div></div></a></div><div><a href="/2020/06/01/BigData-MapReduce进阶-二-之工作机制/" title="BigData--MapReduce进阶(二)之工作机制"><img class="cover" src="https://ae01.alicdn.com/kf/H675a31a08d4b4015ab2bd5886ce81979C.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-01</div><div class="title">BigData--MapReduce进阶(二)之工作机制</div></div></a></div><div><a href="/2020/07/01/BigData-Flume框架/" title="BigData--Apache Flume框架"><img class="cover" src="https://ae01.alicdn.com/kf/H3cae0a1814934caa9a43090c0c041653e.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-01</div><div class="title">BigData--Apache Flume框架</div></div></a></div><div><a href="/2020/06/03/BigData-Hadoop数据压缩/" title="BigData--Hadoop数据压缩"><img class="cover" src="https://file.buildworld.cn/img/b2b1da7192e883d1e9b068e562692596_u=3289803254,2227787275&fm=26&gp=0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-06-03</div><div class="title">BigData--Hadoop数据压缩</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MiChong</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MiChongGET"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/qjzxzxd@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到米虫的小站，一起加油🤝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Hadoop%E7%BB%84%E6%88%90"><span class="toc-number">1.</span> <span class="toc-text">一、Hadoop组成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81HDFS%E6%9E%B6%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">1、HDFS架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81YARN%E6%9E%B6%E6%9E%84"><span class="toc-number">1.2.</span> <span class="toc-text">2、YARN架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81MapReduce%E6%9E%B6%E6%9E%84"><span class="toc-number">1.3.</span> <span class="toc-text">3、MapReduce架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%8A%80%E6%9C%AF%E7%94%9F%E6%80%81%E4%BD%93%E7%B3%BB"><span class="toc-number">1.4.</span> <span class="toc-text">4、大数据技术生态体系</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81HDFS-Hadoop-Distribution-File-System"><span class="toc-number">2.</span> <span class="toc-text">二、HDFS(Hadoop Distribution File System)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E4%BC%98%E7%82%B9"><span class="toc-number">2.1.</span> <span class="toc-text">1、优点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E7%BC%BA%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text">2、缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E7%BB%84%E7%BB%87%E6%9E%B6%E6%9E%84"><span class="toc-number">2.3.</span> <span class="toc-text">3、组织架构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81HDFS%E7%9A%84%E6%95%B0%E6%8D%AE%E6%B5%81"><span class="toc-number">3.</span> <span class="toc-text">三、HDFS的数据流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81HDFS%E5%86%99%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B"><span class="toc-number">3.1.</span> <span class="toc-text">1、HDFS写数据流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81HDFS%E8%AF%BB%E6%95%B0%E6%8D%AE%E6%B5%81%E7%A8%8B"><span class="toc-number">3.2.</span> <span class="toc-text">2、HDFS读数据流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E7%BD%91%E7%BB%9C%E6%8B%93%E6%89%91-%E8%8A%82%E7%82%B9%E8%B7%9D%E7%A6%BB%E8%AE%A1%E7%AE%97"><span class="toc-number">3.3.</span> <span class="toc-text">3、网络拓扑-节点距离计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E5%AE%9E%E6%93%8D"><span class="toc-number">3.4.</span> <span class="toc-text">常用命令实操</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81NN-amp-amp-2NN"><span class="toc-number">4.</span> <span class="toc-text">四、NN &amp;&amp; 2NN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81NameNode%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">4.1.</span> <span class="toc-text">1、NameNode工作机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8B%E5%9B%BE%E4%B8%BANN%E5%92%8C2NN%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">4.1.0.1.</span> <span class="toc-text">下图为NN和2NN工作机制</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81DataNode"><span class="toc-number">5.</span> <span class="toc-text">五、DataNode</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81DataNode%E5%B7%A5%E4%BD%9C%E6%9C%BA%E5%88%B6"><span class="toc-number">5.1.</span> <span class="toc-text">1、DataNode工作机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E6%95%B0%E6%8D%AE%E5%AE%8C%E6%95%B4%E6%80%A7"><span class="toc-number">5.2.</span> <span class="toc-text">2、数据完整性</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/06/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/07/06/hello-world/" title="Hello World">Hello World</a><time datetime="2021-07-06T05:12:56.084Z" title="发表于 2021-07-06 13:12:56">2021-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合"><img src="https://file.buildworld.cn/img/20210209161641.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode数据库题目集合"/></a><div class="content"><a class="title" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合">LeetCode数据库题目集合</a><time datetime="2021-02-09T08:13:56.000Z" title="发表于 2021-02-09 16:13:56">2021-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习"><img src="https://file.buildworld.cn/img/20210107194133.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData-数据仓库学习"/></a><div class="content"><a class="title" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习">BigData-数据仓库学习</a><time datetime="2021-01-07T11:35:36.000Z" title="发表于 2021-01-07 19:35:36">2021-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录"><img src="https://file.buildworld.cn/img/20201104092750.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法学习记录"/></a><div class="content"><a class="title" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录">算法学习记录</a><time datetime="2020-11-04T01:20:49.000Z" title="发表于 2020-11-04 09:20:49">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink"><img src="https://file.buildworld.cn/img/20200911110402.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData--分布式流数据流引擎Apache Flink"/></a><div class="content"><a class="title" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink">BigData--分布式流数据流引擎Apache Flink</a><time datetime="2020-09-11T02:59:30.000Z" title="发表于 2020-09-11 10:59:30">2020-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By MiChong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'mef0W501zi4VSjltsnmN5D9J-gzGzoHsz',
+      appKey: 'ktKil4OakXUNcSs0Ofkph1rm',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "7d002c40-fe0a-44eb-977b-a992eaed1e7c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

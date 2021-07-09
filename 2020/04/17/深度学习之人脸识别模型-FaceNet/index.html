@@ -1,0 +1,390 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>深度学习之人脸识别模型--FaceNet | MiChong的🏡</title><meta name="keywords" content="Python,TensorFlow,FaceNet"><meta name="author" content="MiChong,qjzxzxd@gmail.com"><meta name="copyright" content="MiChong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="FaceNet网络模型一般用于人脸识别中，使用TensorFlow深度学习框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习之人脸识别模型--FaceNet">
+<meta property="og:url" content="https://www.buildworld.cn/2020/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E6%A8%A1%E5%9E%8B-FaceNet/index.html">
+<meta property="og:site_name" content="MiChong的🏡">
+<meta property="og:description" content="FaceNet网络模型一般用于人脸识别中，使用TensorFlow深度学习框架">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://file.buildworld.cn/img/a11365232a0778a4321b77dd70fd1341_t01f7960acb86d562df.jpg">
+<meta property="article:published_time" content="2020-04-17T05:02:52.000Z">
+<meta property="article:modified_time" content="2020-07-07T11:46:42.770Z">
+<meta property="article:author" content="MiChong">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="TensorFlow">
+<meta property="article:tag" content="FaceNet">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.buildworld.cn/img/a11365232a0778a4321b77dd70fd1341_t01f7960acb86d562df.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.buildworld.cn/2020/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E6%A8%A1%E5%9E%8B-FaceNet/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '深度学习之人脸识别模型--FaceNet',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2020-07-07 19:46:42'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="MiChong的🏡" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://ae01.alicdn.com/kf/H2b74e480888c44eb9fc5f23f770af288N.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">MiChong的🏡</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">深度学习之人脸识别模型--FaceNet</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-04-17T05:02:52.000Z" title="发表于 2020-04-17 13:02:52">2020-04-17</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-07-07T11:46:42.770Z" title="更新于 2020-07-07 19:46:42">2020-07-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/">人脸识别</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="深度学习之人脸识别模型--FaceNet"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h3 id="一、FaceNet模型"><a href="#一、FaceNet模型" class="headerlink" title="一、FaceNet模型"></a>一、FaceNet模型</h3><h4 id="1-、FaceNet源码仓库，本地代码存放在facenet-master文件夹下面"><a href="#1-、FaceNet源码仓库，本地代码存放在facenet-master文件夹下面" class="headerlink" title="(1)、FaceNet源码仓库，本地代码存放在facenet-master文件夹下面"></a>(1)、FaceNet源码仓库，本地代码存放在facenet-master文件夹下面</h4><p>​            <a target="_blank" rel="noopener" href="https://github.com/davidsandberg/facenet">https://github.com/davidsandberg/facenet</a></p>
+<h4 id="2-、FaceNet源码解读（网友解读版一），代码存放在understand-facenet文件夹下"><a href="#2-、FaceNet源码解读（网友解读版一），代码存放在understand-facenet文件夹下" class="headerlink" title="(2)、FaceNet源码解读（网友解读版一），代码存放在understand_facenet文件夹下"></a>(2)、FaceNet源码解读（网友解读版一），代码存放在understand_facenet文件夹下</h4><p>​            <a target="_blank" rel="noopener" href="https://blog.csdn.net/u013044310/article/details/79556099">https://blog.csdn.net/u013044310/article/details/79556099</a><br>​            <a target="_blank" rel="noopener" href="https://github.com/boyliwensheng/understand_facenet%EF%BC%88%E9%85%8D%E5%A5%97%E6%BA%90%E7%A0%81%E5%9C%B0%E5%9D%80%EF%BC%89">https://github.com/boyliwensheng/understand_facenet（配套源码地址）</a></p>
+<h4 id="3-、FaceNet源码解读（网友解读版二），代码存放在facenet-master文件夹下"><a href="#3-、FaceNet源码解读（网友解读版二），代码存放在facenet-master文件夹下" class="headerlink" title="(3)、FaceNet源码解读（网友解读版二），代码存放在facenet-master文件夹下"></a>(3)、FaceNet源码解读（网友解读版二），代码存放在facenet-master文件夹下</h4><p>​            <a target="_blank" rel="noopener" href="https://blog.csdn.net/huangshaoyin/article/details/81034551">https://blog.csdn.net/huangshaoyin/article/details/81034551</a></p>
+<h4 id="4-、triplet-reid源码地址"><a href="#4-、triplet-reid源码地址" class="headerlink" title="(4)、triplet-reid源码地址"></a>(4)、triplet-reid源码地址</h4><p>​            <a target="_blank" rel="noopener" href="https://github.com/VisualComputingInstitute/triplet-reid">https://github.com/VisualComputingInstitute/triplet-reid</a></p>
+<h4 id="5-、FaceNet源码解读-网友解读版三-，（2）是在借鉴此作者的博客，"><a href="#5-、FaceNet源码解读-网友解读版三-，（2）是在借鉴此作者的博客，" class="headerlink" title="(5)、FaceNet源码解读(网友解读版三)，（2）是在借鉴此作者的博客，"></a>(5)、FaceNet源码解读(网友解读版三)，（2）是在借鉴此作者的博客，</h4><ul>
+<li>本篇博客也提供了各种人脸数据集的介绍和<code>预模型</code>的下载<pre><code>      https://blog.csdn.net/MrCharles/article/details/80360461
+</code></pre>
+</li>
+</ul>
+<h3 id="二、人脸匹配数据准备"><a href="#二、人脸匹配数据准备" class="headerlink" title="二、人脸匹配数据准备"></a>二、人脸匹配数据准备</h3><h4 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h4><ul>
+<li>tensorflow==1.7</li>
+<li>scipy</li>
+<li>scikit-learn</li>
+<li>opencv-python</li>
+<li>h5py</li>
+<li>matplotlib</li>
+<li>Pillow</li>
+<li>requests</li>
+<li>psutil</li>
+</ul>
+<h4 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h4><ul>
+<li>LFW  下载地址：<a target="_blank" rel="noopener" href="http://vis-www.cs.umass.edu/lfw/#views">http://vis-www.cs.umass.edu/lfw/#views</a>  谷歌网盘（需要梯子）：<a target="_blank" rel="noopener" href="https://drive.google.com/drive/u/0/folders/0B7EVK8r0v71pQ3NzdzRhVUhSams">https://drive.google.com/drive/u/0/folders/0B7EVK8r0v71pQ3NzdzRhVUhSams</a></li>
+<li>Celeba 下载地址：<a target="_blank" rel="noopener" href="http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html">http://mmlab.ie.cuhk.edu.hk/projects/CelebA.html</a></li>
+<li>VGGface2</li>
+<li>CASIA-WebFace</li>
+<li>CASIA-faceV5</li>
+<li>更多人脸数据集请看：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/ansang/p/8137413.html">https://www.cnblogs.com/ansang/p/8137413.html</a></li>
+</ul>
+<h4 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h4><ul>
+<li><p>文件夹名/文件夹名_文件名</p>
+</li>
+<li><p>同一个热的图片放在相同文件夹</p>
+</li>
+</ul>
+<h4 id="Pre-trained-models"><a href="#Pre-trained-models" class="headerlink" title="Pre-trained models"></a>Pre-trained models</h4><ul>
+<li> <a target="_blank" rel="noopener" href="https://blog.csdn.net/MrCharles/article/details/80360461">https://blog.csdn.net/MrCharles/article/details/80360461</a>  （一）中的第五点</li>
+</ul>
+<p><img src="https://ae01.alicdn.com/kf/Hbea52004ac754ea7a7883812f23fade2N.png"></p>
+<p>模型下载链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1aiSq7wGpdHIe6MUKPnXgrA">https://pan.baidu.com/s/1aiSq7wGpdHIe6MUKPnXgrA</a> 密码：4dcn</p>
+<blockquote>
+<p>20170512-110547（MS-Celeb-1M数据集训练的模型文件，微软人脸识别数据库，名人榜选择前100万名人，搜索引擎采集每个名人100张人脸图片。预训练模型准确率0.993+-0.004）</p>
+</blockquote>
+<h4 id="Inception-ResNet-v1-模型图"><a href="#Inception-ResNet-v1-模型图" class="headerlink" title="Inception ResNet v1 模型图"></a>Inception ResNet v1 模型图</h4><img src="https://ae01.alicdn.com/kf/Hd053b820ced845f58090b433d513c8f3o.png" style="zoom:80%;" />
+
+
+<h3 id="三、一些问题"><a href="#三、一些问题" class="headerlink" title="三、一些问题"></a>三、一些问题</h3><h4 id="1、解决出现ModuleNotFoundError-No-module-named-39-facenet-39-异常"><a href="#1、解决出现ModuleNotFoundError-No-module-named-39-facenet-39-异常" class="headerlink" title="1、解决出现ModuleNotFoundError: No module named &#39;facenet&#39;异常"></a>1、解决出现<code>ModuleNotFoundError: No module named &#39;facenet&#39;</code>异常</h4><ul>
+<li>a.在cmd（需要管理员权限）命令行键入：set PYTHONPATH=…\facenet\src, 例如笔者的是:set PYTHONPATH=D:\Python\Work\face-system\face-net\facenet-master\src</li>
+<li>b.在 计算机–&gt;属性–&gt;高级系统设置–&gt;环境变量 中,新建PYTHONPATH,键入 D:\Python\Work\face-system\face-net\facenet-master\src</li>
+<li>c.如果使用pycharm，请记得重启pycharm</li>
+</ul>
+<h4 id="2、重新裁剪LFM图片数据集的大小"><a href="#2、重新裁剪LFM图片数据集的大小" class="headerlink" title="2、重新裁剪LFM图片数据集的大小"></a>2、重新裁剪LFM图片数据集的大小</h4><blockquote>
+<p>程序中神经网络使用的是谷歌的“inception resnet v1”网络模型，这个模型的输入时160x160的图像，而我们下载的LFW数据集是250x250限像素的图像，所以需要进行图片的预处理。</p>
+</blockquote>
+<ul>
+<li>原本数据集放在raw文件夹下面，新裁剪的图片放在ifw_160文件夹下面</li>
+</ul>
+<p>data/lfw/raw ：D:\Python\Work\face-system\face-net\facenet-master\data\ifw\raw<br>data/lfw/lfw_160：D:\Python\Work\face-system\face-net\facenet-master\data\ifw\ifw_160</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 运行脚本，记得将图片文件夹修改为自己的文件夹目录</span></span><br><span class="line">python src\align\align_dataset_mtcnn.py data/lfw/raw data/lfw/lfw_160 --image_size 160 --margin 32</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>pycharm中运行记得修改成下面这样</li>
+</ul>
+<p><img src="https://ae01.alicdn.com/kf/H8bfbd1bb2f2b474681a4a92b42731c65U.png"></p>
+<h4 id="3、评估预训练模型的准确率"><a href="#3、评估预训练模型的准确率" class="headerlink" title="3、评估预训练模型的准确率"></a>3、评估预训练模型的准确率</h4><h5 id="1）、模型下载"><a href="#1）、模型下载" class="headerlink" title="1）、模型下载"></a>1）、模型下载</h5><blockquote>
+<p>facenet提供了两个预训练模型，分别是基于CASIA-WebFace和MS-Celeb-1M人脸库训练的，不过需要去谷歌网盘下载，这里给其中一个模型的百度网盘的链接：</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1LLPIitZhXVI_V3ifZ10XNg#list/path=%2F">https://pan.baidu.com/s/1LLPIitZhXVI_V3ifZ10XNg#list/path=%2F</a> 密码: 12mh</p>
+<blockquote>
+<p>模型放在data文件夹下，没有就创建</p>
+</blockquote>
+<h5 id="2）、运行脚本"><a href="#2）、运行脚本" class="headerlink" title="2）、运行脚本"></a>2）、运行脚本</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 运行脚本,同样的，目录改为自己的</span></span><br><span class="line">data\lfw\lfw_160：D:\\Python\\Work\\face-system\\face-net\\facenet-master\\data\\ifw\\ifw_160</span><br><span class="line">src\models\20180408-102900：D:\\Python\\Work\\face-system\\face-net\\facenet-master\\data\\models\\20180408-102900</span><br><span class="line"></span><br><span class="line">Python src\validate_on_lfw.py data\lfw\lfw_160 src\models\20180408-102900</span><br></pre></td></tr></table></figure>
+<ul>
+<li>安装网络上面的做法会出现错误，是应为data/pairs.txt读取不到，所以需要在运行脚本上面加上`–lfw_pairs=txt的地址<br><img src="https://ae01.alicdn.com/kf/H9f8ff6240a024da4821d07c405654677G.png"></li>
+</ul>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">运行脚本,同样的，目录改为自己的</span><br><span class="line"></span><br><span class="line">data\lfw\lfw_160：D:\\Python\\Work\\face-system\\face-net\\facenet-master\\data\\ifw\\ifw_160</span><br><span class="line">src\models\20180408-102900：D:\\Python\\Work\\face-system\\face-net\\facenet-master\\data\\models\\20180408-102900</span><br><span class="line">data/pairs.txt：D:\\Python\\Work\\face-system\\face-net\\facenet-master\\data\\pairs.txt</span><br><span class="line"></span><br><span class="line">Python src\validate_on_lfw.py data\lfw\lfw_160 src\models\20180408-102900 --lfw_pairs=data/pairs.txt</span><br></pre></td></tr></table></figure>
+
+<h5 id="3-、TensorFlow版本导致报错"><a href="#3-、TensorFlow版本导致报错" class="headerlink" title="3)、TensorFlow版本导致报错"></a>3)、TensorFlow版本导致报错</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">2020-04-17 00:27:11.307949: W tensorflow/core/graph/graph_constructor.cc:1272] Importing a graph with a lower producer version 24 into an existing graph with producer version 27. Shape inference will have run different parts of the graph with different producer versions.</span><br><span class="line">Traceback (most recent call last):</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>解决方案</p>
+<p>1.把Tensorflow换为1.7版本的；</p>
+<p>2.在<code>facenet.py</code>代码中找到<code>create_input_pipeline</code> 再添加一行语句<code> with tf.name_scope(&quot;tempscope&quot;):</code> 就可以完美解决（貌似Tensorflow 1.10及以上版本才修复这个bug）。</p>
+<p><img src="https://ae01.alicdn.com/kf/H2eb7b8dc5d984ecca4f52703467fb45b0.png"></p>
+</li>
+<li><p>运行结果，可以看出，模型的精度高达99.7%</p>
+<img src="https://ae01.alicdn.com/kf/Hbe49c52d5942488fbed1296a0514254cW.png" style="zoom: 80%;" /></li>
+</ul>
+<h4 id="4、人脸对比程序运行"><a href="#4、人脸对比程序运行" class="headerlink" title="4、人脸对比程序运行"></a>4、人脸对比程序运行</h4><blockquote>
+<p>FaceNet可以对比两张人脸图片，可以得出他们的经过网络映射之后的欧式距离，相同的人脸的距离越小。</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 参数：第一个参数为预模型的地址，第二个和第三个参数为图片的地址</span></span><br><span class="line">python src\compare.py </span><br><span class="line">D:\\Python\\Work\\face-system\\face-net\\facenet-master\\data\\models\\20180408-102900</span><br><span class="line">D:\\Python\\Work\\face-system\\face-net\\facenet-master\\data\\ifw\\ifw_160\\Aaron_Eckhart\\Aaron_Eckhart_0001.png</span><br><span class="line">D:\\Python\\Work\\face-system\\face-net\\facenet-master\\data\\ifw\\ifw_160\\Aaron_Guiel\\Aaron_Guiel_0001.png</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>pycharm中运行记得修改成下面这样:<br><img src="https://ae01.alicdn.com/kf/Ha03a9c0a688b4b7fa4352fe0ab5f59270.png"></p>
+</li>
+<li><p>运行结果如下：</p>
+</li>
+</ul>
+<p><img src="https://ae01.alicdn.com/kf/H1ee064785b9a455b88ec83ccd54999d06.png"></p>
+<h4 id="5、GPU内存溢出问题，已经解决"><a href="#5、GPU内存溢出问题，已经解决" class="headerlink" title="5、GPU内存溢出问题，已经解决"></a>5、GPU内存溢出问题，已经解决</h4><blockquote>
+<p>在<code>detect_face.py</code>中加入下面的配置，防止出现GPU内存不足报错，放在代码靠前的位置</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">config = tf.ConfigProto(allow_soft_placement=<span class="literal">True</span>)</span><br><span class="line">gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=<span class="number">0.5</span>) <span class="comment">#此处调整GPU的利用率</span></span><br><span class="line">config.gpu_options.allow_growth = <span class="literal">True</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="四、相关函数"><a href="#四、相关函数" class="headerlink" title="四、相关函数"></a>四、相关函数</h3><h4 id="1、主要函数"><a href="#1、主要函数" class="headerlink" title="1、主要函数"></a>1、主要函数</h4><ul>
+<li>align/ ：用于人脸检测与人脸对齐的神经网络</li>
+<li>facenet ：用于人脸映射的神经网络</li>
+<li>util/plot_learning_curves.m:这是用来在训练softmax模型的时候用matlab显示训练过程的程序</li>
+</ul>
+<h4 id="2、facenet-contributed-相关函数："><a href="#2、facenet-contributed-相关函数：" class="headerlink" title="2、facenet/contributed/相关函数："></a>2、facenet/contributed/相关函数：</h4><h5 id="1）、基于mtcnn与facenet的人脸聚类"><a href="#1）、基于mtcnn与facenet的人脸聚类" class="headerlink" title="1）、基于mtcnn与facenet的人脸聚类"></a>1）、基于mtcnn与facenet的人脸聚类</h5><blockquote>
+<p>代码：<code>facenet/contributed/cluster.py</code>（<code>facenet/contributed/clustering.py</code>实现了相似的功能，只是没有<code>mtcnn</code>进行检测这一步）</p>
+</blockquote>
+<p>主要功能：</p>
+<ul>
+<li><p>① 使用<code>mtcnn</code>进行人脸检测并对齐与裁剪</p>
+</li>
+<li><p>② 对裁剪的人脸使用<code>facenet</code>进行<code>embedding</code></p>
+</li>
+<li><p>③ 对<code>embedding</code>的特征向量使用欧式距离进行聚类</p>
+</li>
+</ul>
+<h5 id="2）、基于mtcnn与facenet的人脸识别（输入单张图片判断这人是谁）"><a href="#2）、基于mtcnn与facenet的人脸识别（输入单张图片判断这人是谁）" class="headerlink" title="2）、基于mtcnn与facenet的人脸识别（输入单张图片判断这人是谁）"></a>2）、基于mtcnn与facenet的人脸识别（输入单张图片判断这人是谁）</h5><blockquote>
+<p>代码：<code>facenet/contributed/predict.py</code></p>
+</blockquote>
+<p>主要功能：</p>
+<ul>
+<li><p>① 使用<code>mtcnn</code>进行人脸检测并对齐与裁剪</p>
+</li>
+<li><p>② 对裁剪的人脸使用<code>facenet</code>进行<code>embedding</code></p>
+</li>
+<li><p>③ 执行<code>predict.py</code>进行人脸识别（需要训练好的svm模型）</p>
+</li>
+</ul>
+<h5 id="3）、以numpy数组的形式输出人脸聚类和图像标签"><a href="#3）、以numpy数组的形式输出人脸聚类和图像标签" class="headerlink" title="3）、以numpy数组的形式输出人脸聚类和图像标签"></a>3）、以numpy数组的形式输出人脸聚类和图像标签</h5><p>代码：<code>facenet/contributed/export_embeddings.py</code></p>
+<p>主要功能：</p>
+<ul>
+<li><p>① 需要对数据进行对齐与裁剪做为输入数据</p>
+</li>
+<li><p>② 输出<code>embeddings.npy</code>；<code>labels.npy</code>；<code>label_strings.npy</code></p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:qjzxzxd@gmail.com">MiChong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.buildworld.cn/2020/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E6%A8%A1%E5%9E%8B-FaceNet/">https://www.buildworld.cn/2020/04/17/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E4%B9%8B%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E6%A8%A1%E5%9E%8B-FaceNet/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.buildworld.cn" target="_blank">MiChong的🏡</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Python/">Python</a><a class="post-meta__tags" href="/tags/TensorFlow/">TensorFlow</a><a class="post-meta__tags" href="/tags/FaceNet/">FaceNet</a></div><div class="post_share"><div class="social-share" data-image="https://file.buildworld.cn/img/a11365232a0778a4321b77dd70fd1341_t01f7960acb86d562df.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/04/29/TensorFlow2-X%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0-1-TensorFlow%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5/"><img class="prev-cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">TensorFlow2.X学习笔记(1)--TensorFlow核心概念</div></div></a></div><div class="next-post pull-right"><a href="/2020/04/01/Java%E5%B8%B8%E7%94%A8%E7%9A%84%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><img class="next-cover" src="https://file.buildworld.cn/img/20200401101919.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Java常用的设计模式</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/04/29/TensorFlow2-X学习笔记-1-TensorFlow核心概念/" title="TensorFlow2.X学习笔记(1)--TensorFlow核心概念"><img class="cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-29</div><div class="title">TensorFlow2.X学习笔记(1)--TensorFlow核心概念</div></div></a></div><div><a href="/2020/04/30/TensorFlow2-X学习笔记-2-TensorFlow的层次结构介绍/" title=" TensorFlow2.X学习笔记(2)--TensorFlow的层次结构介绍"><img class="cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-30</div><div class="title"> TensorFlow2.X学习笔记(2)--TensorFlow的层次结构介绍</div></div></a></div><div><a href="/2020/05/02/TensorFlow2-X学习笔记-3-TensorFlow低阶API之张量/" title="TensorFlow2.X学习笔记(3)--TensorFlow低阶API之张量"><img class="cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-02</div><div class="title">TensorFlow2.X学习笔记(3)--TensorFlow低阶API之张量</div></div></a></div><div><a href="/2020/05/02/TensorFlow2-X学习笔记-4-TensorFlow低阶API之AutoGraph相关研究/" title="TensorFlow2.X学习笔记(4)--TensorFlow低阶API之AutoGraph相关研究"><img class="cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-02</div><div class="title">TensorFlow2.X学习笔记(4)--TensorFlow低阶API之AutoGraph相关研究</div></div></a></div><div><a href="/2020/05/03/TensorFlow2-X学习笔记-5-TensorFlow中阶API之数据管道/" title="TensorFlow2.X学习笔记(5)--TensorFlow中阶API之数据管道"><img class="cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-03</div><div class="title">TensorFlow2.X学习笔记(5)--TensorFlow中阶API之数据管道</div></div></a></div><div><a href="/2020/05/06/TensorFlow2-X学习笔记-6-TensorFlow中阶API之特征列、激活函数、模型层/" title="TensorFlow2.X学习笔记(6)--TensorFlow中阶API之特征列、激活函数、模型层"><img class="cover" src="https://ae01.alicdn.com/kf/H24c9452e63dd4cc08266332d7111b080Z.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-05-06</div><div class="title">TensorFlow2.X学习笔记(6)--TensorFlow中阶API之特征列、激活函数、模型层</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MiChong</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">71</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">68</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">20</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MiChongGET"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/qjzxzxd@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到米虫的小站，一起加油🤝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81FaceNet%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.</span> <span class="toc-text">一、FaceNet模型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E3%80%81FaceNet%E6%BA%90%E7%A0%81%E4%BB%93%E5%BA%93%EF%BC%8C%E6%9C%AC%E5%9C%B0%E4%BB%A3%E7%A0%81%E5%AD%98%E6%94%BE%E5%9C%A8facenet-master%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B%E9%9D%A2"><span class="toc-number">1.1.</span> <span class="toc-text">(1)、FaceNet源码仓库，本地代码存放在facenet-master文件夹下面</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E3%80%81FaceNet%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%EF%BC%88%E7%BD%91%E5%8F%8B%E8%A7%A3%E8%AF%BB%E7%89%88%E4%B8%80%EF%BC%89%EF%BC%8C%E4%BB%A3%E7%A0%81%E5%AD%98%E6%94%BE%E5%9C%A8understand-facenet%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B"><span class="toc-number">1.2.</span> <span class="toc-text">(2)、FaceNet源码解读（网友解读版一），代码存放在understand_facenet文件夹下</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E3%80%81FaceNet%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB%EF%BC%88%E7%BD%91%E5%8F%8B%E8%A7%A3%E8%AF%BB%E7%89%88%E4%BA%8C%EF%BC%89%EF%BC%8C%E4%BB%A3%E7%A0%81%E5%AD%98%E6%94%BE%E5%9C%A8facenet-master%E6%96%87%E4%BB%B6%E5%A4%B9%E4%B8%8B"><span class="toc-number">1.3.</span> <span class="toc-text">(3)、FaceNet源码解读（网友解读版二），代码存放在facenet-master文件夹下</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E3%80%81triplet-reid%E6%BA%90%E7%A0%81%E5%9C%B0%E5%9D%80"><span class="toc-number">1.4.</span> <span class="toc-text">(4)、triplet-reid源码地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E3%80%81FaceNet%E6%BA%90%E7%A0%81%E8%A7%A3%E8%AF%BB-%E7%BD%91%E5%8F%8B%E8%A7%A3%E8%AF%BB%E7%89%88%E4%B8%89-%EF%BC%8C%EF%BC%882%EF%BC%89%E6%98%AF%E5%9C%A8%E5%80%9F%E9%89%B4%E6%AD%A4%E4%BD%9C%E8%80%85%E7%9A%84%E5%8D%9A%E5%AE%A2%EF%BC%8C"><span class="toc-number">1.5.</span> <span class="toc-text">(5)、FaceNet源码解读(网友解读版三)，（2）是在借鉴此作者的博客，</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BA%BA%E8%84%B8%E5%8C%B9%E9%85%8D%E6%95%B0%E6%8D%AE%E5%87%86%E5%A4%87"><span class="toc-number">2.</span> <span class="toc-text">二、人脸匹配数据准备</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83"><span class="toc-number">2.1.</span> <span class="toc-text">运行环境</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">2.2.</span> <span class="toc-text">数据集</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="toc-number">2.3.</span> <span class="toc-text">数据格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Pre-trained-models"><span class="toc-number">2.4.</span> <span class="toc-text">Pre-trained models</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Inception-ResNet-v1-%E6%A8%A1%E5%9E%8B%E5%9B%BE"><span class="toc-number">2.5.</span> <span class="toc-text">Inception ResNet v1 模型图</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%B8%80%E4%BA%9B%E9%97%AE%E9%A2%98"><span class="toc-number">3.</span> <span class="toc-text">三、一些问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E8%A7%A3%E5%86%B3%E5%87%BA%E7%8E%B0ModuleNotFoundError-No-module-named-39-facenet-39-%E5%BC%82%E5%B8%B8"><span class="toc-number">3.1.</span> <span class="toc-text">1、解决出现ModuleNotFoundError: No module named &#39;facenet&#39;异常</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%87%8D%E6%96%B0%E8%A3%81%E5%89%AALFM%E5%9B%BE%E7%89%87%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%A4%A7%E5%B0%8F"><span class="toc-number">3.2.</span> <span class="toc-text">2、重新裁剪LFM图片数据集的大小</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E8%AF%84%E4%BC%B0%E9%A2%84%E8%AE%AD%E7%BB%83%E6%A8%A1%E5%9E%8B%E7%9A%84%E5%87%86%E7%A1%AE%E7%8E%87"><span class="toc-number">3.3.</span> <span class="toc-text">3、评估预训练模型的准确率</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%EF%BC%89%E3%80%81%E6%A8%A1%E5%9E%8B%E4%B8%8B%E8%BD%BD"><span class="toc-number">3.3.1.</span> <span class="toc-text">1）、模型下载</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%EF%BC%89%E3%80%81%E8%BF%90%E8%A1%8C%E8%84%9A%E6%9C%AC"><span class="toc-number">3.3.2.</span> <span class="toc-text">2）、运行脚本</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E3%80%81TensorFlow%E7%89%88%E6%9C%AC%E5%AF%BC%E8%87%B4%E6%8A%A5%E9%94%99"><span class="toc-number">3.3.3.</span> <span class="toc-text">3)、TensorFlow版本导致报错</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E4%BA%BA%E8%84%B8%E5%AF%B9%E6%AF%94%E7%A8%8B%E5%BA%8F%E8%BF%90%E8%A1%8C"><span class="toc-number">3.4.</span> <span class="toc-text">4、人脸对比程序运行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81GPU%E5%86%85%E5%AD%98%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98%EF%BC%8C%E5%B7%B2%E7%BB%8F%E8%A7%A3%E5%86%B3"><span class="toc-number">3.5.</span> <span class="toc-text">5、GPU内存溢出问题，已经解决</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0"><span class="toc-number">4.</span> <span class="toc-text">四、相关函数</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E4%B8%BB%E8%A6%81%E5%87%BD%E6%95%B0"><span class="toc-number">4.1.</span> <span class="toc-text">1、主要函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81facenet-contributed-%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0%EF%BC%9A"><span class="toc-number">4.2.</span> <span class="toc-text">2、facenet&#x2F;contributed&#x2F;相关函数：</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%EF%BC%89%E3%80%81%E5%9F%BA%E4%BA%8Emtcnn%E4%B8%8Efacenet%E7%9A%84%E4%BA%BA%E8%84%B8%E8%81%9A%E7%B1%BB"><span class="toc-number">4.2.1.</span> <span class="toc-text">1）、基于mtcnn与facenet的人脸聚类</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%EF%BC%89%E3%80%81%E5%9F%BA%E4%BA%8Emtcnn%E4%B8%8Efacenet%E7%9A%84%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%EF%BC%88%E8%BE%93%E5%85%A5%E5%8D%95%E5%BC%A0%E5%9B%BE%E7%89%87%E5%88%A4%E6%96%AD%E8%BF%99%E4%BA%BA%E6%98%AF%E8%B0%81%EF%BC%89"><span class="toc-number">4.2.2.</span> <span class="toc-text">2）、基于mtcnn与facenet的人脸识别（输入单张图片判断这人是谁）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3%EF%BC%89%E3%80%81%E4%BB%A5numpy%E6%95%B0%E7%BB%84%E7%9A%84%E5%BD%A2%E5%BC%8F%E8%BE%93%E5%87%BA%E4%BA%BA%E8%84%B8%E8%81%9A%E7%B1%BB%E5%92%8C%E5%9B%BE%E5%83%8F%E6%A0%87%E7%AD%BE"><span class="toc-number">4.2.3.</span> <span class="toc-text">3）、以numpy数组的形式输出人脸聚类和图像标签</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/06/hello-world/" title="Hello World"><img src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Hello World"/></a><div class="content"><a class="title" href="/2021/07/06/hello-world/" title="Hello World">Hello World</a><time datetime="2021-07-06T05:12:56.084Z" title="发表于 2021-07-06 13:12:56">2021-07-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合"><img src="https://file.buildworld.cn/img/20210209161641.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode数据库题目集合"/></a><div class="content"><a class="title" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合">LeetCode数据库题目集合</a><time datetime="2021-02-09T08:13:56.000Z" title="发表于 2021-02-09 16:13:56">2021-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习"><img src="https://file.buildworld.cn/img/20210107194133.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData-数据仓库学习"/></a><div class="content"><a class="title" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习">BigData-数据仓库学习</a><time datetime="2021-01-07T11:35:36.000Z" title="发表于 2021-01-07 19:35:36">2021-01-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录"><img src="https://file.buildworld.cn/img/20201104092750.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法学习记录"/></a><div class="content"><a class="title" href="/2020/11/04/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="算法学习记录">算法学习记录</a><time datetime="2020-11-04T01:20:49.000Z" title="发表于 2020-11-04 09:20:49">2020-11-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink"><img src="https://file.buildworld.cn/img/20200911110402.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData--分布式流数据流引擎Apache Flink"/></a><div class="content"><a class="title" href="/2020/09/11/BigData-%E5%88%86%E5%B8%83%E5%BC%8F%E6%B5%81%E6%95%B0%E6%8D%AE%E6%B5%81%E5%BC%95%E6%93%8EApache-Flink/" title="BigData--分布式流数据流引擎Apache Flink">BigData--分布式流数据流引擎Apache Flink</a><time datetime="2020-09-11T02:59:30.000Z" title="发表于 2020-09-11 10:59:30">2020-09-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By MiChong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'mef0W501zi4VSjltsnmN5D9J-gzGzoHsz',
+      appKey: 'ktKil4OakXUNcSs0Ofkph1rm',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "7d002c40-fe0a-44eb-977b-a992eaed1e7c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
