@@ -13,9 +13,8 @@ language: zh-CN
 timezone: ''
 
 # URL
-## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://www.buildworld.cn
-root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -52,6 +51,11 @@ highlight:
   tab_replace: ''
   wrap: true
   hljs: false
+prismjs:
+  enable: false
+  preprocess: true
+  line_number: true
+  tab_replace: ''
 
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
@@ -77,8 +81,8 @@ meta_generator: true
 ## http://momentjs.com/docs/#/displaying/format/
 date_format: YYYY-MM-DD
 time_format: HH:mm:ss
-## Use post's date for updated date unless set in front-matter
-use_date_for_updated: false
+## updated_option supports 'mtime', 'date', 'empty'
+updated_option: 'mtime'
 
 # Pagination
 ## Set per_page to 0 to disable pagination
@@ -87,17 +91,17 @@ pagination_dir: page
 
 # Include / Exclude file(s)
 ## include:/exclude: options only apply to the 'source/' folder
-include:
-exclude:
+include: 
+exclude: 
 ignore:
 
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: Butterfly
+theme: butterfly
 
 # Deployment
-## Docs: https://hexo.io/docs/deployment.html
+## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
 # Coding仓库
 - type: git
@@ -116,6 +120,16 @@ deploy:
 aplayer:
   meting: true
 
+  # 文章加密插件
+encrypt:
+    enable: true
+
+# search:
+#   path: search.xml
+#   field: post
+#   content: true
+
+
 # 豆瓣
 douban:
   user: mi_chong
@@ -123,25 +137,14 @@ douban:
   book:
     title: '来自豆瓣读书'
     quote: '喜欢读书，就等于把生活中寂寞的辰光换成巨大享受的时刻。　——孟德斯鸠'
+    path: books
+    top_img: https://file.buildworld.cn/img/0684199c025f3d33967eb008344882eb_5ddb89c8d22b5.jpg
   movie:
     title: '来自豆瓣电影'
     quote: '生活就像一盒巧克力，你永远不知道你会得到什么。——《阿甘正传》'
+    path: movies
+    top_img: https://file.buildworld.cn/img/1e08cbc8d1d0bee93f1c213060e9eada_movie.jpg
   # game:
   #   title: '来自豆瓣游戏'
     #quote: ''
   timeout: 100000
-
-# 搜索插件
-search:
-  path: search.xml
-  field: post
-  content: true
-
-  # 文章加密插件
-encrypt:
-    enable: true
-
-server:
-  port: 5000
-  compress: true
-  header: true

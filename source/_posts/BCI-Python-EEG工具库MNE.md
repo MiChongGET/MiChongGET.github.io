@@ -11,6 +11,7 @@ categories:
 description: Python-EEG工具库MNE的使用
 top_img: https://ae01.alicdn.com/kf/H32f1a2189cf54b20a201315213d6c44fa.jpg
 cover: https://ae01.alicdn.com/kf/H32f1a2189cf54b20a201315213d6c44fa.jpg
+comments: false
 ---
 ## Python-EEG工具库MNE
 

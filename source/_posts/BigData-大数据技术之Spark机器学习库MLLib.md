@@ -9,6 +9,7 @@ categories:
 description: MLlib is Apache Spark's scalable machine learning library.
 top_img: https://file.buildworld.cn/img/20200909195914.png
 cover: https://file.buildworld.cn/img/20200909195630.png
+comments: false
 ---
 >MLlib fits into Spark's APIs and interoperates with NumPy in Python (as of Spark 0.9) and R libraries (as of Spark 1.5). You can use any Hadoop data source (e.g. HDFS, HBase, or local files), making it easy to plug into Hadoop workflows.
 

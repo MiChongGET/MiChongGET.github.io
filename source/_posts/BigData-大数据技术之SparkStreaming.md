@@ -9,6 +9,7 @@ categories:
 description: Spark Streaming用于流式数据的处理。Spark Streaming支持的数据输入源很多，例如：Kafka、Flume、Twitter、ZeroMQ和简单的TCP套接字等等。
 top_img: https://file.buildworld.cn/img/20200907215749.jpg
 cover: https://file.buildworld.cn/img/20200907103306.png
+comments: false
 ---
 
 > Spark Streaming用于流式数据的处理。Spark Streaming支持的数据输入源很多，例如：Kafka、Flume、Twitter、ZeroMQ和简单的TCP套接字等等。数据输入后可以用Spark的高度抽象原语如：map、reduce、join、window等进行运算。而结果也能保存在很多地方，如HDFS，数据库等。

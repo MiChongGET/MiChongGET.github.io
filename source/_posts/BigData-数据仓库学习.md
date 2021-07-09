@@ -8,6 +8,7 @@ categories:
 description: 数据仓库，英文名称为Data Warehouse，可简写为DW或DWH。数据仓库，是为企业所有级别的决策制定过程，提供所有类型数据支持的战略集合。
 top_img: https://file.buildworld.cn/img/20210107210514.jpg
 cover: https://file.buildworld.cn/img/20210107194133.png
+comments: false
 ---
 
 

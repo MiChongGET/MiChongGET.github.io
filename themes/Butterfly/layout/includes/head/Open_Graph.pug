@@ -1,19 +1,11 @@
-- var photo_check = is_post() ? page.cover || theme.avatar : theme.avatar
-- var photo_link = url_check (photo_check) ? photo_check : config.url + photo_check
-- var contentType = is_post() ? 'article' : 'website'
-
-//- twitter meta
-if theme.twitter_meta
-  meta(name="twitter:card" content="summary")
-  meta(name="twitter:title" content=pageTitle_no_include_blog_name)
-  meta(name="twitter:description" content=pageDescription)
-  meta(name="twitter:image" content=photo_link)
-
-//- Open_Graph
 if theme.Open_Graph_meta
-  meta(property="og:type" content=contentType)
-  meta(property="og:title" content=pageTitle_no_include_blog_name)
-  meta(property="og:url" content=without_html)
-  meta(property="og:site_name" content=config.title)
-  meta(property="og:description" content=pageDescription)
-  meta(property="og:image" content=photo_link)
+  - let contentType = is_post() ? 'article' : 'website'
+  - let metaImage = (page.cover || theme.avatar.img) ? full_url_for(page.cover || theme.avatar.img) : ''
+  - let fb_appId = theme.facebook_comments.app_id || ''
+  - let fb_admins = theme.facebook_comments.user_id || ''
+
+  != open_graph({type: contentType, image: metaImage, fb_admins: fb_admins, fb_app_id: fb_appId})
+
+else
+  meta(name="description" content=page_description())
+

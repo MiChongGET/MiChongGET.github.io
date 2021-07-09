@@ -8,6 +8,7 @@ categories:
 description: Apache Spark™ is a unified analytics engine for large-scale data processing.
 top_img: https://file.buildworld.cn/img/573b864c042fecfea1a71d9845896376_t011159af9f862fc82e.jpg
 cover: https://file.buildworld.cn/img/20200803194840.png
+comments: false
 ---
 ## 一、Spark运行
 

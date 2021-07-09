@@ -9,6 +9,7 @@ categories:
 description: Apache Flink® — Stateful Computations over Data Streams.
 top_img: https://file.buildworld.cn/img/20200913210327.jpg
 cover: https://file.buildworld.cn/img/20200911110402.png
+comments: false
 ---
 
 ![](https://flink.apache.org/img/flink-header-logo.svg)

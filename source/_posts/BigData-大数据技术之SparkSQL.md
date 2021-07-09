@@ -9,6 +9,7 @@ categories:
 description: Spark SQL是Spark用来处理结构化数据的一个模块，它提供了2个编程抽象：DataFrame和DataSet，并且作为分布式SQL查询引擎的作用。
 top_img: https://file.buildworld.cn/img/20200903155309.jpeg
 cover: https://file.buildworld.cn/img/20200903155458.png
+comments: false
 ---
 
 ![](https://file.buildworld.cn/img/20200810132517.png)
