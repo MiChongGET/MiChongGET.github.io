@@ -1,0 +1,361 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>秒杀那些事 | MiChong的🏡</title><meta name="keywords" content="Java,Redis,架构设计"><meta name="author" content="MiChong,qjzxzxd@gmail.com"><meta name="copyright" content="MiChong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="从九个细节考虑秒杀系统的设计。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="秒杀那些事">
+<meta property="og:url" content="https://www.buildworld.cn/2021/09/06/%E7%A7%92%E6%9D%80%E9%82%A3%E4%BA%9B%E4%BA%8B/index.html">
+<meta property="og:site_name" content="MiChong的🏡">
+<meta property="og:description" content="从九个细节考虑秒杀系统的设计。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://file.buildworld.cn/img/20210906093559.png">
+<meta property="article:published_time" content="2021-09-06T01:29:25.000Z">
+<meta property="article:modified_time" content="2021-09-06T01:41:09.758Z">
+<meta property="article:author" content="MiChong">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="架构设计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.buildworld.cn/img/20210906093559.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.buildworld.cn/2021/09/06/%E7%A7%92%E6%9D%80%E9%82%A3%E4%BA%9B%E4%BA%8B/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '秒杀那些事',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-09-06 09:41:09'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="MiChong的🏡" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">70</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://file.buildworld.cn/img/20210906094058.jpeg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">MiChong的🏡</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">秒杀那些事</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-06T01:29:25.000Z" title="发表于 2021-09-06 09:29:25">2021-09-06</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-09-06T01:41:09.758Z" title="更新于 2021-09-06 09:41:09">2021-09-06</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="秒杀那些事"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="1、九个细节"><a href="#1、九个细节" class="headerlink" title="1、九个细节"></a>1、九个细节</h4><p><img src="https://file.buildworld.cn/img/20210815163818.png"></p>
+<h4 id="2、页面静态化"><a href="#2、页面静态化" class="headerlink" title="2、页面静态化"></a>2、页面静态化</h4><blockquote>
+<p>活动页面绝大多数内容是固定的，比如：商品名称、商品描述、图片等。为了减少不必要的服务端请求，通常情况下，会对活动页面做静态化处理。用户浏览商品等常规操作，并不会请求到服务端。只有到了秒杀时间点，并且用户主动点了秒杀按钮才允许访问服务端。</p>
+</blockquote>
+<blockquote>
+<p>针对不同地区访问使用 CDN，它的全称是 Content Delivery Network，即内容分发网络。<br><img src="https://file.buildworld.cn/img/20210815170351.png"></p>
+</blockquote>
+<h4 id="3、秒杀按钮"><a href="#3、秒杀按钮" class="headerlink" title="3、秒杀按钮"></a>3、秒杀按钮</h4><p>==CDN 上的 js 文件是如何更新的？==</p>
+<blockquote>
+<p>秒杀开始之前，js 标志为 false，还有另外一个随机参数。<br><img src="https://file.buildworld.cn/img/20210815171140.png"></p>
+</blockquote>
+<blockquote>
+<p>当秒杀开始的时候系统会生成一个新的 js 文件，此时标志为 true，并且随机参数生成一个新值，然后同步给 CDN。由于有了这个随机参数，CDN 不会缓存数据，每次都能从 CDN 中获取最新的 js 代码。<br><img src="https://file.buildworld.cn/img/20210815171159.png"></p>
+</blockquote>
+<h4 id="4、读多写少"><a href="#4、读多写少" class="headerlink" title="4、读多写少"></a>4、读多写少</h4><blockquote>
+<p>使用 Redis 抵抗大量的请求。</p>
+</blockquote>
+<p><img src="https://file.buildworld.cn/img/20210815200829.png"></p>
+<h4 id="5、缓存问题"><a href="#5、缓存问题" class="headerlink" title="5、缓存问题"></a>5、缓存问题</h4><p>==秒杀之前查询商品是否存在==</p>
+<p><img src="https://file.buildworld.cn/img/20210815201534.png"></p>
+<blockquote>
+<p>根据商品 id，先从缓存中查询商品，如果商品存在，则参与秒杀。如果不存在，则需要从数据库中查询商品，如果存在，则将商品信息放入缓存，然后参与秒杀。如果商品不存在，则直接提示失败。</p>
+</blockquote>
+<h5 id="5-1-缓存击穿"><a href="#5-1-缓存击穿" class="headerlink" title="5.1 缓存击穿"></a>5.1 缓存击穿</h5><blockquote>
+<p>比如商品 A 第一次秒杀时，缓存中是没有数据的，但数据库中有。虽说上面有如果从数据库中查到数据，则放入缓存的逻辑。</p>
+</blockquote>
+<blockquote>
+<p>然而，在高并发下，同一时刻会有大量的请求，都在秒杀同一件商品，这些请求同时去查缓存中没有数据，然后又同时访问数据库。结果悲剧了，数据库可能扛不住压力，直接挂掉。</p>
+</blockquote>
+<p>==使用分布式锁解决上面的问题==</p>
+<p><img src="https://file.buildworld.cn/img/20210815204416.png"></p>
+<p><strong>项目启动之前进行==缓存预热==。</strong></p>
+<blockquote>
+<p>表面上看起来，确实可以不需要。但如果缓存中设置的过期时间不对，缓存提前过期了，或者缓存被不小心删除了，如果不加速同样可能出现缓存击穿。</p>
+</blockquote>
+<h5 id="5-2-缓存穿透"><a href="#5-2-缓存穿透" class="headerlink" title="5.2 缓存穿透"></a>5.2 缓存穿透</h5><blockquote>
+<p>如果有大量的请求传入的商品 id，在缓存中和数据库中都不存在，这些请求不就每次都会穿透过缓存，而直接访问数据库了。</p>
+</blockquote>
+<p><img src="https://file.buildworld.cn/img/20210815210140.png"></p>
+<blockquote>
+<p>系统根据商品 id，先从布隆过滤器中查询该 id 是否存在，如果存在则允许从缓存中查询数据，如果不存在，则直接返回失败。</p>
+</blockquote>
+<blockquote>
+<p>虽说该方案可以解决缓存穿透问题，但是又会引出另外一个问题：布隆过滤器中的数据如何更缓存中的数据保持一致？</p>
+</blockquote>
+<blockquote>
+<p>这就要求，如果缓存中数据有更新，则要及时同步到布隆过滤器中。如果数据同步失败了，还需要增加重试机制，而且跨数据源，能保证数据的实时一致性吗？</p>
+</blockquote>
+<p>==布隆过滤器绝大部分使用在缓存数据更新很少的场景中。==</p>
+<p>==如果缓存数据更新非常频繁，把不存在的商品 id 也缓存起来。==<br><img src="https://file.buildworld.cn/img/20210815211010.png"></p>
+<blockquote>
+<p>下次，再有该商品 id 的请求过来，则也能从缓存中查到数据，只不过该数据比较特殊，表示商品不存在。需要特别注意的是，这种特殊缓存设置的超时时间应该尽量短一点。</p>
+</blockquote>
+<h4 id="6、库存问题"><a href="#6、库存问题" class="headerlink" title="6、库存问题"></a>6、库存问题</h4><h5 id="6-1、数据库扣减库存"><a href="#6-1、数据库扣减库存" class="headerlink" title="6.1、数据库扣减库存"></a>6.1、数据库扣减库存</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 基于数据库的乐观锁，这样会少一次数据库查询，而且能够天然的保证数据操作的原子性。</span><br><span class="line">update product set stock=stock-1 where id=product and stock &gt; 0;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>但需要频繁访问数据库，我们都知道数据库连接是非常昂贵的资源。在高并发的场景下，可能会造成系统雪崩。而且，容易出现多个请求，同时竞争行锁的情况，造成相互等待，从而出现==死锁==的问题。</p>
+</blockquote>
+<h5 id="6-2、redis-扣减库存"><a href="#6-2、redis-扣减库存" class="headerlink" title="6.2、redis 扣减库存"></a>6.2、redis 扣减库存</h5><p>==lua 脚本扣减库存==</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">StringBuilder lua = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">  lua.append(<span class="string">&quot;if (redis.call(&#x27;exists&#x27;, KEYS[1]) == 1) then&quot;</span>);</span><br><span class="line">  lua.append(<span class="string">&quot;    local stock = tonumber(redis.call(&#x27;get&#x27;, KEYS[1]));&quot;</span>);</span><br><span class="line">  lua.append(<span class="string">&quot;    if (stock == -1) then&quot;</span>);</span><br><span class="line">  lua.append(<span class="string">&quot;        return 1;&quot;</span>);</span><br><span class="line">  lua.append(<span class="string">&quot;    end;&quot;</span>);</span><br><span class="line">  lua.append(<span class="string">&quot;    if (stock &gt; 0) then&quot;</span>);</span><br><span class="line">  lua.append(<span class="string">&quot;        redis.call(&#x27;incrby&#x27;, KEYS[1], -1);&quot;</span>);</span><br><span class="line">  lua.append(<span class="string">&quot;        return stock;&quot;</span>);</span><br><span class="line">  lua.append(<span class="string">&quot;    end;&quot;</span>);</span><br><span class="line">  lua.append(<span class="string">&quot;    return 0;&quot;</span>);</span><br><span class="line">  lua.append(<span class="string">&quot;end;&quot;</span>);</span><br><span class="line">  lua.append(<span class="string">&quot;return -1;&quot;</span>);</span><br><span class="line"></span><br><span class="line">    先判断商品id是否存在，如果不存在则直接返回。</span><br><span class="line">    获取该商品id的库存，判断库存如果是-<span class="number">1</span>，则直接返回，表示不限制库存。</span><br><span class="line">    如果库存大于<span class="number">0</span>，则扣减库存。</span><br><span class="line">    如果库存等于<span class="number">0</span>，是直接返回，表示库存不足。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="7、分布式锁"><a href="#7、分布式锁" class="headerlink" title="7、分布式锁"></a>7、分布式锁</h4><blockquote>
+<p>如果在高并发下，有大量的请求都去查一个缓存中不存在的商品，这些请求都会直接打到数据库。数据库由于承受不住压力，而直接挂掉。</p>
+</blockquote>
+<h5 id="7-1、setNx-加锁"><a href="#7-1、setNx-加锁" class="headerlink" title="7.1、setNx 加锁"></a>7.1、setNx 加锁</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (jedis.setnx(lockKey, val) == <span class="number">1</span>) &#123;</span><br><span class="line">   jedis.expire(lockKey, timeout);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 用该命令其实可以加锁，但和后面的设置超时时间是分开的，并非原子操作。</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 假如加锁成功了，但是设置超时时间失败了，该lockKey就变成永不失效的了。在高并发场景中，该问题会导致非常严重的后果。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="7-2、set-加锁"><a href="#7-2、set-加锁" class="headerlink" title="7.2、set 加锁"></a>7.2、set 加锁</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">String result = jedis.set(lockKey, requestId, <span class="string">&quot;NX&quot;</span>, <span class="string">&quot;PX&quot;</span>, expireTime);</span><br><span class="line"><span class="keyword">if</span> (<span class="string">&quot;OK&quot;</span>.equals(result)) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">lockKey：锁的标识</span><br><span class="line">requestId：请求id</span><br><span class="line">NX：只在键不存在时，才对键进行设置操作。</span><br><span class="line">PX：设置键的过期时间为 millisecond 毫秒。</span><br><span class="line">expireTime：过期时间</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="7-3、释放锁"><a href="#7-3、释放锁" class="headerlink" title="7.3、释放锁"></a>7.3、释放锁</h5><blockquote>
+<p>requestId 是在释放锁的时候用的。</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">if (jedis.get(lockKey).equals(requestId)) &#123;</span><br><span class="line">    jedis.del(lockKey);</span><br><span class="line">    return true;</span><br><span class="line">&#125;</span><br><span class="line">return false;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// lua脚本</span><br><span class="line">if redis.call(&#x27;get&#x27;, KEYS[1]) == ARGV[1] then</span><br><span class="line"> return redis.call(&#x27;del&#x27;, KEYS[1])</span><br><span class="line">else</span><br><span class="line">  return 0</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<h5 id="7-4、自旋锁"><a href="#7-4、自旋锁" class="headerlink" title="7.4、自旋锁"></a>7.4、自旋锁</h5><p>在秒杀场景下，会有什么问题？</p>
+<p>答：每 1 万个请求，有 1 个成功。再 1 万个请求，有 1 个成功。如此下去，直到库存不足。这就变成均匀分布的秒杀了，跟我们想象中的不一样。</p>
+<p>如何解决这个问题呢？</p>
+<p>答：使用自旋锁。在规定的时间，比如 500 毫秒内，自旋不断尝试加锁，如果成功则直接返回。如果失败，则休眠 50 毫秒，再发起新一轮的尝试。如果到了超时时间，还未加锁成功，则直接返回失败。</p>
+<h5 id="7-5、redisson"><a href="#7-5、redisson" class="headerlink" title="7.5、redisson"></a>7.5、redisson</h5><h4 id="8、-mq-异步处理"><a href="#8、-mq-异步处理" class="headerlink" title="8、 mq 异步处理"></a>8、 mq 异步处理</h4><p><img src="https://file.buildworld.cn/img/20210815221516.png"></p>
+<h5 id="8-1-消息丢失问题"><a href="#8-1-消息丢失问题" class="headerlink" title="8.1 消息丢失问题"></a>8.1 消息丢失问题</h5><blockquote>
+<p>秒杀成功了，往 mq 发送下单消息的时候，有可能会失败。原因有很多，比如：网络问题、broker 挂了、mq 服务端磁盘问题等。这些情况，都可能会造成消息丢失</p>
+</blockquote>
+<p>==加一张消息发送表==</p>
+<p><img src="https://file.buildworld.cn/img/20210815221745.png"></p>
+<blockquote>
+<p>在生产者发送 mq 消息之前，先把该条消息写入消息发送表，初始状态是待处理，然后再发送 mq 消息。消费者消费消息时，处理完业务逻辑之后，再回调生产者的一个接口，修改消息状态为已处理。</p>
+</blockquote>
+<p><strong>发送 mq 消息到 mq 服务端的过程中失败了</strong></p>
+<p>==使用 job，增加重试机制==。</p>
+<blockquote>
+<p>用 job 每隔一段时间去查询消息发送表中状态为待处理的数据，然后重新发送 mq 消息。<br><img src="https://file.buildworld.cn/img/20210815221953.png"></p>
+</blockquote>
+<h5 id="8-2、重复消费问题"><a href="#8-2、重复消费问题" class="headerlink" title="8.2、重复消费问题"></a>8.2、重复消费问题</h5><blockquote>
+<p>本来消费者消费消息时，在 ack 应答的时候，如果网络超时，本身就可能会消费重复的消息。但由于消息发送者增加了重试机制，会导致消费者重复消息的概率增大。</p>
+</blockquote>
+<p>那么，如何解决重复消息问题呢？</p>
+<p>==答：加一张消息处理表。==</p>
+<blockquote>
+<p>消费者读到消息之后，先判断一下消息处理表，是否存在该消息，如果存在，表示是重复消费，则直接返回。如果不存在，则进行下单操作，接着将该消息写入消息处理表中，再返回。<br><img src="https://file.buildworld.cn/img/20210815222133.png"></p>
+</blockquote>
+<p><strong>有个比较关键的点是：下单和写消息处理表，要放在同一个事务中，保证原子操作。</strong></p>
+<h5 id="8-3、垃圾消息问题"><a href="#8-3、垃圾消息问题" class="headerlink" title="8.3、垃圾消息问题"></a>8.3、垃圾消息问题</h5><blockquote>
+<p>这套方案表面上看起来没有问题，但如果出现了消息消费失败的情况。比如：由于某些原因，消息消费者下单一直失败，一直不能回调状态变更接口，这样 job 会不停的重试发消息。最后，会产生大量的垃圾消息。</p>
+</blockquote>
+<blockquote>
+<p>每次在 job 重试时，需要先判断一下消息发送表中该消息的发送次数是否达到最大限制，如果达到了，则直接返回。如果没有达到，则将次数加 1，然后发送消息。<br><img src="https://file.buildworld.cn/img/20210815223449.png"></p>
+</blockquote>
+<h5 id="8-4、延迟消费问题"><a href="#8-4、延迟消费问题" class="headerlink" title="8.4、延迟消费问题"></a>8.4、延迟消费问题</h5><blockquote>
+<p>下单时消息生产者会先生成订单，此时状态为待支付，然后会向延迟队列中发一条消息。达到了延迟时间，消息消费者读取消息之后，会查询该订单的状态是否为待支付。如果是待支付状态，则会更新订单状态为取消状态。如果不是待支付状态，说明该订单已经支付过了，则直接返回。<br><img src="https://file.buildworld.cn/img/20210815224026.png"></p>
+</blockquote>
+<h4 id="9、如何限流？"><a href="#9、如何限流？" class="headerlink" title="9、如何限流？"></a>9、如何限流？</h4></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:qjzxzxd@gmail.com">MiChong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.buildworld.cn/2021/09/06/%E7%A7%92%E6%9D%80%E9%82%A3%E4%BA%9B%E4%BA%8B/">https://www.buildworld.cn/2021/09/06/%E7%A7%92%E6%9D%80%E9%82%A3%E4%BA%9B%E4%BA%8B/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.buildworld.cn" target="_blank">MiChong的🏡</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Java/">Java</a><a class="post-meta__tags" href="/tags/Redis/">Redis</a><a class="post-meta__tags" href="/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/">架构设计</a></div><div class="post_share"><div class="social-share" data-image="https://file.buildworld.cn/img/20210906093559.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/07/15/%E7%AE%97%E6%B3%95%E9%82%A3%E4%BA%9B%E4%BA%8B/"><img class="next-cover" src="https://file.buildworld.cn/img/20210804154052.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">算法那些事</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2018/04/11/JWT登录信息加密/" title="JWT登录信息加密"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-04-11</div><div class="title">JWT登录信息加密</div></div></a></div><div><a href="/2020/04/01/Java常用的设计模式/" title="Java常用的设计模式"><img class="cover" src="https://file.buildworld.cn/img/20200401101919.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-04-01</div><div class="title">Java常用的设计模式</div></div></a></div><div><a href="/2018/04/21/Spring Cloud构建微服务架构：服务注册与发现（Eureka、Consul) /" title="Spring Cloud构建微服务架构：服务注册与发现（Eureka、Consul)"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-04-21</div><div class="title">Spring Cloud构建微服务架构：服务注册与发现（Eureka、Consul)</div></div></a></div><div><a href="/2018/03/29/SpringBoot之API--Swagger2接口文档管理/" title="SpringBoot之API--Swagger2接口文档管理"><img class="cover" src="https://file.buildworld.cn/img/u=2551084964,3275034231&fm=26&gp=0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-03-29</div><div class="title">SpringBoot之API--Swagger2接口文档管理</div></div></a></div><div><a href="/2018/03/29/SpringBoot整合Dubbo/" title="SpringBoot整合Dubbo"><img class="cover" src="https://file.buildworld.cn/img/u=2551084964,3275034231&fm=26&gp=0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-03-29</div><div class="title">SpringBoot整合Dubbo</div></div></a></div><div><a href="/2018/05/07/SpringBoot整合Quartz实现定时任务（单任务、多任务）/" title="SpringBoot整合Quartz实现定时任务（单任务、多任务）"><img class="cover" src="https://file.buildworld.cn/img/u=2551084964,3275034231&fm=26&gp=0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-05-07</div><div class="title">SpringBoot整合Quartz实现定时任务（单任务、多任务）</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MiChong</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">73</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">70</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MiChongGET"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/qjzxzxd@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到米虫的小站，一起加油🤝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E4%B9%9D%E4%B8%AA%E7%BB%86%E8%8A%82"><span class="toc-number">1.</span> <span class="toc-text">1、九个细节</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E9%A1%B5%E9%9D%A2%E9%9D%99%E6%80%81%E5%8C%96"><span class="toc-number">2.</span> <span class="toc-text">2、页面静态化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E7%A7%92%E6%9D%80%E6%8C%89%E9%92%AE"><span class="toc-number">3.</span> <span class="toc-text">3、秒杀按钮</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E8%AF%BB%E5%A4%9A%E5%86%99%E5%B0%91"><span class="toc-number">4.</span> <span class="toc-text">4、读多写少</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E7%BC%93%E5%AD%98%E9%97%AE%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">5、缓存问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#5-1-%E7%BC%93%E5%AD%98%E5%87%BB%E7%A9%BF"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 缓存击穿</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-2-%E7%BC%93%E5%AD%98%E7%A9%BF%E9%80%8F"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 缓存穿透</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E5%BA%93%E5%AD%98%E9%97%AE%E9%A2%98"><span class="toc-number">6.</span> <span class="toc-text">6、库存问题</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#6-1%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E6%89%A3%E5%87%8F%E5%BA%93%E5%AD%98"><span class="toc-number">6.1.</span> <span class="toc-text">6.1、数据库扣减库存</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-2%E3%80%81redis-%E6%89%A3%E5%87%8F%E5%BA%93%E5%AD%98"><span class="toc-number">6.2.</span> <span class="toc-text">6.2、redis 扣减库存</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81%E5%88%86%E5%B8%83%E5%BC%8F%E9%94%81"><span class="toc-number">7.</span> <span class="toc-text">7、分布式锁</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#7-1%E3%80%81setNx-%E5%8A%A0%E9%94%81"><span class="toc-number">7.1.</span> <span class="toc-text">7.1、setNx 加锁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-2%E3%80%81set-%E5%8A%A0%E9%94%81"><span class="toc-number">7.2.</span> <span class="toc-text">7.2、set 加锁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-3%E3%80%81%E9%87%8A%E6%94%BE%E9%94%81"><span class="toc-number">7.3.</span> <span class="toc-text">7.3、释放锁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-4%E3%80%81%E8%87%AA%E6%97%8B%E9%94%81"><span class="toc-number">7.4.</span> <span class="toc-text">7.4、自旋锁</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-5%E3%80%81redisson"><span class="toc-number">7.5.</span> <span class="toc-text">7.5、redisson</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%E3%80%81-mq-%E5%BC%82%E6%AD%A5%E5%A4%84%E7%90%86"><span class="toc-number">8.</span> <span class="toc-text">8、 mq 异步处理</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#8-1-%E6%B6%88%E6%81%AF%E4%B8%A2%E5%A4%B1%E9%97%AE%E9%A2%98"><span class="toc-number">8.1.</span> <span class="toc-text">8.1 消息丢失问题</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-2%E3%80%81%E9%87%8D%E5%A4%8D%E6%B6%88%E8%B4%B9%E9%97%AE%E9%A2%98"><span class="toc-number">8.2.</span> <span class="toc-text">8.2、重复消费问题</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-3%E3%80%81%E5%9E%83%E5%9C%BE%E6%B6%88%E6%81%AF%E9%97%AE%E9%A2%98"><span class="toc-number">8.3.</span> <span class="toc-text">8.3、垃圾消息问题</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-4%E3%80%81%E5%BB%B6%E8%BF%9F%E6%B6%88%E8%B4%B9%E9%97%AE%E9%A2%98"><span class="toc-number">8.4.</span> <span class="toc-text">8.4、延迟消费问题</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9%E3%80%81%E5%A6%82%E4%BD%95%E9%99%90%E6%B5%81%EF%BC%9F"><span class="toc-number">9.</span> <span class="toc-text">9、如何限流？</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/09/06/%E7%A7%92%E6%9D%80%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="秒杀那些事"><img src="https://file.buildworld.cn/img/20210906093559.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="秒杀那些事"/></a><div class="content"><a class="title" href="/2021/09/06/%E7%A7%92%E6%9D%80%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="秒杀那些事">秒杀那些事</a><time datetime="2021-09-06T01:29:25.000Z" title="发表于 2021-09-06 09:29:25">2021-09-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/15/%E7%AE%97%E6%B3%95%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="算法那些事"><img src="https://file.buildworld.cn/img/20210804154052.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法那些事"/></a><div class="content"><a class="title" href="/2021/07/15/%E7%AE%97%E6%B3%95%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="算法那些事">算法那些事</a><time datetime="2021-07-15T00:56:01.000Z" title="发表于 2021-07-15 08:56:01">2021-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/09/14%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E7%AE%97%E6%B3%95%E6%A8%A1%E5%BC%8F/" title="14种常见的算法模式"><img src="https://file.buildworld.cn/img/20210709115216.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="14种常见的算法模式"/></a><div class="content"><a class="title" href="/2021/07/09/14%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E7%AE%97%E6%B3%95%E6%A8%A1%E5%BC%8F/" title="14种常见的算法模式">14种常见的算法模式</a><time datetime="2021-07-09T03:41:36.000Z" title="发表于 2021-07-09 11:41:36">2021-07-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合"><img src="https://file.buildworld.cn/img/20210209161641.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode数据库题目集合"/></a><div class="content"><a class="title" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合">LeetCode数据库题目集合</a><time datetime="2021-02-09T08:13:56.000Z" title="发表于 2021-02-09 16:13:56">2021-02-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习"><img src="https://file.buildworld.cn/img/20210107194133.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="BigData-数据仓库学习"/></a><div class="content"><a class="title" href="/2021/01/07/BigData-%E6%95%B0%E6%8D%AE%E4%BB%93%E5%BA%93%E5%AD%A6%E4%B9%A0/" title="BigData-数据仓库学习">BigData-数据仓库学习</a><time datetime="2021-01-07T11:35:36.000Z" title="发表于 2021-01-07 19:35:36">2021-01-07</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By MiChong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'mef0W501zi4VSjltsnmN5D9J-gzGzoHsz',
+      appKey: 'ktKil4OakXUNcSs0Ofkph1rm',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "7d002c40-fe0a-44eb-977b-a992eaed1e7c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
