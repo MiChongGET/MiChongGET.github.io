@@ -1,0 +1,324 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>手写netty的springboot-starter组件 | MiChong的🏡</title><meta name="keywords" content="SpringBoot,Netty"><meta name="author" content="MiChong,qjzxzxd@gmail.com"><meta name="copyright" content="MiChong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="从九个细节考虑秒杀系统的设计。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="手写netty的springboot-starter组件">
+<meta property="og:url" content="https://www.buildworld.cn/2021/09/07/%E6%89%8B%E5%86%99netty%E7%9A%84springboot-starter%E7%BB%84%E4%BB%B6/index.html">
+<meta property="og:site_name" content="MiChong的🏡">
+<meta property="og:description" content="从九个细节考虑秒杀系统的设计。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://file.buildworld.cn/img/20210907092140.png">
+<meta property="article:published_time" content="2021-09-07T00:57:28.000Z">
+<meta property="article:modified_time" content="2021-09-07T01:37:15.063Z">
+<meta property="article:author" content="MiChong">
+<meta property="article:tag" content="SpringBoot">
+<meta property="article:tag" content="Netty">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.buildworld.cn/img/20210907092140.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.buildworld.cn/2021/09/07/%E6%89%8B%E5%86%99netty%E7%9A%84springboot-starter%E7%BB%84%E4%BB%B6/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '手写netty的springboot-starter组件',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-09-07 09:37:15'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="MiChong的🏡" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">74</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">71</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://file.buildworld.cn/img/20210906094058.jpeg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">MiChong的🏡</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">手写netty的springboot-starter组件</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-07T00:57:28.000Z" title="发表于 2021-09-07 08:57:28">2021-09-07</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-09-07T01:37:15.063Z" title="更新于 2021-09-07 09:37:15">2021-09-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%90%8E%E7%AB%AF/">后端</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="手写netty的springboot-starter组件"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>本文的工作分为两个部分，一个是研究 Netty 框架的使用，实现服务端和客户之间的通信，另一个是将服务端和客户端的 Netty 打包成 springboot-starter 组件（两个组件：rpc-server-start,rpc-client-start），方便直接引入 starter 去实现 Netty 的相关功能。</p>
+<p>项目地址：<a target="_blank" rel="noopener" href="https://gitee.com/mi_chong/NettyDemo">https://gitee.com/mi_chong/NettyDemo</a></p>
+</blockquote>
+<h2 id="一、Netty"><a href="#一、Netty" class="headerlink" title="一、Netty"></a>一、Netty</h2><p><strong>1、NIO 是一种非阻塞 IO</strong></p>
+<ul>
+<li>单线程可以连接多个客户端。</li>
+<li>选择器可以实现但线程管理多个 Channel，新建的通道都要向选择器注册。</li>
+<li>一个 SelectionKey 键表示了一个特定的通道对象和一个特定的选择器对象之间的注册关系。</li>
+<li>selector 进行 select()操作可能会产生阻塞，但是可以设置阻塞时间，并且可以用 wakeup()唤醒 selector，所以 NIO 是非阻塞 IO。</li>
+</ul>
+<h3 id="2、Netty-模型-selector-模式"><a href="#2、Netty-模型-selector-模式" class="headerlink" title="2、Netty 模型 selector 模式"></a>2、Netty 模型 selector 模式</h3><ul>
+<li>NIO 采用多线程的方式可以同时使用多个 selector</li>
+<li>通过绑定多个端口的方式，使得一个 selector 可以同时注册多个 ServerSocketServer</li>
+<li>单个线程下只能有一个 selector，用来实现 Channel 的匹配及复用</li>
+</ul>
+<p><img src="https://file.buildworld.cn/img/20210827203719.png"></p>
+<p><strong>半包问题</strong></p>
+<blockquote>
+<p>TCP/IP 在发送消息的时候，可能会拆包，这就导致接收端无法知道什么时候收到的数据是一个完整的数据。在传统的 BIO 中在读取不到数据时会发生阻塞，但是 NIO 不会。</p>
+<p>为了解决 NIO 的半包问题，Netty 在 Selector 模型的基础上，提出了<strong>reactor 模式</strong>，从而解决客户端请求在服务端不完整的问题。</p>
+</blockquote>
+<h3 id="3、netty-模型-reactor-模式"><a href="#3、netty-模型-reactor-模式" class="headerlink" title="3、netty 模型 reactor 模式"></a>3、netty 模型 reactor 模式</h3><blockquote>
+<p>在 selector 的基础上解决了半包问题。<br><img src="https://file.buildworld.cn/img/20210827205913.png"></p>
+</blockquote>
+<p>Netty 服务端代码：<a target="_blank" rel="noopener" href="https://gitee.com/mi_chong/NettyDemo/tree/master/rpc-server-start">https://gitee.com/mi_chong/NettyDemo/tree/master/rpc-server-start</a></p>
+<p>Netty 客户端代码：<a target="_blank" rel="noopener" href="https://gitee.com/mi_chong/NettyDemo/tree/master/rpc-client-start">https://gitee.com/mi_chong/NettyDemo/tree/master/rpc-client-start</a></p>
+<h2 id="二、自定义-springboot-starter-组件"><a href="#二、自定义-springboot-starter-组件" class="headerlink" title="二、自定义 springboot-starter 组件"></a>二、自定义 springboot-starter 组件</h2><h3 id="1、介绍"><a href="#1、介绍" class="headerlink" title="1、介绍"></a>1、介绍</h3><blockquote>
+<p>SpringBoot 中的 starter 是一种非常重要的机制，能够抛弃以前繁杂的配置，将其统一集成进 starter，应用者只需要在 maven 中引入 starter 依赖，SpringBoot 就能自动扫描到要加载的信息并启 动相应的默认配置。starter 让我们摆脱了各种依赖库的处理，需要配置各种信息的困扰。</p>
+</blockquote>
+<blockquote>
+<p>SpringBoot 会自动通过 classpath 路径下的类发现需要的 Bean，并注册进 IOC 容器。SpringBoot 提供 了针对日常企业应用研发各种场景的<strong>spring-boot-starter</strong>依赖模块。所有这些依赖模块都遵循着约定成俗的默认配置，并允许我们调整这些配置，即遵循“<strong>约定大于配置</strong>”的理念。</p>
+</blockquote>
+<blockquote>
+<p>以 rpc-server-start 来看，如下图：<br><img src="https://file.buildworld.cn/img/20210906210553.png"></p>
+<p>1、属性配置类</p>
+<p>2、业务逻辑执行类</p>
+<p>3、自动配置类</p>
+<p>4、spring.factories 文件（里面指定了自动配置类 3 的位置）</p>
+</blockquote>
+<h3 id="2、NettyProperties-java——属性配置类"><a href="#2、NettyProperties-java——属性配置类" class="headerlink" title="2、NettyProperties.java——属性配置类"></a>2、NettyProperties.java——属性配置类</h3><blockquote>
+<p>在使用 Spring 官方的 Starter 时通常可以在 application.properties 中来配置参数覆盖掉默认的值</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings(&quot;serial&quot;)</span></span><br><span class="line"><span class="meta">@ConfigurationProperties(prefix = &quot;netty.server&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NettyProperties</span> <span class="keyword">implements</span> <span class="title">Serializable</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 地址</span></span><br><span class="line">    <span class="keyword">private</span> String hostname = <span class="string">&quot;127.0.0.1&quot;</span>;</span><br><span class="line">    <span class="comment">// 端口</span></span><br><span class="line">    <span class="keyword">private</span> Integer host = <span class="number">8082</span>;</span><br><span class="line">    <span class="comment">// 主线程数目</span></span><br><span class="line">    <span class="keyword">private</span> Integer bossGroupCounts = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">// 工作线程数目</span></span><br><span class="line">    <span class="keyword">private</span> Integer workGroupCounts = <span class="number">200</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NettyProperties</span><span class="params">()</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    get...</span><br><span class="line">    set...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3、NettyServer-java——业务操作类"><a href="#3、NettyServer-java——业务操作类" class="headerlink" title="3、NettyServer.java——业务操作类"></a>3、NettyServer.java——业务操作类</h3><blockquote>
+<p>在这里使用上面的属性配置类</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 服务启动监听器</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> MiChong</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2021-08-27 21:12</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NettyServer</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> NettyProperties nettyProperties;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NettyServer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">NettyServer</span><span class="params">(NettyProperties nettyProperties)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.nettyProperties = nettyProperties;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        InetSocketAddress socketAddress = <span class="keyword">new</span> InetSocketAddress(nettyProperties.getHostname(), nettyProperties.getHost());</span><br><span class="line">        <span class="comment">//new 一个主线程组</span></span><br><span class="line">        EventLoopGroup bossGroup = <span class="keyword">new</span> NioEventLoopGroup(nettyProperties.getBossGroupCounts());</span><br><span class="line">        <span class="comment">//new 一个工作线程组</span></span><br><span class="line">        EventLoopGroup workGroup = <span class="keyword">new</span> NioEventLoopGroup(nettyProperties.getWorkGroupCounts());</span><br><span class="line">        ServerBootstrap bootstrap = <span class="keyword">new</span> ServerBootstrap()</span><br><span class="line">                .group(bossGroup, workGroup)</span><br><span class="line">                .channel(NioServerSocketChannel.class)</span><br><span class="line">                .childHandler(<span class="keyword">new</span> ServerChannelInitializer())</span><br><span class="line">                .localAddress(socketAddress)</span><br><span class="line">                <span class="comment">//设置队列大小</span></span><br><span class="line">                .option(ChannelOption.SO_BACKLOG, <span class="number">1024</span>)</span><br><span class="line">                <span class="comment">// 两小时内没有数据的通信时,TCP会自动发送一个活动探测数据报文</span></span><br><span class="line">                .childOption(ChannelOption.SO_KEEPALIVE, <span class="keyword">true</span>);</span><br><span class="line">        <span class="comment">//绑定端口,开始接收进来的连接</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            ChannelFuture future = bootstrap.bind(socketAddress).sync();</span><br><span class="line">            log.info(<span class="string">&quot;服务器启动开始监听端口: &#123;&#125;&quot;</span>, socketAddress.getPort());</span><br><span class="line">            future.channel().closeFuture().sync();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">            log.error(<span class="string">&quot;服务器开启失败&quot;</span>, e);</span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">            <span class="comment">//关闭主线程组</span></span><br><span class="line">            bossGroup.shutdownGracefully();</span><br><span class="line">            <span class="comment">//关闭工作线程组</span></span><br><span class="line">            workGroup.shutdownGracefully();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4、NettyServerAutoConfiguration-java–自动配置-NettyServer-类"><a href="#4、NettyServerAutoConfiguration-java–自动配置-NettyServer-类" class="headerlink" title="4、NettyServerAutoConfiguration.java–自动配置 NettyServer 类"></a>4、NettyServerAutoConfiguration.java–自动配置 NettyServer 类</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> MiChong</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2021-09-06 14:24</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableConfigurationProperties(NettyProperties.class)</span></span><br><span class="line"><span class="comment">//当类路径下有指定的类为true</span></span><br><span class="line"><span class="meta">@ConditionalOnClass(NettyServer.class)</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty(prefix = &quot;netty.server&quot;, value = &quot;enabled&quot;, matchIfMissing = true)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NettyServerAutoConfiguration</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> NettyProperties nettyProperties;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="meta">@ConditionalOnMissingBean(NettyServer.class)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> NettyServer <span class="title">nettyServer</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        NettyServer nettyServer = <span class="keyword">new</span> NettyServer(nettyProperties);</span><br><span class="line">        <span class="keyword">return</span> nettyServer;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="5、spring-factories-文件"><a href="#5、spring-factories-文件" class="headerlink" title="5、spring.factories 文件"></a>5、spring.factories 文件</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/META-INF/spring.factories文件放在/src/main/resources目录下</span><br><span class="line">注意：META-INF是自己手动创建的目录，spring.factories也是自己手动创建的文件，在该文件中配置自己的自动配置类。</span><br><span class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration=cn.buildworld.netty.server.start.config.NettyServerAutoConfiguration</span><br></pre></td></tr></table></figure>
+
+<h3 id="6、项目打包"><a href="#6、项目打包" class="headerlink" title="6、项目打包"></a>6、项目打包</h3><p><strong>最后，将项目打包 mvn clean install</strong><br><strong>下面链接是引入组件的 springboot 项目</strong></p>
+<p><a target="_blank" rel="noopener" href="https://gitee.com/mi_chong/NettyDemo/tree/master/WebStart">https://gitee.com/mi_chong/NettyDemo/tree/master/WebStart</a></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--在我们的springboot项目中引入打包好的starter组件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.buildworld<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>rpc-server-start<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>在 springboot 中配置 applicaiton.yml</strong></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">netty:</span></span><br><span class="line">  <span class="attr">server:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">9000</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7、如何使用-netty-server"><a href="#7、如何使用-netty-server" class="headerlink" title="7、如何使用 netty server"></a>7、如何使用 netty server</h3><blockquote>
+<p>在我们的 springboot 项目中引入 netty-starter 组件，需要在我们项目启动的时候，启动 netty 服务器，需要做一些处理。</p>
+<p>需求就是，启动 springboot 项目–&gt; 执行 netty 组件中的启动服务器方法，目前网上有 5 种方式在 springboot 启动时执行方法。在<a target="_blank" rel="noopener" href="https://gitee.com/mi_chong/NettyDemo/tree/master/WebStart/src/main/java/cn/buildworld/netty/webstart/start%E7%9B%AE%E5%BD%95%E4%B8%8B%E3%80%82">https://gitee.com/mi_chong/NettyDemo/tree/master/WebStart/src/main/java/cn/buildworld/netty/webstart/start目录下。</a></p>
+</blockquote>
+<p><strong>推荐使用@PostConstruct 注解方式</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 将要执行的方法所在的类交个spring容器扫描(<span class="doctag">@Component</span>),并且在要执行的方法上添加<span class="doctag">@PostConstruct</span>注解或者静态代码块执行</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> MiChong</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2021-09-06 15:38</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NettyServerStart</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> NettyServer nettyServer;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostConstruct</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot; 使用@PostConstruct注解 &quot;</span>);</span><br><span class="line">        <span class="comment">// 开启一个线程去启动Netty服务，防止阻塞springboot启动</span></span><br><span class="line">        <span class="keyword">new</span> Thread(() -&gt; &#123;</span><br><span class="line">            nettyServer.start();</span><br><span class="line">        &#125;).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="8、如何使用-netty-client"><a href="#8、如何使用-netty-client" class="headerlink" title="8、如何使用 netty client"></a>8、如何使用 netty client</h3><h4 id="8-1-引入依赖"><a href="#8-1-引入依赖" class="headerlink" title="8.1 引入依赖"></a>8.1 引入依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>cn.buildworld<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>rpc-client-start<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.0-SNAPSHOT<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="8-2-自动导入-Bean"><a href="#8-2-自动导入-Bean" class="headerlink" title="8.2 自动导入 Bean"></a>8.2 自动导入 Bean</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> MiChong</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@date</span> 2021-09-06 10:01</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 注入Bean</span></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> NettyClientUtil nettyClientUtil;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@PostMapping(&quot;/helloNetty&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseResult <span class="title">helloNetty</span><span class="params">(<span class="meta">@RequestParam</span> String msg)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> nettyClientUtil.sendMessage(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="9、测试"><a href="#9、测试" class="headerlink" title="9、测试"></a>9、测试</h3><h4 id="9-1、请求接口，发送数据"><a href="#9-1、请求接口，发送数据" class="headerlink" title="9.1、请求接口，发送数据"></a>9.1、请求接口，发送数据</h4><p><img src="https://file.buildworld.cn/img/20210907093445.png"></p>
+<h4 id="9-2、客户端发送消息"><a href="#9-2、客户端发送消息" class="headerlink" title="9.2、客户端发送消息"></a>9.2、客户端发送消息</h4><p><img src="https://file.buildworld.cn/img/20210907093612.png"></p>
+<h4 id="9-3、服务端接收消息并返回消息给客户端"><a href="#9-3、服务端接收消息并返回消息给客户端" class="headerlink" title="9.3、服务端接收消息并返回消息给客户端"></a>9.3、服务端接收消息并返回消息给客户端</h4><p><img src="https://file.buildworld.cn/img/20210907093657.png"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:qjzxzxd@gmail.com">MiChong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.buildworld.cn/2021/09/07/%E6%89%8B%E5%86%99netty%E7%9A%84springboot-starter%E7%BB%84%E4%BB%B6/">https://www.buildworld.cn/2021/09/07/%E6%89%8B%E5%86%99netty%E7%9A%84springboot-starter%E7%BB%84%E4%BB%B6/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.buildworld.cn" target="_blank">MiChong的🏡</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/SpringBoot/">SpringBoot</a><a class="post-meta__tags" href="/tags/Netty/">Netty</a></div><div class="post_share"><div class="social-share" data-image="https://file.buildworld.cn/img/20210907092140.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/09/06/%E7%A7%92%E6%9D%80%E9%82%A3%E4%BA%9B%E4%BA%8B/"><img class="next-cover" src="https://file.buildworld.cn/img/20210906093559.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">秒杀那些事</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2018/04/21/Spring Cloud构建微服务架构：服务注册与发现（Eureka、Consul) /" title="Spring Cloud构建微服务架构：服务注册与发现（Eureka、Consul)"><img class="cover" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/img/default.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-04-21</div><div class="title">Spring Cloud构建微服务架构：服务注册与发现（Eureka、Consul)</div></div></a></div><div><a href="/2018/03/29/SpringBoot之API--Swagger2接口文档管理/" title="SpringBoot之API--Swagger2接口文档管理"><img class="cover" src="https://file.buildworld.cn/img/u=2551084964,3275034231&fm=26&gp=0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-03-29</div><div class="title">SpringBoot之API--Swagger2接口文档管理</div></div></a></div><div><a href="/2019/02/10/SpringBoot微服务架构项目-Union社交平台/" title="SpringBoot微服务架构项目--Union社交平台"><img class="cover" src="https://file.buildworld.cn/img/6dc7724665fb0fa34d8d2872f6b40d22_224859_0cf8011f_759177.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-02-10</div><div class="title">SpringBoot微服务架构项目--Union社交平台</div></div></a></div><div><a href="/2018/03/29/SpringBoot整合Dubbo/" title="SpringBoot整合Dubbo"><img class="cover" src="https://file.buildworld.cn/img/u=2551084964,3275034231&fm=26&gp=0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-03-29</div><div class="title">SpringBoot整合Dubbo</div></div></a></div><div><a href="/2018/05/07/SpringBoot整合Quartz实现定时任务（单任务、多任务）/" title="SpringBoot整合Quartz实现定时任务（单任务、多任务）"><img class="cover" src="https://file.buildworld.cn/img/u=2551084964,3275034231&fm=26&gp=0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-05-07</div><div class="title">SpringBoot整合Quartz实现定时任务（单任务、多任务）</div></div></a></div><div><a href="/2018/05/17/SpringBoot整合常用技术/" title="SpringBoot整合常用技术"><img class="cover" src="https://file.buildworld.cn/img/u=2551084964,3275034231&fm=26&gp=0.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2018-05-17</div><div class="title">SpringBoot整合常用技术</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MiChong</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">74</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">71</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MiChongGET"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/qjzxzxd@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到米虫的小站，一起加油🤝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81Netty"><span class="toc-number">1.</span> <span class="toc-text">一、Netty</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81Netty-%E6%A8%A1%E5%9E%8B-selector-%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.1.</span> <span class="toc-text">2、Netty 模型 selector 模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81netty-%E6%A8%A1%E5%9E%8B-reactor-%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.2.</span> <span class="toc-text">3、netty 模型 reactor 模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89-springboot-starter-%E7%BB%84%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">二、自定义 springboot-starter 组件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.1.</span> <span class="toc-text">1、介绍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81NettyProperties-java%E2%80%94%E2%80%94%E5%B1%9E%E6%80%A7%E9%85%8D%E7%BD%AE%E7%B1%BB"><span class="toc-number">2.2.</span> <span class="toc-text">2、NettyProperties.java——属性配置类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81NettyServer-java%E2%80%94%E2%80%94%E4%B8%9A%E5%8A%A1%E6%93%8D%E4%BD%9C%E7%B1%BB"><span class="toc-number">2.3.</span> <span class="toc-text">3、NettyServer.java——业务操作类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81NettyServerAutoConfiguration-java%E2%80%93%E8%87%AA%E5%8A%A8%E9%85%8D%E7%BD%AE-NettyServer-%E7%B1%BB"><span class="toc-number">2.4.</span> <span class="toc-text">4、NettyServerAutoConfiguration.java–自动配置 NettyServer 类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81spring-factories-%E6%96%87%E4%BB%B6"><span class="toc-number">2.5.</span> <span class="toc-text">5、spring.factories 文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85"><span class="toc-number">2.6.</span> <span class="toc-text">6、项目打包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7%E3%80%81%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-netty-server"><span class="toc-number">2.7.</span> <span class="toc-text">7、如何使用 netty server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8%E3%80%81%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-netty-client"><span class="toc-number">2.8.</span> <span class="toc-text">8、如何使用 netty client</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#8-1-%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="toc-number">2.8.1.</span> <span class="toc-text">8.1 引入依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-2-%E8%87%AA%E5%8A%A8%E5%AF%BC%E5%85%A5-Bean"><span class="toc-number">2.8.2.</span> <span class="toc-text">8.2 自动导入 Bean</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9%E3%80%81%E6%B5%8B%E8%AF%95"><span class="toc-number">2.9.</span> <span class="toc-text">9、测试</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#9-1%E3%80%81%E8%AF%B7%E6%B1%82%E6%8E%A5%E5%8F%A3%EF%BC%8C%E5%8F%91%E9%80%81%E6%95%B0%E6%8D%AE"><span class="toc-number">2.9.1.</span> <span class="toc-text">9.1、请求接口，发送数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-2%E3%80%81%E5%AE%A2%E6%88%B7%E7%AB%AF%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF"><span class="toc-number">2.9.2.</span> <span class="toc-text">9.2、客户端发送消息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#9-3%E3%80%81%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%8E%A5%E6%94%B6%E6%B6%88%E6%81%AF%E5%B9%B6%E8%BF%94%E5%9B%9E%E6%B6%88%E6%81%AF%E7%BB%99%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">2.9.3.</span> <span class="toc-text">9.3、服务端接收消息并返回消息给客户端</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/09/07/%E6%89%8B%E5%86%99netty%E7%9A%84springboot-starter%E7%BB%84%E4%BB%B6/" title="手写netty的springboot-starter组件"><img src="https://file.buildworld.cn/img/20210907092140.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="手写netty的springboot-starter组件"/></a><div class="content"><a class="title" href="/2021/09/07/%E6%89%8B%E5%86%99netty%E7%9A%84springboot-starter%E7%BB%84%E4%BB%B6/" title="手写netty的springboot-starter组件">手写netty的springboot-starter组件</a><time datetime="2021-09-07T00:57:28.000Z" title="发表于 2021-09-07 08:57:28">2021-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/09/06/%E7%A7%92%E6%9D%80%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="秒杀那些事"><img src="https://file.buildworld.cn/img/20210906093559.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="秒杀那些事"/></a><div class="content"><a class="title" href="/2021/09/06/%E7%A7%92%E6%9D%80%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="秒杀那些事">秒杀那些事</a><time datetime="2021-09-06T01:29:25.000Z" title="发表于 2021-09-06 09:29:25">2021-09-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/15/%E7%AE%97%E6%B3%95%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="算法那些事"><img src="https://file.buildworld.cn/img/20210804154052.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法那些事"/></a><div class="content"><a class="title" href="/2021/07/15/%E7%AE%97%E6%B3%95%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="算法那些事">算法那些事</a><time datetime="2021-07-15T00:56:01.000Z" title="发表于 2021-07-15 08:56:01">2021-07-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/09/14%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E7%AE%97%E6%B3%95%E6%A8%A1%E5%BC%8F/" title="14种常见的算法模式"><img src="https://file.buildworld.cn/img/20210709115216.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="14种常见的算法模式"/></a><div class="content"><a class="title" href="/2021/07/09/14%E7%A7%8D%E5%B8%B8%E8%A7%81%E7%9A%84%E7%AE%97%E6%B3%95%E6%A8%A1%E5%BC%8F/" title="14种常见的算法模式">14种常见的算法模式</a><time datetime="2021-07-09T03:41:36.000Z" title="发表于 2021-07-09 11:41:36">2021-07-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合"><img src="https://file.buildworld.cn/img/20210209161641.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="LeetCode数据库题目集合"/></a><div class="content"><a class="title" href="/2021/02/09/LeetCode%E6%95%B0%E6%8D%AE%E5%BA%93%E9%A2%98%E7%9B%AE%E9%9B%86%E5%90%88/" title="LeetCode数据库题目集合">LeetCode数据库题目集合</a><time datetime="2021-02-09T08:13:56.000Z" title="发表于 2021-02-09 16:13:56">2021-02-09</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By MiChong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'mef0W501zi4VSjltsnmN5D9J-gzGzoHsz',
+      appKey: 'ktKil4OakXUNcSs0Ofkph1rm',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "7d002c40-fe0a-44eb-977b-a992eaed1e7c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
