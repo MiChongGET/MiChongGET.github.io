@@ -1,0 +1,388 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>图数据库（一）--Neo4j的介绍 | MiChong的🏡</title><meta name="keywords" content="深度学习,图,Neo4j"><meta name="author" content="MiChong,qjzxzxd@gmail.com"><meta name="copyright" content="MiChong"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Neo4j是一个高性能的,NOSQL图形数据库，它将结构化数据存储在网络上而不是表中。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="图数据库（一）--Neo4j的介绍">
+<meta property="og:url" content="https://www.buildworld.cn/2021/09/22/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88%E4%B8%80%EF%BC%89-Neo4j%E7%9A%84%E4%BB%8B%E7%BB%8D/index.html">
+<meta property="og:site_name" content="MiChong的🏡">
+<meta property="og:description" content="Neo4j是一个高性能的,NOSQL图形数据库，它将结构化数据存储在网络上而不是表中。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://file.buildworld.cn/img/20210922220613.png">
+<meta property="article:published_time" content="2021-09-22T14:01:45.000Z">
+<meta property="article:modified_time" content="2021-09-22T14:09:18.473Z">
+<meta property="article:author" content="MiChong">
+<meta property="article:tag" content="深度学习">
+<meta property="article:tag" content="图">
+<meta property="article:tag" content="Neo4j">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://file.buildworld.cn/img/20210922220613.png"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.buildworld.cn/2021/09/22/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88%E4%B8%80%EF%BC%89-Neo4j%E7%9A%84%E4%BB%8B%E7%BB%8D/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '图数据库（一）--Neo4j的介绍',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-09-22 22:09:18'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if (GLOBAL_CONFIG_SITE.isHome && /iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="MiChong的🏡" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/header.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">76</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://file.buildworld.cn/img/20210922220835.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">MiChong的🏡</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/talk/"><i class="fa-fw fas fa-comment"></i><span> 说说</span></a></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><i class="fa-fw fa fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down expand"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> 歌单</span></a></li><li><a class="site-page child" href="/books/"><i class="fa-fw fas fa-book"></i><span> 书单</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-film"></i><span> 影单</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fas fa-images"></i><span> 图集</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/tools/"><i class="fa-fw fa fa-rocket"></i><span> 工具</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-user"></i><span> 关于我</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fas fa-comment-dots"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">图数据库（一）--Neo4j的介绍</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-22T14:01:45.000Z" title="发表于 2021-09-22 22:01:45">2021-09-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-09-22T14:09:18.473Z" title="更新于 2021-09-22 22:09:18">2021-09-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="图数据库（一）--Neo4j的介绍"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="一、图数据库"><a href="#一、图数据库" class="headerlink" title="一、图数据库"></a>一、图数据库</h2><h3 id="1、什么是图数据库"><a href="#1、什么是图数据库" class="headerlink" title="1、什么是图数据库"></a>1、什么是图数据库</h3><blockquote>
+<p>随着社交、电商、金融、零售、物联网等行业的快速发展，现实社会织起了了一张庞大而复杂的关系<br>网，传统数据库很难处理关系运算。大数据行业需要处理的数据之间的关系随数据量呈几何级数增长，<br>急需一种支持海量复杂数据关系运算的数据库，图数据库应运而生。</p>
+</blockquote>
+<ul>
+<li>社交领域：Facebook, Twitter，Linkedin 用它来管理社交关系，实现好友推荐</li>
+<li>零售领域：eBay，沃尔玛使用它实现商品实时推荐，给买家更好的购物体验</li>
+<li>金融领域：摩根大通，花旗和瑞银等银行在用图数据库做风控处理</li>
+<li>汽车制造领域：沃尔沃，戴姆勒和丰田等顶级汽车制造商依靠图数据库推动创新制造解决方案</li>
+<li>电信领域：Verizon, Orange 和 AT&amp;T 等电信公司依靠图数据库来管理网络，控制访问并支持客户 360</li>
+<li>酒店领域：万豪和雅高酒店等顶级酒店公司依使用图数据库来管理复杂且快速变化的库存图数据库并非指存储图片的数据库，而是以图数据结构存储和查询数据。</li>
+</ul>
+<blockquote>
+<p><strong>图数据库是基于图论实现的一种 NoSQL 数据库，其数据存储结构和数据查询方式都是以图论为基础的，</strong> &gt;<strong>图数据库主要用于存储更多的连接数据。</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>图论〔Graph Theory〕</strong>是数学的一个分支。它以图为研究对象图论中的图是由若干给定的点及连<br>接两点的线所构成的图形，这种图形通常用来描述某些事物之间的某种特定关系，用点代表事物，<br>用连接两点的线表示相应两个事物间具有这种关系。</p>
+<p><img src="https://file.buildworld.cn/img/20210918094152.png"></p>
+</blockquote>
+<h3 id="2、和关系型数据库的对比"><a href="#2、和关系型数据库的对比" class="headerlink" title="2、和关系型数据库的对比"></a>2、和关系型数据库的对比</h3><table>
+<thead>
+<tr>
+<th align="left">关系型数据库（RDBMS）</th>
+<th align="left">图数据库（GDB）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">表</td>
+<td align="left">图</td>
+</tr>
+<tr>
+<td align="left">行</td>
+<td align="left">节点</td>
+</tr>
+<tr>
+<td align="left">列和数据</td>
+<td align="left">属性和数据</td>
+</tr>
+<tr>
+<td align="left">约束</td>
+<td align="left">关系</td>
+</tr>
+</tbody></table>
+<h3 id="3、Neo4j-数据库"><a href="#3、Neo4j-数据库" class="headerlink" title="3、Neo4j 数据库"></a>3、Neo4j 数据库</h3><blockquote>
+<p>Neo4j 是一个开源的 NoSQL 图形数据库，2003 年开始开发，使用 scala 和 java 语言，2007 年开始发布。</p>
+<ul>
+<li>是世界上最先进的图数据库之一，提供原生的图数据存储，检索和处理；</li>
+<li>采用<strong>属性图模型（Property graph model）</strong>，极大的完善和丰富图数据模型；</li>
+<li>专属查询语言 Cypher，直观，高效；</li>
+</ul>
+<p>官网： <a target="_blank" rel="noopener" href="https://neo4j.com/">https://neo4j.com/</a></p>
+</blockquote>
+<h4 id="3-1、Neo4j-的特性"><a href="#3-1、Neo4j-的特性" class="headerlink" title="3.1、Neo4j 的特性"></a>3.1、Neo4j 的特性</h4><ul>
+<li>SQL 就像简单的查询语言 Neo4j CQL</li>
+<li>它遵循属性图数据模型</li>
+<li>它通过使用 Apache Lucence 支持索引</li>
+<li>它支持 UNIQUE 约束</li>
+<li>它包含一个用于执行 CQL 命令的 UI：Neo4j 数据浏览器</li>
+<li>它支持完整的 ACID（原子性，一致性，隔离性和持久性）规则</li>
+<li>它采用原生图形库与本地 GPE（图形处理引擎）</li>
+<li>它支持查询的数据导出到 JSON 和 XLS 格式</li>
+<li>它提供了 REST API，可以被任何编程语言（如 Java，Spring，Scala 等）访问</li>
+<li>它提供了可以通过任何 UI MVC 框架（如 Node JS）访问的 Java 脚本</li>
+<li>它支持两种 Java API：Cypher API 和 Native Java API 来开发 Java 应用程序</li>
+</ul>
+<h4 id="3-2、Neo4j-的优点"><a href="#3-2、Neo4j-的优点" class="headerlink" title="3.2、Neo4j 的优点"></a>3.2、Neo4j 的优点</h4><ul>
+<li>它很容易表示连接的数据</li>
+<li>检索/遍历/导航更多的连接数据是非常容易和快速的</li>
+<li>它非常容易地表示半结构化数据</li>
+<li>Neo4j CQL 查询语言命令是人性化的可读格式，非常容易学习</li>
+<li>使用简单而强大的数据模型</li>
+<li>它不需要复杂的连接来检索连接的/相关的数据，因为它很容易检索它的相邻节点或关系细节没有<br>连接或索引</li>
+</ul>
+<h2 id="二、Neo4j-数据模型"><a href="#二、Neo4j-数据模型" class="headerlink" title="二、Neo4j 数据模型"></a>二、Neo4j 数据模型</h2><h3 id="1、属性图模型"><a href="#1、属性图模型" class="headerlink" title="1、属性图模型"></a>1、属性图模型</h3><blockquote>
+<p>Neo4j 图数据库遵循属性图模型来存储和管理其数据。</p>
+<p>属性图模型规则</p>
+<ul>
+<li>表示节点，关系和属性中的数据</li>
+<li>节点和关系都包含属性</li>
+<li>关系连接节点</li>
+<li>属性是键值对</li>
+<li>节点用圆圈表示，关系用方向键表示。</li>
+<li>关系具有方向：单向和双向。</li>
+<li>每个关系包含“开始节点”或“从节点”和“到节点”或“结束节点”</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>Neo4j 图数据库将其所有数据存储在节点和关系中</strong>，我们不需要任何额外的 RDBMS 数据库或 NoSQL 数据<br>库来存储 Neo4j 数据库数据，它以图的形式存储数据。Neo4j 使用本机<strong>GPE（图形处理引擎）</strong>来使用它的<br>本机图存储格式。</p>
+</blockquote>
+<h3 id="2、Neo4j-的构建元素"><a href="#2、Neo4j-的构建元素" class="headerlink" title="2、Neo4j 的构建元素"></a>2、Neo4j 的构建元素</h3><blockquote>
+<ul>
+<li><p>节点</p>
+</li>
+<li><p>属性</p>
+</li>
+<li><p>关系</p>
+</li>
+<li><p>标签</p>
+</li>
+<li><p>数据浏览器</p>
+<p><img src="https://file.buildworld.cn/img/20210922211025.png"></p>
+</li>
+</ul>
+</blockquote>
+<h4 id="2-1、节点"><a href="#2-1、节点" class="headerlink" title="2.1、节点"></a>2.1、节点</h4><blockquote>
+<p>节点（Node)是图数据库中的一个基本元素，用来表示一个实体记录，就像关系数据库中的一条记录一<br>样。在 Neo4j 中节点可以包含多个属性(Property)和多个标签(Label)。</p>
+<ul>
+<li>节点是主要的数据元素</li>
+<li>节点通过关系连接到其他节点</li>
+<li>节点可以具有一个或多个属性（即，存储为键/值对的属性）</li>
+<li>节点有一个或多个标签，用于描述其在图表中的作用</li>
+</ul>
+</blockquote>
+<h4 id="2-2、属性"><a href="#2-2、属性" class="headerlink" title="2.2、属性"></a>2.2、属性</h4><blockquote>
+<p>属性（Property）是用于描述图节点和关系的键值对。其中 Key 是一个字符串，值可以通过使用任何<br>Neo4j 数据类型来表示。</p>
+<ul>
+<li>属性是命名值，其中名称（或键）是字符串</li>
+<li>属性可以被索引和约束</li>
+<li>可以从多个属性创建复合索引</li>
+</ul>
+</blockquote>
+<h4 id="2-3、关系"><a href="#2-3、关系" class="headerlink" title="2.3、关系"></a>2.3、关系</h4><blockquote>
+<p>关系（Relationship）同样是图数据库的基本元素。当数据库中已经存在节点后，需要将节点连接起来<br>构成图。关系就是用来连接两个节点，关系也称为图论的边(Edge) ,其始端和末端都必须是节点，关系不<br>能指向空也不能从空发起。关系和节点一样可以包含多个属性，但关系只能有一个类型(Type) 。</p>
+<ul>
+<li>关系连接两个节点</li>
+<li>关系是方向性的</li>
+<li>节点可以有多个甚至递归的关系</li>
+<li>关系可以有一个或多个属性（即存储为键/值对的属性）</li>
+</ul>
+</blockquote>
+<h4 id="2-4、标签"><a href="#2-4、标签" class="headerlink" title="2.4、标签"></a>2.4、标签</h4><blockquote>
+<p>标签（Label）将一个公共名称与一组节点或关系相关联， 节点或关系可以包含一个或多个标签。 我们<br>可以为现有节点或关系创建新标签， 我们可以从现有节点或关系中删除标签。</p>
+<ul>
+<li>标签用于将节点分组</li>
+<li>一个节点可以具有多个标签</li>
+<li>对标签进行索引以加速在图中查找节点</li>
+<li>本机标签索引针对速度进行了优化</li>
+</ul>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:qjzxzxd@gmail.com">MiChong</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.buildworld.cn/2021/09/22/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88%E4%B8%80%EF%BC%89-Neo4j%E7%9A%84%E4%BB%8B%E7%BB%8D/">https://www.buildworld.cn/2021/09/22/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88%E4%B8%80%EF%BC%89-Neo4j%E7%9A%84%E4%BB%8B%E7%BB%8D/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.buildworld.cn" target="_blank">MiChong的🏡</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a><a class="post-meta__tags" href="/tags/%E5%9B%BE/">图</a><a class="post-meta__tags" href="/tags/Neo4j/">Neo4j</a></div><div class="post_share"><div class="social-share" data-image="https://file.buildworld.cn/img/20210922220613.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/09/10/%E5%9B%BE%E4%B8%8E%E5%9B%BE%E5%AD%A6%E4%B9%A0/"><img class="next-cover" src="https://file.buildworld.cn/img/20210907184428.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">图与图学习</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span> 相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/09/10/图与图学习/" title="图与图学习"><img class="cover" src="https://file.buildworld.cn/img/20210907184428.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-10</div><div class="title">图与图学习</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/header.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MiChong</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">76</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">21</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MiChongGET"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="/qjzxzxd@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">欢迎来到米虫的小站，一起加油🤝</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.</span> <span class="toc-text">一、图数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.1.</span> <span class="toc-text">1、什么是图数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%92%8C%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-number">1.2.</span> <span class="toc-text">2、和关系型数据库的对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81Neo4j-%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-number">1.3.</span> <span class="toc-text">3、Neo4j 数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1%E3%80%81Neo4j-%E7%9A%84%E7%89%B9%E6%80%A7"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1、Neo4j 的特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2%E3%80%81Neo4j-%E7%9A%84%E4%BC%98%E7%82%B9"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2、Neo4j 的优点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Neo4j-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.</span> <span class="toc-text">二、Neo4j 数据模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E5%B1%9E%E6%80%A7%E5%9B%BE%E6%A8%A1%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">1、属性图模型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81Neo4j-%E7%9A%84%E6%9E%84%E5%BB%BA%E5%85%83%E7%B4%A0"><span class="toc-number">2.2.</span> <span class="toc-text">2、Neo4j 的构建元素</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1%E3%80%81%E8%8A%82%E7%82%B9"><span class="toc-number">2.2.1.</span> <span class="toc-text">2.1、节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2%E3%80%81%E5%B1%9E%E6%80%A7"><span class="toc-number">2.2.2.</span> <span class="toc-text">2.2、属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3%E3%80%81%E5%85%B3%E7%B3%BB"><span class="toc-number">2.2.3.</span> <span class="toc-text">2.3、关系</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4%E3%80%81%E6%A0%87%E7%AD%BE"><span class="toc-number">2.2.4.</span> <span class="toc-text">2.4、标签</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/09/22/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88%E4%B8%80%EF%BC%89-Neo4j%E7%9A%84%E4%BB%8B%E7%BB%8D/" title="图数据库（一）--Neo4j的介绍"><img src="https://file.buildworld.cn/img/20210922220613.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="图数据库（一）--Neo4j的介绍"/></a><div class="content"><a class="title" href="/2021/09/22/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88%E4%B8%80%EF%BC%89-Neo4j%E7%9A%84%E4%BB%8B%E7%BB%8D/" title="图数据库（一）--Neo4j的介绍">图数据库（一）--Neo4j的介绍</a><time datetime="2021-09-22T14:01:45.000Z" title="发表于 2021-09-22 22:01:45">2021-09-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/09/10/%E5%9B%BE%E4%B8%8E%E5%9B%BE%E5%AD%A6%E4%B9%A0/" title="图与图学习"><img src="https://file.buildworld.cn/img/20210907184428.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="图与图学习"/></a><div class="content"><a class="title" href="/2021/09/10/%E5%9B%BE%E4%B8%8E%E5%9B%BE%E5%AD%A6%E4%B9%A0/" title="图与图学习">图与图学习</a><time datetime="2021-09-10T06:35:46.000Z" title="发表于 2021-09-10 14:35:46">2021-09-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/09/07/%E6%89%8B%E5%86%99netty%E7%9A%84springboot-starter%E7%BB%84%E4%BB%B6/" title="手写netty的springboot-starter组件"><img src="https://file.buildworld.cn/img/20210907092140.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="手写netty的springboot-starter组件"/></a><div class="content"><a class="title" href="/2021/09/07/%E6%89%8B%E5%86%99netty%E7%9A%84springboot-starter%E7%BB%84%E4%BB%B6/" title="手写netty的springboot-starter组件">手写netty的springboot-starter组件</a><time datetime="2021-09-07T00:57:28.000Z" title="发表于 2021-09-07 08:57:28">2021-09-07</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/09/06/%E7%A7%92%E6%9D%80%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="秒杀那些事"><img src="https://file.buildworld.cn/img/20210906093559.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="秒杀那些事"/></a><div class="content"><a class="title" href="/2021/09/06/%E7%A7%92%E6%9D%80%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="秒杀那些事">秒杀那些事</a><time datetime="2021-09-06T01:29:25.000Z" title="发表于 2021-09-06 09:29:25">2021-09-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/15/%E7%AE%97%E6%B3%95%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="算法那些事"><img src="https://file.buildworld.cn/img/20210804154052.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="算法那些事"/></a><div class="content"><a class="title" href="/2021/07/15/%E7%AE%97%E6%B3%95%E9%82%A3%E4%BA%9B%E4%BA%8B/" title="算法那些事">算法那些事</a><time datetime="2021-07-15T00:56:01.000Z" title="发表于 2021-07-15 08:56:01">2021-07-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By MiChong</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div><div class="footer_custom_text"><a href="//www.upyun.com/?utm_source=lianmeng&utm_medium=referral" target="_blank"><img src="https://ae01.alicdn.com/kf/H4484324da9f8498e943e64b4cc0e602dZ.png" style="width:75px;"></a></p></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="chat_btn" type="button" title="rightside.chat_btn"><i class="fas fa-sms"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div></div><hr/><div id="local-search-results"></div><span class="search-close-button"><i class="fas fa-times"></i></span></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function loadValine () {
+  function initValine () {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'mef0W501zi4VSjltsnmN5D9J-gzGzoHsz',
+      appKey: 'ktKil4OakXUNcSs0Ofkph1rm',
+      placeholder: 'Please leave your footprints',
+      avatar: 'monsterid',
+      meta: 'nick,mail,link'.split(','),
+      pageSize: '10',
+      lang: 'zh-cn',
+      recordIP: false,
+      serverURLs: '',
+      emojiCDN: '',
+      emojiMaps: "",
+      enableQQ: false,
+      path: window.location.pathname,
+      requiredFields: ["nick,mail"],
+      visitor: false
+    }, null))
+  }
+
+  if (typeof Valine === 'function') initValine() 
+  else getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js').then(initValine)
+}
+
+if ('Valine' === 'Valine' || !false) {
+  if (false) btf.loadComment(document.getElementById('vcomment'),loadValine)
+  else setTimeout(loadValine, 0)
+} else {
+  function loadOtherComment () {
+    loadValine()
+  }
+}</script></div><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-fluttering-ribbon.min.js"></script><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/canvas-nest.min.js"></script><script>window.$crisp = [];
+window.CRISP_WEBSITE_ID = "7d002c40-fe0a-44eb-977b-a992eaed1e7c";
+(function () {
+  d = document;
+  s = d.createElement("script");
+  s.src = "https://client.crisp.chat/l.js";
+  s.async = 1;
+  d.getElementsByTagName("head")[0].appendChild(s);
+})();
+$crisp.push(["safe", true])
+
+if (true) {
+  $crisp.push(["do", "chat:hide"])
+  $crisp.push(["on", "chat:closed", function() {
+    $crisp.push(["do", "chat:hide"])
+  }])
+  var chatBtnFn = () => {
+    var chatBtn = document.getElementById("chat_btn")
+    chatBtn.addEventListener("click", function(){
+      $crisp.push(["do", "chat:show"])
+      $crisp.push(["do", "chat:open"])
+
+    });
+  }
+  chatBtnFn()
+} else {
+  if (true) {
+    function chatBtnHide () {
+      $crisp.push(["do", "chat:hide"])
+    }
+    function chatBtnShow () {
+      $crisp.push(["do", "chat:show"])
+    }
+  }
+}</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
