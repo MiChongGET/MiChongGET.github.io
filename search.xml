@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>领域驱动设计学习</title>
+      <link href="/2021/11/04/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AD%A6%E4%B9%A0/"/>
+      <url>/2021/11/04/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AD%A6%E4%B9%A0/</url>
+      
+        <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>小傅哥博客读后感：<a href="https://bugstack.cn/">https://bugstack.cn</a></p><h2 id="一、初识领域驱动设计"><a href="#一、初识领域驱动设计" class="headerlink" title="一、初识领域驱动设计"></a>一、初识领域驱动设计</h2><h3 id="1、介绍"><a href="#1、介绍" class="headerlink" title="1、介绍"></a>1、介绍</h3><blockquote><p><strong>DDD（Domain-Driven Design 领域驱动设计）</strong>是由 Eric Evans 最先提出，目的是对软件所涉及到的领域进行建模，以应对系统规模过大时引起的软件复杂性的问题。整个过程大概是这样的，开发团队和领域专家一起通过 通用语言(Ubiquitous Language)去理解和消化领域知识，从领域知识中提取和划分为一个一个的子领域（核心子域，通用子域，支撑子域），并在子领域上建立模型，再重复以上步骤，这样周而复始，构建出一套符合当前领域的模型。</p></blockquote><p><img src="https://file.buildworld.cn/img/20211104225640.png"></p><blockquote><p>依靠领域驱动设计的设计思想，通过事件风暴建立领域模型，合理划分领域逻辑和物理边界，建立领域对象及服务矩阵和服务架构图，定义符合 DDD 分层架构思想的代码结构模型，保证业务模型与代码模型的一致性。通过上述设计思想、方法和过程，指导团队按照 DDD 设计思想完成微服务设计和开发。</p><ol><li>拒绝泥球小单体、拒绝污染功能与服务、拒绝一加功能排期一个月</li><li>架构出高可用极易符合互联网高速迭代的应用服务</li><li>物料化、组装化、可编排的服务，提高人效</li></ol></blockquote><h3 id="2、服务架构"><a href="#2、服务架构" class="headerlink" title="2、服务架构"></a>2、服务架构</h3><p><img src="https://file.buildworld.cn/img/20211104225650.png" alt="四层架构"></p><h4 id="应用层-application"><a href="#应用层-application" class="headerlink" title="应用层{application}"></a>应用层{application}</h4><blockquote><ol><li>应用服务位于应用层。用来表述应用和用户行为，负责服务的组合、编排和转发，负责处理业务用例的执行顺序以及结果的拼装。</li><li>应用层的服务包括应用服务和领域事件相关服务。</li><li>应用服务可对微服务内的领域服务以及微服务外的应用服务进行组合和编排，或者对基础层如文件、缓存等数据直接操作形成应用服务，对外提供粗粒度的服务。</li><li>领域事件服务包括两类：领域事件的发布和订阅。通过事件总线和消息队列实现异步数据传输，实现微服务之间的解耦。</li></ol></blockquote><h4 id="领域层-domain"><a href="#领域层-domain" class="headerlink" title="领域层{domain}"></a>领域层{domain}</h4><blockquote><ol><li>领域服务位于领域层，为完成领域中跨实体或值对象的操作转换而封装的服务，领域服务以与实体和值对象相同的方式参与实施过程。</li><li>领域服务对同一个实体的一个或多个方法进行组合和封装，或对多个不同实体的操作进行组合或编排，对外暴露成领域服务。领域服务封装了核心的业务逻辑。实体自身的行为在实体类内部实现，向上封装成领域服务暴露。</li><li>为隐藏领域层的业务逻辑实现，所有领域方法和服务等均须通过领域服务对外暴露。</li><li>为实现微服务内聚合之间的解耦，原则上禁止跨聚合的领域服务调用和跨聚合的数据相互关联。</li></ol></blockquote><h4 id="基础层-infrastructrue"><a href="#基础层-infrastructrue" class="headerlink" title="基础层{infrastructrue}"></a>基础层{infrastructrue}</h4><ul><li><p>基础服务位于基础层。为各层提供资源服务（如数据库、缓存等），实现各层的解耦，降低外部资源变化对业务逻辑的影响。</p></li><li><p>基础服务主要为仓储服务，通过依赖反转的方式为各层提供基础资源服务，领域服务和应用服务调用仓储服务接口，利用仓储实现持久化数据对象或直接访问基础资源。</p></li><li><pre><code class="xml">向其他层提供 通用的 技术能力(比如工具类,第三方库类支持,常用基本配置,数据访问底层实现)基础实施层主要包含以下的内容:    * 为应用层 传递消息(比如通知)    * 为领域层 提供持久化机制(最底层的实现)    * 为用户界面层 提供组件配置    * 基础设施层还能够通过架构框架来支持四个层次间的交互模式。</code></pre></li></ul><h4 id="接口层-interfaces"><a href="#接口层-interfaces" class="headerlink" title="接口层{interfaces}"></a>接口层{interfaces}</h4><ul><li>接口服务位于用户接口层，用于处理用户发送的 Restful 请求和解析用户输入的配置文件等，并将信息传递给应用层。</li></ul><h3 id="3、DDD-代码落地"><a href="#3、DDD-代码落地" class="headerlink" title="3、DDD 代码落地"></a>3、DDD 代码落地</h3><p><img src="https://file.buildworld.cn/img/20211104232530.png"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 后端 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Java </tag>
+            
+            <tag> 架构设计 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>图数据库--Neo4j的介绍</title>
       <link href="/2021/09/22/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88%E4%B8%80%EF%BC%89-Neo4j%E7%9A%84%E4%BB%8B%E7%BB%8D/"/>
       <url>/2021/09/22/%E5%9B%BE%E6%95%B0%E6%8D%AE%E5%BA%93%EF%BC%88%E4%B8%80%EF%BC%89-Neo4j%E7%9A%84%E4%BB%8B%E7%BB%8D/</url>

@@ -6,7 +6,7 @@
   <link href="https://www.buildworld.cn/atom.xml" rel="self"/>
   
   <link href="https://www.buildworld.cn/"/>
-  <updated>2021-10-15T02:26:01.465Z</updated>
+  <updated>2021-11-04T15:50:08.385Z</updated>
   <id>https://www.buildworld.cn/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>领域驱动设计学习</title>
+    <link href="https://www.buildworld.cn/2021/11/04/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AD%A6%E4%B9%A0/"/>
+    <id>https://www.buildworld.cn/2021/11/04/%E9%A2%86%E5%9F%9F%E9%A9%B1%E5%8A%A8%E8%AE%BE%E8%AE%A1%E5%AD%A6%E4%B9%A0/</id>
+    <published>2021-11-04T15:27:21.000Z</published>
+    <updated>2021-11-04T15:50:08.385Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><p>小傅哥博客读后感：<a href="https://bugstack.cn/">https://bugstack.cn</a></p><h2 id="一、初识领域驱动设计"><a href="#一、初识领域驱动设计" class="headerlink" title="一、初识领域驱动设计"></a>一、初识领域驱动设计</h2><h3 id="1、介绍"><a href="#1、介绍" class="headerlink" title="1、介绍"></a>1、介绍</h3><blockquote><p><strong>DDD（Domain-Driven Design 领域驱动设计）</strong>是由 Eric Evans 最先提出，目的是对软件所涉及到的领域进行建模，以应对系统规模过大时引起的软件复杂性的问题。整个过程大概是这样的，开发团队和领域专家一起通过 通用语言(Ubiquitous Language)去理解和消化领域知识，从领域知识中提取和划分为一个一个的子领域（核心子域，通用子域，支撑子域），并在子领域上建立模型，再重复以上步骤，这样周而复始，构建出一套符合当前领域的模型。</p></blockquote><p><img src="https://file.buildworld.cn/img/20211104225640.png"></p><blockquote><p>依靠领域驱动设计的设计思想，通过事件风暴建立领域模型，合理划分领域逻辑和物理边界，建立领域对象及服务矩阵和服务架构图，定义符合 DDD 分层架构思想的代码结构模型，保证业务模型与代码模型的一致性。通过上述设计思想、方法和过程，指导团队按照 DDD 设计思想完成微服务设计和开发。</p><ol><li>拒绝泥球小单体、拒绝污染功能与服务、拒绝一加功能排期一个月</li><li>架构出高可用极易符合互联网高速迭代的应用服务</li><li>物料化、组装化、可编排的服务，提高人效</li></ol></blockquote><h3 id="2、服务架构"><a href="#2、服务架构" class="headerlink" title="2、服务架构"></a>2、服务架构</h3><p><img src="https://file.buildworld.cn/img/20211104225650.png" alt="四层架构"></p><h4 id="应用层-application"><a href="#应用层-application" class="headerlink" title="应用层{application}"></a>应用层{application}</h4><blockquote><ol><li>应用服务位于应用层。用来表述应用和用户行为，负责服务的组合、编排和转发，负责处理业务用例的执行顺序以及结果的拼装。</li><li>应用层的服务包括应用服务和领域事件相关服务。</li><li>应用服务可对微服务内的领域服务以及微服务外的应用服务进行组合和编排，或者对基础层如文件、缓存等数据直接操作形成应用服务，对外提供粗粒度的服务。</li><li>领域事件服务包括两类：领域事件的发布和订阅。通过事件总线和消息队列实现异步数据传输，实现微服务之间的解耦。</li></ol></blockquote><h4 id="领域层-domain"><a href="#领域层-domain" class="headerlink" title="领域层{domain}"></a>领域层{domain}</h4><blockquote><ol><li>领域服务位于领域层，为完成领域中跨实体或值对象的操作转换而封装的服务，领域服务以与实体和值对象相同的方式参与实施过程。</li><li>领域服务对同一个实体的一个或多个方法进行组合和封装，或对多个不同实体的操作进行组合或编排，对外暴露成领域服务。领域服务封装了核心的业务逻辑。实体自身的行为在实体类内部实现，向上封装成领域服务暴露。</li><li>为隐藏领域层的业务逻辑实现，所有领域方法和服务等均须通过领域服务对外暴露。</li><li>为实现微服务内聚合之间的解耦，原则上禁止跨聚合的领域服务调用和跨聚合的数据相互关联。</li></ol></blockquote><h4 id="基础层-infrastructrue"><a href="#基础层-infrastructrue" class="headerlink" title="基础层{infrastructrue}"></a>基础层{infrastructrue}</h4><ul><li><p>基础服务位于基础层。为各层提供资源服务（如数据库、缓存等），实现各层的解耦，降低外部资源变化对业务逻辑的影响。</p></li><li><p>基础服务主要为仓储服务，通过依赖反转的方式为各层提供基础资源服务，领域服务和应用服务调用仓储服务接口，利用仓储实现持久化数据对象或直接访问基础资源。</p></li><li><pre><code class="xml">向其他层提供 通用的 技术能力(比如工具类,第三方库类支持,常用基本配置,数据访问底层实现)基础实施层主要包含以下的内容:    * 为应用层 传递消息(比如通知)    * 为领域层 提供持久化机制(最底层的实现)    * 为用户界面层 提供组件配置    * 基础设施层还能够通过架构框架来支持四个层次间的交互模式。</code></pre></li></ul><h4 id="接口层-interfaces"><a href="#接口层-interfaces" class="headerlink" title="接口层{interfaces}"></a>接口层{interfaces}</h4><ul><li>接口服务位于用户接口层，用于处理用户发送的 Restful 请求和解析用户输入的配置文件等，并将信息传递给应用层。</li></ul><h3 id="3、DDD-代码落地"><a href="#3、DDD-代码落地" class="headerlink" title="3、DDD 代码落地"></a>3、DDD 代码落地</h3><p><img src="https://file.buildworld.cn/img/20211104232530.png"></p>]]></content>
+    
+    
+    <summary type="html">DDD（Domain-Driven Design 领域驱动设计）是由Eric Evans最先提出，目的是对软件所涉及到的领域进行建模，以应对系统规模过大时引起的软件复杂性的问题。</summary>
+    
+    
+    
+    <category term="后端" scheme="https://www.buildworld.cn/categories/%E5%90%8E%E7%AB%AF/"/>
+    
+    
+    <category term="Java" scheme="https://www.buildworld.cn/tags/Java/"/>
+    
+    <category term="架构设计" scheme="https://www.buildworld.cn/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/"/>
+    
+  </entry>
   
   <entry>
     <title>图数据库--Neo4j的介绍</title>
@@ -444,31 +467,6 @@
     <category term="Apache" scheme="https://www.buildworld.cn/tags/Apache/"/>
     
     <category term="Kafka" scheme="https://www.buildworld.cn/tags/Kafka/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>BigData--Apache Flume框架</title>
-    <link href="https://www.buildworld.cn/2020/07/01/BigData-Flume%E6%A1%86%E6%9E%B6/"/>
-    <id>https://www.buildworld.cn/2020/07/01/BigData-Flume%E6%A1%86%E6%9E%B6/</id>
-    <published>2020-07-01T09:22:48.000Z</published>
-    <updated>2020-07-03T08:40:08.920Z</updated>
-    
-    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script><script class="meting-secondary-script-marker" src="\assets\js\Meting.min.js"></script><h2 id="Flume进阶"><a href="#Flume进阶" class="headerlink" title="Flume进阶"></a>Flume进阶</h2><h3 id="1、Flume基本框架"><a href="#1、Flume基本框架" class="headerlink" title="1、Flume基本框架"></a>1、Flume基本框架</h3><p><img src="https://file.buildworld.cn/img/20200701104704.png"></p><p><strong>1. Event</strong></p><p><code>Event</code> 是 Flume NG 数据传输的基本单元。类似于 JMS 和消息系统中的消息。一个 Event 由标题和正文组成：前者是键/值映射，后者是任意字节数组。</p><p><strong>2. Source</strong></p><p>数据收集组件，从外部数据源收集数据，并存储到 Channel 中。</p><p><strong>Source类型</strong></p><ul><li>（1）监控后台日志：exec</li><li>（2）监控后台产生日志的端口：netcat</li></ul><p><strong>3. Channel</strong></p><p><code>Channel</code> 是源和接收器之间的管道，用于临时存储数据。可以是内存或持久化的文件系统：</p><ul><li><code>Memory Channel</code> : 使用内存，优点是速度快，但数据可能会丢失 (如突然宕机)；</li><li><code>File Channel</code> : 使用持久化的文件系统，优点是能保证数据不丢失，但是速度慢。</li></ul><p><strong>4. Sink</strong></p><p><code>Sink</code> 的主要功能从 <code>Channel</code> 中读取 <code>Event</code> ，并将其存入外部存储系统或将其转发到下一个<code>Source</code> ，成功后再从 <code>Channel</code> 中移除 <code>Event</code> 。</p><p><strong>5. Agent</strong></p><p>是一个独立的 (JVM) 进程，包含 <code>Source</code> 、 <code>Channel</code> 、 <code>Sink</code> 等组件。</p><h3 id="2、Flume事务"><a href="#2、Flume事务" class="headerlink" title="2、Flume事务"></a>2、Flume事务</h3><p><img src="https://file.buildworld.cn/img/20200701104347.png"></p><blockquote><p><strong>Flume 的事务机制（类似数据库的事务机制）</strong>：Flume 使用两个独立的事务分别负责从<code>Soucrce</code> 到 <code>Channel</code>，以及从 <code>Channel</code> 到 <code>Sink</code> 的事件传递。比如 <code>spooling directory source</code> 为文件的每一行创建一个事件，一旦事务中所有的事件全部传递到 <code>Channel</code> 且提交成功，那么 <code>Soucrce</code> 就将该文件标记为完成。同理，事务以类似的方式处理从 <code>Channel</code> 到 <code>Sink</code> 的传递过程，如果因为某种原因使得事件无法记录，那么事务将会回滚。且所有的事件都会保持到 <code>Channel</code> 中，等待重新传递。</p></blockquote><h3 id="3、Flume-Agent-内部原理"><a href="#3、Flume-Agent-内部原理" class="headerlink" title="3、Flume Agent 内部原理"></a>3、<strong>Flume Agent</strong> 内部原理</h3><p><img src="https://file.buildworld.cn/img/20200701113850.png"></p><p><strong>重要组件：</strong> </p><p><strong>1）ChannelSelector</strong> </p><p><code>ChannelSelector</code> 的作用就是选出 <code>Event</code> 将要被发往哪个 <code>Channel</code>。其共有两种类型，分别是 <code>Replicating</code>（复制）和 <code>Multiplexing</code>（多路复用）。</p><p><code>ReplicatingSelector</code> 会将同一个 <code>Event</code> 发往所有的 <code>Channel</code>，<code>Multiplexing</code> 会根据相应的原则，将不同的 <code>Event</code> 发往不同的 <code>Channel</code>。 </p><p><strong>2）SinkProcessor</strong> </p><p><code>SinkProcessor</code> 共 有 三 种 类 型 ， 分 别 是 <code>DefaultSinkProcessor</code> 、<code>LoadBalancingSinkProcessor</code> 和 <code>FailoverSinkProcessor</code></p><p><code>DefaultSinkProcessor</code> 对 应 的 是 单 个 的 <code>Sink</code> ， <code>LoadBalancingSinkProcessor</code> 和 <code>FailoverSinkProcessor</code> 对应的是 <code>Sink Group</code>，<code>LoadBalancingSinkProcessor</code> 可以实现负载均衡的功能，<code>FailoverSinkProcessor</code> 可以实现故障转移的功能。</p><h3 id="4、Flume-拓扑结构"><a href="#4、Flume-拓扑结构" class="headerlink" title="4、Flume 拓扑结构"></a>4、<strong>Flume</strong> 拓扑结构</h3><h4 id="（1）、简单串联"><a href="#（1）、简单串联" class="headerlink" title="（1）、简单串联"></a>（1）、简单串联</h4><p><img src="https://file.buildworld.cn/img/20200701145041.png"></p><blockquote><p>这种模式是将多个 <code>flume</code> 顺序连接起来了，从最初的 <code>source</code> 开始到最终 <code>sink</code> 传送的目的存储系统。此模式不建议桥接过多的 <code>flume</code> 数量，<code>flume</code> 数量过多不仅会影响传输速率，而且一旦传输过程中某个节点 flume 宕机，会影响整个传输系统。</p></blockquote><h4 id="（2）、复制和多路复用"><a href="#（2）、复制和多路复用" class="headerlink" title="（2）、复制和多路复用"></a>（2）、复制和多路复用</h4><p><img src="https://file.buildworld.cn/img/20200701145300.png"></p><blockquote><p><code>Flume</code> 支持将事件流向一个或者多个目的地。这种模式可以将相同数据复制到多个<code>channel</code> 中，或者将不同数据分发到不同的 <code>channel</code> 中，<code>sink</code> 可以选择传送到不同的目的地。</p></blockquote><h4 id="（3）、负载均衡和故障转移"><a href="#（3）、负载均衡和故障转移" class="headerlink" title="（3）、负载均衡和故障转移"></a>（3）、负载均衡和故障转移</h4><p><img src="https://file.buildworld.cn/img/20200701145526.png"></p><blockquote><p><code>Flume</code>支持使用将多个<code>sink</code>逻辑上分到一个<code>sink</code>组，<code>sink</code>组配合不同的<code>SinkProcessor</code>可以实现负载均衡和错误恢复的功能。</p></blockquote><h4 id="4-、聚合"><a href="#4-、聚合" class="headerlink" title="(4)、聚合"></a>(4)、聚合</h4><p><img src="https://file.buildworld.cn/img/20200701145800.png"></p><blockquote><p>这种模式是我们最常见的，也非常实用，日常 web 应用通常分布在上百个服务器，大者甚至上千个、上万个服务器。产生的日志，处理起来也非常麻烦。用 <code>flume</code> 的这种组合方式能很好的解决这一问题，每台服务器部署一个 <code>flume</code> 采集日志，传送到一个集中收集日志的<code>flume</code>，再由此 <code>flume</code> 上传到 <code>hdfs</code>、<code>hive</code>、<code>hbase</code> 等，进行日志分析。 </p></blockquote><h3 id="5、-Flume-参数调优"><a href="#5、-Flume-参数调优" class="headerlink" title="5、 Flume 参数调优"></a>5、 <strong>Flume</strong> 参数调优</h3><h4 id="（1）-Source"><a href="#（1）-Source" class="headerlink" title="（1）. Source"></a>（1）. Source</h4><blockquote><p>增加 <code>Source</code> 个（使用 <code>Tair Dir Source</code> 时可增加 <code>FileGroups</code> 个数）可以增大 Source 的读取数据的能力。例如：当某一个目录产生的文件过多时需要将这个文件目录拆分成多个文件目录，同时配置好多个 Source 以保证 Source 有足够的能力获取到新产生的数据。</p></blockquote><blockquote><p><code>batchSize</code> 参数决定 Source 一次批量运输到 Channel 的 event 条数，适当调大这个参数可以提高 Source 搬运 Event 到 Channel 时的性能。</p></blockquote><h4 id="（2）-Channel"><a href="#（2）-Channel" class="headerlink" title="（2）. Channel"></a>（2）. Channel</h4><blockquote><p><code>type</code> 选择 memory 时 Channel 的性能最好，但是如果 Flume 进程意外挂掉可能会丢失数据。type 选择 file 时 Channel 的容错性更好，但是性能上会比 memory channel 差。</p></blockquote><blockquote><p>使用 <code>file Channel</code> 时 <code>dataDirs</code> 配置多个不同盘下的目录可以提高性能。</p></blockquote><blockquote><p><code>Capacity</code> 参数决定 <code>Channel</code> 可容纳最大的 <code>event</code> 条数。<code>transactionCapacity</code> 参数决定每次 Source 往 channel 里面写的最大 event 条数和每次 Sink 从 channel 里面读的最大 event条数。<strong>transactionCapacity 需要大于 Source 和 Sink 的 batchSize 参数。</strong></p></blockquote><h4 id="（3）-Sink"><a href="#（3）-Sink" class="headerlink" title="（3）. Sink"></a>（3）. Sink</h4><blockquote><p>增加 <code>Sink</code> 的个数可以增加 Sink 消费 event 的能力。Sink 也不是越多越好够用就行，过多的 Sink 会占用系统资源，造成系统资源不必要的浪费。</p></blockquote><blockquote><p><code>batchSize</code> 参数决定 Sink 一次批量从 Channel 读取的 event 条数，适当调大这个参数可以提高 Sink 从 Channel 搬出 event 的性能。</p></blockquote><h3 id="6、Flume-的-Channel-Selectors"><a href="#6、Flume-的-Channel-Selectors" class="headerlink" title="6、Flume 的 Channel Selectors"></a>6、<strong>Flume</strong> <strong>的</strong> Channel Selectors</h3><p><img src="https://file.buildworld.cn/img/20200701190722.png"></p>]]></content>
-    
-    
-    <summary type="html">Flume是Cloudera提供的一个高可用的，高可靠的，分布式的海量日志采集、聚合和传输的系统。Flume基于流式架构，灵活简单。</summary>
-    
-    
-    
-    <category term="BigData" scheme="https://www.buildworld.cn/categories/BigData/"/>
-    
-    
-    <category term="Hadoop" scheme="https://www.buildworld.cn/tags/Hadoop/"/>
-    
-    <category term="Flume" scheme="https://www.buildworld.cn/tags/Flume/"/>
-    
-    <category term="Apache" scheme="https://www.buildworld.cn/tags/Apache/"/>
     
   </entry>
   
