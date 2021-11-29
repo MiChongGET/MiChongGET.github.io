@@ -115,6 +115,11 @@ deploy:
   repo: git@github.com:MiChongGET/MiChongGET.github.io.git
   branch: master
 
+# gitee仓库
+# - type: git
+#   repo: git@git@gitee.com:mi_chong/mi_chong.git
+#   branch: master
+
 
 # 音乐播放
 aplayer:
