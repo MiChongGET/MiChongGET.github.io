@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://www.buildworld.cn/2022/05/11/SpringBoot-%E5%86%85%E7%BD%AE%E5%B7%A5%E5%85%B7%E7%B1%BB/</loc>
+    
+    <lastmod>2022-05-11</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://www.buildworld.cn/tools/index.html</loc>
     
     <lastmod>2021-11-29</lastmod>
@@ -345,14 +352,14 @@
   </url>
   
   <url>
-    <loc>https://www.buildworld.cn/2018/05/22/Docker%EF%BC%88%E4%BA%8C%EF%BC%89%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</loc>
+    <loc>https://www.buildworld.cn/2018/04/11/JWT%E7%99%BB%E5%BD%95%E4%BF%A1%E6%81%AF%E5%8A%A0%E5%AF%86/</loc>
     
     <lastmod>2020-05-05</lastmod>
     
   </url>
   
   <url>
-    <loc>https://www.buildworld.cn/2018/04/11/JWT%E7%99%BB%E5%BD%95%E4%BF%A1%E6%81%AF%E5%8A%A0%E5%AF%86/</loc>
+    <loc>https://www.buildworld.cn/2018/05/22/Docker%EF%BC%88%E4%BA%8C%EF%BC%89%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8/</loc>
     
     <lastmod>2020-05-05</lastmod>
     
@@ -485,13 +492,6 @@
   </url>
   
   <url>
-    <loc>https://www.buildworld.cn/2018/05/17/springboot%E6%95%B4%E5%90%88%E5%AE%9A%E6%97%B6%E6%A1%86%E6%9E%B6-Elastic-job-lite/</loc>
-    
-    <lastmod>2020-05-05</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.buildworld.cn/2018/02/25/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E4%B9%8BPython%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB%E6%8A%80%E6%9C%AF--face_recognition%E6%A8%A1%E5%9D%97/</loc>
     
     <lastmod>2020-05-05</lastmod>
@@ -499,7 +499,7 @@
   </url>
   
   <url>
-    <loc>https://www.buildworld.cn/2019/05/08/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91-ES6%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</loc>
+    <loc>https://www.buildworld.cn/2018/05/17/springboot%E6%95%B4%E5%90%88%E5%AE%9A%E6%97%B6%E6%A1%86%E6%9E%B6-Elastic-job-lite/</loc>
     
     <lastmod>2020-05-05</lastmod>
     
@@ -507,6 +507,13 @@
   
   <url>
     <loc>https://www.buildworld.cn/2019/05/07/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91-Node%E5%9F%BA%E7%A1%80-WebPack%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91/</loc>
+    
+    <lastmod>2020-05-05</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/2019/05/08/%E5%89%8D%E7%AB%AF%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91-ES6%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86/</loc>
     
     <lastmod>2020-05-05</lastmod>
     
@@ -576,13 +583,6 @@
   </url>
   
   <url>
-    <loc>https://www.buildworld.cn/messageboard/index.html</loc>
-    
-    <lastmod>2020-05-05</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://www.buildworld.cn/music/index.html</loc>
     
     <lastmod>2020-05-05</lastmod>
@@ -590,7 +590,7 @@
   </url>
   
   <url>
-    <loc>https://www.buildworld.cn/tags/index.html</loc>
+    <loc>https://www.buildworld.cn/messageboard/index.html</loc>
     
     <lastmod>2020-05-05</lastmod>
     
@@ -603,10 +603,17 @@
     
   </url>
   
+  <url>
+    <loc>https://www.buildworld.cn/tags/index.html</loc>
+    
+    <lastmod>2020-05-05</lastmod>
+    
+  </url>
+  
 
   <url>
     <loc>https://www.buildworld.cn/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -614,518 +621,518 @@
   
   <url>
     <loc>https://www.buildworld.cn/tags/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/BCI/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Python/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/MNE/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/HBase/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Hadoop/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Flume/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Apache/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/HDFS/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/YARN/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/HA/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Hive/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/SQL/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/MapReduce/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/Shuffle/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Yarn/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/Shuffle/</loc>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Zookeeper/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Spark/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/SparkSQL/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/MLlib/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Data-WareHouse/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Kafka/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/CNN/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/TensorFlow/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Docker/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Linux/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Java/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/C/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/OpenCV/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Pandas/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Numpy/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Redis/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/SpringBoot/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/SpringCloud/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1%E6%9E%B6%E6%9E%84/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/SpringDataJpa/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Quartz/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/MyBatis/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/SpringSession/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/JavaScript/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/ES6/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Node/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/JavaScript/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/ES6/</loc>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/React/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/react-router4/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/antd/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/%E8%84%9A%E6%89%8B%E6%9E%B6/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/axios/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/fetch/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/redux/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/Netty/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/Typecho/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%8F%91/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/%E5%A4%A7%E5%AD%A6/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/%E6%97%A5%E5%B8%B8/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/WordCloud/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/FaceNet/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/java/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/layui/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/EEG/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/ICA/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/SparkStreaming/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/Scala/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/%E7%BA%BF%E7%A8%8B/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/%E9%9D%A2%E8%AF%95/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/Flink/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/LeetCode/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/tags/%E7%AC%94%E8%AF%95%E9%A2%98/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/%E5%9B%BE/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/tags/Neo4j/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/Netty/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/Typecho/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/%E5%8D%9A%E5%AE%A2%E5%BC%80%E5%8F%91/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/%E5%A4%A7%E5%AD%A6/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/%E6%97%A5%E5%B8%B8/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/WordCloud/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/FaceNet/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/java/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/layui/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/EEG/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/ICA/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/SparkStreaming/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/Scala/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/%E7%BA%BF%E7%A8%8B/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/%E9%9D%A2%E8%AF%95/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/Flink/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/LeetCode/</loc>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/tags/%E7%AC%94%E8%AF%95%E9%A2%98/</loc>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -1134,147 +1141,147 @@
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E6%8F%90%E9%AB%98/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E8%84%91%E6%9C%BA%E4%BA%A4%E4%BA%92/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/BigData/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E8%BF%90%E7%BB%B4/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E5%90%8E%E7%AB%AF/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E9%9D%A2%E8%AF%95%E7%AC%94%E8%AF%95/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E8%A7%86%E8%A7%89/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E8%BF%90%E7%BB%B4/%E6%9C%8D%E5%8A%A1%E5%99%A8/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E9%9B%86%E7%BE%A4/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E5%89%8D%E7%AB%AF/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E5%9B%9E%E5%BF%86%E5%BD%95/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E6%A0%A1%E5%9B%AD/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E4%BA%BA%E8%84%B8%E8%AF%86%E5%88%AB/</loc>
-    <lastmod>2022-01-07</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://www.buildworld.cn/categories/%E7%AE%97%E6%B3%95/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/%E7%88%AC%E8%99%AB/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://www.buildworld.cn/categories/%E7%AE%97%E6%B3%95/</loc>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://www.buildworld.cn/categories/SQL/</loc>
-    <lastmod>2022-01-07</lastmod>
+    <lastmod>2022-05-11</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
